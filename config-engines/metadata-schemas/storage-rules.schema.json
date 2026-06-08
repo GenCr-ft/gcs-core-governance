@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Gencraft Studio Storage Rules Schema",
+  "description": "Validates the structure of storage-rules.yml.",
+  "type": "object",
+  "properties": {
+      "storage_rules": {
+          "type": "array",
+          "items": {
+              "type": "object",
+              "properties": {
+                  "rule_id": {
+                      "type": "string"
+                  },
+                  "description": {
+                      "type": "string"
+                  },
+                  "if": {
+                      "type": "object",
+                      "properties": {
+                          "all_of": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object"
+                              }
+                          }
+                      },
+                      "required": ["all_of"]
+                  },
+                  "then": {
+                      "type": "object",
+                      "properties": {
+                          "target_repository_id": { "type": "string" },
+                          "target_repository_prefix": { "type": "string" },
+                          "target_path_template": { "type": "string" },
+                          "justification": { "type": "string" }
+                      },
+                      "required": ["justification"]
+                  }
+              },
+              "required": ["rule_id", "description", "if", "then"]
+          }
+      }
+  },
+  "required": ["storage_rules"]
+}

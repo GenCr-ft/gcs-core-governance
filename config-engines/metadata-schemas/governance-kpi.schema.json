@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Gencraft Studio Governance KPIs Schema",
+    "description": "Validates the structure of governance-kpi.yml, ensuring its alignment with SKOS principles.",
+    "type": "object",
+    "properties": {
+        "governance_kpis": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "skos:prefLabel": { "type": "string" },
+                    "skos:definition": { "type": "string" },
+                    "gcs:target": { "type": "string" },
+                    "skos:notation": { "type": "string" }
+                },
+                "required": ["skos:prefLabel", "skos:definition", "gcs:target", "skos:notation"]
+            }
+        }
+    },
+    "required": ["governance_kpis"]
+}

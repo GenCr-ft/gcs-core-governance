@@ -1,0 +1,115 @@
+{
+    "$schema": "[http://json-schema.org/draft-07/schema#](http://json-schema.org/draft-07/schema#)",
+    "title": "Gencraft Resolved Governance Configuration Object Schema",
+    "description": "Defines the structure of the in-memory object produced by the Governance Resolver. This is the contract for all tooling.",
+    "type": "object",
+    "properties": {
+        "taxonomy": {
+            "description": "Contains all resolved and merged vocabularies.",
+            "type": "object",
+            "properties": {
+                "artifact_class": { "$ref": "#/definitions/skosConceptArray" },
+                "knowledge_classification_category": { "$ref": "#/definitions/skosConceptArray" },
+                "knowledge_classification_type": { "$ref": "#/definitions/knowledgeTypeArray" },
+                "code_classification_type": { "$ref": "#/definitions/skosConceptArray" },
+                "organizational_entity_type": { "$ref": "#/definitions/skosConceptArray" },
+                "studio_domain": { "$ref": "#/definitions/skosConceptArray" },
+                "lifecycle_phase": { "$ref": "#/definitions/skosConceptArray" },
+                "security_classification": { "$ref": "#/definitions/skosConceptArray" },
+                "repository_type": { "$ref": "#/definitions/skosConceptArray" },
+                "intended_audience": { "$ref": "#/definitions/skosConceptArray" }
+            }
+        },
+        "ontology": {
+            "description": "Contains all resolved ontological definitions.",
+            "type": "object",
+            "properties": {
+                "classes": { "$ref": "#/definitions/rdfTripleArray" },
+                "relationships": { "$ref": "#/definitions/rdfTripleArray" },
+                "constraints": { "$ref": "#/definitions/ontologyConstraintArray" }
+            }
+        },
+        "catalogs": {
+            "description": "Contains all resolved and concatenated catalogs.",
+            "type": "object",
+            "properties": {
+                "repository_catalog": { "$ref": "#/definitions/repositoryCatalogArray" },
+                "organizational_entities": { "$ref": "#/definitions/orgEntityArray" },
+                "governance_scopes": { "$ref": "#/definitions/govScopeArray" },
+                "governance_kpis": { "$ref": "#/definitions/kpiArray" }
+            }
+        },
+        "rules": {
+            "description": "Contains all resolved and concatenated rule sets.",
+            "type": "object",
+            "properties": {
+                "validation_rules": { "$ref": "#/definitions/validationRuleArray" },
+                "storage_rules": { "$ref": "#/definitions/storageRuleArray" }
+            }
+        }
+    },
+    "required": ["taxonomy", "ontology", "catalogs", "rules"],
+    "definitions": {
+        "metadata": {
+            "type": "object",
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "description": "The governance scope from which this item originates (e.g., 'global', 'project-aethel')."
+                }
+            },
+            "required": ["source"]
+        },
+        "skosConcept": {
+            "type": "object",
+            "properties": {
+                "skos:prefLabel": { "type": "string" },
+                "skos:definition": { "type": "string" },
+                "metadata": { "$ref": "#/definitions/metadata" }
+            },
+            "required": ["skos:prefLabel", "skos:definition", "metadata"]
+        },
+        "skosConceptArray": { "type": "array", "items": { "$ref": "#/definitions/skosConcept" } },
+        "knowledgeType": {
+            "type": "object",
+            "properties": {
+                "skos:prefLabel": { "type": "string" },
+                "skos:definition": { "type": "string" },
+                "category": { "type": "string" },
+                "metadata": { "$ref": "#/definitions/metadata" }
+            },
+            "required": ["skos:prefLabel", "skos:definition", "category", "metadata"]
+        },
+        "knowledgeTypeArray": { "type": "array", "items": { "$ref": "#/definitions/knowledgeType" } },
+        "rdfTriple": {
+             "type": "object",
+             "properties": {
+                "subject": { "type": "string" },
+                "predicate": { "type": "string" },
+                "object": { "type": "string" },
+                "metadata": { "$ref": "#/definitions/metadata" }
+             },
+             "required": ["subject", "predicate", "object", "metadata"]
+        },
+        "rdfTripleArray": { "type": "array", "items": { "$ref": "#/definitions/rdfTriple" } },
+        "repositoryCatalogEntry": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "description": { "type": "string" },
+                "metadata": {
+                    "type": "object",
+                    "properties": {
+                        "source": { "type": "string" },
+                        "repository_type": { "type": "string" },
+                        "domain": { "type": "string" },
+                        "owner_crew_id": { "type": "string" }
+                    },
+                    "required": ["source", "repository_type", "domain", "owner_crew_id"]
+                }
+            },
+            "required": ["id", "description", "metadata"]
+        },
+        "repositoryCatalogArray": { "type": "array", "items": { "$ref": "#/definitions/repositoryCatalogEntry" } }
+    }
+}
