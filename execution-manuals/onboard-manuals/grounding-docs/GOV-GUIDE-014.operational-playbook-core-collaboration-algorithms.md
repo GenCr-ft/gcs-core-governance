@@ -134,5 +134,5 @@ If you believe a studio protocol could be improved:
 When breaking down large Epics (Parent Issues) into executable Tasks (Child Issues), you MUST use native GitHub Tasklists to maintain a computable hierarchy.
 
 - **Step 1: Create the Epic (Parent).** Create the high-level Epic in the appropriate repository.
-- **Step 2: Define Tasklists.** Inside the body of the Epic, use the standard Markdown tasklist syntax (`- [ ]`) followed by the Child Issue ID (or URL) to strictly link the children. Do not use plain text like `**Parent:** #123`.
+- **Step 2: Define Tasklists.** Inside the body of the Epic, use the standard Markdown tasklist syntax (`- [ ]` followed by a space) followed by the Child Issue ID (or URL) to strictly link the children. Do not use plain text like `**Parent:** #123`.
 - **Step 3: Bi-directional Linking.** Ensure that the Child Issue references the Epic, and the Epic strictly tracks the Child via the Tasklist to feed completion metrics into GitHub Project #16 automatically.

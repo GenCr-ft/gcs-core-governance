@@ -1,5 +1,5 @@
 ---
-docId: GOV-DOC-001
+docId: GOV-LOG-001
 title: Constitution and Policy Amendment Log
 version: 0.3.0
 authors:
@@ -7,12 +7,13 @@ authors:
 creation_date: '2026-05-06'
 last_updated_date: '2026-05-21'
 language: en
+summary: Constitution and policy amendment log tracking ratified changes to studio governance and handbooks.
 knowledgeGuardian:
 - Studio Director
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/execution-manuals/release-protocols/GOV-DOC-001.amendment-log.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/studio-handbook/governance/GOV-LOG-001.amendment-log.md
 metadata:
   lifecycle-stage: approved
-  scope: studio
+  scope: studio-wide
   domain: governance
   doc-type: reference
   security-classification: l2_confidential
@@ -23,9 +24,9 @@ metadata:
   - governance
   - changelog
   intended-audience:
-  - studioleadership
-  - leads
-  - aiagents
+  - studio-director
+  - governance-crew
+  - ai-agents
 ---
 
 # Constitution and Policy Amendment Log
