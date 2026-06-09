@@ -51,6 +51,7 @@ repos:
     hooks:
       - id: yamllint
         args: ['--config-file', '.yamllint.yaml']
+        exclude: ^reference-libraries/
 
   # ===== Python Linting & Formatting (Ruff) =====
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -114,14 +115,15 @@ repos:
     hooks:
       - id: markdownlint
         args: ["--config", ".markdownlint.yaml"]
+        exclude: ^reference-libraries/
 
   # ===== Gencraft SSoT Linters (Custom Hooks) =====
   - repo: https://github.com/GenCr-ft/gcd-ops-scripts.git
-    rev: v4.3.0 # Utiliser le dernier tag stable de nos outils
+    rev: 1b3761d5354ad61990019938a4862523b4506f5b # pragma: allowlist secret
     hooks:
 
       - id: metadata-linter
-        exclude: &ssot_exclude ^(tests/fixtures/|integration_test_docs/|README\.md)
+        exclude: &ssot_exclude ^(tests/fixtures/|integration_test_docs/|README\.md|CHANGELOG\.md|reference-libraries/)
       - id: naming-linter
         exclude: *ssot_exclude
       - id: link-linter

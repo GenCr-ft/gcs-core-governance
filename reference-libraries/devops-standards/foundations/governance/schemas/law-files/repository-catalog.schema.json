@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Gencraft Studio Repository Catalog Schema",
+  "description": "Validates the structure of repository-catalog.yml. The values for repository_type and domain must be validated against taxonomy.yml by a separate linter process.",
+  "type": "object",
+  "properties": {
+      "repository_catalog": {
+          "type": "array",
+          "items": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9-]+$"
+                  },
+                  "description": {
+                      "type": "string"
+                  },
+                  "metadata": {
+                      "type": "object",
+                      "properties": {
+                          "repository_type": { "type": "string" },
+                          "domain": { "type": "string" },
+                          "owner_crew": { "type": "string" }
+                      },
+                      "required": ["repository_type", "domain", "owner_crew"]
+                  }
+              },
+              "required": ["id", "description", "metadata"]
+          }
+      }
+  },
+  "required": ["repository_catalog"]
+}

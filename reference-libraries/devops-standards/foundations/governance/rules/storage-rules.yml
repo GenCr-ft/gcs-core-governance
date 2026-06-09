@@ -1,0 +1,84 @@
+# Gencraft Studio SSoT Artifact Storage Rules
+# Version: 1.0.0
+# filename: storage-rules.yml
+# Rule Evaluation Order: Rules are evaluated top-down. The first matching rule is applied.
+storage_rules:
+  - rule_id: "EXPERIMENTAL_STORAGE_RULE"
+    description: "Artifacts in an experimental phase must reside in a dedicated experimental repository."
+    if:
+      all_of:
+        - metadata.lifecycle-phase: "experimental"
+    then:
+      target_repository_prefix: "gce-"
+      justification: "Isolates experimental work from production SSoT to prevent dependency conflicts."
+
+  - rule_id: "KNOWLEDGE_GOVERNANCE_STORAGE"
+    description: "Core governance documents (the Constitution and its laws) reside in the technical standards repository."
+    if:
+      all_of:
+        - artifact-class: "knowledge"
+        - domain: "governance"
+        - classification.category: "to-govern"
+    then:
+      target_repository_id: "gcs-core-governance"
+      target_path_template: "foundations/governance/{classification.type}/{docId}.md"
+      justification: "Keeps the laws defining the system with the technical configurations that enforce them."
+
+  - rule_id: "KNOWLEDGE_HANDBOOK_STORAGE"
+    description: "Organizational and operational knowledge resides in the studio handbook."
+    if:
+      all_of:
+        - artifact-class: "knowledge"
+        - domain: ["governance", "production-management", "marketing-and-communication", "legal", "finance-and-hr"]
+        - classification.category: ["to-instruct", "to-inform", "to-record", "to-define"]
+    then:
+      target_repository_id: "gcs-core-governance"
+      target_path_template: "sections/{domain}/{docId}.{title_kebab_case}.md"
+      justification: "Centralizes all human-readable operational and organizational knowledge for easy access."
+
+  - rule_id: "INFRASTRUCTURE_CODE_STORAGE"
+    description: "Infrastructure as Code (Terraform/OpenTofu) lives in dedicated infrastructure repositories."
+    if:
+      all_of:
+        - artifact-class: "infrastructure"
+    then:
+      target_repository_prefix: "gci-"
+      justification: "Centralizes infrastructure code for security and consistency, aligning with gci-* prefix convention."
+
+  - rule_id: "PROCESS_DEFINITION_STORAGE"
+    description: "Reusable process definitions like GitHub Actions must live in the 'gcd-shared-actions' repository."
+    if:
+      all_of:
+        - artifact-class: "process"
+    then:
+      target_repository_id: "gcd-shared-actions"
+      justification: "Centralizes all reusable workflows for security and maintainability."
+
+  - rule_id: "CODE_SHARED_LIBRARY_STORAGE"
+    description: "Reusable code libraries and game engine modules live in 'library' repositories."
+    if:
+      all_of:
+        - artifact-class: "code"
+        - code-classification.type: "library" # Remplacé : plus de "propriété magique"
+    then:
+      target_repository_prefix: "gcl-"
+      justification: "Aligns with the gcl-* convention for shared code libraries."
+
+  - rule_id: "ASSET_PROJECT_STORAGE"
+    description: "Creative assets (art, audio) specific to a game project live in that project's asset repositories."
+    if:
+      all_of:
+        - artifact-class: "asset"
+        - scope: "project-aethel"
+    then:
+      target_repository_prefix: "gcp-aethel-assets-"
+      justification: "Separates large binary assets from code while keeping them project-specific."
+
+  - rule_id: "SECURITY_SECRET_STORAGE"
+    description: "Artifacts classified as L3-Secret must be stored in a dedicated, high-security repository."
+    if:
+      all_of:
+        - security-classification: "l3-secret"
+    then:
+      target_repository_id: "gcs-vault-critical" # hypothetical repository for high-security assets
+      justification: "Enforces strict access control for the most sensitive studio assets."

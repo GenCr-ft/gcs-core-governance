@@ -1,0 +1,62 @@
+# Gencraft Studio SSoT Validation Rules
+# Version: 1.0.0
+# Date: 2025-07-07
+# This file defines the logic for the Global SSoT Linter.
+
+validation_rules:
+  - rule_id: "GOV_RULE_001"
+    description: "Legal governance documents must be reviewed by the Legal department."
+    rule_applies_if:
+      all_of:
+        - artifact-class: "knowledge"
+        - classification.category: "to-govern"
+        - domain: "legal"
+    action_to_enforce:
+      required_reviewers: ["Henri (GCT-LEG-LCOUN-001)"]
+
+  - rule_id: "GOV_RULE_002"
+    description: "Engineering standards must be reviewed by architects."
+    rule_applies_if:
+      all_of:
+        - artifact-class: "knowledge"
+        - classification.type: "standard"
+        - domain: "engineering-and-architecture"
+    action_to_enforce:
+      required_reviewers: ["Isaac (GCT-PRG-SARCH-001)"]
+
+  - rule_id: "GOV_RULE_003"
+    description: "Security policies must be approved by the Security Officer."
+    rule_applies_if:
+      all_of:
+        - artifact-class: "knowledge"
+        - classification.type: "policy"
+        - domain: "security-and-compliance"
+    action_to_enforce:
+      required_approvers: ["Cerberus (GCT-MGT-SECOFF-001)"]
+
+  - rule_id: "GOV_RULE_004"
+    description: "A deprecated artifact must justify its status."
+    rule_applies_if:
+      all_of:
+        - lifecycle-phase: "deprecated"
+    action_to_enforce:
+      required_frontmatter_fields: ["deprecation_justification"]
+
+  - rule_id: "GOV_RULE_005"
+    description: "Pull Requests on code repositories must link to the Definition of Done."
+    rule_applies_if:
+      all_of:
+        - event_type: "pull_request"
+        - target_repository.type: "code"
+    action_to_enforce:
+      body_must_contain_string: "References Definition of Done (PRO-STAN-001)"
+
+  - rule_id: "GOV_RULE_006"
+    description: "Legal contracts must have an expiration date and be reviewed by Legal Counsel."
+    rule_applies_if:
+      all_of:
+        - classification.type: "contract"
+        - domain: "legal"
+    action_to_enforce:
+      required_frontmatter_fields: ["expiration_date"]
+      required_reviewers: ["Henri (GCT-LEG-LCOUN-001)"]

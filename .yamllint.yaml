@@ -3,9 +3,11 @@
 extends: default
 
 rules:
-  # Il est peu pratique de forcer une longueur de ligne pour les fichiers de config.
-  line-length:
-    max: 120  # Augmentation de la limite à 120 caractères.
+  # Disabling line-length since config database files contain long lines
+  line-length: disable
+
+  # Disabling document-start since --- is not standard for local config files
+  document-start: disable
 
   # Standardise l'indentation des commentaires.
   comments-indentation: enable

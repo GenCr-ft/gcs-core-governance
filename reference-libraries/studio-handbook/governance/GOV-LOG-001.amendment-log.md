@@ -7,9 +7,10 @@ authors:
 creation_date: '2026-05-06'
 last_updated_date: '2026-05-21'
 language: en
+summary: Constitution and policy amendment log tracking ratified changes to studio governance and handbooks.
 knowledgeGuardian:
 - Studio Director
-ssot_path: gcs-studio-handbook/governance/AMENDMENT-LOG.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/studio-handbook/governance/GOV-LOG-001.amendment-log.md
 metadata:
   lifecycle-stage: approved
   scope: studio-wide

@@ -1,0 +1,291 @@
+# Gencraft Studio SSoT Taxonomy
+# Version: 1.0.0
+# Date: 2025-07-08
+# This file is the SSoT for all controlled vocabularies'\n'  aligned with SKOS principles.
+# filename: taxonomy.yml
+ssot_version: "1.3.0" # Version bumped due to significant additions
+
+artifact_class:
+  - skos:prefLabel: knowledge
+    skos:definition: "An artifact whose primary purpose is to convey information'\n'  such as a guide'\n'  a standard'\n'  or a report."
+  - skos:prefLabel: code
+    skos:definition: "An artifact composed of source code written in a programming or scripting language."
+  - skos:prefLabel: asset
+    skos:definition: "A creative or artistic artifact used in production'\n'  such as a 3D model'\n'  an audio file'\n'  or a texture."
+  - skos:prefLabel: process
+    skos:definition: "An artifact that defines an automated workflow or process'\n'  such as a CI/CD pipeline or a GitHub Action."
+  - skos:prefLabel: infrastructure
+    skos:definition: "An artifact that defines Infrastructure as Code (IaC) for cloud resources'\n'  networks'\n'  or environments."
+  - skos:prefLabel: data
+    skos:definition: "An artifact representing structured or unstructured datasets'\n'  such as analytics'\n'  telemetry'\n'  or game configuration."
+
+knowledge_classification_category:
+  - skos:prefLabel: to-govern
+    skos:definition: "To establish a rule'\n'  policy'\n'  or principle that constrains actions."
+  - skos:prefLabel: to-instruct
+    skos:definition: "To guide an action or process in a sequential manner."
+  - skos:prefLabel: to-describe
+    skos:definition: "To describe the state'\n'  design'\n'  or characteristics of an object or concept."
+  - skos:prefLabel: to-record
+    skos:definition: "To keep a traceable record of a past event or decision."
+  - skos:prefLabel: to-define
+    skos:definition: "To establish a shared language and meaning."
+
+knowledge_classification_type:
+  - skos:prefLabel: "principle"
+    skos:broader: "to-govern"
+    code: "PRIN"
+  - skos:prefLabel: "protocol"
+    skos:broader: "to-instruct"
+    code: "PROT"
+  - skos:prefLabel: "technical-design-detail"
+    skos:broader: "to-describe"
+    code: "TDD"
+  - skos:prefLabel: "technical-story"
+    skos:broader: "to-describe"
+    code: "TECH"
+  - skos:prefLabel: "template"
+    skos:broader: "to-describe"
+    code: "TEMP"
+  - skos:prefLabel: "overview"
+    skos:broader: "to-describe"
+    code: "OVER"
+  - skos:prefLabel: "bug-report"
+    skos:broader: "to-record"
+    code: "BUG"
+  - skos:prefLabel: "registry"
+    skos:broader: "to-inform"
+    code: "REGI"
+  - skos:prefLabel: "roadmap"
+    skos:broader: "to-plan"
+    code: "ROAD"
+  - skos:prefLabel: "enhancement-request"
+    skos:broader: "to-plan"
+    code: "ENHA"
+  - skos:prefLabel: standard
+    category: to-govern
+    skos:definition: "A document that enforces mandatory rules'\n'  conventions'\n'  or specifications."
+  - skos:prefLabel: policy
+    category: to-govern
+    skos:definition: "A document outlining guiding principles and high-level rules for strategic alignment."
+  - skos:prefLabel: charter
+    category: to-govern
+    skos:definition: "A document that defines the mission'\n'  scope'\n'  and principles of an entity (e.g.'\n'  a crew'\n'  an AI agent)."
+  - skos:prefLabel: definition-of-done
+    category: to-govern
+    skos:definition: "The shared contract that defines the criteria for a work item to be considered complete."
+  - skos:prefLabel: guide
+    category: to-instruct
+    skos:definition: "A document that provides detailed instructions on how to perform a specific task."
+  - skos:prefLabel: playbook
+    category: to-instruct
+    skos:definition: "A document containing predefined procedures for handling a recurring situation."
+    skos:scopeNote: "Use for reactive'\n'  situation-based procedures. For proactive'\n'  linear learning'\n'  prefer 'guide'."
+  - skos:prefLabel: contract
+    category: to-govern
+    skos:definition: "A legally binding agreement between the studio and an external party."
+  - skos:prefLabel: invoice
+    category: to-inform
+    skos:definition: "A commercial document issued by a seller to a buyer'\n'  relating to a sale transaction and indicating the products'\n'  quantities'\n'  and agreed prices."
+  - skos:prefLabel: budget-proposal
+    category: to-instruct
+    skos:definition: "A formal document that outlines the estimated costs for a project or department over a specific period."
+  - skos:prefLabel: financial-report
+    category: to-inform
+    skos:definition: "A formal record of the financial activities and position of the studio."
+  - skos:prefLabel: plan
+    category: to-instruct
+    skos:definition: "A document outlining a series of intended actions to achieve a goal."
+  - skos:prefLabel: specification
+    category: to-describe
+    skos:definition: "A document that unambiguously describes the requirements or design of a system."
+  - skos:prefLabel: epic
+    category: to-describe
+    skos:definition: "A large body of work that can be broken down into smaller stories."
+  - skos:prefLabel: feature
+    skos:broader: epic
+    skos:definition: "A slice of functionality that delivers value to the user."
+  - skos:prefLabel: user-story
+    skos:broader: feature
+    skos:definition: "An informal general explanation of a software feature written from the perspective of the end user."
+  - skos:prefLabel: adr
+    category: to-record
+    skos:altLabel: ["architecture-decision-record"]
+    skos:definition: "A record of a significant architectural decision and its consequences."
+  - skos:prefLabel: post-mortem
+    category: to-record
+    skos:definition: "A retrospective analysis of an incident to identify lessons learned."
+  - skos:prefLabel: report
+    category: to-inform
+    skos:definition: "Presents data and analysis in an organized format for a specific audience and purpose."
+  - skos:prefLabel: catalog
+    category: to-inform
+    skos:definition: "A structured list or inventory of items."
+  - skos:prefLabel: reference
+    category: to-define
+    skos:altLabel: ["glossary", "lexicon"]
+    skos:definition: "Provides quick access to structured information and definitions."
+
+studio_domain:
+  - skos:prefLabel: "governance"
+    code: "GOV"
+    skos:definition: "Studio-wide governance S-protocols and high-level policies."
+  - skos:prefLabel: "engineering-and-architecture"
+    code: "ENG"
+    skos:definition: "Software engineering principles architecture and programming standards."
+  - skos:prefLabel: "devops-and-infrastructure"
+    code: "DVO"
+    skos:definition: "CI/CD Infrastructure as Code operational tooling and environment management."
+  - skos:prefLabel: "product-and-game-design"
+    code: "PRD"
+    skos:definition: "Product vision game design mechanics, systems, narrative and level design."
+  - skos:prefLabel: "production-management"
+    code: "MGT"
+    skos:definition: "Project management agile/scrum processes, planning,  and reporting."
+  - skos:prefLabel: "art-and-creative"
+    code: "ART"
+    skos:definition: "Art direction, asset creation standards, and visual guidelines."
+  - skos:prefLabel: "audio"
+    code: "AUD"
+    skos:definition: "Audio design, composition, and implementation standards."
+  - skos:prefLabel: "quality-assurance"
+    code: "QA"
+    skos:definition: "Quality assurance, testing strategies, plans, and standards."
+  - skos:prefLabel: "security-and-compliance"
+    code: "SEC"
+    skos:definition: "All security-related policies, standards, and incident response."
+  - skos:prefLabel: "legal"
+    code: "LEG"
+    skos:definition: "Legal policies, contracts, IP management, and compliance."
+  - skos:prefLabel: "finance-and-hr"
+    code: "FIN"
+    skos:definition: "Financial and human resources-related artifacts."
+  - skos:prefLabel: "marketing-and-communication"
+    code: "MKT"
+    skos:definition: "Marketing strategies and communication guidelines."
+  - skos:prefLabel: "community-and-support"
+    code: "CSM"
+    skos:definition: "Community management and player support policies."
+  - skos:prefLabel: "ai-enablement"
+    code: "AIE"
+    skos:definition: "Management of AI Gems'\n'  blueprints'\n'  and meta-level AI tooling."
+  - skos:prefLabel: "platform-architecture"
+    code: "PLT"
+    skos:definition: "Platform-level architecture diagrams, C4 models, and cross-service design specifications for the studio platform."
+
+
+lifecycle_phase:
+  - skos:prefLabel: "experimental"
+    skos:definition: "A prototype or proof-of-concept. Not an official SSoT artifact."
+  - skos:prefLabel: "emergence"
+    skos:definition: "A raw idea'\n'  a note'\n'  an unstructured brainstorming artifact."
+  - skos:prefLabel: ideation
+    skos:definition: "The artifact is a proposal or an idea that has not yet been approved for development."
+  - skos:prefLabel: design
+    skos:definition: "The artifact is in the design'\n'  drafting'\n'  or specification stage."
+  - skos:prefLabel: implementation
+    skos:definition: "The artifact is actively being built'\n'  coded'\n'  or written."
+  - skos:prefLabel: in-review
+    skos:definition: "The artifact has been submitted for formal review and is awaiting feedback or approval."
+  - skos:prefLabel: approved
+    skos:definition: "The artifact has been formally reviewed and approved for its intended use."
+  - skos:prefLabel: operations
+    skos:definition: "The artifact is deployed and in active use in a production or operational environment."
+  - skos:prefLabel: deprecated
+    skos:definition: "The artifact is no longer recommended for use and will be removed in the future."
+  - skos:prefLabel: archived
+    skos:definition: "The artifact is no longer in use and is retained for historical purposes only."
+
+security_classification:
+  - skos:prefLabel: l0-public
+    skos:definition: "Information explicitly approved for public release. No confidentiality controls required."
+  - skos:prefLabel: l1-internal
+    skos:definition: "Default classification for internal operations. Accessible to all authenticated studio members."
+  - skos:prefLabel: l2-confidential
+    skos:definition: "Sensitive business'\n'  project'\n'  or personal data. Access is restricted on a need-to-know basis."
+  - skos:prefLabel: l3-secret
+    skos:definition: "Critical studio IP'\n'  financial data'\n'  or credentials. Requires the strictest access controls."
+
+repository_type:
+  - skos:prefLabel: "docs"
+    skos:definition: "A repository primarily intended to host documentation artifacts."
+  - skos:prefLabel: "code"
+    skos:definition: "A repository primarily intended to host application source code."
+  - skos:prefLabel: "assets"
+    skos:definition: "A repository intended to store large binary files, such as art or audio, often using Git LFS."
+  - skos:prefLabel: "process"
+    skos:definition: "A repository intended to manage processes and backlogs."
+  - skos:prefLabel: "infrastructure"
+    skos:definition: "A repository primarily intended to host Infrastructure as Code (IaC)."
+  - skos:prefLabel: "template"
+    skos:definition: "A repository that serves as a template for creating other repositories."
+  - skos:prefLabel: "experimental"
+    skos:definition: "A sandbox repository with lenient governance."
+
+
+code_classification_type:
+  - skos:prefLabel: library
+    skos:definition: "A reusable package of code intended to be used as a dependency by other components."
+  - skos:prefLabel: service
+    skos:definition: "A deployable'\n'  long-running application that exposes an API (e.g.'\n'  a microservice)."
+  - skos:prefLabel: application
+    skos:definition: "A deployable'\n'  user-facing application (e.g.'\n'  a game client'\n'  a web frontend)."
+  - skos:prefLabel: script
+    skos:definition: "A standalone piece of code designed to be executed to perform a specific'\n'  discrete task."
+
+intended_audience:
+  - skos:prefLabel: all-contributors
+    skos:definition: "Applies to all human and AI members of Gencraft Studio."
+  - skos:prefLabel: ai-agents
+    skos:definition: "Specifically intended for consumption and use by Gencraft AI Agents (Gems)."
+  - skos:prefLabel: governance-crew
+    skos:definition: "Intended for members of the Governance Crew responsible for studio oversight."
+  - skos:prefLabel: architects
+    skos:definition: "Intended for technical architects responsible for system design and strategy."
+  - skos:prefLabel: devops-crew
+    skos:definition: "Intended for DevOps engineers responsible for infrastructure and CI/CD."
+  - skos:prefLabel: project-leads
+    skos:definition: "Intended for individuals leading specific projects crews or initiatives."
+  - skos:prefLabel: "all-gems"
+    skos:definition: "All AI Gems within Gencraft Studio."
+  - skos:prefLabel: "all-contributors"
+    skos:definition: "All contributors (human and AI Gems) to the studio's projects."
+
+  - skos:prefLabel: "architects"
+    skos:definition: "Software and Game Architects."
+  - skos:prefLabel: "developers"
+    skos:definition: "Software Developers (all programming roles)."
+  - skos:prefLabel: "designers"
+    skos:definition: "Game Level Narrative UX/UI Designers."
+  - skos:prefLabel: "product-managers"
+    skos:definition: "Product Managers and Product Owners."
+  - skos:prefLabel: "qa-team"
+    skos:definition: "Quality Assurance team members."
+  - skos:prefLabel: "devops-crew"
+    skos:definition: "DevOps team members."
+  - skos:prefLabel: "studio-leadership"
+    skos:definition: "Studio Directors and Management."
+  - skos:prefLabel: "knowledge-guardians"
+    skos:definition: "Knowledge Guardians for documentation domains."
+  - skos:prefLabel: "art-team"
+    skos:definition: "Art team members."
+  - skos:prefLabel: "audio-team"
+    skos:definition: "Audio team members."
+  - skos:prefLabel: "legal-team"
+    skos:definition: "Legal team members."
+  - skos:prefLabel: "marketing-team"
+    skos:definition: "Marketing team members."
+  - skos:prefLabel: "community-team"
+    skos:definition: "Community management and player support team members."
+  - skos:prefLabel: "aie-team"
+    skos:definition: "The AI Enablement Team."
+#######################################################
+organizational_entity_type:
+  - skos:prefLabel: crew
+    skos:definition: "A long-lived'\n'  cross-functional team responsible for a specific domain or product."
+  - skos:prefLabel: project-team
+    skos:definition: "A temporary team assembled for the duration of a specific project."
+  - skos:prefLabel: department
+    skos:definition: "A formal organizational unit like Legal or Finance."
+  - skos:prefLabel: gem
+    skos:definition: "An autonomous AI agent acting as a contributor."

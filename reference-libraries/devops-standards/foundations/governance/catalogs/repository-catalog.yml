@@ -1,0 +1,290 @@
+# Gencraft Studio SSoT Repository Catalog
+# Version: 1.1.0
+# Date: 2025-07-07
+# This file is the SSoT for all official repositories. It is complete and exhaustive.
+
+repository_catalog:
+  - id: ".github"
+    description: "Community health files and default templates for public repositories."
+    metadata:
+      repository_type: "docs"
+      domain: "governance"
+      owner_crew_id: "governance-crew"
+  - id: ".github-private"
+    description: "Default templates and settings for private repositories."
+    metadata:
+      repository_type: "docs"
+      domain: "governance"
+      owner_crew_id: "governance-crew"
+  - id: "gcd-backup-utilities"
+    description: "Automation scripts and utilities for studio-wide data backup."
+    metadata:
+      repository_type: "code"
+      domain: "devops-and-infrastructure"
+      owner_crew_id: "devops-crew"
+  - id: "gcd-onboarding-scripts"
+    description: "Automation scripts to set up and validate new developer environments."
+    metadata:
+      repository_type: "code"
+      domain: "devops-and-infrastructure"
+      owner_crew_id: "devops-crew"
+  - id: "gcd-ops-scripts"
+    description: "The SSoT for operational scripts, including the source code for the Global SSoT Linter."
+    metadata:
+      repository_type: "code"
+      domain: "devops-and-infrastructure"
+      owner_crew_id: "devops-crew"
+  - id: "gcd-shared-actions"
+    description: "The SSoT for reusable GitHub Actions workflows used across the studio."
+    metadata:
+      repository_type: "process"
+      domain: "devops-and-infrastructure"
+      owner_crew_id: "devops-crew"
+  - id: "gci-aws-foundations"
+    description: "Infrastructure as Code for foundational AWS services."
+    metadata:
+      repository_type: "infrastructure"
+      domain: "devops-and-infrastructure"
+      owner_crew_id: "devops-crew"
+  - id: "gci-k8s-cluster-main"
+    description: "Infrastructure as Code for the main Kubernetes cluster."
+    metadata:
+      repository_type: "infrastructure"
+      domain: "devops-and-infrastructure"
+      owner_crew_id: "devops-crew"
+  - id: "gcl-api-contracts"
+    description: "Shared library for API data contracts (e.g., Protobuf, OpenAPI specs)."
+    metadata:
+      repository_type: "code"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "architecture-crew"
+  - id: "gcl-srv-authentication"
+    description: "Shared library for the core authentication service."
+    metadata:
+      repository_type: "code"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "platform-services-crew"
+  - id: "gcl-srv-persistence"
+    description: "Shared library for the core data persistence service."
+    metadata:
+      repository_type: "code"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "platform-services-crew"
+  - id: "gcl-ui-components"
+    description: "Shared library of common UI components for game and web clients."
+    metadata:
+      repository_type: "code"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "frontend-crew"
+  - id: "gcl-voxel-engine"
+    description: "Shared library for the core voxel engine technology."
+    metadata:
+      repository_type: "code"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "engine-crew"
+  - id: "gcp-aethel-architecture"
+    description: "Architecture Decision Records (ADRs) and design documents for Project Aethel."
+    metadata:
+      repository_type: "docs"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "aethel-architecture-team"
+  - id: "gcp-aethel-assets-audio"
+    description: "Audio assets (music, SFX) for Project Aethel."
+    metadata:
+      repository_type: "assets"
+      domain: "art-and-design"
+      owner_crew_id: "aethel-audio-team"
+  - id: "gcp-aethel-assets-char"
+    description: "Character assets (models, textures) for Project Aethel."
+    metadata:
+      repository_type: "assets"
+      domain: "art-and-design"
+      owner_crew_id: "aethel-art-team"
+  - id: "gcp-aethel-backlog"
+    description: "The product and development backlog for Project Aethel."
+    metadata:
+      repository_type: "process"
+      domain: "production-management"
+      owner_crew_id: "aethel-production-team"
+  - id: "gcp-aethel-client"
+    description: "Source code for the Project Aethel game client."
+    metadata:
+      repository_type: "code"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "aethel-client-team"
+  - id: "gcp-aethel-docs-external"
+    description: "External-facing documentation for Project Aethel (e.g., player guides, modding docs)."
+    metadata:
+      repository_type: "docs"
+      domain: "marketing-and-communication"
+      owner_crew_id: "aethel-community-team"
+  - id: "gcp-aethel-docs-gdd"
+    description: "The Game Design Document (GDD) for Project Aethel."
+    metadata:
+      repository_type: "docs"
+      domain: "art-and-design"
+      owner_crew_id: "aethel-game-design-team"
+  - id: "gcp-aethel-docs-lore"
+    description: "The Lore Document (GDD) for Project Aethel."
+    metadata:
+      repository_type: "docs"
+      domain: "art-and-design"
+      owner_crew_id: "aethel-game-design-team"
+  - id: "gcp-aethel-docs-req"
+    description: "Product and functional requirements for Project Aethel."
+    metadata:
+      repository_type: "docs"
+      domain: "production-management"
+      owner_crew_id: "aethel-production-team"
+  - id: "gcp-aethel-pcg"
+    description: "Source code for the Procedural Content Generation systems of Project Aethel."
+    metadata:
+      repository_type: "code"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "aethel-pcg-team"
+  - id: "gcp-aethel-qa"
+    description: "Quality assurance test plans, reports, and related artifacts for Project Aethel."
+    metadata:
+      repository_type: "docs"
+      domain: "quality-assurance"
+      owner_crew_id: "aethel-qa-team"
+  - id: "gcp-aethel-server"
+    description: "Source code for the Project Aethel game server."
+    metadata:
+      repository_type: "code"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "aethel-server-team"
+  - id: "gcs-core-governance"
+    description: "The SSoT for all technical governance, engineering standards, and master 'Law' files."
+    metadata:
+      repository_type: "docs"
+      domain: "devops-and-infrastructure"
+      owner_crew_id: "devops-crew"
+  - id: "gcs-engineering-handbook"
+    description: "A handbook detailing engineering culture, manifesto, and career paths."
+    metadata:
+      repository_type: "docs"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "architecture-crew"
+  - id: "gcs-global-assets"
+    description: "A repository for assets shared across the entire studio, not specific to any project."
+    metadata:
+      repository_type: "assets"
+      domain: "art-and-design"
+      owner_crew_id: "art-crew"
+  - id: "gcs-plt-architecture"
+    description: "The SSoT for platform-level architecture decisions, TDDs, and ADRs."
+    metadata:
+      repository_type: "docs"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "architecture-crew"
+  - id: "gcs-plt-assets"
+    description: "Contains assets specific to the core Gencraft platform services."
+    metadata:
+      repository_type: "assets"
+      domain: "art-and-design"
+      owner_crew_id: "art-crew"
+  - id: "gcs-plt-backlog"
+    description: "The master backlog for the core Gencraft platform development."
+    metadata:
+      repository_type: "process"
+      domain: "production-management"
+      owner_crew_id: "platform-services-crew" # Assumed owner
+  - id: "gcs-plt-crewwkf"
+    description: "Central repository for defining and managing CrewAI agent workflows."
+    metadata:
+      repository_type: "code"
+      domain: "ai-enablement"
+      owner_crew_id: "ai-enablement-team"
+  - id: "gcs-plt-docs-req"
+    description: "Documentation for platform-level requirements."
+    metadata:
+      repository_type: "docs"
+      domain: "production-management"
+      owner_crew_id: "platform-services-crew" # Assumed owner
+  - id: "gcs-plt-gembp"
+    description: "Repository for defining AI Gem Blueprints and standards."
+    metadata:
+      repository_type: "docs"
+      domain: "ai-enablement"
+      owner_crew_id: "ai-enablement-team"
+  - id: "gcs-plt-gemop"
+    description: "Operational guides and role definitions for Gencraft AI Gems."
+    metadata:
+      repository_type: "docs"
+      domain: "ai-enablement"
+      owner_crew_id: "ai-enablement-team"
+  - id: "gcs-plt-tools"
+    description: "Source code for shared platform-level tools, including the gft-cli."
+    metadata:
+      repository_type: "code"
+      domain: "devops-and-infrastructure"
+      owner_crew_id: "devops-crew"
+  - id: "gcs-project-management"
+    description: "Studio-wide project management artifacts, such as master action trackers."
+    metadata:
+      repository_type: "process"
+      domain: "production-management"
+      owner_crew_id: "production-crew"
+  - id: "gcs-security-core"
+    description: "Core security policies and standards for the entire studio."
+    metadata:
+      repository_type: "docs"
+      domain: "security"
+      owner_crew_id: "security-crew"
+  - id: "gcs-core-governance"
+    description: "The central handbook for organizational governance, culture, and operational protocols."
+    metadata:
+      repository_type: "docs"
+      domain: "governance"
+      owner_crew_id: "governance-crew"
+  - id: "gcs-studio-legal"
+    description: "Repository for all legal documents, policies, and contracts."
+    metadata:
+      repository_type: "docs"
+      domain: "governance" # Legal falls under broader governance
+      owner_crew_id: "legal-department"
+  - id: "gct-repo-template-backlog"
+    description: "Standard GitHub template for creating new project backlogs."
+    metadata:
+      repository_type: "template"
+      domain: "production-management"
+      owner_crew_id: "production-crew"
+  - id: "gct-repo-template-standard"
+    description: "Standard GitHub template for a generic Gencraft repository."
+    metadata:
+      repository_type: "template"
+      domain: "governance"
+      owner_crew_id: "devops-crew"
+  - id: "gct-service-template-py"
+    description: "Standard GitHub template for a new Python-based microservice."
+    metadata:
+      repository_type: "template"
+      domain: "engineering-and-architecture"
+      owner_crew_id: "architecture-crew"
+  - id: "gct-ssot-templates"
+    description: "A centralized repository for all Markdown document and issue templates."
+    metadata:
+      repository_type: "template"
+      domain: "governance"
+      owner_crew_id: "governance-crew"
+  - id: "hub"
+    description: "Internal repository for miscellaneous studio-wide artifacts and templates."
+    metadata:
+      repository_type: "docs"
+      domain: "governance"
+      owner_crew_id: "governance-crew"
+
+  - id: "hub-private"
+    description: "Internal repository for private or sensitive studio-wide artifacts."
+    metadata:
+      repository_type: "docs"
+      domain: "governance"
+      owner_crew_id: "governance-crew"
+
+  - id: gce-aethel-pcg-experiments
+    description: "Sandbox for experimental work on procedural content generation for project Aethel."
+    metadata:
+      repository_type: "experimental"
+      domain: "engineering-and-architecture"
+      owner_crew: "aethel-engine-squad"

@@ -1,0 +1,57 @@
+# Gencraft Studio SSoT Ontology
+# Version: 1.0.0
+# Date: 2025-07-07
+# This file describes the fundamental relationships between SSoT concepts.
+
+# Define the namespaces we will use.
+# 'gcs' is our internal namespace for Gencraft Studio concepts.
+prefixes:
+  gcs: "http://schemas.gencraft.studio/ont/1.0/"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+
+# Define the core classes of our universe.
+# This section formalizes the "Container vs. Artifact" distinction.
+classes:
+  - subject: gcs:Contenant
+    predicate: rdfs:comment
+    object: "A logical space that holds, organizes, and applies context to artifacts (e.g., a repository)."
+  - subject: gcs:Artefact
+    predicate: rdfs:comment
+    object: "An elementary unit of intellectual property created and managed by the studio (e.g., a document, a script)."
+
+# Define the relationships between our concepts.
+relationships:
+  # The different 'artifact_class' values are all sub-types of the main 'Artefact' class.
+  - subject: gcs:Knowledge
+    predicate: rdfs:subClassOf
+    object: gcs:Artefact
+  - subject: gcs:Code
+    predicate: rdfs:subClassOf
+    object: gcs:Artefact
+  - subject: gcs:Asset
+    predicate: rdfs:subClassOf
+    object: gcs:Artefact
+  - subject: gcs:Process
+    predicate: rdfs:subClassOf
+    object: gcs:Artefact
+  - subject: gcs:Infrastructure
+    predicate: rdfs:subClassOf
+    object: gcs:Artefact
+  - subject: gcs:Data
+    predicate: rdfs:subClassOf
+    object: gcs:Artefact
+
+# Define the structural rules of our universe.
+# This section specifies what kind of artifacts can live in what kind of containers.
+constraints:
+  - rule_id: "CONTAINMENT_RULE_001"
+    description: "Defines which artifact classes can be stored within a Repository container."
+    domain: gcs:Repository # This rule applies to things that are repositories.
+    property: gcs:canContain # The property being constrained.
+    range: # The value of the property must be one of these classes.
+      - gcs:Knowledge
+      - gcs:Code
+      - gcs:Asset
+      - gcs:Process
+      - gcs:Infrastructure
+      - gcs:Data
