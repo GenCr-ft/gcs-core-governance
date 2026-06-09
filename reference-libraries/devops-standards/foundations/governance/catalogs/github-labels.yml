@@ -1,0 +1,32 @@
+# Gencraft Studio SSoT GitHub Labels
+# Version: 1.0.0
+# Date: 2025-07-07
+
+github_label_sets:
+  - name: "global-core-status"
+    description: "Basic statuses applicable to all issues and pull requests."
+    target_repository_type: "all"
+    labels:
+      - { name: "status:backlog", color: "EBEBEB", description: "Item is in the backlog, not yet ready for work." }
+      - { name: "status:todo", color: "BFC7D1", description: "Item is ready to be worked on." }
+      - { name: "status:in-progress 🚧", color: "1D76DB", description: "Work is actively in progress." }
+      - { name: "status:blocked 🛑", color: "B60205", description: "Work is blocked by a dependency or issue." }
+      - { name: "status:in-review 👀", color: "534CA8", description: "Work has been submitted and is awaiting review." }
+      - { name: "status:done ✅", color: "0E8A16", description: "Work is completed and all criteria are met." }
+
+  - name: "engineering-specifics"
+    description: "Labels for code-centric repositories."
+    target_repository_type: "code"
+    labels:
+      - { name: "type:bug", color: "B60205", description: "A reported bug or defect in functionality." }
+      - { name: "type:feature", color: "7EBBF2", description: "A new feature or enhancement." }
+      - { name: "type:tech-debt", color: "F9D0C4", description: "Work related to refactoring or improving code quality." }
+      - { name: "needs:tech-review", color: "534CA8", description: "Requires technical review from an architect or senior developer." }
+
+  - name: "knowledge-management"
+    description: "Labels for documentation-centric repositories."
+    target_repository_type: "docs"
+    labels:
+      - { name: "type:clarification", color: "FAD8C7", description: "A request for clarification on existing content." }
+      - { name: "type:update", color: "FBCA04", description: "A request to update existing content with new information." }
+      - { name: "type:new-content", color: "C2E0C6", description: "A proposal for creating a new document or section." }

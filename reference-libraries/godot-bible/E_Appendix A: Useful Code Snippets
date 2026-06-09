@@ -1,0 +1,309 @@
+## **Appendix A: Useful Code Snippets**
+
+### **SignalBus.gd (Autoload Singleton)**
+
+This script should be set up as an Autoload named SignalBus. It acts as a central event bus, allowing nodes to communicate without holding direct references to each other. This is a best-practice solution to avoid the "Direct Reference Obsession" anti-pattern.
+
+\# SignalBus.gd
+\# This script must be added to Project \> Project Settings \> Autoload
+extends Node
+
+\# \--- Player Signals \---
+\# Emitted when the player's health changes.
+signal health\_changed(current\_health: int, max\_health: int)
+
+\# Emitted when the player's health reaches zero.
+signal player\_died
+
+\# \--- Stats & UI Signals \---
+\# Emitted when the score is updated.
+signal score\_updated(new\_score: int)
+
+\# Emitted when a new item is collected (for UI, sound, etc.)
+signal item\_collected(item\_resource)
+
+\# \--- Game State Signals \---
+\# Emitted by the pause menu. Listened to by enemies, players, etc.
+signal game\_paused
+signal game\_resumed
+signal scene\_transition\_requested(scene\_path: String)
+
+\# \--- Example Usage \---
+
+\# In Player.gd:
+\# func take\_damage(amount):
+\#     health \-= amount
+\#     SignalBus.health\_changed.emit(health, max\_health)
+\#     if health \<= 0:
+\#         SignalBus.player\_died.emit()
+
+\# In HUD.gd:
+\# func \_ready():
+\#     SignalBus.health\_changed.connect(\_on\_player\_health\_changed)
+\#     SignalBus.score\_updated.connect(\_on\_score\_updated)
+\#
+\# func \_on\_player\_health\_changed(current\_health, max\_health):
+\#     health\_bar.value \= float(current\_health) / max\_health
+\#
+\# func \_on\_score\_updated(new\_score):
+\#     score\_label.text \= str(new\_score)
+
+### **Basic StateMachine (Component-Based)**
+
+This pattern uses a main StateMachine node and child State nodes.
+
+**StateMachine.gd** (Attach to a parent Node)
+
+\# StateMachine.gd
+extends Node
+class\_name StateMachine
+
+\# The state to start in. Set this in the Inspector.
+@export var initial\_state: NodePath
+var current\_state: State
+
+func \_ready():
+	\# Ensure all child nodes are ready first
+	await get\_tree().physics\_frame
+
+	\# Get the initial state node
+	current\_state \= get\_node(initial\_state)
+
+	\# Initialize all states
+	for child in get\_children():
+		if child is State:
+			child.state\_machine \= self
+
+	\# Enter the first state
+	current\_state.enter()
+
+func \_physics\_process(delta):
+	current\_state.run\_physics(delta)
+
+func \_process(delta):
+	current\_state.run\_process(delta)
+
+\# Public function to transition to a new state
+func transition\_to(new\_state\_path: NodePath):
+	if not has\_node(new\_state\_path):
+		return
+
+	var new\_state \= get\_node(new\_state\_path)
+	if new\_state \== current\_state or not new\_state is State:
+		return
+
+	current\_state.exit()
+	current\_state \= new\_state
+	current\_state.enter()
+
+**State.gd** (Base class for all states)
+
+\# State.gd
+extends Node
+class\_name State
+
+var state\_machine: StateMachine
+
+\# Called when entering this state
+func enter():
+	pass
+
+\# Called when exiting this state
+func exit():
+	pass
+
+\# Called every physics frame
+func run\_physics(delta):
+	pass
+
+\# Called every visual frame
+func run\_process(delta):
+	pass
+
+**IdleState.gd** (Example state)
+
+\# IdleState.gd (e.g., child of StateMachine, named "Idle")
+extends State
+
+@export var walk\_state: NodePath
+@export var jump\_state: NodePath
+
+func run\_physics(delta):
+	\# Transition to Walk state
+	if Input.get\_vector("move\_left", "move\_right", "move\_fwd", "move\_back") \!= Vector2.ZERO:
+		state\_machine.transition\_to(walk\_state)
+
+	\# Transition to Jump state
+	if Input.is\_action\_just\_pressed("jump"):
+		state\_machine.transition\_to(jump\_state)
+
+func enter():
+	\# Play idle animation
+	\# owner.get\_node("AnimationPlayer").play("idle")
+	pass
+
+### **Basic Save/Load Function (JSON)**
+
+This shows how to save and load game data to a file in the user:// directory, which is the standard, persistent location for user data.
+
+\# SaveLoadManager.gd
+extends Node
+
+const SAVE\_PATH \= "user://save\_game.json"
+
+\# Collects all data from authoritative sources
+func get\_save\_data() \-\> Dictionary:
+	var player \= get\_tree().get\_first\_node\_in\_group("player")
+	var score\_manager \= get\_node("/root/Main/ScoreManager") \# Example path
+
+	if not player or not score\_manager:
+		return {}
+
+	var data \= {
+		"level\_scene": get\_tree().current\_scene.scene\_file\_path,
+		"player\_data": {
+			"global\_position\_x": player.global\_position.x,
+			"global\_position\_y": player.global\_position.y,
+			"global\_position\_z": player.global\_position.z,
+			"health": player.health
+		},
+		"game\_data": {
+			"score": score\_manager.score
+		}
+	}
+	return data
+
+\# Saves the game to disk
+func save\_game():
+	var data \= get\_save\_data()
+	if data.is\_empty():
+		print\_error("Failed to get save data.")
+		return
+
+	var file \= FileAccess.open(SAVE\_PATH, FileAccess.WRITE)
+	if file \== null:
+		print\_error(FileAccess.get\_open\_error())
+		return
+
+	var json\_string \= JSON.stringify(data, "  ") \# "  " for pretty-printing
+	file.store\_string(json\_string)
+	file.close()
+	print("Game saved successfully.")
+
+\# Loads the game from disk
+func load\_game():
+	if not FileAccess.file\_exists(SAVE\_PATH):
+		print("No save file found.")
+		return false \# Return false to indicate no load occurred
+
+	var file \= FileAccess.open(SAVE\_PATH, FileAccess.READ)
+	if file \== null:
+		print\_error(FileAccess.get\_open\_error())
+		return false
+
+	var content \= file.get\_as\_text()
+	file.close()
+
+	var parse\_result \= JSON.parse\_string(content)
+	if not parse\_result:
+		print\_error("Failed to parse save file (corrupted?).")
+		return false
+
+	var data \= parse\_result
+
+	\# \--- Apply the loaded data \---
+	\# This part is complex and game-specific.
+	\# You must first ensure the correct scene is loaded.
+
+	\# Example:
+	\# 1\. Check if data\["level\_scene"\] is the current scene.
+	\# 2\. If not, transition to that scene and \*then\* apply the data.
+	\# 3\. If it is, apply the data to the existing nodes.
+
+	\# Simple example assuming we are in the correct scene:
+	var player \= get\_tree().get\_first\_node\_in\_group("player")
+	var score\_manager \= get\_node("/root/Main/ScoreManager")
+
+	if player and data.has("player\_data"):
+		var p\_data \= data\["player\_data"\]
+		player.global\_position \= Vector3(
+			p\_data\["global\_position\_x"\],
+			p\_data\["global\_position\_y"\],
+			p\_data\["global\_position\_z"\]
+		)
+		player.health \= p\_data\["health"\]
+		\# Manually call update functions
+		SignalBus.health\_changed.emit(player.health, player.max\_health)
+
+	if score\_manager and data.has("game\_data"):
+		score\_manager.score \= data\["game\_data"\]\["score"\]
+		SignalBus.score\_updated.emit(score\_manager.score)
+
+	print("Game loaded successfully.")
+	return true
+
+## **Appendix B: Code Review Checklist**
+
+Use this checklist during code reviews (e.g., when reviewing a pull request) to maintain code quality and consistency.
+
+**Architecture & Design**
+
+* \[ \] **Single Responsibility:** Does this script do one thing well, or is it a "Mega-Script"? (e.g., Player.gd should not also manage the UI).
+* \[ \] **Composition:** Is the logic broken down into component nodes? (e.g., InputController, AnimationHandler as children of Player).
+* \[ \] **Loose Coupling:** Is signal used for communication instead of direct get\_node() calls? (See "Direct Reference Obsession").
+* \[ \] **"Dumb" UI:** Is the UI *visualizing* state (Good) or *holding* state (Bad)? (See "The UI That Thinks").
+* \[ \] **Singleton Use:** Is this new Autoload a true *global service* (Good) or just a *global data bucket* (Bad)?
+
+**Code Health & Readability**
+
+* \[ \] **Naming Conventions:**
+  * PascalCase for class names, node names, and file names (e.g., PlayerController, PlayerController.gd).
+  * snake\_case for variables and functions (e.g., current\_health, \_on\_player\_died()).
+  * ALL\_CAPS for constants (e.g., MAX\_SPEED).
+* \[ \] **Static Typing:** Are all variables, function parameters, and function return types explicitly typed? (e.g., var health: int \= 100, func heal(amount: int) \-\> void:).
+* \[ \] **No Hard-coded Paths:** Are hard-coded get\_node("../../../Player") calls avoided?
+  * Are @export var some\_node: Node or %UniqueName being used for same-scene references?
+  * Are signals or groups used for cross-scene references?
+* \[ \] **Clear Variable Names:** Is it velocity or v? Is it target\_enemy or t? Be descriptive.
+* \[ \] **Comments:** Is complex, non-obvious logic (e.g., a "why") explained with comments?
+
+**Performance & Robustness**
+
+* \[ \] **No \_process Hogs:** Is heavy logic (pathfinding, iterating large arrays) avoided in \_process or \_physics\_process?
+  * Is it event-driven (using signals)?
+  * Is it batched (using a Timer)?
+* \[ \] **@onready:** Are node references cached in \_ready (or with @onready) instead of being called repeatedly in \_process? (e.g., anim\_player.play() vs get\_node("AnimPlayer").play()).
+* \[ \] **Null Checks:** Is is\_instance\_valid(node) checked before using a node reference that might be null or freed?
+* \[ \] **Test Coverage:** Is new, pure logic (e.g., Inventory.add\_item(), Stats.calculate\_damage()) covered by a new Unit Test in GUT?
+
+## **Appendix C: Glossary of Terms**
+
+* **Batching:** A rendering optimization. The GPU performs best when it can draw many similar objects in one go (a "batch"). In 2D, this means the renderer automatically groups sprites that use the same texture, material, and light settings to draw them all at once, saving CPU time. TileMap and MultiMeshInstance are explicit forms of batching.
+* **CI (Continuous Integration):** A development practice where developers merge their code changes into a central repository frequently. Each merge triggers an automated "build" and "test" (e.g., using GitHub Actions to run GUT tests) to catch integration bugs early.
+* **Culling:** A rendering optimization. The engine "culls" (discards) objects that don't need to be drawn.
+  * **Frustum Culling:** Automatically skips rendering objects that are outside the camera's view cone (frustum).
+  * **Occlusion Culling:** Skips rendering objects that are hidden behind other (occluder) objects.
+* **ECS (Entity Component System):** A software architecture pattern, common in game engines. Godot is *not* a pure ECS engine, but its node-based philosophy is very similar:
+  * **Entity:** The Node itself (e.g., Player).
+  * **Component:** Child Nodes or Scripts that add behavior (e.g., AnimationHandler, InputController, HealthStats).
+* **RPC (Remote Procedure Call):** A networking function. It allows one machine (like a client) to call a function on another machine (like the server). In Godot, this is done with the rpc() and rpc\_id() functions, which are often marked with the @rpc annotation.
+* **TDD (Test-Driven Development):** A software development process. It follows a "Red-Green-Refactor" cycle:
+  1. **Red:** Write a small test that fails (because the feature doesn't exist).
+  2. **Green:** Write the absolute minimum code to make the test pass.
+  3. **Refactor:** Clean up the code, knowing the test will protect you from breaking it.
+
+## **Appendix D: External Links and Resources**
+
+* **Official Godot Documentation:** The absolute best and most up-to-date resource.
+  * [Godot Docs \- Main Page](https://docs.godotengine.org/en/stable/)
+  * [GDScript Style Guide (Naming, etc.)](https://www.google.com/search?q=https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/styleguide.html)
+  * [Godot 4.x changelog (Good for new features)](https://godotengine.org/article/godot-4-0-sets-sail/)
+* **Godot Unit Test (GUT)**
+  * [GUT GitHub Repository (for download/docs)](https://github.com/bitwes/Gut)
+* **Recommended Community Tutorials**
+  * [GDQuest](https://www.gdquest.com/) (High-quality professional tutorials, many free)
+  * [KidsCanCode](https://kidscancode.org/godot_recipes/4.x/) (Excellent, clear explanations of core concepts)
+* **Community & Help**
+  * [Official Godot Forums](https://forum.godotengine.org/)
+  * [Official Godot Discord Server](https://www.google.com/search?q=https://discord.gg/godot-engine)
+  * [Godot Subreddit](https://www.reddit.com/r/godot/)

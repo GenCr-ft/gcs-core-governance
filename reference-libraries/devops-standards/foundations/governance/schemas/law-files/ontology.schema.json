@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Gencraft Studio SSoT Ontology Schema",
+    "description": "Validates the structure of ontology.yml, which describes the fundamental relationships between SSoT concepts.",
+    "type": "object",
+    "properties": {
+        "prefixes": {
+            "type": "object",
+            "description": "Defines the namespaces used throughout the ontology file.",
+            "properties": {
+                "gcs": { "type": "string", "format": "uri" },
+                "rdfs": { "type": "string", "format": "uri" }
+            },
+            "required": ["gcs", "rdfs"]
+        },
+        "classes": {
+            "description": "Defines the core classes of the SSoT universe.",
+            "type": "array",
+            "items": { "$ref": "#/definitions/rdfTriple" }
+        },
+        "relationships": {
+            "description": "Defines the hierarchical and other relationships between classes.",
+            "type": "array",
+            "items": { "$ref": "#/definitions/rdfTriple" }
+        },
+        "constraints": {
+            "description": "Defines the structural rules and constraints of the universe.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "rule_id": { "type": "string" },
+                    "description": { "type": "string" },
+                    "domain": { "type": "string" },
+                    "property": { "type": "string" },
+                    "range": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                    }
+                },
+                "required": ["rule_id", "description", "domain", "property", "range"]
+            }
+        }
+    },
+    "required": ["prefixes", "classes", "relationships", "constraints"],
+    "definitions": {
+        "rdfTriple": {
+            "type": "object",
+            "properties": {
+                "subject": { "type": "string" },
+                "predicate": { "type": "string" },
+                "object": { "type": "string" }
+            },
+            "required": ["subject", "predicate", "object"]
+        }
+    }
+}

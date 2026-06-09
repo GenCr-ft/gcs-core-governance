@@ -1,0 +1,23 @@
+---
+
+## Part 4: Implementation and Best Practices
+
+### Chapter 10: Practical Implementation
+* **Choosing a Language/Tool:** A guide to relevant languages (Python, C++, C#) and tools (Houdini, Substance Designer, Unity/Unreal).
+* **Data Structures:** Using data structures like heightmaps, voxels, and grids effectively.
+* **Performance Optimization:** Tips for creating efficient PCG systems that run in real-time.
+
+### Chapter 11: Control and Directing PCG
+* **Art Direction:** How to guide a procedural system to produce a specific aesthetic.
+* **Human-in-the-Loop:** Designing systems that allow for human intervention and refinement.
+* **Evaluating Quality:** Metrics and methods for determining the success of a procedural system.
+
+---
+
+## Part 5: The Future of Procedural Generation
+
+### Chapter 12: Advanced Topics and The Horizon
+* **AI and Machine Learning:** The role of GANs and other generative models in the future of PCG.
+* **Beyond Visuals:** The rise of procedural narrative, logic, and gameplay.
+* **The Ethical Implications:** The impact of PCG on creative industries and the nature of authorship.
+* **Conclusion:** A summary of key takeaways and a look ahead to the next generation of procedural content.

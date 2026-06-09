@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Gencraft Studio Validation Rules Schema",
+  "description": "Validates the structure of validation-rules.yml.",
+  "type": "object",
+  "properties": {
+      "validation_rules": {
+          "type": "array",
+          "items": {
+              "type": "object",
+              "properties": {
+                  "rule_id": { "type": "string", "pattern": "^GOV_RULE_[0-9]{3}$" },
+                  "description": { "type": "string" },
+                  "rule_applies_if": { "type": "object" },
+                  "action_to_enforce": { "type": "object" }
+              },
+              "required": ["rule_id", "description", "rule_applies_if", "action_to_enforce"]
+          }
+      }
+  },
+  "required": ["validation_rules"]
+}

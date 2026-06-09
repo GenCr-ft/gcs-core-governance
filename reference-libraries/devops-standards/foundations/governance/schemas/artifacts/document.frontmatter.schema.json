@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Gencraft Studio SSoT Document Frontmatter Schema",
+  "description": "Defines the mandatory structure and data types for the YAML frontmatter of all official SSoT Markdown documents. This schema is used by the Global SSoT Linter.",
+  "type": "object",
+  "properties": {
+    "docId": {
+      "description": "The unique, immutable identifier for the document. Format: DOMAIN-TYPE-NNN.",
+      "type": "string",
+      "pattern": "^[A-Z]{3,}-[A-Z]{2,10}-[0-9]{3,}$"
+    },
+    "title": {
+      "description": "The official, human-readable title of the document.",
+      "type": "string"
+    },
+    "version": {
+      "description": "The semantic version of the document.",
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "date": {
+      "description": "The date of the last significant update to the document.",
+      "type": "string",
+      "format": "date"
+    },
+    "authors": {
+      "description": "A list of the primary authors or contributors.",
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "knowledgeGuardian": {
+      "description": "The designated Gem or Crew responsible for the long-term accuracy of the document.",
+      "type": "string"
+    },
+    "ssot_path": {
+      "description": "The fully qualified, permanent URL to this document on the main branch of its host repository.",
+      "type": "string",
+      "format": "uri"
+    },
+    "metadata": {
+      "description": "The mandatory block for all classification metadata.",
+      "type": "object",
+      "properties": {
+        "artifact-class": {
+          "description": "The physical nature of the artifact (e.g., knowledge, code). Must be a kebab-case string from the taxonomy.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "The primary functional or business area this document belongs to.",
+          "type": "string"
+        },
+        "classification": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "The high-level intellectual purpose of the document (e.g., to-govern, to-instruct).",
+              "type": "string"
+            },
+            "type": {
+              "description": "The specific archetype or form of the document (e.g., standard, guide).",
+              "type": "string"
+            }
+          },
+          "required": ["category", "type"]
+        },
+        "lifecycle-phase": {
+          "description": "The current stage of the artifact in our value chain.",
+          "type": "string"
+        },
+        "security-classification": {
+          "description": "The confidentiality level of the document's content. Must be a kebab-case string from the taxonomy.",
+          "type": "string"
+        },
+        "intended-audience": {
+          "description": "A list of primary target audiences for the document. Values must be kebab-case strings from the taxonomy.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provenance": {
+          "description": "Tracks the origin of the document's content.",
+          "type": "object",
+          "properties": {
+            "source": {
+              "description": "The source type of the content. Must be a value from the taxonomy.",
+              "type": "string"
+            },
+            "authors": {
+              "description": "Optional detailed list of authors for provenance tracking.",
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "generator_model_id": {
+              "description": "Optional. The ID of the AI model used for generation if source is AI-related.",
+              "type": "string"
+            },
+            "generator_version": {
+              "description": "Optional. The version of the AI model used for generation.",
+              "type": "string"
+            }
+          },
+          "required": ["source"]
+        }
+      },
+      "required": [
+        "domain",
+        "classification",
+        "lifecycle-phase",
+        "security-classification",
+        "intended-audience",
+        "provenance"
+      ]
+    }
+  },
+  "required": [
+    "docId",
+    "title",
+    "version",
+    "date",
+    "authors",
+    "knowledgeGuardian",
+    "ssot_path",
+    "metadata"
+  ]
+}

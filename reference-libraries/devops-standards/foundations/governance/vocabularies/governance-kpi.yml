@@ -1,0 +1,20 @@
+# Gencraft Studio SSoT Governance KPIs
+# Version: 1.1.0
+# This file defines the key performance indicators to measure the success of our governance.
+# Its structure is aligned with SKOS principles for consistency.
+
+governance_kpis:
+  - skos:prefLabel: "AUDIT_FINDING_REDUCTION"
+    skos:definition: "Measures the reduction of governance errors found by the Global SSoT Linter over time."
+    gcs:target: "Reduce the total number of audit findings by 15% per quarter."
+    skos:notation: "COUNT(ssot_audit_report.findings WHERE status = 'open')"
+
+  - skos:prefLabel: "REVIEW_LEAD_TIME"
+    skos:definition: "Measures the average time between a Pull Request submission and its final approval."
+    gcs:target: "Maintain an average review lead time below 48 hours for all repositories."
+    skos:notation: "AVG(pull_requests.merged_at - pull_requests.created_at WHERE status = 'merged')"
+
+  - skos:prefLabel: "STALE_ARTIFACT_RATIO"
+    skos:definition: "Measures the percentage of artifacts that have not been updated in over 12 months."
+    gcs:target: "Keep the ratio of stale artifacts below 5% of the total number of artifacts."
+    skos:notation: "COUNT(artifacts WHERE last_updated_at < 'now-12M') / COUNT(artifacts)"
