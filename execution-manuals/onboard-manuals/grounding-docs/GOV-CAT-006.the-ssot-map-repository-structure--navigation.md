@@ -1,5 +1,5 @@
 ---
-docId: GOV-CATALOG-006
+docId: GOV-CAT-006
 title: 'The SSoT Map: Repository Structure & Navigation'
 version: 1.2.0
 creation_date: '2025-06-16'

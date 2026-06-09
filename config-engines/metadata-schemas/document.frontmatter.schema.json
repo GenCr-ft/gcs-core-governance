@@ -18,7 +18,12 @@
       "type": "string",
       "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
     },
-    "date": {
+    "creation_date": {
+      "description": "The date when the document was initially created.",
+      "type": "string",
+      "format": "date"
+    },
+    "last_updated_date": {
       "description": "The date of the last significant update to the document.",
       "type": "string",
       "format": "date"
@@ -31,7 +36,13 @@
     },
     "knowledgeGuardian": {
       "description": "The designated Gem or Crew responsible for the long-term accuracy of the document.",
-      "type": "string"
+      "anyOf": [
+        { "type": "string" },
+        {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      ]
     },
     "ssot_path": {
       "description": "The fully qualified, permanent URL to this document on the main branch of its host repository.",
@@ -42,34 +53,20 @@
       "description": "The mandatory block for all classification metadata.",
       "type": "object",
       "properties": {
-        "artifact-class": {
-          "description": "The physical nature of the artifact (e.g., knowledge, code). Must be a kebab-case string from the taxonomy.",
+        "lifecycle-stage": {
+          "description": "The current stage of the artifact in our value chain.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "The scope of the document (e.g., studio, project-aethel, platform).",
           "type": "string"
         },
         "domain": {
           "description": "The primary functional or business area this document belongs to.",
           "type": "string"
         },
-        "classification": {
-          "type": "object",
-          "properties": {
-            "category": {
-              "description": "The high-level intellectual purpose of the document (e.g., to-govern, to-instruct).",
-              "type": "string"
-            },
-            "type": {
-              "description": "The specific archetype or form of the document (e.g., standard, guide).",
-              "type": "string"
-            }
-          },
-          "required": ["category", "type"]
-        },
-        "lifecycle-phase": {
-          "description": "The current stage of the artifact in our value chain.",
-          "type": "string"
-        },
-        "security-classification": {
-          "description": "The confidentiality level of the document's content. Must be a kebab-case string from the taxonomy.",
+        "doc-type": {
+          "description": "The specific archetype or form of the document (e.g., standard, guide).",
           "type": "string"
         },
         "intended-audience": {
@@ -79,38 +76,25 @@
             "type": "string"
           }
         },
-        "provenance": {
-          "description": "Tracks the origin of the document's content.",
-          "type": "object",
-          "properties": {
-            "source": {
-              "description": "The source type of the content. Must be a value from the taxonomy.",
-              "type": "string"
-            },
-            "authors": {
-              "description": "Optional detailed list of authors for provenance tracking.",
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "generator_model_id": {
-              "description": "Optional. The ID of the AI model used for generation if source is AI-related.",
-              "type": "string"
-            },
-            "generator_version": {
-              "description": "Optional. The version of the AI model used for generation.",
-              "type": "string"
-            }
-          },
-          "required": ["source"]
+        "security-classification": {
+          "description": "The confidentiality level of the document's content. Must be a kebab-case string from the taxonomy.",
+          "type": "string"
+        },
+        "keywords": {
+          "description": "A list of search keywords for the document.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
+        "lifecycle-stage",
+        "scope",
         "domain",
-        "classification",
-        "lifecycle-phase",
-        "security-classification",
+        "doc-type",
         "intended-audience",
-        "provenance"
+        "security-classification"
       ]
     }
   },
@@ -118,7 +102,8 @@
     "docId",
     "title",
     "version",
-    "date",
+    "creation_date",
+    "last_updated_date",
     "authors",
     "knowledgeGuardian",
     "ssot_path",

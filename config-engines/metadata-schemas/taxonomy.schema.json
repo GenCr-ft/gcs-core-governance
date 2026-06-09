@@ -46,8 +46,8 @@
   "definitions": {
       "kebabCaseString": {
           "type": "string",
-          "description": "A machine-readable identifier in kebab-case.",
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          "description": "A machine-readable identifier in kebab-case or underscore-case.",
+          "pattern": "^[a-z0-9]+(?:[-_][a-z0-9]+)*$"
       },
       "skosConcept": {
           "type": "object",

@@ -64,65 +64,87 @@ knowledge_classification_type:
     code: "ENHA"
   - skos:prefLabel: standard
     category: to-govern
+    code: "STAN"
     skos:definition: "A document that enforces mandatory rules'\n'  conventions'\n'  or specifications."
   - skos:prefLabel: policy
     category: to-govern
+    code: "POL"
     skos:definition: "A document outlining guiding principles and high-level rules for strategic alignment."
   - skos:prefLabel: charter
     category: to-govern
+    code: "CHAR"
     skos:definition: "A document that defines the mission'\n'  scope'\n'  and principles of an entity (e.g.'\n'  a crew'\n'  an AI agent)."
   - skos:prefLabel: definition-of-done
     category: to-govern
+    code: "DOD"
     skos:definition: "The shared contract that defines the criteria for a work item to be considered complete."
   - skos:prefLabel: guide
     category: to-instruct
+    code: "GUIDE"
     skos:definition: "A document that provides detailed instructions on how to perform a specific task."
   - skos:prefLabel: playbook
     category: to-instruct
+    code: "PLAY"
     skos:definition: "A document containing predefined procedures for handling a recurring situation."
     skos:scopeNote: "Use for reactive'\n'  situation-based procedures. For proactive'\n'  linear learning'\n'  prefer 'guide'."
   - skos:prefLabel: contract
     category: to-govern
+    code: "CONT"
     skos:definition: "A legally binding agreement between the studio and an external party."
   - skos:prefLabel: invoice
     category: to-inform
+    code: "INV"
     skos:definition: "A commercial document issued by a seller to a buyer'\n'  relating to a sale transaction and indicating the products'\n'  quantities'\n'  and agreed prices."
   - skos:prefLabel: budget-proposal
     category: to-instruct
+    code: "BUDG"
     skos:definition: "A formal document that outlines the estimated costs for a project or department over a specific period."
   - skos:prefLabel: financial-report
     category: to-inform
+    code: "FIN"
     skos:definition: "A formal record of the financial activities and position of the studio."
   - skos:prefLabel: plan
     category: to-instruct
+    code: "PLAN"
     skos:definition: "A document outlining a series of intended actions to achieve a goal."
   - skos:prefLabel: specification
     category: to-describe
+    code: "SPEC"
     skos:definition: "A document that unambiguously describes the requirements or design of a system."
   - skos:prefLabel: epic
     category: to-describe
+    code: "EPIC"
     skos:definition: "A large body of work that can be broken down into smaller stories."
   - skos:prefLabel: feature
+    category: to-describe
+    code: "FEAT"
     skos:broader: epic
     skos:definition: "A slice of functionality that delivers value to the user."
   - skos:prefLabel: user-story
+    category: to-describe
+    code: "STORY"
     skos:broader: feature
     skos:definition: "An informal general explanation of a software feature written from the perspective of the end user."
   - skos:prefLabel: adr
     category: to-record
+    code: "ADR"
     skos:altLabel: ["architecture-decision-record"]
     skos:definition: "A record of a significant architectural decision and its consequences."
   - skos:prefLabel: post-mortem
     category: to-record
+    code: "POST"
     skos:definition: "A retrospective analysis of an incident to identify lessons learned."
   - skos:prefLabel: report
     category: to-inform
+    code: "REP"
     skos:definition: "Presents data and analysis in an organized format for a specific audience and purpose."
   - skos:prefLabel: catalog
     category: to-inform
+    code: "CAT"
     skos:definition: "A structured list or inventory of items."
   - skos:prefLabel: reference
     category: to-define
+    code: "REFE"
     skos:altLabel: ["glossary", "lexicon"]
     skos:definition: "Provides quick access to structured information and definitions."
 
@@ -197,13 +219,13 @@ lifecycle_phase:
     skos:definition: "The artifact is no longer in use and is retained for historical purposes only."
 
 security_classification:
-  - skos:prefLabel: l0-public
+  - skos:prefLabel: l0_public
     skos:definition: "Information explicitly approved for public release. No confidentiality controls required."
-  - skos:prefLabel: l1-internal
+  - skos:prefLabel: l1_internal
     skos:definition: "Default classification for internal operations. Accessible to all authenticated studio members."
-  - skos:prefLabel: l2-confidential
+  - skos:prefLabel: l2_confidential
     skos:definition: "Sensitive business'\n'  project'\n'  or personal data. Access is restricted on a need-to-know basis."
-  - skos:prefLabel: l3-secret
+  - skos:prefLabel: l3_secret
     skos:definition: "Critical studio IP'\n'  financial data'\n'  or credentials. Requires the strictest access controls."
 
 repository_type:
@@ -234,6 +256,10 @@ code_classification_type:
     skos:definition: "A standalone piece of code designed to be executed to perform a specific'\n'  discrete task."
 
 intended_audience:
+  - skos:prefLabel: contributors
+    skos:definition: "Applies to all contributors (legacy fallback term)."
+  - skos:prefLabel: governance-team
+    skos:definition: "Members of the governance team (legacy fallback term)."
   - skos:prefLabel: all-contributors
     skos:definition: "Applies to all human and AI members of Gencraft Studio."
   - skos:prefLabel: ai-agents

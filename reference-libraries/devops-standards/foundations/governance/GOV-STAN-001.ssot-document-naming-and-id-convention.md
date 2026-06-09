@@ -114,6 +114,15 @@ domain_codes:
     description: Specifications and guides for developer tools (e.g., gft-cli).
 
 type_codes:
+  - code: CAT
+    name: Catalog / Registry (Short Form)
+    description: A curated list or registry of assets.
+  - code: STAN
+    name: Standard (Short Form)
+    description: A mandatory technical or procedural rule.
+  - code: POL
+    name: Policy (Short Form)
+    description: A high-level, mandatory rule or principle.
   - code: ADR
     name: Architecture Decision Record
     description: A short document describing a key architectural decision.
