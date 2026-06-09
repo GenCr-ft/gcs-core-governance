@@ -22,7 +22,11 @@
                   "skos:broader": { "$ref": "#/definitions/kebabCaseString" },
                   "category": { "$ref": "#/definitions/kebabCaseString" }
               },
-              "required": ["skos:prefLabel", "skos:definition", "category"]
+              "required": ["skos:prefLabel"],
+              "anyOf": [
+                  { "required": ["category"] },
+                  { "required": ["skos:broader"] }
+              ]
           }
       },
       "studio_domain": { "$ref": "#/definitions/skosConceptArray" },
@@ -51,7 +55,7 @@
               "skos:prefLabel": { "$ref": "#/definitions/kebabCaseString" },
               "skos:definition": { "type": "string" }
           },
-          "required": ["skos:prefLabel", "skos:definition"]
+          "required": ["skos:prefLabel"]
       },
       "skosConceptArray": {
           "type": "array",
