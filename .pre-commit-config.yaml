@@ -123,7 +123,7 @@ repos:
     hooks:
 
       - id: metadata-linter
-        exclude: &ssot_exclude ^(tests/fixtures/|integration_test_docs/|README\.md|reference-libraries/)
+        exclude: &ssot_exclude ^(tests/fixtures/|integration_test_docs/|README\.md|CHANGELOG\.md|reference-libraries/)
       - id: naming-linter
         exclude: *ssot_exclude
       - id: link-linter
