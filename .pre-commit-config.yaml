@@ -119,7 +119,7 @@ repos:
 
   # ===== Gencraft SSoT Linters (Custom Hooks) =====
   - repo: https://github.com/GenCr-ft/gcd-ops-scripts.git
-    rev: 1b3761d5354ad61990019938a4862523b4506f5b # pragma: allowlist secret
+    rev: e180b7d11f94efadbcaaa5064b37961852dbb653 # pragma: allowlist secret
     hooks:
 
       - id: metadata-linter
