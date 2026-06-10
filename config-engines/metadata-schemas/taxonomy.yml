@@ -62,6 +62,15 @@ knowledge_classification_type:
   - skos:prefLabel: "enhancement-request"
     skos:broader: "to-plan"
     code: "ENHA"
+  - skos:prefLabel: "backlog"
+    skos:broader: "to-plan"
+    code: "BACK"
+  - skos:prefLabel: "session"
+    skos:broader: "to-record"
+    code: "SESS"
+  - skos:prefLabel: "index"
+    skos:broader: "to-define"
+    code: "IDX"
   - skos:prefLabel: standard
     category: to-govern
     code: "STAN"
