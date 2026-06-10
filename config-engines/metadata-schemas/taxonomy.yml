@@ -156,6 +156,10 @@ knowledge_classification_type:
     code: "REFE"
     skos:altLabel: ["glossary", "lexicon"]
     skos:definition: "Provides quick access to structured information and definitions."
+  - skos:prefLabel: "archive"
+    category: "to-record"
+    code: "ARCH"
+    skos:definition: "Archived or deprecated documents kept for historical trace."
 
 studio_domain:
   - skos:prefLabel: "governance"
@@ -206,6 +210,9 @@ studio_domain:
   - skos:prefLabel: "platform-architecture"
     code: "PLT"
     skos:definition: "Platform-level architecture diagrams, C4 models, and cross-service design specifications for the studio platform."
+  - skos:prefLabel: "lore"
+    code: "LOR"
+    skos:definition: "Lore, world-building, cosmology, history, factions, and universe specs."
 
 
 lifecycle_phase:
