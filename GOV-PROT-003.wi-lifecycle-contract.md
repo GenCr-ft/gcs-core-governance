@@ -1,16 +1,23 @@
 ---
-docId: GOV-PROC-WI-001
+docId: GOV-PROT-003
 title: Work Item Lifecycle Quality Contract
 version: 1.0.0
 authors: [Studio Lead]
+knowledgeGuardian:
+- Orion (GCT-GOV-ORN-001)
 creation_date: '2026-06-09'
 last_updated_date: '2026-06-11'
 language: en
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/GOV-PROT-003.wi-lifecycle-contract.md
 metadata:
   lifecycle-stage: approved
   scope: studio
   domain: governance
-  doc-type: procedure
+  doc-type: protocol
+  intended-audience:
+  - ai-agents
+  - contributors
+  - governance-team
   security-classification: l2_confidential
 ---
 
