@@ -21,7 +21,7 @@ storage_rules:
         - domain: "governance"
         - classification.category: "to-govern"
     then:
-      target_repository_id: "gcs-devops-standards"
+      target_repository_id: "gcs-core-governance"
       target_path_template: "foundations/governance/{classification.type}/{docId}.md"
       justification: "Keeps the laws defining the system with the technical configurations that enforce them."
 
@@ -33,7 +33,7 @@ storage_rules:
         - domain: ["governance", "production-management", "marketing-and-communication", "legal", "finance-and-hr"]
         - classification.category: ["to-instruct", "to-inform", "to-record", "to-define"]
     then:
-      target_repository_id: "gcs-studio-handbook"
+      target_repository_id: "gcs-core-governance"
       target_path_template: "sections/{domain}/{docId}.{title_kebab_case}.md"
       justification: "Centralizes all human-readable operational and organizational knowledge for easy access."
 

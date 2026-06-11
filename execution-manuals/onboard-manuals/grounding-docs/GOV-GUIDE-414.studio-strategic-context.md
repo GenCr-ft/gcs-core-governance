@@ -9,7 +9,7 @@ authors:
 knowledgeGuardian:
 - Antoine (GCT-MGT-PPM-001)
 - "B\xE9atrice (GCT-MGT-SPM-001)"
-ssot_path: gcs-studio-handbook/ai-operational-guides/grounding-docs/context-01-strategic-context.md
+ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/context-01-strategic-context.md
 metadata:
   lifecycle-stage: approved
   keywords:

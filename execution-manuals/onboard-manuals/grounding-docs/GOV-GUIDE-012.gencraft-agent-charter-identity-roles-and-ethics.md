@@ -24,7 +24,7 @@ metadata:
   - ethics
   - roles
   - ai-agent
-ssot_path: gcs-studio-handbook/ai-operational-guides/grounding-docs/01-agent-charter.md
+ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/01-agent-charter.md
 ---
 # Gencraft Agent Charter: Identity, Roles, and Ethics
 

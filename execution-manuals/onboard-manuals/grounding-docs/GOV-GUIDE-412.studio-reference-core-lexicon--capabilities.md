@@ -8,7 +8,7 @@ authors:
 - Governance Crew
 knowledgeGuardian:
 - Iris (GCT-UTL-RWSKA-001)
-ssot_path: gcs-studio-handbook/ai-operational-guides/grounding-docs/05-studio-reference.md
+ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/05-studio-reference.md
 metadata:
   lifecycle-stage: approved
   keywords:
