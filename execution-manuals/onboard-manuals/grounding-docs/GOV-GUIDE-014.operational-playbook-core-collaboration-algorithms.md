@@ -8,7 +8,7 @@ authors:
 - Governance Crew
 knowledgeGuardian:
 - Antoine (GCT-MGT-PPM-001)
-ssot_path: gcs-studio-handbook/ai-operational-guides/grounding-docs/02-operational-playbook.md
+ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/02-operational-playbook.md
 metadata:
   lifecycle-stage: approved
   keywords:

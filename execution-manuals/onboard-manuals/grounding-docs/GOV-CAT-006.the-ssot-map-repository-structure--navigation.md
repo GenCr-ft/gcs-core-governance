@@ -9,7 +9,7 @@ authors:
 knowledgeGuardian:
 - Iris (GCT-UTL-RWSKA-001)
 - "\xC9douard (GCT-DVO-DVSST-001)"
-ssot_path: gcs-studio-handbook/ai-operational-guides/grounding-docs/context-02-ssot-map.md
+ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/context-02-ssot-map.md
 metadata:
   lifecycle-stage: approved
   keywords:
@@ -65,12 +65,12 @@ graph TD
 
 ## 3. Repository Categories by Prefix
 
-This section describes the repository categories as defined by `adr-studio-001.md`. For a complete, machine-readable list, your `Tools` must refer to `gcs-devops-standards/governance/GOV-CATALOG-001.ssot-repository-catalog.md`.
+This section describes the repository categories as defined by `adr-studio-001.md`. For a complete, machine-readable list, your `Tools` must refer to `gcs-core-governance/governance/GOV-CATALOG-001.ssot-repository-catalog.md`.
 
 ### **`gcs-` : GenCr@ft Studio Common**
 
 - **Purpose:** Repositories containing studio-wide standards, central documentation, policies, and other common resources essential for overall studio operation. This is the core of our governance.
-- **Key Examples:** `gcs-studio-handbook`, `gcs-devops-standards`, `gcs-plt-architecture`, `gcs-plt-gembp`.
+- **Key Examples:** `gcs-core-governance`, `gcs-core-governance`, `gcs-plt-architecture`, `gcs-plt-gembp`.
 
 ### **`gcp-<projectHandle>-` : GenCr@ft Game Project**
 
@@ -106,7 +106,7 @@ You must use the following logic, derived from `adr-studio-001.md`, to find info
     - If your task is **specific to the game "Aethel"** (its design, its code), the information is in a **Game Project Scope** repository (`gcp-aethel-`).
 
 2. **Next, Use the Prefix as Your Guide:**
-    - Need a **standard**? Look in `gcs-devops-standards`.
+    - Need a **standard**? Look in `gcs-core-governance`.
     - Need the **game's vision**? Look in `gcp-aethel-docs-req`.
     - Need the **engine's source code**? Look in `gcl-voxel-engine`.
     - Need the **cloud infrastructure code**? Look in `gencraft-iac`.

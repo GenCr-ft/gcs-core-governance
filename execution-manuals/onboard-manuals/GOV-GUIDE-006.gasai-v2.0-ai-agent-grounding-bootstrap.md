@@ -7,7 +7,7 @@ authors:
 knowledgeGuardian:
 - AIE Team Lead
 - Governance Crew
-ssot_path: gcs-studio-handbook/ai-operational-guides/gasai-v2.0.md
+ssot_path: gcs-core-governance/ai-operational-guides/gasai-v2.0.md
 creation_date: '2025-06-15'
 last_updated_date: '2026-05-20'
 language: en

@@ -9,7 +9,7 @@ authors:
 knowledgeGuardian:
 - Isaac (GCT-PRG-SARCH-001)
 - "\xC9douard (GCT-DVO-DVSST-001)"
-ssot_path: gcs-studio-handbook/ai-operational-guides/grounding-docs/03-unified-technical-standard.md
+ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/03-unified-technical-standard.md
 metadata:
   lifecycle-stage: approved
   keywords:

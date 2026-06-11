@@ -24,7 +24,7 @@ metadata:
 # Work Item Lifecycle Quality Contract
 
 **Spec:** `docs/superpowers/specs/2026-06-09-wi-lifecycle-enforcement-design.md`
-**Epic:** https://github.com/GenCr-ft/gcs-project-management/issues/320
+**Epic:** <https://github.com/GenCr-ft/gcs-project-management/issues/320>
 
 This document is the canonical definition of what must be true at each Work Item lifecycle
 gate. All three enforcement layers (L1 hooks, L2 GitHub Actions, L3 wi-lifecycle skill)
@@ -80,7 +80,7 @@ hook, Action, and skill updates follow as separate PRs.
 
 ### `[DESIGN]` Required Sections
 
-```
+```text
 ## Schemas & Data Models
 ## Interface Signatures
 ## Rejected Alternatives
@@ -92,7 +92,7 @@ A section passes with ≥1 non-blank, non-header line. `N/A` + one-line justific
 
 ### `[IMPL]` Required Sections (12 headers)
 
-```
+```text
 ## Desired Outcome
 ## AC Coverage Map
 ## Technical Scope
@@ -153,6 +153,7 @@ AC Coverage Map rows ≥ parent AC count.
 ## Bypass Protocol
 
 A **human** (not Claude) must:
+
 1. Post on the issue: `LIFECYCLE:BYPASS — gate: <name> — reason: <justification>`
 2. Set `lifecycle:bypass` label on the issue.
 
@@ -181,7 +182,7 @@ Machine-parseable token set used by all three enforcement layers:
 
 ## Evidence Comment Format
 
-```
+```markdown
 ✅ AC-N satisfied — PR #<number>, commit <sha>
 Scenario: `<Gherkin scenario title>`
 Test: `<file>:<line>` — `<test description>`
@@ -203,6 +204,7 @@ Output:
 ## Tasklist Position Convention
 
 In the parent WI body, the Sub-issues tasklist must follow this order:
+
 1. First entry: `[DESIGN]` sub-issue link
 2. Second entry: `[IMPL]` sub-issue link
 
