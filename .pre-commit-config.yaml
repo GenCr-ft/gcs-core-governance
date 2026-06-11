@@ -126,7 +126,6 @@ repos:
         language: system
         types: [markdown]
         exclude: &ssot_exclude '^(tests/fixtures/|integration_test_docs/|README\.md|CHANGELOG\.md|reference-libraries/|AGENTS\.md|CLAUDE\.md|\.planning/)'
-
       - id: naming-linter
         name: SSoT Naming Linter
         entry: 'bash -c ''command -v gft >/dev/null 2>&1 || { echo "ERROR: gft CLI not found. Please run the onboarding script or pipx install gft-ops-scripts." >&2; exit 1; }; exec gft verify --naming "$@"'' --'
