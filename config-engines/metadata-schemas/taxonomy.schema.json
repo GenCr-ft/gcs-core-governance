@@ -55,7 +55,7 @@
               "skos:prefLabel": { "$ref": "#/definitions/kebabCaseString" },
               "skos:definition": { "type": "string" }
           },
-          "required": ["skos:prefLabel"]
+          "required": ["skos:prefLabel", "skos:definition"]
       },
       "skosConceptArray": {
           "type": "array",
