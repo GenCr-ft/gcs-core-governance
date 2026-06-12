@@ -13,10 +13,10 @@ assert_exit() {
     "$@" > /dev/null 2>&1 && actual=0 || actual=$?
     if [ "$actual" -eq "$expected" ]; then
         echo "  PASS: $desc"
-        ((PASS++))
+        PASS=$((PASS+1))
     else
         echo "  FAIL: $desc — expected exit $expected, got $actual"
-        ((FAIL++))
+        FAIL=$((FAIL+1))
     fi
 }
 
@@ -25,13 +25,13 @@ assert_output_contains() {
     shift 2
     local out
     out=$("$@" 2>&1 || true)
-    if echo "$out" | grep -q "$pattern"; then
+    if echo "$out" | grep -qE "$pattern"; then
         echo "  PASS: $desc"
-        ((PASS++))
+        PASS=$((PASS+1))
     else
         echo "  FAIL: $desc — expected pattern '$pattern' in output"
         echo "        got: $out"
-        ((FAIL++))
+        FAIL=$((FAIL+1))
     fi
 }
 
