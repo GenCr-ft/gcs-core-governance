@@ -26,7 +26,10 @@
               "anyOf": [
                   { "required": ["category"] },
                   { "required": ["skos:broader"] }
-              ]
+              ],
+              "dependencies": {
+                  "category": ["skos:definition"]
+              }
           }
       },
       "studio_domain": { "$ref": "#/definitions/skosConceptArray" },
