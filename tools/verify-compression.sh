@@ -19,7 +19,7 @@ check_workspace() {
 
     if [ ! -f "$claude_path" ]; then
         emit FAIL "workspace — CLAUDE.md not found: $claude_path"
-        ((FAIL++)); return
+        FAIL=$((FAIL+1)); return
     fi
 
     local nb
@@ -29,7 +29,7 @@ check_workspace() {
         emit PASS "workspace — CLAUDE.md $nb/$CLAUDE_MAX_NB non-blank lines"
     else
         emit FAIL "workspace — CLAUDE.md $nb non-blank lines exceeds budget of $CLAUDE_MAX_NB"
-        ((FAIL++))
+        FAIL=$((FAIL+1))
     fi
 
     local abs_matches
@@ -38,7 +38,7 @@ check_workspace() {
         emit PASS "workspace — CLAUDE.md no absolute paths"
     else
         emit FAIL "workspace — CLAUDE.md contains absolute paths: $(echo "$abs_matches" | tr '\n' ' ')"
-        ((FAIL++))
+        FAIL=$((FAIL+1))
     fi
 }
 
@@ -47,7 +47,7 @@ check_repo() {
 
     if [ ! -f "$agents_path" ]; then
         emit FAIL "repo — AGENTS.md not found: $agents_path"
-        ((FAIL++)); return
+        FAIL=$((FAIL+1)); return
     fi
 
     local abs_matches
@@ -56,7 +56,7 @@ check_repo() {
         emit PASS "repo — AGENTS.md no absolute paths"
     else
         emit FAIL "repo — AGENTS.md contains absolute paths: $(echo "$abs_matches" | tr '\n' ' ')"
-        ((FAIL++))
+        FAIL=$((FAIL+1))
     fi
 
     local nb
@@ -76,8 +76,8 @@ AGENTS_PATH=""
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --workspace) MODE="workspace" ;;
-        --claude)    CLAUDE_PATH="$2"; shift ;;
-        --repo)      MODE="repo"; AGENTS_PATH="$2"; shift ;;
+        --claude)    CLAUDE_PATH="${2:?--claude requires a path argument}"; shift ;;
+        --repo)      MODE="repo"; AGENTS_PATH="${2:?--repo requires a path argument}"; shift ;;
         *) echo "Unknown argument: $1" >&2; exit 2 ;;
     esac
     shift
