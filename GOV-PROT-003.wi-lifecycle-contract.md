@@ -73,14 +73,26 @@ hook, Action, and skill updates follow as separate PRs.
 | `LIFECYCLE:DATA-RISK:*` PR comment | NONE/MITIGATED/ACCEPTED with justification |
 | ADR | Referenced if wire format, auth, or persistence changed |
 | PR checklist | All boxes ticked |
+| `[IMPL]` Relations Check | `[IMPL]` sub-issue body contains a valid branch or PR reference in its `## Relations` section |
 
 ---
 
 ## Sub-issue Contracts
 
+### `## Relations` Section Format
+
+Every `[DESIGN]` and `[IMPL]` sub-issue body must include a `## Relations` section conforming to this format:
+
+```markdown
+## Relations
+- **Parent WI:** GenCr-ft/<repo>#<number>
+- **Dev branch:** `feat/issue-<number>-<slug>` (or link to PR once opened)
+```
+
 ### `[DESIGN]` Required Sections
 
 ```text
+## Relations
 ## Schemas & Data Models
 ## Interface Signatures
 ## Rejected Alternatives
@@ -90,9 +102,10 @@ hook, Action, and skill updates follow as separate PRs.
 
 A section passes with ≥1 non-blank, non-header line. `N/A` + one-line justification is valid.
 
-### `[IMPL]` Required Sections (12 headers)
+### `[IMPL]` Required Sections (13 headers)
 
 ```text
+## Relations
 ## Desired Outcome
 ## AC Coverage Map
 ## Technical Scope
