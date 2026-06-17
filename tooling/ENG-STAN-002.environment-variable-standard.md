@@ -22,7 +22,7 @@ metadata:
 # Environment Variable Standard
 
 Parsed at runtime by `gcd-onboarding-scripts/includes/get_standard_env_vars.py`.
-The script writes matching `export KEY=VALUE` lines into the engineer's shell profile.
+The script prints matching `KEY=VALUE` assignments to stdout; `03_configuration.sh` writes them to the engineer's shell profile.
 
 ## Common Variables
 
