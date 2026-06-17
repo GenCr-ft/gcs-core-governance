@@ -1,5 +1,5 @@
 ---
-docId: ENG-STAN-002
+docId: ENG-STAN-003
 title: VS Code Extension Recommendations
 version: 1.0.0
 authors:
@@ -23,7 +23,7 @@ metadata:
 
 Parsed at runtime by `gcd-onboarding-scripts/includes/get_vscode_extensions.py`.
 Section headings must match the role slug passed to the onboarding script (lowercase, hyphens).
-Role sections include both role-specific extensions and inherited extensions (flattened from GOV-GUIDE-010).
+Role sections include both role-specific extensions and inherited global extensions (flattened).
 
 ## Global Extensions
 
@@ -65,4 +65,3 @@ Inherits: `common-base`
 Inherits: `common-base`
 
 - yzane.markdown-all-in-one
-
