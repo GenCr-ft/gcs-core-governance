@@ -1,5 +1,5 @@
 ---
-docId: ENG-STAN-VSCODE-001
+docId: ENG-STAN-002
 title: VS Code Extension Recommendations
 version: 1.0.0
 authors:
@@ -66,6 +66,3 @@ Inherits: `common-base`
 
 - yzane.markdown-all-in-one
 
-### producer-project-manager
-
-Inherits: `common-base` — no additional extensions beyond global.
