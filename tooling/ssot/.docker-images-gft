@@ -1,0 +1,8 @@
+# GenCr@ft Studio — Docker image pre-pull list
+# Read at runtime by gcd-onboarding-scripts performance_and_caching()
+# Format: one image:tag per line; comment lines (#) and blank lines are ignored.
+# Versions track tooling/ssot/.tool-versions-gft where applicable.
+docker.io/library/node:20-slim
+docker.io/library/python:3.11-slim
+docker.io/library/postgres:16-alpine
+docker.io/library/redis:7-alpine
