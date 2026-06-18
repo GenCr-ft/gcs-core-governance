@@ -12,7 +12,7 @@ summary: Provides a list of recommended Visual Studio Code extensions and settin
   to ensure a consistent development environment across the studio.
 last_updated_date: '2026-06-18'
 metadata:
-  lifecycle-stage: draft
+  lifecycle-stage: approved
   keywords:
   - tooling
   - vscode
@@ -71,7 +71,7 @@ It is recommended to include these settings in your user `settings.json` file.
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  // Python
+  // Python — requires ms-python.black-formatter (not auto-installed by onboarding; see issue #75)
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   }
