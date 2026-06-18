@@ -10,7 +10,7 @@ creation_date: '2025-06-09'
 language: en
 summary: Provides a list of recommended Visual Studio Code extensions and settings
   to ensure a consistent development environment across the studio.
-last_updated_date: '2026-05-20'
+last_updated_date: '2026-06-18'
 metadata:
   lifecycle-stage: draft
   keywords:
@@ -35,6 +35,8 @@ ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-l
 ## 1. Purpose
 
 This document lists the recommended Visual Studio Code extensions and settings for GenCr@t Studio. A consistent environment simplifies troubleshooting and onboarding.
+
+> **Machine-readable companion:** `tooling/ENG-STAN-003.vs-code-extension-recommendations.md` is the authoritative source consumed by the onboarding parser (`get_vscode_extensions.py`). This document provides the human-readable rationale, `settings.json` recommendations, and role-inheritance context. Keep both in sync when modifying the extension catalogue.
 
 ## 2. Recommended Extensions
 
