@@ -12,7 +12,7 @@ language: en
 summary: This guide provides a step-by-step checklist for new technical team members
   to set up their environment, get access to required tools, and understand studio
   processes.
-last_updated_date: '2026-05-20'
+last_updated_date: '2026-06-18'
 metadata:
   lifecycle-stage: draft
   keywords:
@@ -50,7 +50,9 @@ Welcome to the team! This guide will help you get set up and productive as quick
 
 - [ ] **Run the Onboarding Script:** This is the most critical step. Clone the `gcd-onboarding-scripts` repository and run the `gft-onboarding.sh` script. This will install all required tools and configure your environment.
   - _Note: This script will be developed in Phase 2 of our mission._
-- [ ] **IDE Configuration:** Follow the `tool-008-vscode-recommendations.md` standard to set up your VS Code.
+- [ ] **IDE Configuration:** VS Code extensions are installed automatically by the onboarding script. The canonical extension catalogue is `tooling/ENG-STAN-003.vs-code-extension-recommendations.md`.
+- [ ] **Environment Variables:** Role-specific environment variables are applied automatically. The canonical definitions are in `tooling/ENG-STAN-002.environment-variable-standard.md`.
+- [ ] **Docker Images:** Studio container images to pre-pull are listed in `tooling/ssot/.docker-images-gft`.
 - [ ] **SSH & GPG Keys:** Ensure your SSH key is added to your GitHub account for secure access.
 
 ### Day 4-5: Understanding the Ecosystem
