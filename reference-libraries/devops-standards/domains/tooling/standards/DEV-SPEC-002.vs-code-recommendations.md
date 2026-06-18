@@ -12,7 +12,7 @@ summary: Provides a list of recommended Visual Studio Code extensions and settin
   to ensure a consistent development environment across the studio.
 last_updated_date: '2026-06-18'
 metadata:
-  lifecycle-stage: draft
+  lifecycle-stage: approved
   keywords:
   - tooling
   - vscode
