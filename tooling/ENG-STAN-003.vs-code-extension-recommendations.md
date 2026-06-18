@@ -5,7 +5,7 @@ version: 1.0.0
 authors:
   - Studio DevOps (Gem-BB / Camille)
 creation_date: '2026-06-17'
-last_updated_date: '2026-06-17'
+last_updated_date: '2026-06-18'
 language: en
 metadata:
   lifecycle-stage: approved
@@ -24,6 +24,8 @@ metadata:
 Parsed at runtime by `gcd-onboarding-scripts/includes/get_vscode_extensions.py`.
 Section headings must match the role slug passed to the onboarding script (lowercase, hyphens).
 Role sections include both role-specific extensions and inherited global extensions (flattened).
+
+> **Human-readable companion:** `reference-libraries/devops-standards/domains/tooling/standards/DEV-SPEC-002.vs-code-recommendations.md` provides the rationale, `settings.json` recommendations, and role-inheritance context. This file is the authoritative source for the parser; DEV-SPEC-002 is the authoritative source for human decision-making.
 
 ## Global Extensions
 
