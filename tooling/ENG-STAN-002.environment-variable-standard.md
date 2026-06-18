@@ -5,7 +5,7 @@ version: 1.0.0
 authors:
   - Studio DevOps (Gem-BB / Camille)
 creation_date: '2026-06-17'
-last_updated_date: '2026-06-17'
+last_updated_date: '2026-06-18'
 language: en
 metadata:
   lifecycle-stage: approved
@@ -38,6 +38,14 @@ Role-specific variables appended after the common block.
 Section headings must match the role slug passed to the onboarding script (lowercase, hyphens).
 
 ### devops-specialist
+
+```env
+GFT_AWS_PROFILE="gft-devops"
+```
+
+### cerberus-security-officer
+
+Inherits: `devops-specialist` → `devops-team-lead` → `lead-developer-tech-lead`
 
 ```env
 GFT_AWS_PROFILE="gft-devops"

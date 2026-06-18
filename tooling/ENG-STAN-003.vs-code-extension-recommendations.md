@@ -67,3 +67,95 @@ Inherits: `common-base`
 Inherits: `common-base`
 
 - yzane.markdown-all-in-one
+
+### software-architect
+
+Inherits: `lead-developer-tech-lead` → `common-base`
+
+- ms-python.python
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+- drawio.hiker-drawio
+
+### gameplay-programmer
+
+Inherits: `lead-developer-tech-lead` → `common-base`
+
+- ms-python.python
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+
+### network-backend-programmer
+
+Inherits: `lead-developer-tech-lead` → `common-base`
+
+- ms-python.python
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+
+### ui-developer-game
+
+Inherits: `lead-developer-tech-lead` → `common-base`
+
+- ms-python.python
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+
+### pcg-specialist
+
+Inherits: `lead-developer-tech-lead` → `common-base`
+
+- ms-python.python
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+- rust-lang.rust-analyzer
+
+### devops-team-lead
+
+Inherits: `lead-developer-tech-lead` → `common-base`
+
+- ms-python.python
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+
+### character-artist-3d-voxel
+
+Inherits: `art-director` → `common-base`
+
+- blender.blender-vscode
+
+### environment-artist-3d-voxel
+
+Inherits: `character-artist-3d-voxel` → `art-director` → `common-base`
+
+- blender.blender-vscode
+
+### cerberus-security-officer
+
+Inherits: `devops-specialist` → `devops-team-lead` → `lead-developer-tech-lead` → `common-base`
+
+- ms-python.python
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+- hashicorp.terraform
+- ms-azuretools.vscode-docker
+
+### technical-artist
+
+Inherits: `lead-developer-tech-lead` → `common-base`
+
+- ms-python.python
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+
+### level-designer-procedural
+
+Inherits: `game-designer` → `common-base`
+
+- yzane.markdown-all-in-one
+
+### narrative-designer-procedural
+
+Inherits: `game-designer` → `common-base`
+
+- yzane.markdown-all-in-one
