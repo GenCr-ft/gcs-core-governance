@@ -23,7 +23,7 @@ metadata:
 
 Parsed at runtime by `gcd-onboarding-scripts/includes/get_standard_env_vars.py`.
 The script prints matching `KEY=VALUE` assignments to stdout; `03_configuration.sh` writes them to the engineer's shell profile.
-The `Inherits:` lines in role sections are human-readable documentation only; they are not parsed by the script.
+The `Inherits:` lines in each role section are human-readable documentation only; they are not parsed by the script.
 
 ## Common Variables
 
