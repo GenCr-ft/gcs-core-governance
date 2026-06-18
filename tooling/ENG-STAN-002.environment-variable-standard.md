@@ -45,7 +45,7 @@ GFT_AWS_PROFILE="gft-devops"
 
 ### cerberus-security-officer
 
-Inherits: `devops-specialist` → `devops-team-lead` → `lead-developer-tech-lead`
+Inherits: `devops-specialist` → `devops-team-lead` → `lead-developer-tech-lead` → `common-base`
 
 ```env
 GFT_AWS_PROFILE="gft-devops"
