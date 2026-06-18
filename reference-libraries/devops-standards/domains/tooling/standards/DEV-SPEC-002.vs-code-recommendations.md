@@ -48,7 +48,7 @@ The following extensions should be installed. The onboarding script will attempt
 | `esbenp.prettier-vscode`         | Prettier    | Code formatter using Prettier.                   |
 | `ms-python.python`               | Microsoft   | Linting, debugging, and IntelliSense for Python. |
 | `ms-azuretools.vscode-docker`    | Microsoft   | Adds support for Docker containers.              |
-| `redhat.vscode-yaml`             | Red Hat     | YAML language support with validation.           |
+| `redhat.vscode-yaml`             | Red Hat     | YAML language support with validation. *(not auto-installed — see #73)* |
 | `hashicorp.terraform`            | HashiCorp   | HCL language support for Terraform/OpenTofu.     |
 | `davidanson.vscode-markdownlint` | David Anson | Markdown linter and style checker.               |
 
