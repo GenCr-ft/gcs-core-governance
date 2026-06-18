@@ -45,7 +45,7 @@ The official command-line tool used in our CI/CD pipelines is `markdownlint-cli`
 ### 2.2. VS Code Extension
 
 For local development, all developers must install the `DavidAnson.vscode-markdownlint` extension.
-This is specified in `VSCODE_RECOMMENDATIONS.md` and will be installed by the onboarding script.
+This is specified in `tooling/ENG-STAN-003.vs-code-extension-recommendations.md` and will be installed by the onboarding script.
 
 ### 2.3. Configuration
 
