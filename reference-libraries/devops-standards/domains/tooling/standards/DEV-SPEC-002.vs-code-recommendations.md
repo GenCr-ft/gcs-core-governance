@@ -71,7 +71,7 @@ It is recommended to include these settings in your user `settings.json` file.
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  // Python
+  // Python — requires ms-python.black-formatter (not auto-installed by onboarding; see issue #75)
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   }
