@@ -24,6 +24,7 @@ metadata:
 Parsed at runtime by `gcd-onboarding-scripts/includes/get_vscode_extensions.py`.
 Section headings must match the role slug passed to the onboarding script (lowercase, hyphens).
 Role sections include both role-specific extensions and inherited global extensions (flattened).
+The `Inherits:` lines in each role section are human-readable documentation only; they are not parsed by the script.
 
 > **Human-readable companion:** `reference-libraries/devops-standards/domains/tooling/standards/DEV-SPEC-002.vs-code-recommendations.md` provides the rationale, `settings.json` recommendations, and role-inheritance context. This file is the authoritative source for the parser; DEV-SPEC-002 is the authoritative source for human decision-making.
 
