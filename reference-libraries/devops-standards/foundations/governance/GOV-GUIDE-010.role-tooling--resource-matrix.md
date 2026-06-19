@@ -13,7 +13,7 @@ language: en
 summary: This document is the SSoT that maps every studio role to its required command-line
   tools, software, VS Code extensions, and repositories for the automated onboarding
   process. It is based on the official studio organization and prioritizes FOSS.
-last_updated_date: '2026-06-01'
+last_updated_date: '2026-06-19'
 metadata:
   lifecycle-stage: approved
   keywords:
@@ -104,7 +104,7 @@ roles:
   - name: software-architect
     inherits: lead-developer-tech-lead
     description: "Designs the overall software structure and high-level architecture."
-    vscode_extensions: ["drawio.hiker-drawio"]
+    vscode_extensions: ["hediet.vscode-drawio"]
     repositories: ["gcs-plt-architecture"]
   - name: gameplay-programmer
     inherits: lead-developer-tech-lead

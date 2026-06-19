@@ -5,7 +5,7 @@ version: 1.0.0
 authors:
   - Studio DevOps (Gem-BB / Camille)
 creation_date: '2026-06-17'
-last_updated_date: '2026-06-18'
+last_updated_date: '2026-06-19'
 language: en
 metadata:
   lifecycle-stage: approved
@@ -76,7 +76,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - ms-python.python
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
-- drawio.hiker-drawio
+- hediet.vscode-drawio
 
 ### gameplay-programmer
 
