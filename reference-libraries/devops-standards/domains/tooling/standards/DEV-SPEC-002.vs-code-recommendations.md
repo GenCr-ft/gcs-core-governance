@@ -10,7 +10,7 @@ creation_date: '2025-06-09'
 language: en
 summary: Provides a list of recommended Visual Studio Code extensions and settings
   to ensure a consistent development environment across the studio.
-last_updated_date: '2026-06-18'
+last_updated_date: '2026-06-19'
 metadata:
   lifecycle-stage: approved
   keywords:
@@ -51,6 +51,7 @@ The following extensions should be installed. The onboarding script will attempt
 | `redhat.vscode-yaml`             | Red Hat     | YAML language support with validation. *(not auto-installed — see #73)* |
 | `hashicorp.terraform`            | HashiCorp   | HCL language support for Terraform/OpenTofu.     |
 | `davidanson.vscode-markdownlint` | David Anson | Markdown linter and style checker.               |
+| `ms-python.black-formatter`      | Microsoft   | Python formatter — required by `settings.json` `editor.defaultFormatter` for Python files (not auto-installed until gcd-onboarding-scripts#160 merges; see #75). |
 
 ## 3. Recommended `settings.json`
 

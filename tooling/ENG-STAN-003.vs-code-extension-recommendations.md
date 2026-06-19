@@ -45,6 +45,7 @@ Inherits: `devops-team-lead` → `lead-developer-tech-lead` → `common-base`
 - esbenp.prettier-vscode
 - hashicorp.terraform
 - ms-azuretools.vscode-docker
+- ms-python.black-formatter
 
 ### rendering-engine-developer
 
@@ -54,6 +55,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
 - rust-lang.rust-analyzer
+- ms-python.black-formatter
 
 ### lead-developer-tech-lead
 
@@ -62,6 +64,7 @@ Inherits: `common-base`
 - ms-python.python
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
+- ms-python.black-formatter
 
 ### game-designer
 
@@ -77,6 +80,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
 - hediet.vscode-drawio
+- ms-python.black-formatter
 
 ### gameplay-programmer
 
@@ -85,6 +89,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - ms-python.python
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
+- ms-python.black-formatter
 
 ### network-backend-programmer
 
@@ -93,6 +98,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - ms-python.python
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
+- ms-python.black-formatter
 
 ### ui-developer-game
 
@@ -101,6 +107,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - ms-python.python
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
+- ms-python.black-formatter
 
 ### pcg-specialist
 
@@ -110,6 +117,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
 - rust-lang.rust-analyzer
+- ms-python.black-formatter
 
 ### devops-team-lead
 
@@ -118,6 +126,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - ms-python.python
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
+- ms-python.black-formatter
 
 ### character-artist-3d-voxel
 
@@ -140,6 +149,7 @@ Inherits: `devops-specialist` → `devops-team-lead` → `lead-developer-tech-le
 - esbenp.prettier-vscode
 - hashicorp.terraform
 - ms-azuretools.vscode-docker
+- ms-python.black-formatter
 
 ### technical-artist
 
@@ -148,6 +158,7 @@ Inherits: `lead-developer-tech-lead` → `common-base`
 - ms-python.python
 - dbaeumer.vscode-eslint
 - esbenp.prettier-vscode
+- ms-python.black-formatter
 
 ### level-designer-procedural
 

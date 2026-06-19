@@ -99,7 +99,7 @@ roles:
     description: "Leads the programming team and makes key technical decisions."
     tools: ["node-lts", "python", "docker", "prettier"]
     vscode_extensions:
-      ["ms-python.python", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+      ["ms-python.python", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "ms-python.black-formatter"]
     repositories: ["gct-service-template-py", "gcs-plt-tools"]
   - name: software-architect
     inherits: lead-developer-tech-lead
