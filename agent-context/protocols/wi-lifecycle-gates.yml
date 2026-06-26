@@ -1,0 +1,116 @@
+# WI Lifecycle Gates — Machine-Readable Protocol
+# Version: 1.0.0
+# Canonical source: GOV-PROT-003.wi-lifecycle-contract.md + gcs-plt-gemop/hooks/issue_context_gate.py
+# Skill: wi-lifecycle (gcs-plt-gemop/skills/wi-lifecycle/)
+# Evaluation: gates are sequential; each phase must pass before proceeding to the next
+
+gates:
+  - phase: create
+    trigger: new WI issue filed
+    required_sections:
+      - "## Summary"
+      - "## Acceptance Criteria"  # >= 1 AC bullet
+      - "## Architecture Impact"
+      - "## Out of Scope"
+    outputs:
+      - comment: "✅ LIFECYCLE:CREATE:PASS"
+    blockers:
+      - spec_refs_with_lifecycle_stage: ["draft", "proposed", "absent"]
+
+  - phase: refine
+    trigger: branch feat/issue-N-slug or fix/issue-N-slug cut
+    required_sections:
+      - "## Acceptance Criteria"  # >= 1 Given/When/Then block per AC
+      - "## Testability Notes"    # non-trivial content
+      - "## Sub-issues"           # >= 1 tasklist entry for [DESIGN] sub-issue
+    additional_checks:
+      - design_sub_issue_must_be_open: true
+      - spec_refs_still_approved: true
+    outputs:
+      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # written by lifecycle_stamp.py
+      - comment: "✅ LIFECYCLE:REFINE:PASS"
+    blockers:
+      - missing_gherkin_in_any_ac
+      - testability_notes_empty
+      - no_design_sub_issue_linked
+      - design_sub_issue_not_open
+
+  - phase: design
+    trigger: "[DESIGN] sub-issue authored"
+    required_sections_in_design_issue:
+      - "## Relations"
+      - "## Schemas & Data Models"
+      - "## Interface Signatures"
+      - "## Rejected Alternatives"
+      - "## Architecture Diagram / C4 Impact"
+      - "## Open Questions"
+    adversary_review: true  # dispatches wi-lifecycle-adversary
+    outputs:
+      - comment_on_design_issue: "✅ LIFECYCLE:DESIGN:READY — ready for human review and status:approved label"
+    blockers:
+      - any_section_completely_empty  # "N/A + justification" is acceptable
+      - critical_or_high_adversary_finding_unresolved
+
+  - phase: implement
+    trigger: "human sets status:approved on both [DESIGN] (closed) and [IMPL] sub-issues"
+    self_approval_check: true   # label-setter login != current agent login
+    required_sections_in_impl_issue:
+      - "## Relations"
+      - "## Desired Outcome"
+      - "## AC Coverage Map"      # rows >= number of parent WI ACs
+      - "## Technical Scope"
+      - "### Schema & Migration Changes"
+      - "### Port / Interface Changes"
+      - "### Adapter / Implementation Notes"
+      - "## TDD Cycles"           # >= 1 cycle, <= 10 cycles, descriptive names
+      - "## Integration & E2E Verification"
+      - "## Risk Register"
+      - "## External Dependencies"
+      - "## Rollback Plan"
+      - "## Definition of Done"
+    tdd_commit_policy:
+      preferred: per-cycle red+green commit pair
+      acceptable: batch commits if single session AND cycle-to-commit map documented
+      never: red+green in same commit for same feature
+    adversary_review: true
+    outputs:
+      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # phase updated to "implement"
+      - comment: "✅ LIFECYCLE:IMPLEMENT:PASS"
+    blockers:
+      - self_approval_on_either_sub_issue
+      - design_issue_not_closed
+      - impl_issue_missing_required_sections
+      - tdd_cycles_greater_than_10
+      - critical_or_high_adversary_finding_unresolved
+
+  - phase: close
+    trigger: all code committed, PR open
+    checks:
+      - all_child_issues_closed_or_deferred: true   # DEFERRED:WI-N label accepted
+      - all_ac_checkboxes_ticked: true
+      - ac_evidence_comments: ">= 1 per AC"
+      - adversary_pr_review: PASS or FINDINGS-DISPOSITIONED
+      - code_review_comment: required
+      - security_review_comment: required
+      - data_risk_comment: "NONE | MITIGATED | ACCEPTED"
+      - adr_if_wire_format_auth_persistence_changed: true
+      - impl_branch_reference_in_impl_issue: true
+    outputs:
+      - comment: "✅ LIFECYCLE:CLOSE:PASS"
+      - pr_body_may_include: "Closes #N"
+    blockers:
+      - open_undeferred_child_issue
+      - missing_ac_evidence
+      - unresolved_adversary_pr_findings
+      - missing_code_or_security_review
+
+# Branch naming convention
+branch_patterns:
+  feature: "feat/issue-{N}-{slug}"
+  fix: "fix/issue-{N}-{slug}"
+  # N must be the GitHub issue number; slug is kebab-case description
+
+# Commit message convention (Conventional Commits v1.0.0, enforced by commitlint)
+commit_format: "{type}({scope}): WI-{N}.{M} — {description}"
+commit_types: [feat, fix, refactor, test, docs, chore, ci]
+prohibited_trailer: "Co-Authored-By"
