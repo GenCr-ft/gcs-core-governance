@@ -110,6 +110,77 @@
             },
             "required": ["id", "description", "metadata"]
         },
-        "repositoryCatalogArray": { "type": "array", "items": { "$ref": "#/definitions/repositoryCatalogEntry" } }
+        "repositoryCatalogArray": { "type": "array", "items": { "$ref": "#/definitions/repositoryCatalogEntry" } },
+        "orgEntity": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "type": {
+                    "type": "string",
+                    "enum": ["crew", "project-team", "department", "gem"]
+                }
+            },
+            "required": ["id", "name", "type"]
+        },
+        "orgEntityArray": { "type": "array", "items": { "$ref": "#/definitions/orgEntity" } },
+        "govScope": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string" },
+                "description": { "type": "string" },
+                "metadata": { "type": "object" }
+            },
+            "required": ["id", "description"]
+        },
+        "govScopeArray": { "type": "array", "items": { "$ref": "#/definitions/govScope" } },
+        "governanceKpi": {
+            "type": "object",
+            "properties": {
+                "skos:prefLabel": { "type": "string" },
+                "skos:definition": { "type": "string" },
+                "gcs:target": { "type": "string" },
+                "skos:notation": { "type": "string" }
+            },
+            "required": ["skos:prefLabel", "skos:definition", "gcs:target"]
+        },
+        "kpiArray": { "type": "array", "items": { "$ref": "#/definitions/governanceKpi" } },
+        "validationRule": {
+            "type": "object",
+            "properties": {
+                "rule_id": { "type": "string" },
+                "description": { "type": "string" },
+                "rule_applies_if": { "type": "object" },
+                "action_to_enforce": { "type": "object" }
+            },
+            "required": ["rule_id", "description", "rule_applies_if", "action_to_enforce"]
+        },
+        "validationRuleArray": { "type": "array", "items": { "$ref": "#/definitions/validationRule" } },
+        "storageRule": {
+            "type": "object",
+            "properties": {
+                "rule_id": { "type": "string" },
+                "description": { "type": "string" },
+                "if": { "type": "object" },
+                "then": { "type": "object" }
+            },
+            "required": ["rule_id", "description", "if", "then"]
+        },
+        "storageRuleArray": { "type": "array", "items": { "$ref": "#/definitions/storageRule" } },
+        "ontologyConstraint": {
+            "type": "object",
+            "properties": {
+                "rule_id": { "type": "string" },
+                "description": { "type": "string" },
+                "domain": { "type": "string" },
+                "property": { "type": "string" },
+                "range": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            },
+            "required": ["rule_id", "description", "domain", "property", "range"]
+        },
+        "ontologyConstraintArray": { "type": "array", "items": { "$ref": "#/definitions/ontologyConstraint" } }
     }
 }
