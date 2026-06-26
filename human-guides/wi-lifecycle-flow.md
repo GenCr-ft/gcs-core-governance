@@ -1,0 +1,98 @@
+---
+docId: GOV-GUIDE-HG-002
+title: Work Item Lifecycle Flow
+version: 1.0.0
+authors: [Governance Crew]
+metadata:
+  lifecycle-stage: approved
+  scope: studio
+  domain: governance
+  doc-type: guide
+  intended-audience: [contributors]
+  security-classification: l1_internal
+---
+# Work Item Lifecycle Flow
+
+Visual guide to the 5-gate Work Item (WI) lifecycle. All states and transitions match `GOV-PROT-003.wi-lifecycle-contract.md` exactly.
+
+> **Source:** `GOV-PROT-003.wi-lifecycle-contract.md` (canonical)
+
+## State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> Open : Issue filed
+
+    Open --> REFINE_PASS : Gate 2 passed
+    note right of Open
+        Gate 1 (Create) checks:
+        Summary, ACs, Architecture Impact,
+        Out of Scope — all non-empty
+    end note
+
+    REFINE_PASS --> DESIGN_READY : [DESIGN] sub-issue authored
+    note right of REFINE_PASS
+        Gate 2 (Refine) checks:
+        Gherkin ACs, Testability Notes,
+        Sub-issues tasklist with [DESIGN] link
+    end note
+
+    DESIGN_READY --> IMPLEMENT_PASS : [DESIGN] + [IMPL] approved by human
+    note right of DESIGN_READY
+        Gate 3 pre-check:
+        [DESIGN] closed + status:approved
+        [IMPL] open + status:approved
+        Self-approval FORBIDDEN
+    end note
+
+    IMPLEMENT_PASS --> CLOSE_PASS : PR open, all ACs ticked
+    note right of IMPLEMENT_PASS
+        Gate 3 (Implement) checks:
+        Both sub-issues approved by non-self
+        [IMPL] body has all required sections
+        TDD commit policy followed
+    end note
+
+    CLOSE_PASS --> Closed : Closes #N written in PR
+    note right of CLOSE_PASS
+        Gate 4 (Close) checks:
+        AC checkboxes ticked
+        CODE-REVIEW + SECURITY-REVIEW + DATA-RISK
+        PR adversary review PASS
+        All PR checklist boxes ticked
+    end note
+
+    Closed --> [*]
+```
+
+## Gate Summary Table
+
+| Gate | Name | Trigger | Key Checks |
+|------|------|---------|------------|
+| 1 | Create | Issue filed | Summary, ACs, Architecture Impact, Out of Scope |
+| 2 | Refine | Branch cut | Gherkin ACs, Testability Notes, [DESIGN] link in Sub-issues |
+| 3 | Implement | [DESIGN]+[IMPL] approved | Non-self approval, [IMPL] sections, TDD cycles |
+| 4 | Close | PR open, all ACs ticked | Reviews, adversary, PR checklist, ADR if needed |
+
+## TDD Commit Convention
+
+Each TDD cycle produces exactly two commits:
+
+```
+test(scope): WI-N.M — red: <description of failing test>
+feat(scope): WI-N.M — green: <description of implementation>
+```
+
+Refactor commits are optional but follow:
+```
+refactor(scope): WI-N.M — blue: <description>
+```
+
+## Sub-issue Naming Convention
+
+| Sub-issue | Title format | State when gate passes |
+|-----------|-------------|----------------------|
+| [DESIGN] | `[DESIGN] #N — <description>` | Closed + `status:approved` (set by human) |
+| [IMPL] | `[IMPL] #N — <description>` | Open + `status:approved` (set by human) |
+
+> **Self-approval is forbidden.** The person who sets `status:approved` must differ from the current GitHub actor. In a solo studio, this creates a gate that requires a second human reviewer.
