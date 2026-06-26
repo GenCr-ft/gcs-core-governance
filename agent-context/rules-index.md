@@ -40,6 +40,16 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 |------|--------|----------|
 | *(see directory listing)* | CI thresholds | Coverage floors, lint budgets |
 
+## agent-context/grounding/
+
+| File | Domain | Source Doc |
+|------|--------|-----------|
+| `agent-bootstrap.md` | Agent identity, ethics, escalation | GOV-GUIDE-006, GOV-GUIDE-012 |
+| `studio-quick-ref.md` | Terminology, repo map, tech stack, security levels | GOV-GUIDE-412, README |
+| `technical-constraints.md` | Engineering + quality constraints table (8 rules) | GOV-GUIDE-017 |
+| `lexicon.yml` | Core vocabulary: 15 terms with definitions | GOV-GUIDE-412 §2 |
+| `strategic-context.md` | Studio mission, Aethel vision, 8 collaboration principles | GOV-GUIDE-414 |
+
 ## Key rule evaluation rules
 
 - `storage-rules.yml`: **first-match wins** (top-down evaluation order, stated in file header)

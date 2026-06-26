@@ -1,0 +1,74 @@
+# Agent Lexicon — Core Studio Vocabulary
+# Extracted from GOV-GUIDE-412: Studio Reference — Core Lexicon & Capabilities
+# Source: execution-manuals/onboard-manuals/grounding-docs/GOV-GUIDE-412.studio-reference-core-lexicon--capabilities.md
+# Version: 1.0.0
+---
+docId: GOV-GUIDE-HG-AC-004
+title: Agent Lexicon
+version: 1.0.0
+metadata:
+  lifecycle-stage: approved
+  intended-audience: [ai-agents]
+  security-classification: l2_confidential
+  source: GOV-GUIDE-412 §2
+
+terms:
+  - term: SSoT
+    definition: "Single Source of Truth — for any given piece of official information, there is one authoritative location, always a version-controlled document in a Gencraft Git repository."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: AI Gem
+    definition: "A specialized AI entity within Gencraft Studio, designed to perform specific roles and tasks. Also called 'Gem'."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: GOP
+    definition: "Global Operational Protocol — studio-wide operational protocol in 01-operational-protocols/, applies to all Gencraft members (e.g., S1, S2, S8)."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: CSP
+    definition: "Crew-Specific Protocol — documented local adaptation of a GOP, applies only within a particular Crew, as defined in Protocol S12."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: Knowledge Guardian
+    definition: "A designated Gem responsible for the quality, accuracy, and currency of a specific knowledge domain within the SSoT. Abbreviated KG."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: ADR
+    definition: "Architecture Decision Record — document capturing an important architectural decision, its context, and consequences."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: Crew
+    definition: "A functional group of Gems orchestrated by the CrewAI framework to collaborate on complex tasks."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: MCP
+    definition: "Model Context Protocol — open standard Gencraft uses to standardize all interactions between Gems (as MCP Clients) and their Tools (exposed via MCP Servers)."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: DoD
+    definition: "Definition of Done — shared mandatory checklist of criteria a work item must meet to be considered complete. Document: PRO-STAN-001."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: NFR
+    definition: "Non-Functional Requirement — criteria used to judge the operation of a system (performance, security, usability), rather than specific behaviors."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: IaC
+    definition: "Infrastructure as Code — managing and provisioning infrastructure through machine-readable definition files (OpenTofu). Repo: gencraft-iac."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: CI/CD
+    definition: "Continuous Integration / Continuous Delivery — automated processes for building, testing, and releasing software. See gcd-shared-actions for reusable workflows."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: PR
+    definition: "Pull Request — standard mechanism for proposing changes to any SSoT repository. All significant changes must be submitted via PR."
+    source: "GOV-GUIDE-412 §2"
+
+  - term: WI
+    definition: "Work Item — a GitHub Issue tracking a single deliverable, governed by the 5-gate lifecycle in GOV-PROT-003."
+    source: "gcs-core-governance/agent-context/protocols/wi-lifecycle-gates.yml"
+
+  - term: GemID
+    definition: "Unique identifier for an AI Gem. Format: GCT-{DEPT}-{ROLE}-{NNN}. Example: GCT-PRG-SARCH-001 (Isaac, Senior Architect)."
+    source: "gcs-plt-gembp repo"
