@@ -10,6 +10,8 @@ metadata:
   doc-type: protocol
   intended-audience: [ai-agents]
   security-classification: l2_confidential
+  source_version: "1.0.0"
+  last_verified: "2026-06-27"
 ---
 # Document Routing Protocol
 

@@ -10,6 +10,8 @@ metadata:
   doc-type: guide
   intended-audience: [ai-agents]
   security-classification: l2_confidential
+  source_version: "1.0.0"
+  last_verified: "2026-06-27"
 ---
 # Studio Strategic Context — Executive Summary
 
@@ -29,7 +31,7 @@ Build a virtual game studio producing **ambitious, innovative, immersive gaming 
 | Aesthetic | Voxel art |
 | World generation | 100% procedural (PCG) |
 | Core promise | Player freedom: exploration, action, creation |
-| Current phase | Walking skeleton → Phase 6 (multiplayer + persistence) |
+| Current phase | See `gcs-project-management/workspaces/*/STATUS.md` for live phase state |
 
 ## Collaboration Principles (P3 — 8 mandates)
 
