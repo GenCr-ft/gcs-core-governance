@@ -1,0 +1,23 @@
+name: agent-context parity check
+
+on:
+  pull_request:
+    paths:
+      - 'config-engines/metadata-schemas/storage-rules.yml'
+      - 'agent-context/protocols/document-routing.md'
+  push:
+    branches: [main]
+    paths:
+      - 'config-engines/metadata-schemas/storage-rules.yml'
+      - 'agent-context/protocols/document-routing.md'
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify agent-context routing table matches storage-rules.yml
+        run: python3 scripts/verify_agent_context_parity.py
