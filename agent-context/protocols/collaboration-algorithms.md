@@ -1,7 +1,7 @@
 ---
 docId: GOV-PROTO-CA-001
 title: Collaboration Algorithms — Agent Protocol Reference
-version: 1.0.0
+version: 1.1.0
 authors: [Governance Crew]
 metadata:
   lifecycle-stage: approved
@@ -10,6 +10,8 @@ metadata:
   doc-type: protocol
   intended-audience: [ai-agents]
   security-classification: l2_confidential
+  source_version: "1.0.0"
+  last_verified: "2026-06-27"
 ---
 # Collaboration Algorithms
 
@@ -25,25 +27,27 @@ This layer: stripped of narrative, optimized for token budget. Full prose in GOV
 
 ## Algorithm 2 — Disagreement & Escalation (S2)
 
-| Level | Actor | Action |
-|-------|-------|--------|
-| 1 | Self | Formalize in GitHub Issue (disagreement-formalization-template.md) + direct discussion |
-| 2 | Lead | Mediation |
-| 3 | Architect | Isaac or Isidore (architectural issues) |
-| 4 | Production | Antoine (Producer) or Béatrice (PM) |
-| 5 | Governance Crew | Final binding decision |
+1. **Self** — formalize disagreement in GitHub Issue (`disagreement-formalization-template.md`) + direct discussion
+2. **Lead** — request mediation from Crew Lead
+3. **Architect** — escalate to Isaac or Isidore (architectural issues only)
+4. **Production** — escalate to Antoine (Producer) or Béatrice (PM)
+5. **Governance Crew** — final binding decision
+
+> ⚠ Template: `disagreement-formalization-template.md` — not yet authored. See ops-runbook.md Template Registry.
 
 Rule: **do not remain blocked** — escalate within same sprint cycle.
 
-## Algorithm 3 — Decision Traceability Checklist (S7)
+## Algorithm 3 — Decision Traceability (S7)
 
-Required when making a significant decision in scope of autonomy:
+Required when making a significant decision within scope of autonomy:
 
-- [ ] Context: what problem is being solved?
-- [ ] Options considered: what were the alternatives?
-- [ ] Decision: state it clearly
-- [ ] Justification: why was this option chosen?
-- [ ] Traceability: log in GitHub Issue or ADR
+1. **Context** — state what problem is being solved
+2. **Options** — list the alternatives considered
+3. **Decision** — state the decision clearly
+4. **Justification** — explain why this option was chosen
+5. **Traceability** — log in GitHub Issue or ADR
+
+> ⚠ Template: `decision-template.md` — not yet authored. See ops-runbook.md Template Registry.
 
 ## Algorithm 4 — Agile/Scrum Task Loop (S15)
 
@@ -62,8 +66,12 @@ Required when making a significant decision in scope of autonomy:
 
 ## Algorithm 6 — Protocol Evolution (S12/S13)
 
-- Crew-level improvement → propose Crew-Specific Protocol (CSP) to Lead (S12)
-- Studio-level improvement → propose Global Operational Protocol (GOP) via `protocol-change-proposal-template.md` → submit to Governance Crew (S13)
+1. **Crew-level** — propose Crew-Specific Protocol (CSP) to Lead (S12)
+2. **Studio-level** — draft proposal using `protocol-change-proposal-template.md`
+3. Submit proposal to Governance Crew (S13) for review
+4. Approved proposals become GOPs and are merged to gcs-core-governance
+
+> ⚠ Template: `protocol-change-proposal-template.md` — not yet authored. See ops-runbook.md Template Registry.
 
 ## Algorithm 7 — Epic & Task Hierarchy (S16)
 
