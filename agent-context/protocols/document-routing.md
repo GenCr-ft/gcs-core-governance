@@ -20,16 +20,16 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 
 ## Storage Routing Decision Table
 
-| Rule ID | Condition | Target |
+| Rule ID | Condition (exact YAML field syntax from storage-rules.yml) | Target |
 |---------|-----------|--------|
-| `EXPERIMENTAL_STORAGE_RULE` | `metadata.lifecycle-phase = "experimental"` | repo prefix `gce-` |
-| `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class=knowledge` + `domain=governance` + `classification.category=to-govern` | `gcs-core-governance` → `foundations/governance/{classification.type}/{docId}.md` |
-| `KNOWLEDGE_HANDBOOK_STORAGE` | `artifact-class=knowledge` + `domain` in [governance, production-management, marketing-and-communication, legal, finance-and-hr] + `classification.category` in [to-instruct, to-inform, to-record, to-define] | `gcs-core-governance` → `sections/{domain}/{docId}.{title_kebab}.md` |
-| `INFRASTRUCTURE_CODE_STORAGE` | `artifact-class=infrastructure` | repo prefix `gci-` |
-| `PROCESS_DEFINITION_STORAGE` | `artifact-class=process` | `gcd-shared-actions` |
-| `CODE_SHARED_LIBRARY_STORAGE` | `artifact-class=code` + `code-classification.type=library` | repo prefix `gcl-` |
-| `ASSET_PROJECT_STORAGE` | `artifact-class=asset` + `scope=project-aethel` | repo prefix `gcp-aethel-assets-` |
-| `SECURITY_SECRET_STORAGE` | `security-classification=l3-secret` *(evaluated before artifact-class rules)* | `gcs-vault-critical` |
+| `EXPERIMENTAL_STORAGE_RULE` | `metadata.lifecycle-phase: "experimental"` | repo prefix `gce-` |
+| `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class: "knowledge"` + `domain: "governance"` + `classification.category: "to-govern"` | `gcs-core-governance` → `foundations/governance/{classification.type}/{docId}.md` |
+| `KNOWLEDGE_HANDBOOK_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","production-management","marketing-and-communication","legal","finance-and-hr"]` + `classification.category: ["to-instruct","to-inform","to-record","to-define"]` | `gcs-core-governance` → `sections/{domain}/{docId}.{title_kebab}.md` |
+| `INFRASTRUCTURE_CODE_STORAGE` | `artifact-class: "infrastructure"` | repo prefix `gci-` |
+| `PROCESS_DEFINITION_STORAGE` | `artifact-class: "process"` | `gcd-shared-actions` |
+| `CODE_SHARED_LIBRARY_STORAGE` | `artifact-class: "code"` + `code-classification.type: "library"` | repo prefix `gcl-` |
+| `ASSET_PROJECT_STORAGE` | `artifact-class: "asset"` + `scope: "project-aethel"` | repo prefix `gcp-aethel-assets-` |
+| `SECURITY_SECRET_STORAGE` | `security-classification: "l3-secret"` *(evaluated before artifact-class rules)* | `gcs-vault-critical` |
 | *(no match)* | None of the above rules matched | ⚠ File issue in `gcs-core-governance` — no routing rule defined for this artifact |
 
 **Canonical source:** `config-engines/metadata-schemas/storage-rules.yml`
