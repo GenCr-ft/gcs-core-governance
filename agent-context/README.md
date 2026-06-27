@@ -15,15 +15,24 @@ metadata:
 
 Machine-readable protocol layer for AI agents operating in GenCr@ft Studio. Read this folder instead of `reference-libraries/` — it contains dense, structured extractions that answer operational questions directly.
 
-## Navigation
+## Navigation — Protocol Questions
 
 | Question | File | Format |
 |----------|------|--------|
-| How do I route a document to the correct repo? | [protocols/document-routing.md](protocols/document-routing.md) | Decision table |
+| How do I route a document to the correct repo? | [protocols/document-routing.md](protocols/document-routing.md) | Decision table + flowchart |
 | What are the WI lifecycle gate requirements? | [protocols/wi-lifecycle-gates.yml](protocols/wi-lifecycle-gates.yml) | YAML |
 | What collaboration algorithm should I follow? | [protocols/collaboration-algorithms.md](protocols/collaboration-algorithms.md) | Numbered steps |
+| What CLI commands and error paths do I need? | [protocols/ops-runbook.md](protocols/ops-runbook.md) | YAML command ref |
+
+## Navigation — Grounding Questions
+
+| Question | File | Format |
+|----------|------|--------|
 | What is my identity and operational context? | [grounding/agent-bootstrap.md](grounding/agent-bootstrap.md) | Distilled guide |
 | What studio facts do I need? | [grounding/studio-quick-ref.md](grounding/studio-quick-ref.md) | Reference table |
+| What engineering constraints apply? | [grounding/technical-constraints.md](grounding/technical-constraints.md) | Constraint table |
+| What does this term mean? | [grounding/lexicon.yml](grounding/lexicon.yml) | YAML glossary |
+| What is the studio mission and project context? | [grounding/strategic-context.md](grounding/strategic-context.md) | Exec summary |
 | Where are the authoritative rule YAML files? | [rules-index.md](rules-index.md) | Pointer manifest |
 
 ## Design Principles
