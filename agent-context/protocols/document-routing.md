@@ -29,7 +29,8 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 | `PROCESS_DEFINITION_STORAGE` | `artifact-class=process` | `gcd-shared-actions` |
 | `CODE_SHARED_LIBRARY_STORAGE` | `artifact-class=code` + `code-classification.type=library` | repo prefix `gcl-` |
 | `ASSET_PROJECT_STORAGE` | `artifact-class=asset` + `scope=project-aethel` | repo prefix `gcp-aethel-assets-` |
-| `SECURITY_SECRET_STORAGE` | `security-classification=l3-secret` | `gcs-vault-critical` |
+| `SECURITY_SECRET_STORAGE` | `security-classification=l3-secret` *(evaluated before artifact-class rules)* | `gcs-vault-critical` |
+| *(no match)* | None of the above rules matched | ⚠ File issue in `gcs-core-governance` — no routing rule defined for this artifact |
 
 **Canonical source:** `config-engines/metadata-schemas/storage-rules.yml`
 
@@ -52,7 +53,9 @@ Rules are cumulative (all matching rules apply). **Canonical source:** `config-e
 flowchart TD
     A[New artifact to route] --> B{lifecycle-phase = experimental?}
     B -- Yes --> C[gce-* repo]
-    B -- No --> D{artifact-class?}
+    B -- No --> SEC{security-classification = l3-secret?}
+    SEC -- Yes --> L[gcs-vault-critical]
+    SEC -- No --> D{artifact-class?}
     D -- infrastructure --> E[gci-* repo]
     D -- process --> F[gcd-shared-actions]
     D -- asset + project-aethel --> G[gcp-aethel-assets-*]
@@ -60,5 +63,5 @@ flowchart TD
     D -- knowledge --> I{classification.category?}
     I -- to-govern + domain=governance --> J[gcs-core-governance/foundations/governance/]
     I -- to-instruct/inform/record/define --> K[gcs-core-governance/sections/{domain}/]
-    D -- security-classification=l3-secret --> L[gcs-vault-critical]
+    D -- no match --> M[⚠ Escalate: file issue in gcs-core-governance\nNo routing rule matched]
 ```
