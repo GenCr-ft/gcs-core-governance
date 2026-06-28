@@ -123,6 +123,7 @@ Post these exact strings as GitHub **issue** comments (no surrounding text requi
 | Gate | Comment string |
 |------|---------------|
 | CREATE pass | `✅ LIFECYCLE:CREATE:PASS` |
+| CREATE fail | `❌ LIFECYCLE:CREATE:FAIL — <gap list>` |
 | REFINE pass | `✅ LIFECYCLE:REFINE:PASS` |
 | REFINE fail | `❌ LIFECYCLE:REFINE:FAIL — <gap list>` |
 | DESIGN ready | `✅ LIFECYCLE:DESIGN:READY — ready for human review and status:approved label` |
@@ -130,13 +131,17 @@ Post these exact strings as GitHub **issue** comments (no surrounding text requi
 | CLOSE pass | `✅ LIFECYCLE:CLOSE:PASS` |
 | Close blocked | `LIFECYCLE:CLOSE:BLOCKED — sub-issue #<M> is open and undeferred` |
 
-Post via:
+Post via (CREATE phase example):
 
 ```bash
-source gcs-plt-gemop/hooks/github-app-token.sh
-# Gate 1 — CREATE
+unset GH_TOKEN
 gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "✅ LIFECYCLE:CREATE:PASS"
-# Gate 2 — REFINE
+```
+
+Post via (REFINE phase example):
+
+```bash
+unset GH_TOKEN
 gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "✅ LIFECYCLE:REFINE:PASS"
 ```
 
