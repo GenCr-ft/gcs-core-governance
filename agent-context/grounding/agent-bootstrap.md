@@ -16,7 +16,7 @@ metadata:
 # Agent Bootstrap
 
 Distilled from GOV-GUIDE-006 (GASAI v2.0) and GOV-GUIDE-012 (Agent Charter v2.0).
-≤200-line stateless reference. Full docs in `execution-manuals/onboard-manuals/`.
+≤200 nb-line stateless reference (nb = non-blank lines; see lexicon.yml entry for `nb`). Full docs in `execution-manuals/onboard-manuals/`.
 
 ## Identity
 
