@@ -6,9 +6,10 @@ authors: [Studio Lead]
 knowledgeGuardian:
 - Orion (GCT-UTL-SLG-001)
 creation_date: '2026-06-09'
-last_updated_date: '2026-06-27'
+last_updated_date: '2026-06-28'
 language: en
 ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/GOV-PROT-003.wi-lifecycle-contract.md
+spec_path: docs/superpowers/specs/2026-06-09-wi-lifecycle-enforcement-design.md
 metadata:
   lifecycle-stage: approved
   scope: studio
@@ -43,6 +44,8 @@ hook, Action, and skill updates follow as separate PRs.
 | `## Acceptance Criteria` | ≥1 AC bullet (free-text) |
 | `## Architecture Impact` | ≥1 non-blank line (rough) |
 | `## Out of Scope` | ≥1 non-blank line |
+
+**Spec-refs blocker (hard-block):** If the WI `## Relations` section links any specification document whose `metadata.lifecycle-stage` frontmatter value is `draft`, `proposed`, or absent, the CREATE gate fails. An agent evaluates this by fetching each linked document and reading its `lifecycle-stage` field. See `agent-context/grounding/lexicon.yml` term `spec_refs` for the full evaluation algorithm.
 
 **Spec-refs blocker (hard-block):** If the WI `## Relations` section links any specification document whose `metadata.lifecycle-stage` frontmatter value is `draft`, `proposed`, or absent, the CREATE gate fails. An agent evaluates this by fetching each linked document and reading its `lifecycle-stage` field. See `agent-context/grounding/lexicon.yml` term `spec_refs` for the full evaluation algorithm.
 
