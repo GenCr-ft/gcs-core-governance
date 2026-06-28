@@ -1,7 +1,7 @@
 ---
 docId: GOV-IDX-001
 title: Rules Index — Canonical YAML Source Manifest
-version: 1.0.0
+version: 1.1.0
 authors: [Governance Crew]
 metadata:
   lifecycle-stage: approved
@@ -10,8 +10,8 @@ metadata:
   doc-type: reference
   intended-audience: [ai-agents]
   security-classification: l2_confidential
-  source_version: "1.0.0"
-  last_verified: "2026-06-27"
+  source_version: "1.1.0"
+  last_verified: "2026-06-28"
 ---
 # Rules Index
 
@@ -34,13 +34,13 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 
 | File | Domain | Contents |
 |------|--------|----------|
-| *(see directory listing)* | API schema parameters | Per-service parameter contracts |
+| `README.md` | API schema parameters | Placeholder explaining that per-service parameter contract files are pending authorship (see gcs-core-governance#207) |
 
 ## config-engines/pipeline-thresholds/
 
 | File | Domain | Contents |
 |------|--------|----------|
-| *(see directory listing)* | CI thresholds | Coverage floors, lint budgets |
+| `coverage-floors.yml` | CI thresholds | Coverage floor pointers — cross-references `agent-context/grounding/technical-constraints.md` for the authoritative 80% unit-test coverage rule; does not restate the value |
 
 ## agent-context/grounding/
 
