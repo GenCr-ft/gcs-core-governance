@@ -15,14 +15,14 @@ metadata:
 ---
 # Operations Runbook — Agent CLI Reference
 
-Copy-pasteable commands for AI agents operating in gcs-core-governance. All `gh` calls require `unset GH_TOKEN` to use keychain auth.
+Copy-pasteable commands for AI agents operating in gcs-core-governance. All `gh` calls **must** authenticate via the studio bot token: source `gcs-plt-gemop/hooks/github-app-token.sh` to populate `GH_TOKEN` before every command. Never run `unset GH_TOKEN` — keychain auth is unavailable in CI and automated agent pipelines.
 
 ## WI Operations
 
 ### Create an issue
 
 ```bash
-unset GH_TOKEN
+source gcs-plt-gemop/hooks/github-app-token.sh
 gh issue create --repo GenCr-ft/gcs-core-governance \
   --title "[GOV] Short description" \
   --body-file /tmp/issue-body.md
@@ -47,7 +47,7 @@ Types: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `ci`
 ### Create a PR
 
 ```bash
-unset GH_TOKEN
+source gcs-plt-gemop/hooks/github-app-token.sh
 gh pr create --repo GenCr-ft/gcs-core-governance \
   --title "type(scope): WI-N — description" \
   --body-file /tmp/pr-body.md \
@@ -58,14 +58,14 @@ gh pr create --repo GenCr-ft/gcs-core-governance \
 ### Merge a PR (squash)
 
 ```bash
-unset GH_TOKEN
+source gcs-plt-gemop/hooks/github-app-token.sh
 gh pr merge {PR_NUMBER} --repo GenCr-ft/gcs-core-governance --squash --delete-branch
 ```
 
 ### Close an issue with comment
 
 ```bash
-unset GH_TOKEN
+source gcs-plt-gemop/hooks/github-app-token.sh
 gh issue close {N} --repo GenCr-ft/gcs-core-governance --comment "Merged in PR #{PR}."
 ```
 
@@ -105,7 +105,7 @@ Post these exact strings as GitHub issue comments (no surrounding text required)
 Post via:
 
 ```bash
-unset GH_TOKEN
+source gcs-plt-gemop/hooks/github-app-token.sh
 gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "✅ LIFECYCLE:REFINE:PASS"
 ```
 
@@ -114,7 +114,7 @@ gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "✅ LIFECYCLE:R
 | HTTP status | Cause | Action |
 |-------------|-------|--------|
 | 404 | Issue / branch not found | Verify issue number; check `gh issue list --repo GenCr-ft/gcs-core-governance` |
-| 403 | Auth / scope missing | Run `unset GH_TOKEN`; verify keychain via `gh auth status` |
+| 403 | Auth / scope missing | Re-source `gcs-plt-gemop/hooks/github-app-token.sh` to refresh `GH_TOKEN`; verify with `gh auth status` |
 | 422 | Branch already exists | Use `git branch -d feat/issue-{N}-{slug}` then recreate |
 | 429 | Rate limit hit | Wait 60s; avoid parallel `gh` calls |
 | 5xx | GitHub API unavailable | Retry after 30s; check https://githubstatus.com |
