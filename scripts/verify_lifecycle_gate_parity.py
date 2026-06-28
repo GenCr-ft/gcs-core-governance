@@ -81,16 +81,27 @@ def check_metadata_fields(data: dict) -> list[str]:
 
 
 def check_extension_phase_annotated(data: dict) -> list[str]:
-    """Verify that phases not numbered in GOV-PROT-003 carry an extension annotation."""
+    """Verify that phases not numbered in GOV-PROT-003 carry an extension annotation.
+
+    Accepts either ``extension_phase: true`` or ``gate_number: null`` as
+    equivalent markers — the latter is the canonical form used in
+    wi-lifecycle-gates.yml where an inline comment further clarifies intent.
+    """
     failures = []
     gates = data.get("gates", [])
     for gate in gates:
         phase = gate.get("phase", "")
-        if phase in EXTENSION_PHASES and not gate.get("extension_phase"):
+        if phase not in EXTENSION_PHASES:
+            continue
+        annotated = gate.get("extension_phase") or (
+            "gate_number" in gate and gate.get("gate_number") is None
+        )
+        if not annotated:
             failures.append(
                 f"FAIL: phase '{phase}' in wi-lifecycle-gates.yml has no numbered gate in "
-                f"GOV-PROT-003 but lacks 'extension_phase: true' annotation — agents cannot "
-                f"determine whether this corresponds to Gate 3 (Implement) or is unlisted"
+                f"GOV-PROT-003 but lacks an extension annotation — add either "
+                f"'extension_phase: true' or 'gate_number: null' to clarify that this phase "
+                f"is not a canonical GOV-PROT-003 gate"
             )
     return failures
 
