@@ -1,5 +1,5 @@
 ---
-docId: GOV-GUIDE-502
+docId: GOV-GRND-003
 title: Technical Constraints — Engineering and Quality
 version: 1.0.0
 authors: [Governance Crew]
@@ -7,7 +7,7 @@ metadata:
   lifecycle-stage: approved
   scope: studio
   domain: governance
-  doc-type: guide
+  doc-type: grounding
   intended-audience: [ai-agents]
   security-classification: l2_confidential
   source_version: "1.0.0"

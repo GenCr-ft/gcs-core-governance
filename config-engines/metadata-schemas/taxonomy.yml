@@ -91,6 +91,11 @@ knowledge_classification_type:
     category: to-govern
     code: "DOD"
     skos:definition: "The shared contract that defines the criteria for a work item to be considered complete."
+  - skos:prefLabel: grounding
+    category: to-instruct
+    code: "GRND"
+    skos:definition: "A machine-readable reference document providing factual, distilled context for AI agents to bootstrap operational state."
+    skos:scopeNote: "Use exclusively for agent-context grounding files consumed directly by AI Gems at cold-start."
   - skos:prefLabel: guide
     category: to-instruct
     code: "GUIDE"

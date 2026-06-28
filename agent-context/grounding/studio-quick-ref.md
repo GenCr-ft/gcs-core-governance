@@ -1,5 +1,5 @@
 ---
-docId: GOV-REFE-003
+docId: GOV-GRND-002
 title: Studio Quick Reference — Key Facts for AI Agents
 version: 1.0.0
 authors: [Governance Crew]
@@ -7,7 +7,7 @@ metadata:
   lifecycle-stage: approved
   scope: studio
   domain: governance
-  doc-type: reference
+  doc-type: grounding
   intended-audience: [ai-agents]
   security-classification: l2_confidential
   source_version: "1.0.0"

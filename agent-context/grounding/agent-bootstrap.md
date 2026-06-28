@@ -1,5 +1,5 @@
 ---
-docId: GOV-GUIDE-501
+docId: GOV-GRND-001
 title: Agent Bootstrap — Operational Identity Reference
 version: 1.1.0
 authors: [Governance Crew]
@@ -7,7 +7,7 @@ metadata:
   lifecycle-stage: approved
   scope: studio
   domain: governance
-  doc-type: playbook
+  doc-type: grounding
   intended-audience: [ai-agents]
   security-classification: l2_confidential
   source_version: "1.0.0"

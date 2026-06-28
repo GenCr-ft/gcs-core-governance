@@ -80,6 +80,7 @@ Examples across all in-use formats:
 | `POL` | Policy | to-govern | `SEC-POL-001` |
 | `BACK` | Backlog entry | to-describe | `ENG-BACK-001` |
 | `OVER` | Overview | to-describe | `ENG-OVER-001` |
+| `GRND` | Grounding | to-instruct | `GOV-GRND-001` |
 | `READ` | README / Navigation index | to-inform | `GOV-READ-001` |
 
 ## Frontmatter Template
