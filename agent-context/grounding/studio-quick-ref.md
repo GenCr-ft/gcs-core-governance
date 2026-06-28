@@ -24,7 +24,7 @@ Key facts for cold-start context. Full lexicon in GOV-GUIDE-412.
 |------|-----------|
 | SSoT | Single Source of Truth — one authoritative location per piece of info, always in a version-controlled Git repo |
 | AI Gem | A specialized AI entity with a role, GemID, and SKILL.md persona definition |
-| GOP | Global Operational Protocol — studio-wide, applies to all Gems (S1–S17) |
+| GOP | Global Operational Protocol — studio-wide, applies to all Gems (S1–S20) — see [protocols/gop-s-number-index.md](../protocols/gop-s-number-index.md) |
 | CSP | Crew-Specific Protocol — local adaptation of a GOP, applies within one Crew only |
 | Knowledge Guardian (KG) | Gem responsible for accuracy/currency of a knowledge domain |
 | ADR | Architecture Decision Record — documents significant architectural choices |

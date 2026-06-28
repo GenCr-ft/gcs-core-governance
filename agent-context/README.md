@@ -22,6 +22,7 @@ Machine-readable protocol layer for AI agents operating in GenCr@ft Studio. Read
 | How do I route a document to the correct repo? | [protocols/document-routing.md](protocols/document-routing.md) | Decision table + flowchart |
 | What are the WI lifecycle gate requirements? | [protocols/wi-lifecycle-gates.yml](protocols/wi-lifecycle-gates.yml) | YAML |
 | What collaboration algorithm should I follow? | [protocols/collaboration-algorithms.md](protocols/collaboration-algorithms.md) | Numbered steps |
+| What does GOP S-number Sn cover? | [protocols/gop-s-number-index.md](protocols/gop-s-number-index.md) | Lookup table |
 | What CLI commands and error paths do I need? | [protocols/ops-runbook.md](protocols/ops-runbook.md) | YAML command ref |
 
 ## Navigation — Grounding Questions
