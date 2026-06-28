@@ -33,7 +33,7 @@ storage_rules:
         - classification.category: "to-govern"
     then:
       target_repository_id: "gcs-core-governance"
-      target_path_template: "foundations/governance/{classification.type}/{docId}.md"
+      target_path_template: "foundations/governance/{docId}.md"
       justification: "Keeps the laws defining the system with the technical configurations that enforce them."
 
   - rule_id: "KNOWLEDGE_HANDBOOK_STORAGE"
