@@ -40,7 +40,7 @@ Machine-readable protocol layer for AI agents operating in GenCr@ft Studio. Read
 1. **No rule duplication** — every rule cites its canonical path in `config-engines/`. Never restates rules inline.
 2. **Token budget** — each file targets ≤200 lines. Prefer tables over prose.
 3. **Stateless** — each file is self-contained; no cross-file dependencies required for a single question.
-4. **Frozen reference-libraries/** — `reference-libraries/` is NOT modified. This layer derives from it.
+4. **Migrated from execution-manuals/** — `execution-manuals/` is deprecated and its content is migrating into this layer. Source files originate there (e.g., `execution-manuals/onboard-manuals/GOV-GUIDE-006.gasai-v2.0-ai-agent-grounding-bootstrap.md` → `grounding/agent-bootstrap.md`). `reference-libraries/` is a separate frozen human-oriented docs folder unrelated to agent-context provenance.
 
 ## Canonical sources
 
