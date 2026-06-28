@@ -217,6 +217,12 @@ studio_domain:
   - skos:prefLabel: "lore"
     code: "LOR"
     skos:definition: "Lore, world-building, cosmology, history, factions, and universe specs."
+  - skos:prefLabel: "operations-and-management"
+    code: "OPS"
+    skos:definition: "Studio operational protocols, management processes, runbooks, and cross-functional procedures."
+  - skos:prefLabel: "procedural-content-generation"
+    code: "PCG"
+    skos:definition: "Procedural generation algorithms, tooling, research, and implementation specifications."
 
 
 lifecycle_phase:
