@@ -107,7 +107,7 @@ cat /tmp/lifecycle/gcs-core-governance-feat-issue-{N}-{slug}.json
 If Step 1 returns file-not-found, run:
 
 ```bash
-unset GH_TOKEN
+source gcs-plt-gemop/hooks/github-app-token.sh
 gh issue view {N} --repo GenCr-ft/gcs-core-governance --comments \
   | grep -E '✅ LIFECYCLE:(REFINE|IMPLEMENT):PASS'
 ```
@@ -215,7 +215,7 @@ An adversary finding must be classified as one of the following tiers. The gate 
 Post via:
 
 ```bash
-unset GH_TOKEN
+source gcs-plt-gemop/hooks/github-app-token.sh
 gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "LIFECYCLE:ADVERSARY-REVIEW:DESIGN:PASS"
 ```
 
