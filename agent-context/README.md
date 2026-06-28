@@ -37,6 +37,18 @@ Machine-readable protocol layer for AI agents operating in GenCr@ft Studio. Read
 | What is the studio mission and project context? | [grounding/strategic-context.md](grounding/strategic-context.md) | Exec summary |
 | Where are the authoritative rule YAML files? | [rules-index.md](rules-index.md) | Pointer manifest |
 
+## Folder Architecture
+
+Complete folder-purpose table for `gcs-core-governance`. Use this to determine which layer to read or write.
+
+| Folder | Primary Audience | Content Type | Edit Policy |
+|--------|-----------------|-------------|-------------|
+| `config-engines/` | AI Agents + Tooling | JSON Schema, YAML rule files | Open governance issue first; PR required |
+| `agent-context/` | AI Agents | Extracted protocols, pointer manifests | Update when `config-engines/` changes |
+| `human-guides/` | Human Contributors | Mermaid diagrams, annotated tables | Update when `config-engines/` changes |
+| `reference-libraries/` | Human Contributors | Long-form narrative Markdown | FROZEN — additive README files only |
+| `execution-manuals/` | (Deprecated) | Old agent runbooks | No new content; migrate to `agent-context/` |
+
 ## Design Principles
 
 1. **No rule duplication** — every rule cites its canonical path in `config-engines/`. Never restates rules inline.
