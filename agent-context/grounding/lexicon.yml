@@ -77,7 +77,7 @@ terms:
     source: "GOV-GUIDE-412 §2"
 
   - term: WI
-    definition: "Work Item — a GitHub Issue tracking a single deliverable, governed by the 5-gate lifecycle in GOV-PROT-003."
+    definition: "Work Item — a GitHub Issue tracking a single deliverable, governed by the 4-gate lifecycle in GOV-PROT-003 (Gate 1 Create, Gate 2 Refine, Gate 3 Implement, Gate 4 Close). The lifecycle has 5 sequential phases — create, refine, design, implement, close — where the design phase is a sub-phase within the refine-to-implement transition, not a standalone named gate."
     source: "gcs-core-governance/GOV-PROT-003.wi-lifecycle-contract.md"
 
   - term: title_kebab_case
@@ -91,6 +91,10 @@ terms:
   - term: redirect (->)
     definition: "Notation used in rules-index.md to indicate that the canonical SSoT for the named file lives in reference-libraries/ but a surfaced read-accessible copy is maintained at the path given by the enclosing section header (e.g. config-engines/metadata-schemas/). Agents must read the copy at the surfaced path, never the reference-libraries/ original."
     source: "gcs-core-governance/agent-context/rules-index.md"
+
+  - term: spec_refs
+    definition: "Specification references — the set of Markdown links present in a WI issue body's `## Relations` section that point to documents (in any Gencraft repository) whose YAML frontmatter contains a `lifecycle-stage:` field. An agent evaluates spec_refs by: (1) parsing every hyperlink in `## Relations`; (2) fetching the target document; (3) reading its `metadata.lifecycle-stage` frontmatter field. A spec_ref is considered 'approved' when its `lifecycle-stage` value is exactly `approved`. Values of `draft`, `proposed`, or an absent frontmatter field are non-approved. The blocker `spec_refs_with_lifecycle_stage: [\"draft\", \"proposed\", \"absent\"]` fails (hard-block at CREATE) when any linked spec document matches one of those states. The additional_check `spec_refs_still_approved: true` fails (advisory at REFINE) when any previously-approved spec has been demoted below `approved`."
+    source: "gcs-core-governance/agent-context/protocols/wi-lifecycle-gates.yml"
 
   - term: GemID
     definition: "Unique identifier for an AI Gem. Format: GCT-{DEPT}-{ROLE}-{NNN}. Example: GCT-PRG-SARCH-001 (Isaac, Senior Architect)."

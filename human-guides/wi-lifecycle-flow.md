@@ -13,7 +13,7 @@ metadata:
 ---
 # Work Item Lifecycle Flow
 
-Visual guide to the 4-gate Work Item (WI) lifecycle. All states and transitions match `GOV-PROT-003.wi-lifecycle-contract.md` exactly.
+Visual guide to the 4-gate Work Item (WI) lifecycle. All states and transitions match `GOV-PROT-003.wi-lifecycle-contract.md` exactly. The lifecycle has 5 sequential phases (create, refine, design, implement, close) but only 4 named gates (Gate 1–4); the design phase is a sub-phase within the refine-to-implement transition.
 
 > **Source:** `GOV-PROT-003.wi-lifecycle-contract.md` (canonical)
 
