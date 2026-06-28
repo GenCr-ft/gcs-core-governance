@@ -84,6 +84,10 @@ terms:
     definition: "Specification references — the set of Markdown links present in a WI issue body's `## Relations` section that point to documents (in any Gencraft repository) whose YAML frontmatter contains a `lifecycle-stage:` field. An agent evaluates spec_refs by: (1) parsing every hyperlink in `## Relations`; (2) fetching the target document; (3) reading its `metadata.lifecycle-stage` frontmatter field. A spec_ref is considered 'approved' when its `lifecycle-stage` value is exactly `approved`. Values of `draft`, `proposed`, or an absent frontmatter field are non-approved. The blocker `spec_refs_with_lifecycle_stage: [\"draft\", \"proposed\", \"absent\"]` fails (hard-block at CREATE) when any linked spec document matches one of those states. The additional_check `spec_refs_still_approved: true` fails (advisory at REFINE) when any previously-approved spec has been demoted below `approved`."
     source: "gcs-core-governance/agent-context/protocols/wi-lifecycle-gates.yml"
 
+  - term: redirect (->)
+    definition: "Notation used in rules-index.md to indicate that the canonical SSoT for the named file lives in reference-libraries/ but a surfaced read-accessible copy is maintained at the path given by the enclosing section header (e.g. config-engines/metadata-schemas/). Agents must read the copy at the surfaced path, never the reference-libraries/ original."
+    source: "gcs-core-governance/agent-context/rules-index.md"
+
   - term: GemID
     definition: "Unique identifier for an AI Gem. Format: GCT-{DEPT}-{ROLE}-{NNN}. Example: GCT-PRG-SARCH-001 (Isaac, Senior Architect)."
     source: "gcs-plt-gembp repo"
