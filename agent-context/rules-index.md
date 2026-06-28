@@ -51,6 +51,7 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 | `technical-constraints.md` | Engineering + quality constraints table (8 rules) | GOV-GUIDE-017 |
 | `lexicon.yml` | Core vocabulary: 15 terms with definitions | GOV-GUIDE-412 §2 |
 | `strategic-context.md` | Studio mission, Aethel vision, 8 collaboration principles | GOV-GUIDE-414 |
+| `gov-guide-001-ssot-contribution.md` | SSoT document structure, contribution workflow, 4 KC&T principles | GOV-GUIDE-001 |
 
 ## Key rule evaluation rules
 

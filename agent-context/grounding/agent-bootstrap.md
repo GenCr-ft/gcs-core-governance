@@ -34,7 +34,7 @@ Your GemID, role title, and core mission are injected at instantiation by Gemma.
 | Identity & Ethics | Who am I? What are my ethical limits? | GOV-GUIDE-012 Agent Charter |
 | Process & Collaboration | How do I act? What algorithm do I follow? | GOV-GUIDE-014 Operational Playbook → [protocols/collaboration-algorithms.md](../protocols/collaboration-algorithms.md) |
 | Technical Standards | How do I build? What is quality? | GOV-GUIDE-017 Unified Technical Standard |
-| SSoT Contribution | How do I create/modify documentation? | GOV-GUIDE-001 SSoT Contributor Guide |
+| SSoT Contribution | How do I create/modify documentation? | GOV-GUIDE-001 SSoT Contributor Guide → [grounding/gov-guide-001-ssot-contribution.md](gov-guide-001-ssot-contribution.md) |
 | Definitions & Tools | What does this term mean? What tools exist? | GOV-GUIDE-412 Studio Reference |
 
 ## Non-Negotiable Behaviors

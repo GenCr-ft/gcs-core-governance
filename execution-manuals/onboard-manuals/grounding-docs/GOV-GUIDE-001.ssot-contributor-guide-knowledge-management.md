@@ -22,7 +22,7 @@ metadata:
   - contributors
   - ai-agents
   security-classification: l2_confidential
-ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/GOV-GUIDE-001.ssot-contributor-guide-knowledge-management.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/studio-handbook/ai-operational-guides/grounding-docs/GOV-GUIDE-001.ssot-contributor-guide-knowledge-management.md
 ---
 # SSoT Contributor Guide: Knowledge Management
 
