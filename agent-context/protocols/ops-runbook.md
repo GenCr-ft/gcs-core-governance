@@ -95,6 +95,7 @@ Post these exact strings as GitHub issue comments (no surrounding text required)
 
 | Gate | Comment string |
 |------|---------------|
+| CREATE pass | `✅ LIFECYCLE:CREATE:PASS` |
 | REFINE pass | `✅ LIFECYCLE:REFINE:PASS` |
 | REFINE fail | `❌ LIFECYCLE:REFINE:FAIL — <gap list>` |
 | DESIGN ready | `✅ LIFECYCLE:DESIGN:READY — ready for human review and status:approved label` |
@@ -106,6 +107,9 @@ Post via:
 
 ```bash
 source gcs-plt-gemop/hooks/github-app-token.sh
+# Gate 1 — CREATE
+gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "✅ LIFECYCLE:CREATE:PASS"
+# Gate 2 — REFINE
 gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "✅ LIFECYCLE:REFINE:PASS"
 ```
 
