@@ -1,0 +1,12 @@
+# CODEOWNERS — Change-control gates for protected governance documents
+# Any PR modifying a listed path requires explicit approval from the designated owner.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Agent bootstrap fallback procedure — must be reviewed by Governance Crew on every change
+agent-context/grounding/agent-bootstrap.md @GenCr-ft/governance-crew
+
+# Agent lexicon — canonical term definitions
+agent-context/grounding/lexicon.yml @GenCr-ft/governance-crew
+
+# WI lifecycle gates — machine-readable protocol
+agent-context/protocols/wi-lifecycle-gates.yml @GenCr-ft/governance-crew

@@ -1,13 +1,20 @@
 # WI Lifecycle Gates — Machine-Readable Protocol
-# Canonical source: GOV-PROT-003.wi-lifecycle-contract.md
-# Skill: wi-lifecycle (resolved via Claude Code harness; no local path required)
+
+_meta:
+  docId: GOV-PROT-WI-GATES-001
+  title: WI Lifecycle Gates
+  version: 1.0.0
+  metadata:
+    lifecycle-stage: approved
+    intended-audience: [ai-agents]
+    security-classification: l2_confidential
+    source_version: "1.0.0"
+    last_verified: "2026-06-28"
+    source: "GOV-PROT-003.wi-lifecycle-contract.md + gcs-plt-gemop/hooks/issue_context_gate.py"
+    skill: "wi-lifecycle (gcs-plt-gemop/skills/wi-lifecycle/)"
+    knowledgeGuardian: "Orion (GCT-UTL-SLG-001)"
+
 # Evaluation: gates are sequential; each phase must pass before proceeding to the next
-metadata:
-  version: "1.0.0"
-  source_document: "GOV-PROT-003.wi-lifecycle-contract.md"
-  source_version: "1.0.0"
-  last_verified: "2026-06-27"
-  knowledgeGuardian: "Orion (GCT-UTL-SLG-001)" 
 
 gates:
   - phase: create
