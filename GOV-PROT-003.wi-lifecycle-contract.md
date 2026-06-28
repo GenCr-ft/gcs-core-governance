@@ -44,6 +44,8 @@ hook, Action, and skill updates follow as separate PRs.
 | `## Architecture Impact` | ≥1 non-blank line (rough) |
 | `## Out of Scope` | ≥1 non-blank line |
 
+**Spec-refs blocker (hard-block):** If the WI `## Relations` section links any specification document whose `metadata.lifecycle-stage` frontmatter value is `draft`, `proposed`, or absent, the CREATE gate fails. An agent evaluates this by fetching each linked document and reading its `lifecycle-stage` field. See `agent-context/grounding/lexicon.yml` term `spec_refs` for the full evaluation algorithm.
+
 ### Gate 2 — Refine (before DESIGN sub-issue is approved)
 
 | Upgrade required | Condition |
@@ -52,6 +54,8 @@ hook, Action, and skill updates follow as separate PRs.
 | `## Architecture Impact` | Detailed: interfaces, schemas, services |
 | `## Testability Notes` | QA-authored: test types, tooling, data |
 | `## Sub-issues` tasklist | Contains `- [ ] #N` for `[DESIGN]` sub-issue |
+
+**Spec-refs advisory check:** All spec documents linked in `## Relations` must still carry `lifecycle-stage: approved`. This is an `additional_checks` condition (advisory, not hard-block): a demotion to `draft` or `proposed` surfaces as a warning that the linked spec may no longer support the WI's design. See `agent-context/grounding/lexicon.yml` term `spec_refs` for the evaluation algorithm.
 
 ### Gate 3 — Design (before [IMPL] sub-issue is authored)
 

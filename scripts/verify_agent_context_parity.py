@@ -2,13 +2,15 @@
 """
 verify_agent_context_parity.py — Agent-context parity check.
 
-Checks three invariants:
+Checks four invariants:
   1. rule_ids in storage-rules.yml all appear in the routing table of document-routing.md.
   2. rule_ids in validation-rules.yml all appear in the validation table of document-routing.md.
   3. target_path_template placeholder variable names in storage-rules.yml match those used
      in the corresponding rows of document-routing.md (prevents silent naming divergence).
+  4. Every GemID row in technical-constraints.md §Key Agents Referenced also appears in
+     studio-quick-ref.md §Key Gem Contacts for Escalation.
 
-Exit 0 = PASS (all rule_ids present and placeholder names match).
+Exit 0 = PASS (all invariants satisfied).
 Exit 1 = FAIL (details printed to stdout).
 """
 import re
@@ -19,6 +21,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 STORAGE_RULES = REPO_ROOT / "config-engines" / "metadata-schemas" / "storage-rules.yml"
 VALIDATION_RULES = REPO_ROOT / "config-engines" / "metadata-schemas" / "validation-rules.yml"
 ROUTING_DOC = REPO_ROOT / "agent-context" / "protocols" / "document-routing.md"
+TECHNICAL_CONSTRAINTS = REPO_ROOT / "agent-context" / "grounding" / "technical-constraints.md"
+STUDIO_QUICK_REF = REPO_ROOT / "agent-context" / "grounding" / "studio-quick-ref.md"
 
 
 def extract_rule_ids_from_yaml(path: Path) -> list[str]:
@@ -116,9 +120,22 @@ def check_placeholder_parity(
     return failures
 
 
+def extract_gem_ids_from_technical_constraints(path: Path) -> list[str]:
+    """Parse GemID values from the Key Agents Referenced table in technical-constraints.md."""
+    pattern = re.compile(r'\|\s*[^|]+\|\s*(GCT-[A-Z0-9]+-[A-Z0-9]+-\d+)')
+    return pattern.findall(path.read_text(encoding="utf-8"))
+
+
+def extract_gem_ids_from_quick_ref_escalation_table(path: Path) -> list[str]:
+    """Parse GemID values from the Key Gem Contacts for Escalation table in studio-quick-ref.md."""
+    pattern = re.compile(r'\|\s*[^|]+\|\s*(GCT-[A-Z0-9]+-[A-Z0-9]+-\d+)')
+    return pattern.findall(path.read_text(encoding="utf-8"))
+
+
 def main() -> int:
     missing_files = [
-        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC] if not p.exists()
+        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF]
+        if not p.exists()
     ]
     if missing_files:
         for p in missing_files:
@@ -141,13 +158,25 @@ def main() -> int:
     )
     placeholder_failures = check_placeholder_parity(yaml_templates, routing_templates)
 
-    all_failures = storage_failures + validation_failures + placeholder_failures
+    # Invariant 4: every GemID in technical-constraints.md Key Agents Referenced must appear
+    # in studio-quick-ref.md Key Gem Contacts for Escalation.
+    constraints_gem_ids = set(extract_gem_ids_from_technical_constraints(TECHNICAL_CONSTRAINTS))
+    quick_ref_gem_ids = set(extract_gem_ids_from_quick_ref_escalation_table(STUDIO_QUICK_REF))
+    gem_failures = check_parity(
+        constraints_gem_ids,
+        quick_ref_gem_ids,
+        "technical-constraints.md Key Agents Referenced",
+        "studio-quick-ref.md Key Gem Contacts for Escalation",
+    )
+
+    all_failures = storage_failures + validation_failures + placeholder_failures + gem_failures
 
     if not all_failures:
         print(
             f"PASS: {len(storage_canonical)} storage rule IDs and "
             f"{len(validation_canonical)} validation rule IDs all present in document-routing.md; "
-            f"all target_path_template placeholders match"
+            f"all target_path_template placeholders match; "
+            f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref"
         )
         return 0
 

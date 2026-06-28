@@ -11,6 +11,9 @@ on:
       - 'GOV-PROT-003.wi-lifecycle-contract.md'
       - 'config-engines/metadata-schemas/taxonomy.yml'
       - 'human-guides/ssot-naming-cheatsheet.md'
+      - 'agent-context/grounding/technical-constraints.md'
+      - 'agent-context/grounding/studio-quick-ref.md'
+      - 'scripts/verify_agent_context_parity.py'
   push:
     branches: [main]
     paths:
@@ -22,6 +25,9 @@ on:
       - 'GOV-PROT-003.wi-lifecycle-contract.md'
       - 'config-engines/metadata-schemas/taxonomy.yml'
       - 'human-guides/ssot-naming-cheatsheet.md'
+      - 'agent-context/grounding/technical-constraints.md'
+      - 'agent-context/grounding/studio-quick-ref.md'
+      - 'scripts/verify_agent_context_parity.py'
 
 jobs:
   parity:

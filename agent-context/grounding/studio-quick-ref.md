@@ -91,4 +91,5 @@ Key facts for cold-start context. Full lexicon in GOV-GUIDE-412.
 | Security Officer | GCT-MGT-SECOFF-001 | Cerberus | Security incidents, L3 access |
 | Sr. Architect | GCT-PRG-SARCH-001 | Isaac | Architecture decisions, ADR veto |
 | Sr. Architect | GCT-PRG-SARCH-002 | Isidore | Architecture decisions |
+| QA Lead | GCT-QAS-QA-001 | Sentinel | Bug triage, severity assignment |
 | AIE Team Lead | GCT-UTL-AIETL-001 | Aura | AI/Gem platform issues |
