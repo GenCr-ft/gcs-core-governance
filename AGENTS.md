@@ -29,7 +29,10 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 | What collaboration algorithm applies? | [agent-context/protocols/collaboration-algorithms.md](agent-context/protocols/collaboration-algorithms.md) |
 | What CLI commands and error paths do I need? | [agent-context/protocols/ops-runbook.md](agent-context/protocols/ops-runbook.md) |
 | What is my identity and operational context? | [agent-context/grounding/agent-bootstrap.md](agent-context/grounding/agent-bootstrap.md) |
+| What studio facts do I need? | [agent-context/grounding/studio-quick-ref.md](agent-context/grounding/studio-quick-ref.md) |
+| What engineering constraints apply? | [agent-context/grounding/technical-constraints.md](agent-context/grounding/technical-constraints.md) |
 | What does this term mean? | [agent-context/grounding/lexicon.yml](agent-context/grounding/lexicon.yml) |
+| What is the studio mission and project context? | [agent-context/grounding/strategic-context.md](agent-context/grounding/strategic-context.md) |
 | What are the authoritative rule YAML files? | [agent-context/rules-index.md](agent-context/rules-index.md) |
 
 ## Human Guides Layer
