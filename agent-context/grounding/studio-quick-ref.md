@@ -44,7 +44,7 @@ Key facts for cold-start context. Full lexicon: `agent-context/grounding/lexicon
 | `gcs-` | Studio-wide standards and handbooks |
 | `gct-` | Templates (repo, service, SSoT) |
 | `gce-` | Experimental (not yet production) |
-| *(none — see `gencraft-iac`)* | Infrastructure as Code (predates prefix convention; actual repo is `gencraft-iac`) |
+| `gci-` | Infrastructure as Code (e.g. `gci-aws-foundations`, `gci-k8s-cluster-main`; legacy repo `gencraft-iac` predates this prefix) |
 
 ## Key Repositories
 
