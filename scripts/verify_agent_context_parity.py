@@ -2,13 +2,18 @@
 """
 verify_agent_context_parity.py — Agent-context parity check.
 
-Checks four invariants:
+Checks three invariants:
   1. rule_ids in storage-rules.yml all appear in the routing table of document-routing.md.
-  2. rule_ids in validation-rules.yml all appear in the validation table of document-routing.md.
-  3. target_path_template placeholder variable names in storage-rules.yml match those used
+  2. target_path_template placeholder variable names in storage-rules.yml match those used
      in the corresponding rows of document-routing.md (prevents silent naming divergence).
-  4. Every GemID row in technical-constraints.md §Key Agents Referenced also appears in
+  3. Every GemID row in technical-constraints.md §Key Agents Referenced also appears in
      studio-quick-ref.md §Key Gem Contacts for Escalation.
+     (studio-quick-ref.md may list additional contacts — that is expected and not an error.)
+
+Note: Invariant 2 from the original four (validation rule IDs present in document-routing.md)
+was removed.  As of commit 6925a39, document-routing.md intentionally uses a pointer-only
+§Validation Rules section — it no longer mirrors the GOV_RULE_NNN rows that live in
+validation-rules.yml.  The canonical source for those rules is validation-rules.yml itself.
 
 Exit 0 = PASS (all invariants satisfied).
 Exit 1 = FAIL (details printed to stdout).
@@ -37,12 +42,6 @@ def extract_storage_rule_ids_from_routing_table(path: Path) -> list[str]:
     return pattern.findall(path.read_text(encoding="utf-8"))
 
 
-def extract_validation_rule_ids_from_routing_table(path: Path) -> list[str]:
-    """Parse backtick-quoted GOV_RULE_NNN IDs from document-routing.md."""
-    pattern = re.compile(r'`(GOV_RULE_\d+)`')
-    return pattern.findall(path.read_text(encoding="utf-8"))
-
-
 def check_parity(
     canonical_ids: set[str],
     table_ids: set[str],
@@ -60,6 +59,25 @@ def check_parity(
     if orphaned:
         failures.append(f"WARN: rule IDs in {table_label} not found in {source_label}:")
         for rid in sorted(orphaned):
+            failures.append(f"  - {rid}")
+    return failures
+
+
+def check_subset(
+    required_ids: set[str],
+    superset_ids: set[str],
+    required_label: str,
+    superset_label: str,
+) -> list[str]:
+    """Check that required_ids is a subset of superset_ids (one-way; extra entries in superset are fine).
+
+    Returns FAIL messages only for IDs missing from superset_ids.
+    """
+    failures = []
+    missing = required_ids - superset_ids
+    if missing:
+        failures.append(f"FAIL: GemIDs in {required_label} missing from {superset_label}:")
+        for rid in sorted(missing):
             failures.append(f"  - {rid}")
     return failures
 
@@ -143,9 +161,7 @@ def main() -> int:
         return 1
 
     storage_canonical = set(extract_rule_ids_from_yaml(STORAGE_RULES))
-    validation_canonical = set(extract_rule_ids_from_yaml(VALIDATION_RULES))
     routing_storage_ids = set(extract_storage_rule_ids_from_routing_table(ROUTING_DOC))
-    routing_validation_ids = set(extract_validation_rule_ids_from_routing_table(ROUTING_DOC))
 
     yaml_templates = extract_template_placeholders_from_yaml(STORAGE_RULES)
     routing_templates = extract_template_placeholders_from_routing_table(ROUTING_DOC)
@@ -153,28 +169,26 @@ def main() -> int:
     storage_failures = check_parity(
         storage_canonical, routing_storage_ids, "storage-rules.yml", "document-routing.md routing table"
     )
-    validation_failures = check_parity(
-        validation_canonical, routing_validation_ids, "validation-rules.yml", "document-routing.md validation table"
-    )
     placeholder_failures = check_placeholder_parity(yaml_templates, routing_templates)
 
-    # Invariant 4: every GemID in technical-constraints.md Key Agents Referenced must appear
+    # Invariant 3: every GemID in technical-constraints.md Key Agents Referenced must appear
     # in studio-quick-ref.md Key Gem Contacts for Escalation.
+    # studio-quick-ref.md is the escalation table and may list additional contacts — that is
+    # expected and is NOT a failure condition.
     constraints_gem_ids = set(extract_gem_ids_from_technical_constraints(TECHNICAL_CONSTRAINTS))
     quick_ref_gem_ids = set(extract_gem_ids_from_quick_ref_escalation_table(STUDIO_QUICK_REF))
-    gem_failures = check_parity(
+    gem_failures = check_subset(
         constraints_gem_ids,
         quick_ref_gem_ids,
         "technical-constraints.md Key Agents Referenced",
         "studio-quick-ref.md Key Gem Contacts for Escalation",
     )
 
-    all_failures = storage_failures + validation_failures + placeholder_failures + gem_failures
+    all_failures = storage_failures + placeholder_failures + gem_failures
 
     if not all_failures:
         print(
-            f"PASS: {len(storage_canonical)} storage rule IDs and "
-            f"{len(validation_canonical)} validation rule IDs all present in document-routing.md; "
+            f"PASS: {len(storage_canonical)} storage rule IDs all present in document-routing.md; "
             f"all target_path_template placeholders match; "
             f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref"
         )
