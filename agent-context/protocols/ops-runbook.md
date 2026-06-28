@@ -162,6 +162,65 @@ source gcs-plt-gemop/hooks/github-app-token.sh
 gh pr comment {PR_NUMBER} --repo GenCr-ft/gcs-core-governance --body "LIFECYCLE:CODE-REVIEW:PASS"
 ```
 
+## Adversary Review
+
+Triggered automatically by `wi-lifecycle` when `adversary_review: true` is set in `wi-lifecycle-gates.yml` (DESIGN phase line 49, IMPLEMENT phase line 77). Can also be invoked directly.
+
+### Invocation syntax
+
+```
+wi-lifecycle-adversary <review-type> <artifact-ref>
+```
+
+| `review-type` | When to use | `artifact-ref` |
+|--------------|-------------|----------------|
+| `design-review` | After `[DESIGN]` sub-issue is authored, before posting `LIFECYCLE:DESIGN:READY` | `[DESIGN]` sub-issue number (e.g. `#212`) |
+| `impl-review` | After `[IMPL]` sub-issue is authored, before posting `LIFECYCLE:IMPLEMENT:PASS` | `[IMPL]` sub-issue number |
+| `pr-review` | After PR is open, before posting `LIFECYCLE:CLOSE:PASS` | PR number (e.g. `PR#45`) |
+
+Examples:
+
+```
+wi-lifecycle-adversary design-review #212
+wi-lifecycle-adversary impl-review #213
+wi-lifecycle-adversary pr-review PR#45
+```
+
+### Severity tier schema
+
+An adversary finding must be classified as one of the following tiers. The gate blocker `critical_or_high_adversary_finding_unresolved` in `wi-lifecycle-gates.yml` lines 54 and 86 is satisfied (i.e. the gate is BLOCKED) when any CRITICAL or HIGH finding is unresolved.
+
+| Tier | Definition | Gate behaviour |
+|------|-----------|----------------|
+| CRITICAL | A gap that makes the artifact un-implementable or structurally unsound — missing schema, contradictory interface, untestable AC. | Block gate. Post `LIFECYCLE:ADVERSARY-REVIEW:<PHASE>:FINDINGS`. Stop. Implementer must fix and re-trigger adversary. |
+| HIGH | A significant gap that can be remediated without a full redesign — missing section, ambiguous field type, incomplete rollback path. | Block gate. Post `LIFECYCLE:ADVERSARY-REVIEW:<PHASE>:FINDINGS`. Stop. Implementer posts `ADVERSARY-REVIEW:DISPOSITION` comment; gate re-runs and posts `LIFECYCLE:ADVERSARY-REVIEW:<PHASE>:FINDINGS-DISPOSITIONED`. |
+| LOW | A minor improvement — wording, optional field, style. | Do not block gate. Post `LIFECYCLE:ADVERSARY-REVIEW:<PHASE>:PASS` with findings in body. |
+
+`<PHASE>` ∈ {`DESIGN`, `IMPL`, `PR`}.
+
+### Adversary comment tokens
+
+| Outcome | Comment token |
+|---------|---------------|
+| DESIGN: no blocking findings | `LIFECYCLE:ADVERSARY-REVIEW:DESIGN:PASS` |
+| DESIGN: CRITICAL or HIGH finding | `LIFECYCLE:ADVERSARY-REVIEW:DESIGN:FINDINGS` |
+| DESIGN: HIGH finding dispositioned | `LIFECYCLE:ADVERSARY-REVIEW:DESIGN:FINDINGS-DISPOSITIONED` |
+| IMPL: no blocking findings | `LIFECYCLE:ADVERSARY-REVIEW:IMPL:PASS` |
+| IMPL: CRITICAL or HIGH finding | `LIFECYCLE:ADVERSARY-REVIEW:IMPL:FINDINGS` |
+| IMPL: HIGH finding dispositioned | `LIFECYCLE:ADVERSARY-REVIEW:IMPL:FINDINGS-DISPOSITIONED` |
+| PR: no blocking findings | `LIFECYCLE:ADVERSARY-REVIEW:PR:PASS` |
+| PR: CRITICAL or HIGH finding | `LIFECYCLE:ADVERSARY-REVIEW:PR:FINDINGS` |
+| PR: HIGH finding dispositioned | `LIFECYCLE:ADVERSARY-REVIEW:PR:FINDINGS-DISPOSITIONED` |
+
+Post via:
+
+```bash
+unset GH_TOKEN
+gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "LIFECYCLE:ADVERSARY-REVIEW:DESIGN:PASS"
+```
+
+Full skill specification (dispatch prompt format, challenge dimensions, accepted-findings registry): `gcs-plt-gemop/skills/wi-lifecycle-adversary/SKILL.md`.
+
 ## Error Handling
 
 | HTTP status | Cause | Action |

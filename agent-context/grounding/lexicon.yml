@@ -96,6 +96,10 @@ terms:
     definition: "Unique identifier for an AI Gem. Format: GCT-{DEPT}-{ROLE}-{NNN}. Example: GCT-PRG-SARCH-001 (Isaac, Senior Architect)."
     source: "gcs-plt-gembp repo"
 
+  - term: Adversary Finding Severity
+    definition: "Classification tier for a finding raised by the wi-lifecycle-adversary skill. CRITICAL — makes the artifact un-implementable; blocks gate, requires full fix and re-trigger. HIGH — significant but remediable gap; blocks gate, resolved via ADVERSARY-REVIEW:DISPOSITION comment. LOW — minor improvement; does not block the gate. The blocker condition critical_or_high_adversary_finding_unresolved in wi-lifecycle-gates.yml is triggered by any CRITICAL or HIGH finding that has not been resolved or dispositioned."
+    source: "gcs-plt-gemop/skills/wi-lifecycle-adversary/SKILL.md"
+
   - term: redirect (→)
     definition: "Notation used in rules-index.md to indicate that the canonical SSoT for the named file lives in reference-libraries/ but a surfaced read-accessible copy is maintained at the path given by the enclosing section header (e.g. config-engines/metadata-schemas/). Agents must read the copy at the surfaced path, never the reference-libraries/ original."
     source: "gcs-core-governance/agent-context/rules-index.md"
