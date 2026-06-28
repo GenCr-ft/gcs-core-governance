@@ -24,7 +24,7 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 |---------|-----------|--------|
 | `EXPERIMENTAL_STORAGE_RULE` | `metadata.lifecycle-phase: "experimental"` | repo prefix `gce-` |
 | `SECURITY_SECRET_STORAGE` | `security-classification: "l3_secret"` | `gcs-vault-critical` |
-| `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class: "knowledge"` + `domain: "governance"` + `classification.category: "to-govern"` | `gcs-core-governance` → `foundations/governance/{classification.type}/{docId}.md` |
+| `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","engineering-and-architecture"]` + `classification.category: "to-govern"` | `gcs-core-governance` → `foundations/governance/{classification.type}/{docId}.md` |
 | `KNOWLEDGE_HANDBOOK_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","production-management","marketing-and-communication","legal","finance-and-hr"]` + `classification.category: ["to-instruct","to-inform","to-record","to-define"]` | `gcs-core-governance` → `reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` |
 | `INFRASTRUCTURE_CODE_STORAGE` | `artifact-class: "infrastructure"` | repo prefix `gci-` |
 | `PROCESS_DEFINITION_STORAGE` | `artifact-class: "process"` | `gcd-shared-actions` |
@@ -61,7 +61,7 @@ flowchart TD
     D -- asset + project-aethel --> G[gcp-aethel-assets-*]
     D -- code + library --> H[gcl-* repo]
     D -- knowledge --> I{classification.category?}
-    I -- to-govern + domain=governance --> J[gcs-core-governance/foundations/governance/]
+    I -- to-govern + domain=governance/engineering-and-architecture --> J[gcs-core-governance/foundations/governance/]
     I -- to-instruct/inform/record/define --> K[gcs-core-governance/reference-libraries/studio-handbook/sections/{domain}/]
     D -- no match --> M[⚠ Escalate: file issue in gcs-core-governance\nNo routing rule matched]
 ```

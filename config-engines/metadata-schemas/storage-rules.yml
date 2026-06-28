@@ -27,7 +27,7 @@ storage_rules:
     if:
       all_of:
         - artifact-class: "knowledge"
-        - domain: "governance"
+        - domain: ["governance", "engineering-and-architecture"]
         - classification.category: "to-govern"
     then:
       target_repository_id: "gcs-core-governance"
