@@ -24,4 +24,35 @@ if [[ ! -f "${STAMP_SCRIPT}" ]]; then
   exit 1
 fi
 
-exec python3 "${STAMP_SCRIPT}" "$@"
+# lifecycle_stamp.py is a library module (no CLI entrypoint).
+# Parse the positional args and call the appropriate function directly.
+CMD="${1:-}"
+if [[ "${CMD}" == "write" ]]; then
+  REPO="${2:?missing repo argument}"
+  BRANCH="${3:?missing branch argument}"
+  ISSUE="${4:?missing issue number argument}"
+  PHASE="${5:?missing phase argument}"
+  exec python3 -c "
+import sys
+sys.path.insert(0, '$(dirname "${STAMP_SCRIPT}")')
+import lifecycle_stamp
+lifecycle_stamp.write_stamp('${REPO}', '${BRANCH}', int('${ISSUE}'), '${PHASE}', ['manual'], 'manual')
+print('Stamp written:', lifecycle_stamp.stamp_path('${REPO}', '${BRANCH}'))
+"
+elif [[ "${CMD}" == "read" ]]; then
+  REPO="${2:?missing repo argument}"
+  BRANCH="${3:?missing branch argument}"
+  exec python3 -c "
+import sys, json
+sys.path.insert(0, '$(dirname "${STAMP_SCRIPT}")')
+import lifecycle_stamp
+result = lifecycle_stamp.read_stamp('${REPO}', '${BRANCH}')
+if result is None:
+    print('No stamp found.')
+    sys.exit(1)
+print(json.dumps(result, indent=2))
+"
+else
+  echo "ERROR: unknown command '${CMD}'. Usage: bash scripts/lifecycle-stamp.sh write|read <repo> <branch> [<issue> <phase>]" >&2
+  exit 1
+fi
