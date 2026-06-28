@@ -33,7 +33,7 @@ storage_rules:
         - classification.category: ["to-instruct", "to-inform", "to-record", "to-define"]
     then:
       target_repository_id: "gcs-core-governance"
-      target_path_template: "sections/{domain}/{docId}.{title_kebab_case}.md"
+      target_path_template: "reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md"
       justification: "Centralizes all human-readable operational and organizational knowledge for easy access."
 
   - rule_id: "INFRASTRUCTURE_CODE_STORAGE"

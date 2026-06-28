@@ -44,7 +44,7 @@ flowchart TD
     Q7 -- Yes --> R7[📋 gcs-core-governance\nfoundations/governance/]
     Q7 -- No --> Q8{artifact-class = knowledge\nAND domain IN\ngov/ops/legal/marketing/finance?}
 
-    Q8 -- Yes --> R8[📖 gcs-core-governance\nsections/{domain}/]
+    Q8 -- Yes --> R8[📖 gcs-core-governance\nreference-libraries/studio-handbook/sections/{domain}/]
     Q8 -- No --> R9[❓ No matching rule\nFile governance issue to add one]
 
     style R1 fill:#fff3cd
@@ -69,6 +69,6 @@ flowchart TD
 | CODE_SHARED_LIBRARY_STORAGE | `artifact-class: code` + `type: library` | `gcl-*` | Library convention |
 | ASSET_PROJECT_STORAGE | `artifact-class: asset` + `scope: project-aethel` | `gcp-aethel-assets-*` | Asset isolation |
 | KNOWLEDGE_GOVERNANCE_STORAGE | knowledge + governance + to-govern | `gcs-core-governance/foundations/governance/` | Laws with configs |
-| KNOWLEDGE_HANDBOOK_STORAGE | knowledge + ops/legal/marketing domains | `gcs-core-governance/sections/{domain}/` | Operational centralization |
+| KNOWLEDGE_HANDBOOK_STORAGE | knowledge + ops/legal/marketing domains | `gcs-core-governance/reference-libraries/studio-handbook/sections/{domain}/` | Operational centralization |
 
 > **Rule evaluation is sequential.** A document matching multiple conditions stops at the FIRST matching rule (top of table wins).
