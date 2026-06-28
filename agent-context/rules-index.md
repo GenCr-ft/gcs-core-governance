@@ -51,7 +51,7 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 | `agent-bootstrap.md` | Agent identity, ethics, escalation | GOV-GUIDE-006, GOV-GUIDE-012 |
 | `studio-quick-ref.md` | Terminology, repo map, tech stack, security levels | GOV-GUIDE-412, README |
 | `technical-constraints.md` | Engineering + quality constraints table (8 rules) | GOV-GUIDE-017 |
-| `lexicon.yml` | Core vocabulary: 15 terms with definitions | GOV-GUIDE-412 §2 |
+| `lexicon.yml` | Core vocabulary: 16 terms with definitions | GOV-GUIDE-412 §2 |
 | `gop-index.yml` | GOP S-number lookup: S1–S20, protocol name, doc path, algorithm cross-ref | GOV-GUIDE-014, 01-operational-protocols/ |
 | `strategic-context.md` | Studio mission, Aethel vision, 8 collaboration principles | GOV-GUIDE-414 |
 | `gov-guide-001-ssot-contribution.md` | SSoT document structure, contribution workflow, 4 KC&T principles | GOV-GUIDE-001 |
