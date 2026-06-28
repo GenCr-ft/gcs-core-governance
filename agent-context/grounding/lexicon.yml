@@ -73,7 +73,7 @@ terms:
 
   - term: WI
     definition: "Work Item — a GitHub Issue tracking a single deliverable, governed by the 5-gate lifecycle in GOV-PROT-003."
-    source: "gcs-core-governance/agent-context/protocols/wi-lifecycle-gates.yml"
+    source: "gcs-core-governance/GOV-PROT-003.wi-lifecycle-contract.md"
 
   - term: title_kebab_case
     definition: "A path-template variable that resolves to the document title transformed to lowercase, with spaces and underscores replaced by hyphens, and all non-alphanumeric punctuation removed. Example: 'On-Boarding Guide' → 'on-boarding-guide'. Used in KNOWLEDGE_HANDBOOK_STORAGE target_path_template."

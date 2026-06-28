@@ -6,7 +6,7 @@ authors: [Studio Lead]
 knowledgeGuardian:
 - Orion (GCT-GOV-ORN-001)
 creation_date: '2026-06-09'
-last_updated_date: '2026-06-11'
+last_updated_date: '2026-06-27'
 language: en
 ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/GOV-PROT-003.wi-lifecycle-contract.md
 metadata:
@@ -53,7 +53,16 @@ hook, Action, and skill updates follow as separate PRs.
 | `## Testability Notes` | QA-authored: test types, tooling, data |
 | `## Sub-issues` tasklist | Contains `- [ ] #N` for `[DESIGN]` sub-issue |
 
-### Gate 3 — Implement (before Edit/Write is unblocked)
+### Gate 3 — Design (before [IMPL] sub-issue is authored)
+
+| Artifact | Required state |
+|----------|---------------|
+| `[DESIGN]` sub-issue | Authored with all required sections (see Sub-issue Contracts) |
+| Adversary review | Dispatched; critical/high findings resolved |
+| Output token | `LIFECYCLE:DESIGN:READY` posted on [DESIGN] sub-issue |
+| Human review | Human sets `status:approved` on [DESIGN] sub-issue |
+
+### Gate 4 — Implement (before Edit/Write is unblocked)
 
 | Artifact | Required state |
 |----------|---------------|
@@ -62,7 +71,7 @@ hook, Action, and skill updates follow as separate PRs.
 | Both sub-issues | Linked in parent WI tasklist |
 | Self-approval | Forbidden — label setter must differ from current GitHub actor |
 
-### Gate 4 — Close (before `Closes #N` written)
+### Gate 5 — Close (before `Closes #N` written)
 
 | Check | Required |
 |-------|---------|
@@ -221,6 +230,7 @@ Machine-parseable token set used by all three enforcement layers:
 |-------|---------|
 | `✅ LIFECYCLE:<PHASE>:PASS` | Phase gate passed; written to issue comment |
 | `❌ LIFECYCLE:<PHASE>:FAIL — <gaps>` | Phase gate failed; written to issue comment |
+| `LIFECYCLE:DESIGN:READY` | Design sub-issue complete; ready for human review and `status:approved` label |
 | `LIFECYCLE:CODE-REVIEW:PASS` | Code review clean |
 | `LIFECYCLE:CODE-REVIEW:FINDINGS` | Code review findings with accepted dispositions |
 | `LIFECYCLE:SECURITY-REVIEW:PASS` | OWASP scan clean |

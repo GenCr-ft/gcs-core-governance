@@ -39,15 +39,18 @@ stateDiagram-v2
 
     DESIGN_READY --> IMPLEMENT_PASS : [DESIGN] + [IMPL] approved by human
     note right of DESIGN_READY
-        Design phase (pre-Gate 3):
-        [DESIGN] closed + status:approved
-        [IMPL] open + status:approved
-        Self-approval FORBIDDEN
+        Gate 3 (Design) checks:
+        [DESIGN] all required sections present
+        Adversary review PASS
+        LIFECYCLE:DESIGN:READY posted
+        Human sets status:approved on [DESIGN]
     end note
 
     IMPLEMENT_PASS --> CLOSE_PASS : PR open, all ACs ticked
     note right of IMPLEMENT_PASS
-        Gate 3 (Implement) checks:
+        Gate 4 (Implement) checks:
+        [DESIGN] closed + status:approved
+        [IMPL] open + status:approved
         Both sub-issues approved by non-self
         [IMPL] body has all required sections
         TDD commit policy followed
@@ -55,7 +58,7 @@ stateDiagram-v2
 
     CLOSE_PASS --> Closed : Closes #N written in PR
     note right of CLOSE_PASS
-        Gate 4 (Close) checks:
+        Gate 5 (Close) checks:
         AC checkboxes ticked
         CODE-REVIEW + SECURITY-REVIEW + DATA-RISK
         PR adversary review PASS
@@ -71,8 +74,9 @@ stateDiagram-v2
 |------|------|---------|------------|
 | 1 | Create | Issue filed | Summary, ACs, Architecture Impact, Out of Scope |
 | 2 | Refine | Branch cut | Gherkin ACs, Testability Notes, [DESIGN] link in Sub-issues |
-| 3 | Implement | [DESIGN]+[IMPL] approved | Non-self approval, [IMPL] sections, TDD cycles |
-| 4 | Close | PR open, all ACs ticked | Reviews, adversary, PR checklist, ADR if needed |
+| 3 | Design | [DESIGN] sub-issue authored | All required sections, adversary PASS, LIFECYCLE:DESIGN:READY posted |
+| 4 | Implement | [DESIGN]+[IMPL] approved | Non-self approval, [IMPL] sections, TDD cycles |
+| 5 | Close | PR open, all ACs ticked | Reviews, adversary, PR checklist, ADR if needed |
 
 ## TDD Commit Convention
 
