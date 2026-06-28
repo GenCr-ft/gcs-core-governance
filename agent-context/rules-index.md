@@ -22,7 +22,7 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 | File | Domain | Contents |
 |------|--------|----------|
 | `repository-catalog.yml` | Repository type catalog | Agent-accessible catalog listing all repositories with `type` field used by GOV_RULE_005 (`target_repository.type`) |
-| `storage-rules.yml` | Document routing | 8 storage rules: EXPERIMENTAL, KNOWLEDGE_GOVERNANCE, KNOWLEDGE_HANDBOOK, INFRASTRUCTURE_CODE, PROCESS_DEFINITION, CODE_SHARED_LIBRARY, ASSET_PROJECT, SECURITY_SECRET |
+| `storage-rules.yml` | Document routing | 8 storage rules: EXPERIMENTAL, DATA_ARTIFACT, KNOWLEDGE_GOVERNANCE, KNOWLEDGE_HANDBOOK, INFRASTRUCTURE_CODE, PROCESS_DEFINITION, CODE_SHARED_LIBRARY, ASSET_PROJECT |
 | `validation-rules.yml` | Document validation | Validation rules applied by the SSoT linter |
 | `governance-config.schema.json` | Schema contract | JSON Schema Draft-7 for the resolved governance config object |
 | `ontology.yml` | Knowledge ontology | RDF triples, class hierarchy, containment constraints |
