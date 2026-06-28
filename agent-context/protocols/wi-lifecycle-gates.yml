@@ -37,6 +37,7 @@ gates:
     outputs:
       - stamp: /tmp/lifecycle/{repo}-{branch}.json  # written by lifecycle_stamp.py
       - comment: "✅ LIFECYCLE:REFINE:PASS"
+    lifecycle_stamp_cmd: "python3 $(git -C . rev-parse --show-toplevel)/../gcs-plt-gemop/hooks/lifecycle_stamp.py write {repo} {branch} {issue} refine"  # path anchored to workspace root; gcs-plt-gemop must be a sibling dir
     blockers:
       - missing_gherkin_in_any_ac
       - testability_notes_empty

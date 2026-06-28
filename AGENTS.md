@@ -46,7 +46,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 |------|---------|
 | Run compression acceptance tests | `bash tools/tests/test_verify_compression.sh` |
 | Run agent-context parity check | `python3 scripts/verify_agent_context_parity.py` |
-| Write lifecycle stamp (REFINE) | `python3 gcs-plt-gemop/hooks/lifecycle_stamp.py write gcs-core-governance <branch> <issue> refine` |
+| Write lifecycle stamp (REFINE) | `python3 $(git -C . rev-parse --show-toplevel)/../gcs-plt-gemop/hooks/lifecycle_stamp.py write gcs-core-governance <branch> <issue> refine` |
 | File governance gap issue | `unset GH_TOKEN && gh issue create --repo GenCr-ft/gcs-core-governance --title "[GOV] ..."` |
 
 ## Critical Patterns

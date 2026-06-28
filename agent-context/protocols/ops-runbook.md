@@ -71,10 +71,19 @@ gh issue close {N} --repo GenCr-ft/gcs-core-governance --comment "Merged in PR #
 
 ## Lifecycle Stamp
 
+### Pre-condition: verify gcs-plt-gemop is co-located
+
+`gcs-plt-gemop` must be cloned as a sibling directory to `gcs-core-governance` at the workspace collection root (e.g., `~/hxgn/dev/claude/exp/gcs-plt-gemop/`). Run this check before issuing any stamp command:
+
+```bash
+test -f $(git -C . rev-parse --show-toplevel)/../gcs-plt-gemop/hooks/lifecycle_stamp.py \
+  || echo "ERROR: gcs-plt-gemop not found at sibling path — clone it before continuing"
+```
+
 ### Write a stamp (REFINE gate)
 
 ```bash
-python3 gcs-plt-gemop/hooks/lifecycle_stamp.py write \
+python3 $(git -C . rev-parse --show-toplevel)/../gcs-plt-gemop/hooks/lifecycle_stamp.py write \
   gcs-core-governance \
   feat/issue-{N}-{slug} \
   {N} \
