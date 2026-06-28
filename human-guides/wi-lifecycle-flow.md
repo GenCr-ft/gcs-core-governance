@@ -1,7 +1,7 @@
 ---
 docId: GOV-GUIDE-HG-002
 title: Work Item Lifecycle Flow
-version: 1.0.0
+version: 1.1.0
 authors: [Governance Crew]
 metadata:
   lifecycle-stage: approved
