@@ -125,3 +125,44 @@ branch_patterns:
 commit_format: "{type}({scope}): WI-{N}.{M} — {description}"
 commit_types: [feat, fix, refactor, test, docs, chore, ci]
 prohibited_trailer: "Co-Authored-By"
+
+# Behavioral constraints — sourced verbatim from GOV-PROT-003 lines 132-153
+# MUST NOT items are hard-blocked (exit 2 / required status check)
+# MUST items are obligations enforced by L1 hooks, L2 CI, and L3 wi-lifecycle skill
+behavioral_constraints:
+  must_not:
+    - id: MN-1
+      description: "Write 'Closes #N' before all AC checkboxes are ticked and evidence comments are present."
+    - id: MN-2
+      description: "Set status:approved on any sub-issue (Claude is never the approver)."
+    - id: MN-3
+      description: "Post LIFECYCLE:BYPASS on its own behalf."
+    - id: MN-4
+      description: "Commit to main, master, or prod."
+    - id: MN-5
+      description: "Commit without a WI-N.M ref in the message."
+    - id: MN-6
+      description: "Modify source files without a valid open WI issue linked to the current branch."
+    - id: MN-7
+      description: "Skip a gate without human-set lifecycle:bypass label AND pre-posted bypass comment."
+    - id: MN-8
+      description: "Close the parent WI issue manually."
+    - id: MN-9
+      description: "Begin Edit/Write on implement-phase work before the implement gate passes."
+    - id: MN-10
+      description: "Merge a PR without all L2 required status checks green."
+  must:
+    - id: M-1
+      description: "Invoke wi-lifecycle <phase> at each phase transition."
+    - id: M-2
+      description: "Post '✅ AC-N satisfied' evidence comments on the parent WI for each AC."
+    - id: M-3
+      description: "Post review outcome markers (LIFECYCLE:CODE-REVIEW:, LIFECYCLE:SECURITY-REVIEW:, LIFECYCLE:DATA-RISK:) as PR comments before the close gate."
+    - id: M-4
+      description: "Author [DESIGN] and [IMPL] sub-issues before the design gate is validated."
+    - id: M-5
+      description: "Link sub-issues in the parent WI tasklist."
+    - id: M-6
+      description: "Run ./test.sh before opening a PR."
+    - id: M-7
+      description: "Post fix-pointer comments on resolved PR review threads."
