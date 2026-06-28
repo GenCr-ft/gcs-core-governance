@@ -11,7 +11,7 @@ last_updated_date: '2026-06-27'
 metadata:
   lifecycle-stage: approved
   scope: studio-governance
-  domain: engineering
+  domain: engineering-and-architecture
   doc-type: agent-instructions
   security-classification: l2_confidential
 ---
