@@ -29,7 +29,7 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 | `taxonomy.yml` | Vocabulary taxonomy | SKOS concepts for artifact classes, domains, lifecycles |
 | `organizational-entities.yml` | Org catalog | 25 entities: crews, project-teams, departments, gems |
 | `governance-scopes.yml` | Scope catalog | governance scope definitions |
-| `governance-kpi.yml` | KPIs | 3 governance KPIs with targets |
+| `governance-kpi.yml` | KPIs | 3 governance KPIs with targets, owners, cadence, data-source, report-to, and alert-at fields |
 
 ## config-engines/api-parameters/
 

@@ -12,9 +12,14 @@
                     "skos:prefLabel": { "type": "string" },
                     "skos:definition": { "type": "string" },
                     "gcs:target": { "type": "string" },
-                    "skos:notation": { "type": "string" }
+                    "skos:notation": { "type": "string" },
+                    "owner": { "type": "string" },
+                    "cadence": { "type": "string", "enum": ["daily", "weekly", "monthly", "quarterly"] },
+                    "data-source": { "type": "string" },
+                    "report-to": { "type": "string" },
+                    "alert-at": { "type": "string" }
                 },
-                "required": ["skos:prefLabel", "skos:definition", "gcs:target", "skos:notation"]
+                "required": ["skos:prefLabel", "skos:definition", "gcs:target", "skos:notation", "owner", "cadence", "data-source", "report-to", "alert-at"]
             }
         }
     },
