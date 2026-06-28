@@ -31,7 +31,7 @@ gh issue create --repo GenCr-ft/gcs-core-governance \
 ### Create a branch
 
 ```bash
-git checkout develop && git pull
+git checkout main && git pull
 git checkout -b feat/issue-{N}-{slug}
 ```
 
@@ -51,7 +51,7 @@ source gcs-plt-gemop/hooks/github-app-token.sh
 gh pr create --repo GenCr-ft/gcs-core-governance \
   --title "type(scope): WI-N — description" \
   --body-file /tmp/pr-body.md \
-  --base develop \
+  --base main \
   --head feat/issue-{N}-{slug}
 ```
 
