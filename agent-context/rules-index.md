@@ -1,5 +1,5 @@
 ---
-docId: GOV-RULES-IDX-001
+docId: GOV-IDX-001
 title: Rules Index — Canonical YAML Source Manifest
 version: 1.0.0
 authors: [Governance Crew]

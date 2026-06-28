@@ -1,5 +1,5 @@
 ---
-docId: GOV-GRND-AB-001
+docId: GOV-GUIDE-501
 title: Agent Bootstrap — Operational Identity Reference
 version: 1.0.0
 authors: [Governance Crew]

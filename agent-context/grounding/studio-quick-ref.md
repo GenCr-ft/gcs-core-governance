@@ -1,5 +1,5 @@
 ---
-docId: GOV-GRND-SQR-001
+docId: GOV-REFE-003
 title: Studio Quick Reference — Key Facts for AI Agents
 version: 1.0.0
 authors: [Governance Crew]

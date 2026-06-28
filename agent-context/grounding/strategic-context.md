@@ -1,5 +1,5 @@
 ---
-docId: GOV-GUIDE-HG-AC-005
+docId: GOV-GUIDE-503
 title: Studio Strategic Context — Executive Summary
 version: 1.0.0
 authors: [Governance Crew]
