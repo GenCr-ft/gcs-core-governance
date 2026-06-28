@@ -29,7 +29,7 @@ flowchart TD
     Q2 -- Yes --> R2[🔒 gcs-vault-critical\nHigh-security vault]
     Q2 -- No --> Q3{artifact-class\n= infrastructure?}
 
-    Q3 -- Yes --> R3[⚙️ gencraft-iac\nOpenTofu IaC repo]
+    Q3 -- Yes --> R3[⚙️ gci-*\nOpenTofu IaC repos]
     Q3 -- No --> Q4{artifact-class\n= process?}
 
     Q4 -- Yes --> R4[🔄 gcd-shared-actions\nReusable GitHub Actions]
@@ -64,7 +64,7 @@ flowchart TD
 |---------|-----------|--------|---------------|
 | EXPERIMENTAL_STORAGE_RULE | `lifecycle-phase: experimental` | `gce-*` | Isolates experimental work |
 | SECURITY_SECRET_STORAGE | `security-classification: l3-secret` | `gcs-vault-critical` | Strict access control |
-| INFRASTRUCTURE_CODE_STORAGE | `artifact-class: infrastructure` | `gencraft-iac` | IaC centralization |
+| INFRASTRUCTURE_CODE_STORAGE | `artifact-class: infrastructure` | `gci-*` | IaC centralization |
 | PROCESS_DEFINITION_STORAGE | `artifact-class: process` | `gcd-shared-actions` | Workflow centralization |
 | CODE_SHARED_LIBRARY_STORAGE | `artifact-class: code` + `type: library` | `gcl-*` | Library convention |
 | ASSET_PROJECT_STORAGE | `artifact-class: asset` + `scope: project-aethel` | `gcp-aethel-assets-*` | Asset isolation |
