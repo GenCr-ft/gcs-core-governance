@@ -35,6 +35,18 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 
 **Canonical source:** `config-engines/metadata-schemas/storage-rules.yml`
 
+## Knowledge Guardian Assignments
+
+For agents following Algorithm 1 (collaboration-algorithms.md): the table below maps governance document types to their assigned knowledgeGuardian. Use this to assign reviewers without reading individual protocol files or reference-libraries/.
+
+| Domain | doc-type | knowledgeGuardian | GemID |
+|--------|----------|-------------------|-------|
+| governance | protocol | Orion | GCT-UTL-SLG-001 |
+| governance | standard | Iris | GCT-UTL-RWSKA-001 |
+| governance | reference | Iris | GCT-UTL-RWSKA-001 |
+
+**Canonical source:** `reference-libraries/devops-standards/foundations/governance/GOV-REFE-001.studio-directory--knowledge-guardians.md`
+
 ## Validation Rules Quick Reference
 
 Rules are cumulative (all matching rules apply). **Canonical source:** `config-engines/metadata-schemas/validation-rules.yml`

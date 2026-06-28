@@ -4,7 +4,7 @@ title: Work Item Lifecycle Quality Contract
 version: 1.0.0
 authors: [Studio Lead]
 knowledgeGuardian:
-- Orion (GCT-GOV-ORN-001)
+- Orion (GCT-UTL-SLG-001)
 creation_date: '2026-06-09'
 last_updated_date: '2026-06-27'
 language: en
