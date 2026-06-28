@@ -44,7 +44,9 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 | `compression-thresholds.yml` | File compression | CLAUDE.md hard limit (200 nb, FAIL) and AGENTS.md soft limit (150 nb, WARN) |
 | `coverage-floors.yml` | CI thresholds | Coverage floor pointers — cross-references `agent-context/grounding/technical-constraints.md` for the authoritative 80% unit-test coverage rule; does not restate the value |
 
-## agent-context/grounding/
+## agent-context/grounding/ *(contextual reference only — not enforcement sources)*
+
+> These files are **grounding/reference material** only. They are NOT machine-evaluable rule sources. Agents MUST NOT evaluate these files as rule engines. Authoritative enforceable rules are listed in the `config-engines/` sections above.
 
 | File | Domain | Source Doc |
 |------|--------|-----------|
