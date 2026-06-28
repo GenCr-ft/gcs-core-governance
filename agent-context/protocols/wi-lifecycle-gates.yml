@@ -46,7 +46,7 @@ gates:
       - design_sub_issue_not_open
 
   - phase: design
-    gate_number: null  # design is a sub-phase within the implement gate (Gate 3), not a numbered gate
+    gate_number: 3  # Gate 3 — Design (before [IMPL] sub-issue is authored); canonical per GOV-PROT-003
     trigger: "[DESIGN] sub-issue authored"
     required_sections_in_design_issue:
       - "## Relations"
@@ -65,7 +65,7 @@ gates:
       - critical_or_high_adversary_finding_unresolved
 
   - phase: implement
-    gate_number: 3
+    gate_number: 4
     trigger: "human sets status:approved on both [DESIGN] (closed) and [IMPL] sub-issues"
     self_approval_check: true   # label-setter login != current agent login
     required_sections_in_impl_issue:
@@ -99,7 +99,7 @@ gates:
       - critical_or_high_adversary_finding_unresolved
 
   - phase: close
-    gate_number: 4
+    gate_number: 5
     trigger: all code committed, PR open
     checks:
       - all_child_issues_closed_or_deferred: true   # DEFERRED:WI-N label accepted
