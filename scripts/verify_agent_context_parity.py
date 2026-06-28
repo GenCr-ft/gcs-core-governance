@@ -2,11 +2,13 @@
 """
 verify_agent_context_parity.py — Agent-context parity check.
 
-Checks two invariants:
+Checks three invariants:
   1. rule_ids in storage-rules.yml all appear in the routing table of document-routing.md.
   2. rule_ids in validation-rules.yml all appear in the validation table of document-routing.md.
+  3. target_path_template placeholder variable names in storage-rules.yml match those used
+     in the corresponding rows of document-routing.md (prevents silent naming divergence).
 
-Exit 0 = PASS (all rule_ids present in respective tables).
+Exit 0 = PASS (all rule_ids present and placeholder names match).
 Exit 1 = FAIL (details printed to stdout).
 """
 import re
@@ -58,6 +60,62 @@ def check_parity(
     return failures
 
 
+def extract_template_placeholders_from_yaml(path: Path) -> dict[str, set[str]]:
+    """Return {rule_id: set_of_placeholder_names} for rules that have target_path_template."""
+    text = path.read_text(encoding="utf-8")
+    rule_id_pattern = re.compile(r'-\s*rule_id:\s*"?([A-Z_0-9]+)"?')
+    template_pattern = re.compile(r'target_path_template:\s*"([^"]+)"')
+    placeholder_pattern = re.compile(r'\{([^}]+)\}')
+
+    result: dict[str, set[str]] = {}
+    # Split on rule blocks using the rule_id as a delimiter
+    blocks = re.split(r'(?=-\s*rule_id:)', text)
+    for block in blocks:
+        rid_match = rule_id_pattern.search(block)
+        tpl_match = template_pattern.search(block)
+        if rid_match and tpl_match:
+            rid = rid_match.group(1)
+            placeholders = set(placeholder_pattern.findall(tpl_match.group(1)))
+            result[rid] = placeholders
+    return result
+
+
+def extract_template_placeholders_from_routing_table(path: Path) -> dict[str, set[str]]:
+    """Return {rule_id: set_of_placeholder_names} from path strings in document-routing.md table rows."""
+    text = path.read_text(encoding="utf-8")
+    placeholder_pattern = re.compile(r'\{([^}]+)\}')
+    result: dict[str, set[str]] = {}
+    for line in text.splitlines():
+        # Match table rows that contain a backtick-quoted rule_id and a path fragment
+        rid_match = re.search(r'`([A-Z][A-Z_]*(?:STORAGE|RULE)[A-Z_]*)`', line)
+        if rid_match:
+            rid = rid_match.group(1)
+            placeholders = set(placeholder_pattern.findall(line))
+            if placeholders:
+                result[rid] = placeholders
+    return result
+
+
+def check_placeholder_parity(
+    yaml_templates: dict[str, set[str]],
+    routing_templates: dict[str, set[str]],
+) -> list[str]:
+    """Return failure messages for any rule whose placeholder sets diverge."""
+    failures = []
+    for rid, yaml_placeholders in yaml_templates.items():
+        routing_placeholders = routing_templates.get(rid)
+        if routing_placeholders is None:
+            # Rule not in routing table — caught by rule_id parity check; skip here
+            continue
+        if yaml_placeholders != routing_placeholders:
+            failures.append(
+                f"FAIL: placeholder mismatch for rule {rid}:\n"
+                f"  storage-rules.yml  : {sorted(yaml_placeholders)}\n"
+                f"  document-routing.md: {sorted(routing_placeholders)}"
+            )
+    return failures
+
+
 def main() -> int:
     missing_files = [
         p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC] if not p.exists()
@@ -72,19 +130,24 @@ def main() -> int:
     routing_storage_ids = set(extract_storage_rule_ids_from_routing_table(ROUTING_DOC))
     routing_validation_ids = set(extract_validation_rule_ids_from_routing_table(ROUTING_DOC))
 
+    yaml_templates = extract_template_placeholders_from_yaml(STORAGE_RULES)
+    routing_templates = extract_template_placeholders_from_routing_table(ROUTING_DOC)
+
     storage_failures = check_parity(
         storage_canonical, routing_storage_ids, "storage-rules.yml", "document-routing.md routing table"
     )
     validation_failures = check_parity(
         validation_canonical, routing_validation_ids, "validation-rules.yml", "document-routing.md validation table"
     )
+    placeholder_failures = check_placeholder_parity(yaml_templates, routing_templates)
 
-    all_failures = storage_failures + validation_failures
+    all_failures = storage_failures + validation_failures + placeholder_failures
 
     if not all_failures:
         print(
             f"PASS: {len(storage_canonical)} storage rule IDs and "
-            f"{len(validation_canonical)} validation rule IDs all present in document-routing.md"
+            f"{len(validation_canonical)} validation rule IDs all present in document-routing.md; "
+            f"all target_path_template placeholders match"
         )
         return 0
 

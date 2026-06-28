@@ -75,6 +75,10 @@ terms:
     definition: "Work Item — a GitHub Issue tracking a single deliverable, governed by the 5-gate lifecycle in GOV-PROT-003."
     source: "gcs-core-governance/agent-context/protocols/wi-lifecycle-gates.yml"
 
+  - term: title_kebab_case
+    definition: "A path-template variable that resolves to the document title transformed to lowercase, with spaces and underscores replaced by hyphens, and all non-alphanumeric punctuation removed. Example: 'On-Boarding Guide' → 'on-boarding-guide'. Used in KNOWLEDGE_HANDBOOK_STORAGE target_path_template."
+    source: "config-engines/metadata-schemas/storage-rules.yml (KNOWLEDGE_HANDBOOK_STORAGE)"
+
   - term: GemID
     definition: "Unique identifier for an AI Gem. Format: GCT-{DEPT}-{ROLE}-{NNN}. Example: GCT-PRG-SARCH-001 (Isaac, Senior Architect)."
     source: "gcs-plt-gembp repo"
