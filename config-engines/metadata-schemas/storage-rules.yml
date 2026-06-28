@@ -13,6 +13,16 @@ storage_rules:
       target_repository_prefix: "gce-"
       justification: "Isolates experimental work from production SSoT to prevent dependency conflicts."
 
+  - rule_id: "DATA_ARTIFACT_STORAGE"
+    description: "Structured and unstructured datasets (telemetry, analytics, game configuration) live in dedicated data repositories."
+    if:
+      all_of:
+        - artifact-class: "data"
+    then:
+      target_repository_prefix: "gcd-data-"
+      target_path_template: "datasets/{domain}/{docId}.{title_kebab_case}"
+      justification: "Centralizes data artifacts in dedicated data repositories, keeping telemetry, analytics, and game configuration datasets separate from code and knowledge artifacts."
+
   - rule_id: "SECURITY_SECRET_STORAGE"
     description: "Artifacts classified as L3-Secret must be stored in a dedicated, high-security repository."
     if:

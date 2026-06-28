@@ -11,7 +11,7 @@ metadata:
   intended-audience: [ai-agents]
   security-classification: l2_confidential
   source_version: "1.0.0"
-  last_verified: "2026-06-27"
+  last_verified: "2026-06-28"
 ---
 # Document Routing Protocol
 
@@ -30,6 +30,7 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 | `PROCESS_DEFINITION_STORAGE` | `artifact-class: "process"` | `gcd-shared-actions` |
 | `CODE_SHARED_LIBRARY_STORAGE` | `artifact-class: "code"` + `code-classification.type: "library"` | repo prefix `gcl-` |
 | `ASSET_PROJECT_STORAGE` | `artifact-class: "asset"` + `scope: "project-aethel"` | repo prefix `gcp-aethel-assets-` |
+| `DATA_ARTIFACT_STORAGE` | `artifact-class: "data"` | repo prefix `gcd-data-` → `datasets/{domain}/{docId}.{title_kebab_case}` |
 | *(no match)* | None of the above rules matched | ⚠ File issue in `gcs-core-governance` — no routing rule defined for this artifact |
 
 **Canonical source:** `config-engines/metadata-schemas/storage-rules.yml`
@@ -63,5 +64,6 @@ flowchart TD
     D -- knowledge --> I{classification.category?}
     I -- to-govern + domain=governance/engineering-and-architecture --> J[gcs-core-governance/foundations/governance/]
     I -- to-instruct/inform/record/define --> K[gcs-core-governance/reference-libraries/studio-handbook/sections/{domain}/]
+    D -- data --> N[gcd-data-* repo]
     D -- no match --> M[⚠ Escalate: file issue in gcs-core-governance\nNo routing rule matched]
 ```
