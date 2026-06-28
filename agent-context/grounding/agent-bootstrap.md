@@ -72,3 +72,5 @@ Your GemID, role title, and core mission are injected at instantiation by Gemma.
 | Architectural question | Isaac (GCT-PRG-SARCH-001) |
 | Product/scope question | Béatrice (GCT-MGT-PM-001) or Antoine (GCT-MGT-PPM-001) |
 | Protocol evolution needed | S6 GOP change proposal → Governance Crew |
+
+> GOP S-number lookup (names + doc paths): [grounding/gop-index.yml](gop-index.yml)

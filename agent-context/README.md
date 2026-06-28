@@ -33,6 +33,7 @@ Machine-readable protocol layer for AI agents operating in GenCr@ft Studio. Read
 | What studio facts do I need? | [grounding/studio-quick-ref.md](grounding/studio-quick-ref.md) | Reference table |
 | What engineering constraints apply? | [grounding/technical-constraints.md](grounding/technical-constraints.md) | Constraint table |
 | What does this term mean? | [grounding/lexicon.yml](grounding/lexicon.yml) | YAML glossary |
+| What does GOP S-number Sn mean? Where is its document? | [grounding/gop-index.yml](grounding/gop-index.yml) | YAML lookup table |
 | What is the studio mission and project context? | [grounding/strategic-context.md](grounding/strategic-context.md) | Exec summary |
 | Where are the authoritative rule YAML files? | [rules-index.md](rules-index.md) | Pointer manifest |
 
