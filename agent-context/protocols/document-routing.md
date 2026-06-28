@@ -29,7 +29,7 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 | `PROCESS_DEFINITION_STORAGE` | `artifact-class: "process"` | `gcd-shared-actions` |
 | `CODE_SHARED_LIBRARY_STORAGE` | `artifact-class: "code"` + `code-classification.type: "library"` | repo prefix `gcl-` |
 | `ASSET_PROJECT_STORAGE` | `artifact-class: "asset"` + `scope: "project-aethel"` | repo prefix `gcp-aethel-assets-` |
-| `SECURITY_SECRET_STORAGE` | `security-classification: "l3-secret"` *(evaluated before artifact-class rules)* | `gcs-vault-critical` |
+| `SECURITY_SECRET_STORAGE` | `security-classification: "l3_secret"` *(evaluated before artifact-class rules)* | `gcs-vault-critical` |
 | *(no match)* | None of the above rules matched | ⚠ File issue in `gcs-core-governance` — no routing rule defined for this artifact |
 
 **Canonical source:** `config-engines/metadata-schemas/storage-rules.yml`
@@ -53,7 +53,7 @@ Rules are cumulative (all matching rules apply). **Canonical source:** `config-e
 flowchart TD
     A[New artifact to route] --> B{lifecycle-phase = experimental?}
     B -- Yes --> C[gce-* repo]
-    B -- No --> SEC{security-classification = l3-secret?}
+    B -- No --> SEC{security-classification = l3_secret?}
     SEC -- Yes --> L[gcs-vault-critical]
     SEC -- No --> D{artifact-class?}
     D -- infrastructure --> E[gci-* repo]

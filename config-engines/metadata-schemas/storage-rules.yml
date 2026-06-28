@@ -79,7 +79,7 @@ storage_rules:
     description: "Artifacts classified as L3-Secret must be stored in a dedicated, high-security repository."
     if:
       all_of:
-        - security-classification: "l3-secret"
+        - security-classification: "l3_secret"
     then:
       target_repository_id: "gcs-vault-critical" # hypothetical repository for high-security assets
       justification: "Enforces strict access control for the most sensitive studio assets."

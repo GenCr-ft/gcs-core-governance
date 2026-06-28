@@ -77,7 +77,7 @@
           }
         },
         "security-classification": {
-          "description": "The confidentiality level of the document's content. Must be a kebab-case string from the taxonomy.",
+          "description": "The confidentiality level of the document's content. Must be an underscore-delimited string from the taxonomy (e.g. l0_public, l1_internal, l2_confidential, l3_secret).",
           "type": "string"
         },
         "keywords": {
