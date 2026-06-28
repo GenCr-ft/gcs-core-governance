@@ -57,7 +57,9 @@ gates:
       - "## Open Questions"
     adversary_review: true  # dispatches wi-lifecycle-adversary
     outputs:
+      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # phase updated to "design"
       - comment_on_design_issue: "✅ LIFECYCLE:DESIGN:READY — ready for human review and status:approved label"
+      - comment: "✅ LIFECYCLE:DESIGN:PASS"
     blockers:
       - any_section_completely_empty  # "N/A + justification" is acceptable
       - critical_or_high_adversary_finding_unresolved

@@ -233,6 +233,7 @@ Machine-parseable token set used by all three enforcement layers:
 | Token | Meaning |
 |-------|---------|
 | `✅ LIFECYCLE:<PHASE>:PASS` | Phase gate passed; written to issue comment |
+| `✅ LIFECYCLE:DESIGN:PASS` | Design gate passed; written to issue comment and stamp updated to `phase=design` |
 | `❌ LIFECYCLE:<PHASE>:FAIL — <gaps>` | Phase gate failed; written to issue comment |
 | `LIFECYCLE:DESIGN:READY` | Design sub-issue complete; ready for human review and `status:approved` label |
 | `LIFECYCLE:CODE-REVIEW:PASS` | Code review clean |
