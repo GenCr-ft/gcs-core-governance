@@ -57,7 +57,7 @@ terms:
     source: "GOV-GUIDE-412 §2"
 
   - term: DoD
-    definition: "Definition of Done — shared mandatory checklist of criteria a work item must meet to be considered complete. Document: PRO-STAN-001."
+    definition: "Definition of Done — shared mandatory checklist of criteria a work item must meet to be considered complete. Document: OPS-STANDARD-001."
     source: "GOV-GUIDE-412 §2"
 
   - term: NFR
