@@ -7,6 +7,8 @@ on:
       - 'config-engines/metadata-schemas/validation-rules.yml'
       - 'agent-context/protocols/document-routing.md'
       - 'human-guides/validation-rules-summary.md'
+      - 'agent-context/protocols/wi-lifecycle-gates.yml'
+      - 'GOV-PROT-003.wi-lifecycle-contract.md'
   push:
     branches: [main]
     paths:
@@ -14,6 +16,8 @@ on:
       - 'config-engines/metadata-schemas/validation-rules.yml'
       - 'agent-context/protocols/document-routing.md'
       - 'human-guides/validation-rules-summary.md'
+      - 'agent-context/protocols/wi-lifecycle-gates.yml'
+      - 'GOV-PROT-003.wi-lifecycle-contract.md'
 
 jobs:
   parity:
@@ -25,3 +29,5 @@ jobs:
           python-version: '3.12'
       - name: Verify agent-context routing table matches storage-rules.yml
         run: python3 scripts/verify_agent_context_parity.py
+      - name: Verify wi-lifecycle-gates.yml gate phases match GOV-PROT-003
+        run: python3 scripts/verify_lifecycle_gate_parity.py

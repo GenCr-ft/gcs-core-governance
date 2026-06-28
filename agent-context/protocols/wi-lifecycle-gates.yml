@@ -1,10 +1,13 @@
 # WI Lifecycle Gates — Machine-Readable Protocol
-# Version: 1.0.0
 # Canonical source: GOV-PROT-003.wi-lifecycle-contract.md + gcs-plt-gemop/hooks/issue_context_gate.py
 # Skill: wi-lifecycle (gcs-plt-gemop/skills/wi-lifecycle/)
-# source_version: "1.0.0"
-# last_verified: "2026-06-27"
 # Evaluation: gates are sequential; each phase must pass before proceeding to the next
+metadata:
+  version: "1.0.0"
+  source_document: "GOV-PROT-003.wi-lifecycle-contract.md"
+  source_version: "1.0.0"
+  last_verified: "2026-06-27"
+  knowledgeGuardian: "Orion (GCT-GOV-ORN-001)" 
 
 gates:
   - phase: create
