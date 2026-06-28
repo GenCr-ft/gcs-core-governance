@@ -8,7 +8,7 @@ authors:
 - Governance Crew
 knowledgeGuardian:
 - Antoine (GCT-MGT-PPM-001)
-ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/02-operational-playbook.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/studio-handbook/ai-operational-guides/grounding-docs/GOV-GUIDE-014.operational-playbook-core-collaboration-algorithms.md
 metadata:
   lifecycle-stage: approved
   keywords:

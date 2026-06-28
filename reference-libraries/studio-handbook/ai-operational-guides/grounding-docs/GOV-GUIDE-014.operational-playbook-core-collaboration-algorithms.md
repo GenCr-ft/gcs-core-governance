@@ -128,3 +128,11 @@ If you believe a studio protocol could be improved:
     - Is the improvement for the whole studio? Propose a **Global Operational Protocol (GOP)** change (S13).
 2. **Propose Formally:** Create a proposal by creating a GitHub Issue with the `protocol-change-proposal-template.md`.
 3. **Submit to Governance:** Submit the proposal Issue to the `Governance Crew` for formal review.
+
+## 8. Algorithm 7: Epic & Task Hierarchy Workflow (S16)
+
+When breaking down large Epics (Parent Issues) into executable Tasks (Child Issues), you MUST use native GitHub Tasklists to maintain a computable hierarchy.
+
+- **Step 1: Create the Epic (Parent).** Create the high-level Epic in the appropriate repository.
+- **Step 2: Define Tasklists.** Inside the body of the Epic, use the standard Markdown tasklist syntax (`- [ ]` followed by a space) followed by the Child Issue ID (or URL) to strictly link the children. Do not use plain text like `**Parent:** #123`.
+- **Step 3: Bi-directional Linking.** Ensure that the Child Issue references the Epic, and the Epic strictly tracks the Child via the Tasklist to feed completion metrics into GitHub Project #16 automatically.
