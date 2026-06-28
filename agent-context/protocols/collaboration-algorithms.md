@@ -83,3 +83,26 @@ Required when making a significant decision within scope of autonomy:
 4. This feeds completion metrics into GitHub Projects automatically
 
 **Never use:** `**Parent:** #123` — use `- [ ] #123` or `- [x] #123` only.
+
+
+## Algorithm 8 — Information Security Management (S8)
+
+Apply before committing any artifact, creating any document, or storing any data:
+
+1. **Classify** — determine the data classification level of the artifact:
+   - `l0_public`: explicitly approved for public release
+   - `l1_internal`: non-sensitive operational information (default)
+   - `l2_confidential`: sensitive business/project/technical data (restricted access)
+   - `l3_secret`: highly sensitive — private keys, critical vulnerability details, core IP pre-legal-protection
+2. **Mark** — set `security-classification: <level>` in YAML frontmatter for every SSoT document
+3. **Check prohibited storage** — never commit or store the following regardless of classification:
+   - API keys, passwords, certificates, or encryption keys in source files or config
+   - Secrets in Gem Blueprints or CI environment variables in plaintext
+   - Any `l3_secret` material outside the designated Gencraft Secret Management System
+4. **Escalate l3-secret material** — if the artifact is `l3_secret`:
+   - Do NOT proceed autonomously
+   - File a GitHub Issue in `gcs-core-governance` referencing `Cerberus` (GCT-MGT-SECOFF-001) as assignee
+   - Await explicit approval before any storage or transmission action
+5. **Log** — all access to `l2_confidential` or `l3_secret` data must be logged (reference S3 Algorithm 5 if a breach is suspected)
+
+> Source: `reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-008.s8-information-security-management.md` (sections 8.1-8.3). Agents must not read that file directly; this algorithm surfaces the mandatory agent-facing steps.
