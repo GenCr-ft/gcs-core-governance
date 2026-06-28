@@ -116,7 +116,9 @@ A matching line confirms the gate was passed in a prior session. Absence of both
 
 ## LIFECYCLE Comment Strings
 
-Post these exact strings as GitHub issue comments (no surrounding text required):
+### Issue comments (Gate 1–3 phase markers)
+
+Post these exact strings as GitHub **issue** comments (no surrounding text required):
 
 | Gate | Comment string |
 |------|---------------|
@@ -136,6 +138,28 @@ source gcs-plt-gemop/hooks/github-app-token.sh
 gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "✅ LIFECYCLE:CREATE:PASS"
 # Gate 2 — REFINE
 gh issue comment {N} --repo GenCr-ft/gcs-core-governance --body "✅ LIFECYCLE:REFINE:PASS"
+```
+
+### PR comments (Gate 4 close-review markers)
+
+Post these exact strings as GitHub **PR** comments before the close gate (GOV-PROT-003 Gate 4):
+
+| Review type | Comment string |
+|-------------|---------------|
+| Code review clean | `LIFECYCLE:CODE-REVIEW:PASS` |
+| Code review findings accepted | `LIFECYCLE:CODE-REVIEW:FINDINGS` |
+| Security review clean | `LIFECYCLE:SECURITY-REVIEW:PASS` |
+| Security review findings accepted | `LIFECYCLE:SECURITY-REVIEW:FINDINGS` |
+| No data risk | `LIFECYCLE:DATA-RISK:NONE` |
+| Data risk mitigated | `LIFECYCLE:DATA-RISK:MITIGATED` |
+| Data risk accepted | `LIFECYCLE:DATA-RISK:ACCEPTED` |
+| Human-authored bypass | `LIFECYCLE:BYPASS — gate: <name> — reason: <justification>` |
+
+Post via:
+
+```bash
+source gcs-plt-gemop/hooks/github-app-token.sh
+gh pr comment {PR_NUMBER} --repo GenCr-ft/gcs-core-governance --body "LIFECYCLE:CODE-REVIEW:PASS"
 ```
 
 ## Error Handling
