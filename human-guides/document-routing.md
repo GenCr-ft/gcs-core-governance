@@ -39,7 +39,7 @@ flowchart TD
     Q6 -- No --> Q7{artifact-class = knowledge\nAND domain = governance\nAND category = to-govern?}
 
     Q7 -- Yes --> R7[📋 gcs-core-governance\nfoundations/governance/]
-    Q7 -- No --> Q8{artifact-class = knowledge\nAND domain IN\ngov/ops/legal/marketing/finance?}
+    Q7 -- No --> Q8{artifact-class = knowledge\nAND domain IN\ngovernance/production-management/\nmarketing-and-communication/\nlegal/finance-and-hr?}
 
     Q8 -- Yes --> R8[📖 gcs-core-governance\nreference-libraries/studio-handbook/sections/{domain}/]
     Q8 -- No --> Q9{artifact-class\n= data?}
@@ -70,7 +70,7 @@ flowchart TD
 | CODE_SHARED_LIBRARY_STORAGE | `artifact-class: code` + `type: library` | `gcl-*` | Library convention |
 | ASSET_PROJECT_STORAGE | `artifact-class: asset` + `scope: project-aethel` | `gcp-aethel-assets-*` | Asset isolation |
 | KNOWLEDGE_GOVERNANCE_STORAGE | knowledge + governance + to-govern | `gcs-core-governance/foundations/governance/` | Laws with configs |
-| KNOWLEDGE_HANDBOOK_STORAGE | knowledge + ops/legal/marketing domains | `gcs-core-governance/reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` | Operational centralization |
+| KNOWLEDGE_HANDBOOK_STORAGE | knowledge + governance/production-management/marketing-and-communication/legal/finance-and-hr domains | `gcs-core-governance/reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` | Operational centralization |
 | DATA_ARTIFACT_STORAGE | `artifact-class: data` | `gcd-data-*` → `datasets/{domain}/` | Data centralization |
 
 > **Rule evaluation is sequential.** A document matching multiple conditions stops at the FIRST matching rule (top of table wins).
