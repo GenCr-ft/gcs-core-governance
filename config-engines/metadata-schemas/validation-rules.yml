@@ -38,7 +38,7 @@ validation_rules:
     description: "A deprecated artifact must justify its status."
     rule_applies_if:
       all_of:
-        - lifecycle-phase: "deprecated"
+        - lifecycle-stage: "deprecated"
     action_to_enforce:
       required_frontmatter_fields: ["deprecation_justification"]
 

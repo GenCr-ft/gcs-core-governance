@@ -22,7 +22,7 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 
 | Rule ID | Condition (exact YAML field syntax from storage-rules.yml) | Target |
 |---------|-----------|--------|
-| `EXPERIMENTAL_STORAGE_RULE` | `metadata.lifecycle-phase: "experimental"` | repo prefix `gce-` |
+| `EXPERIMENTAL_STORAGE_RULE` | `metadata.lifecycle-stage: "experimental"` | repo prefix `gce-` |
 | `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","engineering-and-architecture"]` + `classification.category: "to-govern"` | `gcs-core-governance` → `foundations/governance/{classification.type}/{docId}.md` |
 | `KNOWLEDGE_HANDBOOK_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","production-management","marketing-and-communication","legal","finance-and-hr"]` + `classification.category: ["to-instruct","to-inform","to-record","to-define"]` | `gcs-core-governance` → `reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` |
 | `INFRASTRUCTURE_CODE_STORAGE` | `artifact-class: "infrastructure"` | `gencraft-iac` |
@@ -55,7 +55,7 @@ Rules are cumulative (all matching rules apply). **Canonical source:** `config-e
 | `GOV_RULE_001` | knowledge + to-govern + domain=legal | required_reviewers: Henri |
 | `GOV_RULE_002` | knowledge + type=standard + domain=engineering-and-architecture | required_reviewers: Isaac |
 | `GOV_RULE_003` | knowledge + type=policy + domain=security-and-compliance | required_approvers: Cerberus |
-| `GOV_RULE_004` | lifecycle-phase=deprecated | required_frontmatter: deprecation_justification |
+| `GOV_RULE_004` | lifecycle-stage=deprecated | required_frontmatter: deprecation_justification |
 | `GOV_RULE_005` | pull_request on code repo | body must contain: "References Definition of Done (PRO-STAN-001)" |
 | `GOV_RULE_006` | type=contract + domain=legal | required_frontmatter: expiration_date + reviewer: Henri |
 
@@ -63,7 +63,7 @@ Rules are cumulative (all matching rules apply). **Canonical source:** `config-e
 
 ```mermaid
 flowchart TD
-    A[New artifact to route] --> B{lifecycle-phase = experimental?}
+    A[New artifact to route] --> B{lifecycle-stage = experimental?}
     B -- Yes --> C[gce-* repo]
     B -- No --> D{artifact-class?}
     D -- infrastructure --> E[gencraft-iac]

@@ -94,9 +94,9 @@ refactor(scope): WI-N.M — blue: <description>
 
 ## Sub-issue Naming Convention
 
-| Sub-issue | Title format | State when gate passes |
-|-----------|-------------|----------------------|
-| [DESIGN] | `[DESIGN] #N — <description>` | Closed + `status:approved` (set by human) |
-| [IMPL] | `[IMPL] #N — <description>` | Open + `status:approved` (set by human) |
+| Type | Title pattern | Example | State when gate passes |
+|------|--------------|---------|------------------------|
+| `[DESIGN]` | `[DESIGN] WI-N.M — <parent WI title>` | `[DESIGN] WI-42.1 — fix auth bug` | Closed + `status:approved` (set by human) |
+| `[IMPL]` | `[IMPL] WI-N.M — <parent WI title>` | `[IMPL] WI-42.1 — fix auth bug` | Open + `status:approved` (set by human) |
 
 > **Self-approval is forbidden.** The person who sets `status:approved` must differ from the current GitHub actor. In a solo studio, this creates a gate that requires a second human reviewer.

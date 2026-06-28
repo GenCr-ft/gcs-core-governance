@@ -64,7 +64,7 @@
           },
           "required": ["category", "type"]
         },
-        "lifecycle-phase": {
+        "lifecycle-stage": {
           "description": "The current stage of the artifact in our value chain.",
           "type": "string"
         },
@@ -107,7 +107,7 @@
       "required": [
         "domain",
         "classification",
-        "lifecycle-phase",
+        "lifecycle-stage",
         "security-classification",
         "intended-audience",
         "provenance"

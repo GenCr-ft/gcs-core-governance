@@ -7,7 +7,7 @@ storage_rules:
     description: "Artifacts in an experimental phase must reside in a dedicated experimental repository."
     if:
       all_of:
-        - metadata.lifecycle-phase: "experimental"
+        - metadata.lifecycle-stage: "experimental"
     then:
       target_repository_prefix: "gce-"
       justification: "Isolates experimental work from production SSoT to prevent dependency conflicts."
