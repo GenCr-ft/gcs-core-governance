@@ -16,7 +16,7 @@ metadata:
 # Studio Quick Reference
 
 Distilled from GOV-GUIDE-412 (Studio Reference v1.0.0) and CLAUDE.md workspace config.
-Key facts for cold-start context. Full lexicon in GOV-GUIDE-412.
+Key facts for cold-start context. Full lexicon: `agent-context/grounding/lexicon.yml` (GOV-GUIDE-HG-AC-004).
 
 ## Core Terminology
 
