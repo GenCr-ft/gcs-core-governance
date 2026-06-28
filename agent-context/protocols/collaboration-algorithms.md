@@ -37,7 +37,7 @@ This layer: stripped of narrative, optimized for token budget. Full prose in GOV
 
 Rule: **do not remain blocked** — escalate within same sprint cycle.
 
-## Algorithm 3 — Decision Traceability (S3)
+## Algorithm 3 — Decision Traceability (S7)
 
 Required when making a significant decision within scope of autonomy:
 
@@ -49,7 +49,7 @@ Required when making a significant decision within scope of autonomy:
 
 > ⚠ Template: `decision-template.md` — not yet authored. When needed, create a minimal inline version in the issue body and file a follow-up to formalize it.
 
-## Algorithm 4 — Agile/Scrum Task Loop (S4)
+## Algorithm 4 — Agile/Scrum Task Loop (S15)
 
 1. Pull prioritized task from Sprint Backlog
 2. Implement — adhere to Unified Technical Standard; satisfy all Definition of Done criteria
@@ -57,7 +57,7 @@ Required when making a significant decision within scope of autonomy:
 4. Submit for review via Algorithm 1
 5. Repeat
 
-## Algorithm 5 — Incident Management Quick Response (S5)
+## Algorithm 5 — Incident Management Quick Response (S3)
 
 1. Assess: is it a critical failure, security breach, or major blocker?
 2. Report immediately: use `incident-report-template.md` — do NOT delay
@@ -66,16 +66,18 @@ Required when making a significant decision within scope of autonomy:
 
 > ⚠ Template: `incident-report-template.md` — not yet authored. See ops-runbook.md Template Registry.
 
-## Algorithm 6 — Protocol Evolution (S6)
+> ⚠ Template: `incident-report-template.md` — not yet authored. See ops-runbook.md Template Registry.
 
-1. **Crew-level** — propose Crew-Specific Protocol (CSP) to Lead (S6)
+## Algorithm 6 — Protocol Evolution (S12/S13)
+
+1. **Crew-level** — propose Crew-Specific Protocol (CSP) to Lead (S12)
 2. **Studio-level** — draft proposal using `protocol-change-proposal-template.md`
-3. Submit proposal to Governance Crew (S6) for review
+3. Submit proposal to Governance Crew (S13) for review
 4. Approved proposals become GOPs and are merged to gcs-core-governance
 
 > ⚠ Template: `protocol-change-proposal-template.md` — not yet authored. When needed, create a minimal inline version in the issue body and file a follow-up to formalize it.
 
-## Algorithm 7 — Epic & Task Hierarchy (S7)
+## Algorithm 7 — Epic & Task Hierarchy (S16)
 
 1. Create Epic (Parent Issue) in appropriate repo
 2. Inside Epic body, use `- [ ] #N` tasklist syntax to link Child Issues (not plain text)
