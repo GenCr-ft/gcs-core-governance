@@ -32,7 +32,8 @@ gates:
       - "## Sub-issues"           # >= 1 tasklist entry for [DESIGN] sub-issue
     additional_checks:
       - design_sub_issue_must_be_open: true
-      - spec_refs_still_approved: true
+    blockers_additional:
+      - spec_refs_still_approved: true  # see GOV-PROT-003 §Spec Reference Contract for evaluation rules
     outputs:
       - stamp: /tmp/lifecycle/{repo}-{branch}.json  # written by lifecycle_stamp.py
       - comment: "✅ LIFECYCLE:REFINE:PASS"

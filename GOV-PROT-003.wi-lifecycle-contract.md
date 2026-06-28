@@ -77,6 +77,45 @@ hook, Action, and skill updates follow as separate PRs.
 
 ---
 
+## Spec Reference Contract
+
+A **spec_ref** is a specification document linked or referenced in a Work Item body. This section is the canonical definition required by `wi-lifecycle-gates.yml` (lines 20 and 30).
+
+### What qualifies as a spec_ref
+
+A document or issue qualifies as a spec_ref if:
+- Its `docId` frontmatter field starts with a recognized spec prefix: `ENG-SPEC-`, `GAM-SPEC-`, `GOV-SPEC-`, or any studio-registered docId pattern ending in `-SPEC-`.
+- It is a GitHub Issue carrying the `spec` label.
+- It is explicitly named as a spec in the WI body using the format `**Spec:** <link>`.
+
+### How to identify spec_refs on a WI
+
+Scan the WI issue body for:
+1. Lines matching `**Spec:** <url-or-issue-ref>`
+2. Linked issues that carry the `spec` label.
+3. File paths matching the docId patterns above in the `## Architecture Impact` or `## Relations` sections.
+
+If none are found, the spec_ref set is considered **absent**.
+
+### How to evaluate lifecycle-stage
+
+| Source type | Where to read lifecycle-stage |
+|-------------|------------------------------|
+| Markdown file with YAML frontmatter | `metadata.lifecycle-stage` field |
+| GitHub Issue | Label starting with `lifecycle:` (e.g. `lifecycle:approved`) |
+| No frontmatter and no label | Treat as `draft` |
+
+Valid lifecycle-stage values: `draft`, `proposed`, `approved`, `deprecated`, `archived`.
+
+### Gate evaluation rules
+
+| Gate key | Location in YAML | Blocks when |
+|----------|-----------------|-------------|
+| `spec_refs_with_lifecycle_stage: ["draft", "proposed", "absent"]` | create phase `blockers:` | Any linked spec_ref has lifecycle-stage `draft` or `proposed`, OR the spec_ref set is absent |
+| `spec_refs_still_approved: true` | refine phase `blockers:` | Any linked spec_ref no longer has lifecycle-stage `approved` at refine time |
+
+---
+
 ## Sub-issue Contracts
 
 ### `## Relations` Section Format
