@@ -10,7 +10,7 @@ metadata:
   doc-type: grounding
   intended-audience: [ai-agents]
   security-classification: l2_confidential
-  source_version: "1.0.0"
+  source_version: "1.3.0"
   last_verified: "2026-06-27"
 ---
 # Studio Quick Reference
@@ -59,6 +59,7 @@ Key facts for cold-start context. Full lexicon: `agent-context/grounding/lexicon
 | `gcs-project-management` | Project backlog, sprint plans, workspace STATUS.md |
 | `gcd-shared-actions` | Reusable GitHub Actions workflows |
 | `gcd-ops-scripts` | Python SSoT linters |
+| `gencraft-iac` | OpenTofu / GCP Infrastructure as Code |
 
 ## Technology Stack
 
