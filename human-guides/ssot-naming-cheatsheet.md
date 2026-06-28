@@ -1,5 +1,5 @@
 ---
-docId: GOV-GUIDE-HG-004
+docId: GOV-GUIDE-004
 title: SSoT Document Naming Cheatsheet
 version: 1.0.0
 authors: [Governance Crew]
@@ -79,7 +79,6 @@ Examples across all in-use formats:
 | `POST` | Postmortem | to-record | `OPS-POST-001` |
 | `POL` | Policy | to-govern | `SEC-POL-001` |
 | `BACK` | Backlog entry | to-describe | `ENG-BACK-001` |
-| `STAN` | Standard | to-govern | `GOV-STAN-001` |
 | `OVER` | Overview | to-describe | `ENG-OVER-001` |
 | `READ` | README / Navigation index | to-inform | `GOV-READ-001` |
 

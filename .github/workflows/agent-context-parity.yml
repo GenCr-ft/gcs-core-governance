@@ -9,6 +9,8 @@ on:
       - 'human-guides/validation-rules-summary.md'
       - 'agent-context/protocols/wi-lifecycle-gates.yml'
       - 'GOV-PROT-003.wi-lifecycle-contract.md'
+      - 'config-engines/metadata-schemas/taxonomy.yml'
+      - 'human-guides/ssot-naming-cheatsheet.md'
   push:
     branches: [main]
     paths:
@@ -18,6 +20,8 @@ on:
       - 'human-guides/validation-rules-summary.md'
       - 'agent-context/protocols/wi-lifecycle-gates.yml'
       - 'GOV-PROT-003.wi-lifecycle-contract.md'
+      - 'config-engines/metadata-schemas/taxonomy.yml'
+      - 'human-guides/ssot-naming-cheatsheet.md'
 
 jobs:
   parity:
@@ -31,3 +35,5 @@ jobs:
         run: python3 scripts/verify_agent_context_parity.py
       - name: Verify wi-lifecycle-gates.yml gate phases match GOV-PROT-003
         run: python3 scripts/verify_lifecycle_gate_parity.py
+      - name: Verify ssot-naming-cheatsheet.md type codes match taxonomy.yml
+        run: python3 scripts/verify_taxonomy_parity.py
