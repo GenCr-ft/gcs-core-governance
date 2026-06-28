@@ -24,10 +24,7 @@ flowchart TD
     START([New artifact to store]) --> Q1{lifecycle-phase\n= experimental?}
 
     Q1 -- Yes --> R1[🧪 gce-* repo\nExperimental repository]
-    Q1 -- No --> Q2{security-classification\n= l3-secret?}
-
-    Q2 -- Yes --> R2[🔒 gcs-vault-critical\nHigh-security vault]
-    Q2 -- No --> Q3{artifact-class\n= infrastructure?}
+    Q1 -- No --> Q3{artifact-class\n= infrastructure?}
 
     Q3 -- Yes --> R3[⚙️ gci-*\nOpenTofu IaC repos]
     Q3 -- No --> Q4{artifact-class\n= process?}
@@ -68,7 +65,6 @@ flowchart TD
 | Rule ID | Condition | Target | Justification |
 |---------|-----------|--------|---------------|
 | EXPERIMENTAL_STORAGE_RULE | `lifecycle-phase: experimental` | `gce-*` | Isolates experimental work |
-| SECURITY_SECRET_STORAGE | `security-classification: l3-secret` | `gcs-vault-critical` | Strict access control |
 | INFRASTRUCTURE_CODE_STORAGE | `artifact-class: infrastructure` | `gci-*` | IaC centralization |
 | PROCESS_DEFINITION_STORAGE | `artifact-class: process` | `gcd-shared-actions` | Workflow centralization |
 | CODE_SHARED_LIBRARY_STORAGE | `artifact-class: code` + `type: library` | `gcl-*` | Library convention |

@@ -23,7 +23,6 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 | Rule ID | Condition (exact YAML field syntax from storage-rules.yml) | Target |
 |---------|-----------|--------|
 | `EXPERIMENTAL_STORAGE_RULE` | `metadata.lifecycle-phase: "experimental"` | repo prefix `gce-` |
-| `SECURITY_SECRET_STORAGE` | `security-classification: "l3_secret"` | `gcs-vault-critical` |
 | `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","engineering-and-architecture"]` + `classification.category: "to-govern"` | `gcs-core-governance` → `foundations/governance/{classification.type}/{docId}.md` |
 | `KNOWLEDGE_HANDBOOK_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","production-management","marketing-and-communication","legal","finance-and-hr"]` + `classification.category: ["to-instruct","to-inform","to-record","to-define"]` | `gcs-core-governance` → `reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` |
 | `INFRASTRUCTURE_CODE_STORAGE` | `artifact-class: "infrastructure"` | repo prefix `gci-` |
@@ -66,9 +65,7 @@ Rules are cumulative (all matching rules apply). **Canonical source:** `config-e
 flowchart TD
     A[New artifact to route] --> B{lifecycle-phase = experimental?}
     B -- Yes --> C[gce-* repo]
-    B -- No --> SEC{security-classification = l3_secret?}
-    SEC -- Yes --> L[gcs-vault-critical]
-    SEC -- No --> D{artifact-class?}
+    B -- No --> D{artifact-class?}
     D -- infrastructure --> E[gci-* repo]
     D -- process --> F[gcd-shared-actions]
     D -- asset + project-aethel --> G[gcp-aethel-assets-*]

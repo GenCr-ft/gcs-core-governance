@@ -23,14 +23,6 @@ storage_rules:
       target_path_template: "datasets/{domain}/{docId}.{title_kebab_case}"
       justification: "Centralizes data artifacts in dedicated data repositories, keeping telemetry, analytics, and game configuration datasets separate from code and knowledge artifacts."
 
-  - rule_id: "SECURITY_SECRET_STORAGE"
-    description: "Artifacts classified as L3-Secret must be stored in a dedicated, high-security repository."
-    if:
-      all_of:
-        - security-classification: "l3_secret"
-    then:
-      target_repository_id: "gcs-vault-critical" # hypothetical repository for high-security assets
-      justification: "Enforces strict access control for the most sensitive studio assets."
 
   - rule_id: "KNOWLEDGE_GOVERNANCE_STORAGE"
     description: "Core governance documents reside in the technical standards repository."
