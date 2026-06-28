@@ -33,7 +33,7 @@ This layer: stripped of narrative, optimized for token budget. Full prose in GOV
 4. **Production** — escalate to Antoine (Producer) or Béatrice (PM)
 5. **Governance Crew** — final binding decision
 
-> ⚠ Template: `disagreement-formalization-template.md` — not yet authored. See ops-runbook.md Template Registry.
+> ⚠ Template: `disagreement-formalization-template.md` — not yet authored. When needed, create a minimal inline version in the issue body and file a follow-up to formalize it.
 
 Rule: **do not remain blocked** — escalate within same sprint cycle.
 
@@ -47,7 +47,7 @@ Required when making a significant decision within scope of autonomy:
 4. **Justification** — explain why this option was chosen
 5. **Traceability** — log in GitHub Issue or ADR
 
-> ⚠ Template: `decision-template.md` — not yet authored. See ops-runbook.md Template Registry.
+> ⚠ Template: `decision-template.md` — not yet authored. When needed, create a minimal inline version in the issue body and file a follow-up to formalize it.
 
 ## Algorithm 4 — Agile/Scrum Task Loop (S15)
 
@@ -73,7 +73,7 @@ Required when making a significant decision within scope of autonomy:
 3. Submit proposal to Governance Crew (S13) for review
 4. Approved proposals become GOPs and are merged to gcs-core-governance
 
-> ⚠ Template: `protocol-change-proposal-template.md` — not yet authored. See ops-runbook.md Template Registry.
+> ⚠ Template: `protocol-change-proposal-template.md` — not yet authored. When needed, create a minimal inline version in the issue body and file a follow-up to formalize it.
 
 ## Algorithm 7 — Epic & Task Hierarchy
 
