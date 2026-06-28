@@ -13,7 +13,7 @@ metadata:
 ---
 # Work Item Lifecycle Flow
 
-Visual guide to the 5-gate Work Item (WI) lifecycle. All states and transitions match `GOV-PROT-003.wi-lifecycle-contract.md` exactly.
+Visual guide to the 4-gate Work Item (WI) lifecycle. All states and transitions match `GOV-PROT-003.wi-lifecycle-contract.md` exactly.
 
 > **Source:** `GOV-PROT-003.wi-lifecycle-contract.md` (canonical)
 
@@ -39,7 +39,7 @@ stateDiagram-v2
 
     DESIGN_READY --> IMPLEMENT_PASS : [DESIGN] + [IMPL] approved by human
     note right of DESIGN_READY
-        Gate 3 pre-check:
+        Design phase (pre-Gate 3):
         [DESIGN] closed + status:approved
         [IMPL] open + status:approved
         Self-approval FORBIDDEN
