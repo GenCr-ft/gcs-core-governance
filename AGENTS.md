@@ -37,8 +37,8 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 | Guide | File |
 |-------|------|
 | Three-layer enforcement architecture | [human-guides/enforcement-architecture.md](human-guides/enforcement-architecture.md) |
-| WI lifecycle visual flowchart | [human-guides/wi-lifecycle-visual.md](human-guides/wi-lifecycle-visual.md) |
-| Document routing guide | [human-guides/document-routing-guide.md](human-guides/document-routing-guide.md) |
+| WI lifecycle visual flowchart | [human-guides/wi-lifecycle-flow.md](human-guides/wi-lifecycle-flow.md) |
+| Document routing guide | [human-guides/document-routing.md](human-guides/document-routing.md) |
 
 ## Quick Commands
 
