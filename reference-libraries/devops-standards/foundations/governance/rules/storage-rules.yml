@@ -90,5 +90,6 @@ storage_rules:
       all_of:
         - security-classification: "l3-secret"
     then:
-      target_repository_id: "gcs-vault-critical" # hypothetical repository for high-security assets
-      justification: "Enforces strict access control for the most sensitive studio assets."
+      target_repository_id: "gcs-security-core"
+      target_path_template: "secrets/{docId}.md"
+      justification: "Enforces strict access control for the most sensitive studio assets by routing them to the dedicated, access-restricted security repository."
