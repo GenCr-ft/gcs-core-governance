@@ -52,7 +52,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 ## Critical Patterns
 
 - All documents must have YAML frontmatter with `docId: DOMAIN-TYPE-CODE`.
-- `tools/verify-compression.sh` — compression ACs for WI-14 (200 nb CLAUDE.md, 150 nb AGENTS.md).
+- `tools/verify-compression.sh` — compression ACs for WI-14 (200 nb CLAUDE.md, 150 nb AGENTS.md). nb = non-blank lines (lines where `grep -cv ^\\s*$` counts non-zero); defined in [agent-context/grounding/lexicon.yml](agent-context/grounding/lexicon.yml).
 - `agent-context/` is the machine-readable surfacing layer. Do not read `reference-libraries/` directly.
 - Issue routing: `gh issue create --repo GenCr-ft/gcs-core-governance`.
 
@@ -69,7 +69,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 - File gaps as GitHub issues in `gcs-core-governance` before proceeding
 
 ⚠️ **Ask First**
-- Changing compression thresholds (200/150 nb line limits)
+- Changing compression thresholds (200/150 nb line limits; nb = non-blank lines)
 - Adding new governance standards that affect all repos
 
 🚫 **Never Do**

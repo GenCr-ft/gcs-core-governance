@@ -97,8 +97,8 @@ terms:
     source: "gcs-plt-gembp repo"
 
   - term: nb
-    definition: "Non-blank lines — a count of lines that do not match the pattern ^\\s*$ (i.e., lines containing at least one non-whitespace character). Computed via: grep -cv '^\\s*$' <file>. Used as the unit for compression thresholds: CLAUDE.md ≤200 nb, AGENTS.md ≤150 nb."
-    source: "gcs-core-governance tools/verify-compression.sh"
+    definition: "Non-blank lines — the count of lines that are not entirely whitespace, computed as `grep -cv '^\s*$' <file>`. Used as the unit for CLAUDE.md (≤200 nb) and AGENTS.md (≤150 nb) compression thresholds established in WI-14 (gcs-core-governance#14). Authoritative implementation: tools/verify-compression.sh."
+    source: "gcs-core-governance/tools/verify-compression.sh (WI-14)"
 
   - term: spec_ref
     definition: "A specification document linked or referenced in a Work Item's body. Qualifying documents are: any GitHub Issue or file whose title or path starts with a recognized spec prefix (ENG-SPEC-, GAM-SPEC-, GOV-SPEC-, or equivalent docId patterns), or any issue explicitly labelled 'spec'. To evaluate a spec_ref's lifecycle-stage: read the YAML frontmatter field `metadata.lifecycle-stage` of the linked document; if the document has no frontmatter or is a GitHub Issue, read the issue label whose name starts with 'lifecycle:' (e.g. lifecycle:draft, lifecycle:proposed, lifecycle:approved). A spec_ref is considered 'absent' when no qualifying reference exists in the WI body. The create-phase blocker spec_refs_with_lifecycle_stage blocks a WI if any linked spec_ref has a lifecycle-stage matching one of the listed values (['draft', 'proposed', 'absent']). The refine-phase check spec_refs_still_approved passes only when every linked spec_ref retains lifecycle-stage 'approved' at the time of evaluation."
