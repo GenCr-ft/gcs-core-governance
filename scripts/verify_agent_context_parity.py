@@ -204,6 +204,19 @@ def extract_gem_ids_from_quick_ref_escalation_table(path: Path) -> list[str]:
     return pattern.findall(path.read_text(encoding="utf-8"))
 
 
+def check_config_dirs_non_empty(dirs: list[Path]) -> list[str]:
+    """Return failure messages for any config-engines subdirectory that is empty."""
+    failures = []
+    for d in dirs:
+        if not d.is_dir():
+            failures.append(f"FAIL: required config directory not found: {d}")
+        elif not any(f for f in d.iterdir() if f.is_file()):
+            failures.append(
+                f"FAIL: config directory is empty (rules-index.md pointer is broken): {d.relative_to(REPO_ROOT)}"
+            )
+    return failures
+
+
 def main() -> int:
     missing_files = [
         p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF]
@@ -238,13 +251,15 @@ def main() -> int:
         "studio-quick-ref.md Key Gem Contacts for Escalation",
     )
 
-    all_failures = storage_failures + placeholder_failures + gem_failures
+    config_dir_failures = check_config_dirs_non_empty(CONFIG_DIRS_REQUIRED_NON_EMPTY)
+    all_failures = storage_failures + placeholder_failures + gem_failures + config_dir_failures
 
     if not all_failures:
         print(
             f"PASS: {len(storage_canonical)} storage rule IDs all present in document-routing.md; "
             f"all target_path_template placeholders match; "
-            f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref"
+            f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref; "
+            f"all required config-engines directories are non-empty"
         )
         return 0
 

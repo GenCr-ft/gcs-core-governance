@@ -3,13 +3,11 @@ name: agent-context parity check
 on:
   pull_request:
     paths:
-      - 'config-engines/metadata-schemas/storage-rules.yml'
-      - 'config-engines/metadata-schemas/validation-rules.yml'
+      - 'config-engines/**'
       - 'agent-context/protocols/document-routing.md'
       - 'human-guides/validation-rules-summary.md'
       - 'agent-context/protocols/wi-lifecycle-gates.yml'
       - 'GOV-PROT-003.wi-lifecycle-contract.md'
-      - 'config-engines/metadata-schemas/taxonomy.yml'
       - 'human-guides/ssot-naming-cheatsheet.md'
       - 'agent-context/grounding/technical-constraints.md'
       - 'agent-context/grounding/studio-quick-ref.md'
@@ -17,13 +15,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'config-engines/metadata-schemas/storage-rules.yml'
-      - 'config-engines/metadata-schemas/validation-rules.yml'
+      - 'config-engines/**'
       - 'agent-context/protocols/document-routing.md'
       - 'human-guides/validation-rules-summary.md'
       - 'agent-context/protocols/wi-lifecycle-gates.yml'
       - 'GOV-PROT-003.wi-lifecycle-contract.md'
-      - 'config-engines/metadata-schemas/taxonomy.yml'
       - 'human-guides/ssot-naming-cheatsheet.md'
       - 'agent-context/grounding/technical-constraints.md'
       - 'agent-context/grounding/studio-quick-ref.md'
