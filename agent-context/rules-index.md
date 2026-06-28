@@ -26,8 +26,8 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 | `governance-config.schema.json` | Schema contract | JSON Schema Draft-7 for the resolved governance config object |
 | `ontology.yml` | Knowledge ontology | RDF triples, class hierarchy, containment constraints |
 | `taxonomy.yml` | Vocabulary taxonomy | SKOS concepts for artifact classes, domains, lifecycles |
-| `organizational-entities.yml` → `reference-libraries/devops-standards/foundations/governance/catalogs/` | Org catalog | 25 entities: crews, project-teams, departments, gems |
-| `governance-scopes.yml` → `reference-libraries/devops-standards/foundations/governance/catalogs/` | Scope catalog | governance scope definitions |
+| `organizational-entities.yml` | Org catalog | 25 entities: crews, project-teams, departments, gems. Proxy for `reference-libraries/devops-standards/foundations/governance/catalogs/organizational-entities.yml` |
+| `governance-scopes.yml` | Scope catalog | governance scope definitions. Proxy for `reference-libraries/devops-standards/foundations/governance/catalogs/governance-scopes.yml` |
 | `governance-kpi.yml` | KPIs | 3 governance KPIs with targets |
 
 ## config-engines/api-parameters/
