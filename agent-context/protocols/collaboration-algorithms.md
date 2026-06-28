@@ -64,6 +64,8 @@ Required when making a significant decision within scope of autonomy:
 3. Follow Incident Commander (IC) instructions once assigned
 4. All communication in the designated incident Issue (traceability)
 
+> ⚠ Template: `incident-report-template.md` — not yet authored. See ops-runbook.md Template Registry.
+
 ## Algorithm 6 — Protocol Evolution (S12/S13)
 
 1. **Crew-level** — propose Crew-Specific Protocol (CSP) to Lead (S12)

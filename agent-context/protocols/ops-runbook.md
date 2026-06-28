@@ -168,5 +168,6 @@ Templates referenced in `collaboration-algorithms.md`:
 | `disagreement-formalization-template.md` | Not yet authored | File issue in gcs-core-governance |
 | `decision-template.md` | Not yet authored | File issue in gcs-core-governance |
 | `escalation-template.md` | Not yet authored | File issue in gcs-core-governance |
+| `incident-report-template.md` | Not yet authored | File issue in gcs-core-governance |
 
 When a template is needed and does not exist: create a minimal inline version in the issue body and file a follow-up to formalize it.
