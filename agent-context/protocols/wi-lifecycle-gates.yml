@@ -1,6 +1,6 @@
 # WI Lifecycle Gates — Machine-Readable Protocol
-# Canonical source: GOV-PROT-003.wi-lifecycle-contract.md + gcs-plt-gemop/hooks/issue_context_gate.py
-# Skill: wi-lifecycle (gcs-plt-gemop/skills/wi-lifecycle/)
+# Canonical source: GOV-PROT-003.wi-lifecycle-contract.md
+# Skill: wi-lifecycle (resolved via Claude Code harness; no local path required)
 # Evaluation: gates are sequential; each phase must pass before proceeding to the next
 metadata:
   version: "1.0.0"
@@ -47,6 +47,7 @@ gates:
 
   - phase: design
     gate_number: 3  # Gate 3 — Design (before [IMPL] sub-issue is authored); canonical per GOV-PROT-003
+    extension_phase: true
     trigger: "[DESIGN] sub-issue authored"
     required_sections_in_design_issue:
       - "## Relations"
