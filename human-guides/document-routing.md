@@ -70,7 +70,7 @@ flowchart TD
 | CODE_SHARED_LIBRARY_STORAGE | `artifact-class: code` + `type: library` | `gcl-*` | Library convention |
 | ASSET_PROJECT_STORAGE | `artifact-class: asset` + `scope: project-aethel` | `gcp-aethel-assets-*` | Asset isolation |
 | KNOWLEDGE_GOVERNANCE_STORAGE | knowledge + governance + to-govern | `gcs-core-governance/foundations/governance/` | Laws with configs |
-| KNOWLEDGE_HANDBOOK_STORAGE | knowledge + ops/legal/marketing domains | `gcs-core-governance/reference-libraries/studio-handbook/sections/{domain}/` | Operational centralization |
+| KNOWLEDGE_HANDBOOK_STORAGE | knowledge + ops/legal/marketing domains | `gcs-core-governance/reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` | Operational centralization |
 | DATA_ARTIFACT_STORAGE | `artifact-class: data` | `gcd-data-*` → `datasets/{domain}/` | Data centralization |
 
 > **Rule evaluation is sequential.** A document matching multiple conditions stops at the FIRST matching rule (top of table wins).
