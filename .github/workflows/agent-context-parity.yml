@@ -4,12 +4,16 @@ on:
   pull_request:
     paths:
       - 'config-engines/metadata-schemas/storage-rules.yml'
+      - 'config-engines/metadata-schemas/validation-rules.yml'
       - 'agent-context/protocols/document-routing.md'
+      - 'human-guides/validation-rules-summary.md'
   push:
     branches: [main]
     paths:
       - 'config-engines/metadata-schemas/storage-rules.yml'
+      - 'config-engines/metadata-schemas/validation-rules.yml'
       - 'agent-context/protocols/document-routing.md'
+      - 'human-guides/validation-rules-summary.md'
 
 jobs:
   parity:
