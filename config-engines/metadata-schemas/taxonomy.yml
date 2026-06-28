@@ -1,34 +1,34 @@
 # Gencraft Studio SSoT Taxonomy
 # Version: 1.0.0
 # Date: 2025-07-08
-# This file is the SSoT for all controlled vocabularies'\n'  aligned with SKOS principles.
+# This file is the SSoT for all controlled vocabularies, aligned with SKOS principles.
 # filename: taxonomy.yml
 ssot_version: "1.4.0" # Version bumped: resolved intra-section duplicate prefLabels (all-contributors, architects, devops-crew) and added scopeNotes to cross-section terms
 
 artifact_class:
   - skos:prefLabel: knowledge
-    skos:definition: "An artifact whose primary purpose is to convey information'\n'  such as a guide'\n'  a standard'\n'  or a report."
+    skos:definition: "An artifact whose primary purpose is to convey information, such as a guide, a standard, or a report."
   - skos:prefLabel: code
     skos:definition: "An artifact composed of source code written in a programming or scripting language."
     skos:scopeNote: "Scoped to artifact_class. Not equivalent to repository_type:code."
   - skos:prefLabel: asset
-    skos:definition: "A creative or artistic artifact used in production'\n'  such as a 3D model'\n'  an audio file'\n'  or a texture."
+    skos:definition: "A creative or artistic artifact used in production, such as a 3D model, an audio file, or a texture."
   - skos:prefLabel: process
-    skos:definition: "An artifact that defines an automated workflow or process'\n'  such as a CI/CD pipeline or a GitHub Action."
+    skos:definition: "An artifact that defines an automated workflow or process, such as a CI/CD pipeline or a GitHub Action."
     skos:scopeNote: "Scoped to artifact_class. Not equivalent to repository_type:process."
   - skos:prefLabel: infrastructure
-    skos:definition: "An artifact that defines Infrastructure as Code (IaC) for cloud resources'\n'  networks'\n'  or environments."
+    skos:definition: "An artifact that defines Infrastructure as Code (IaC) for cloud resources, networks, or environments."
     skos:scopeNote: "Scoped to artifact_class. Not equivalent to repository_type:infrastructure."
   - skos:prefLabel: data
-    skos:definition: "An artifact representing structured or unstructured datasets'\n'  such as analytics'\n'  telemetry'\n'  or game configuration."
+    skos:definition: "An artifact representing structured or unstructured datasets, such as analytics, telemetry, or game configuration."
 
 knowledge_classification_category:
   - skos:prefLabel: to-govern
-    skos:definition: "To establish a rule'\n'  policy'\n'  or principle that constrains actions."
+    skos:definition: "To establish a rule, policy, or principle that constrains actions."
   - skos:prefLabel: to-instruct
     skos:definition: "To guide an action or process in a sequential manner."
   - skos:prefLabel: to-describe
-    skos:definition: "To describe the state'\n'  design'\n'  or characteristics of an object or concept."
+    skos:definition: "To describe the state, design, or characteristics of an object or concept."
   - skos:prefLabel: to-record
     skos:definition: "To keep a traceable record of a past event or decision."
   - skos:prefLabel: to-define
@@ -82,7 +82,7 @@ knowledge_classification_type:
   - skos:prefLabel: standard
     category: to-govern
     code: "STAN"
-    skos:definition: "A document that enforces mandatory rules'\n'  conventions'\n'  or specifications."
+    skos:definition: "A document that enforces mandatory rules, conventions, or specifications."
   - skos:prefLabel: policy
     category: to-govern
     code: "POL"
@@ -90,7 +90,7 @@ knowledge_classification_type:
   - skos:prefLabel: charter
     category: to-govern
     code: "CHAR"
-    skos:definition: "A document that defines the mission'\n'  scope'\n'  and principles of an entity (e.g.'\n'  a crew'\n'  an AI agent)."
+    skos:definition: "A document that defines the mission, scope, and principles of an entity (e.g., a crew, an AI agent)."
   - skos:prefLabel: definition-of-done
     category: to-govern
     code: "DOD"
@@ -108,7 +108,7 @@ knowledge_classification_type:
     category: to-instruct
     code: "PLAY"
     skos:definition: "A document containing predefined procedures for handling a recurring situation."
-    skos:scopeNote: "Use for reactive'\n'  situation-based procedures. For proactive'\n'  linear learning'\n'  prefer 'guide'."
+    skos:scopeNote: "Use for reactive, situation-based procedures. For proactive, linear learning, prefer 'guide'."
   - skos:prefLabel: contract
     category: to-govern
     code: "CONT"
@@ -116,7 +116,7 @@ knowledge_classification_type:
   - skos:prefLabel: invoice
     category: to-inform
     code: "INV"
-    skos:definition: "A commercial document issued by a seller to a buyer'\n'  relating to a sale transaction and indicating the products'\n'  quantities'\n'  and agreed prices."
+    skos:definition: "A commercial document issued by a seller to a buyer, relating to a sale transaction and indicating the products, quantities, and agreed prices."
   - skos:prefLabel: budget-proposal
     category: to-instruct
     code: "BUDG"
@@ -231,7 +231,7 @@ studio_domain:
     skos:definition: "Community management and player support policies."
   - skos:prefLabel: "ai-enablement"
     code: "AIE"
-    skos:definition: "Management of AI Gems'\n'  blueprints'\n'  and meta-level AI tooling."
+    skos:definition: "Management of AI Gems, blueprints, and meta-level AI tooling."
   - skos:prefLabel: "platform-architecture"
     code: "PLT"
     skos:definition: "Platform-level architecture diagrams, C4 models, and cross-service design specifications for the studio platform."
@@ -251,13 +251,13 @@ lifecycle_phase:
     skos:definition: "A prototype or proof-of-concept. Not an official SSoT artifact."
     skos:scopeNote: "Scoped to lifecycle_phase. Not equivalent to repository_type:experimental."
   - skos:prefLabel: "emergence"
-    skos:definition: "A raw idea'\n'  a note'\n'  an unstructured brainstorming artifact."
+    skos:definition: "A raw idea, a note, an unstructured brainstorming artifact."
   - skos:prefLabel: ideation
     skos:definition: "The artifact is a proposal or an idea that has not yet been approved for development."
   - skos:prefLabel: design
-    skos:definition: "The artifact is in the design'\n'  drafting'\n'  or specification stage."
+    skos:definition: "The artifact is in the design, drafting, or specification stage."
   - skos:prefLabel: implementation
-    skos:definition: "The artifact is actively being built'\n'  coded'\n'  or written."
+    skos:definition: "The artifact is actively being built, coded, or written."
   - skos:prefLabel: in-review
     skos:definition: "The artifact has been submitted for formal review and is awaiting feedback or approval."
   - skos:prefLabel: approved
@@ -275,9 +275,9 @@ security_classification:
   - skos:prefLabel: l1_internal
     skos:definition: "Default classification for internal operations. Accessible to all authenticated studio members."
   - skos:prefLabel: l2_confidential
-    skos:definition: "Sensitive business'\n'  project'\n'  or personal data. Access is restricted on a need-to-know basis."
+    skos:definition: "Sensitive business, project, or personal data. Access is restricted on a need-to-know basis."
   - skos:prefLabel: l3_secret
-    skos:definition: "Critical studio IP'\n'  financial data'\n'  or credentials. Requires the strictest access controls."
+    skos:definition: "Critical studio IP, financial data, or credentials. Requires the strictest access controls."
 
 repository_type:
   - skos:prefLabel: "docs"
@@ -300,11 +300,11 @@ code_classification_type:
   - skos:prefLabel: library
     skos:definition: "A reusable package of code intended to be used as a dependency by other components."
   - skos:prefLabel: service
-    skos:definition: "A deployable'\n'  long-running application that exposes an API (e.g.'\n'  a microservice)."
+    skos:definition: "A deployable, long-running application that exposes an API (e.g., a microservice)."
   - skos:prefLabel: application
-    skos:definition: "A deployable'\n'  user-facing application (e.g.'\n'  a game client'\n'  a web frontend)."
+    skos:definition: "A deployable, user-facing application (e.g., a game client, a web frontend)."
   - skos:prefLabel: script
-    skos:definition: "A standalone piece of code designed to be executed to perform a specific'\n'  discrete task."
+    skos:definition: "A standalone piece of code designed to be executed to perform a specific, discrete task."
 
 intended_audience:
   - skos:prefLabel: contributors
@@ -352,7 +352,7 @@ intended_audience:
 #######################################################
 organizational_entity_type:
   - skos:prefLabel: crew
-    skos:definition: "A long-lived'\n'  cross-functional team responsible for a specific domain or product."
+    skos:definition: "A long-lived, cross-functional team responsible for a specific domain or product."
   - skos:prefLabel: project-team
     skos:definition: "A temporary team assembled for the duration of a specific project."
   - skos:prefLabel: department
