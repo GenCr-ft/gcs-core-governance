@@ -1,0 +1,29 @@
+# Prohibited Patterns — Machine-Evaluable Enforcement Rules
+# Each pattern carries a glob or regex predicate that a linter or CI gate can evaluate.
+# Severity: block = hard gate failure; warn = advisory.
+# Referenced from: agent-context/rules-index.md, AGENTS.md
+---
+prohibited_patterns:
+  - id: "PROHIBIT-001"
+    description: "Do not edit files under reference-libraries/ — content is frozen pending restructure."
+    glob_pattern: "reference-libraries/**"
+    applies_to: [edit, create, delete]
+    severity: block
+
+  - id: "PROHIBIT-002"
+    description: "Do not include Co-Authored-By trailer in commit messages."
+    regex: "^Co-Authored-By:"
+    applies_to: [commit_message]
+    severity: block
+
+  - id: "PROHIBIT-003"
+    description: "Do not force-push to main branch."
+    regex: "^main$"
+    applies_to: [force_push_target]
+    severity: block
+
+  - id: "PROHIBIT-004"
+    description: "Do not commit files that may contain secrets (*.secret, *.key, *.pem, *.p12)."
+    glob_pattern: "**/*.{secret,key,pem,p12}"
+    applies_to: [create, edit]
+    severity: block

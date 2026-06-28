@@ -14,6 +14,7 @@ metadata:
   domain: engineering-and-architecture
   doc-type: agent-instructions
   security-classification: l2_confidential
+  source_version: "1.0.0"
 ---
 
 # AGENTS.md — gcs-core-governance
@@ -48,6 +49,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 | Task | Command |
 |------|---------|
 | Run compression acceptance tests | `bash tools/tests/test_verify_compression.sh` |
+| Run all validation checks | `./test.sh` |
 | Run agent-context parity check | `python3 scripts/verify_agent_context_parity.py` |
 | Write lifecycle stamp (REFINE) | `bash scripts/lifecycle-stamp.sh write gcs-core-governance <branch> <issue> refine` |
 | File governance gap issue | `unset GH_TOKEN && gh issue create --repo GenCr-ft/gcs-core-governance --title "[GOV] ..."` |
@@ -78,4 +80,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 🚫 **Never Do**
 - Commit without a GitHub Issue reference
 - Delete existing governance standards without Studio Lead approval
-- Modify `reference-libraries/` content (frozen pending restructure)
+- Modify `reference-libraries/` content (see `PROHIBIT-001` in `config-engines/metadata-schemas/prohibited-patterns.yml`)
+- Include `Co-Authored-By` in commit messages (see `PROHIBIT-002`)
+- Force-push to `main` (see `PROHIBIT-003`)
+- Commit `*.secret`, `*.key`, `*.pem`, `*.p12` files (see `PROHIBIT-004`)

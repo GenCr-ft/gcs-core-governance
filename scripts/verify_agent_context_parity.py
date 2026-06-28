@@ -33,6 +33,7 @@ CONFIG_DIRS_REQUIRED_NON_EMPTY = [
     REPO_ROOT / "config-engines" / "pipeline-thresholds",
     REPO_ROOT / "config-engines" / "api-parameters",
 ]
+PROHIBITED_PATTERNS = REPO_ROOT / "config-engines" / "metadata-schemas" / "prohibited-patterns.yml"
 TECHNICAL_CONSTRAINTS = REPO_ROOT / "agent-context" / "grounding" / "technical-constraints.md"
 STUDIO_QUICK_REF = REPO_ROOT / "agent-context" / "grounding" / "studio-quick-ref.md"
 
@@ -217,6 +218,27 @@ def check_config_dirs_non_empty(dirs: list[Path]) -> list[str]:
     return failures
 
 
+
+def check_prohibited_patterns_exist() -> list[str]:
+    """Verify prohibited-patterns.yml exists and is valid YAML with required fields."""
+    import yaml
+    if not PROHIBITED_PATTERNS.exists():
+        return [f"FAIL: prohibited-patterns.yml not found at {PROHIBITED_PATTERNS.relative_to(REPO_ROOT)} (see #285)"]
+    try:
+        data = yaml.safe_load(PROHIBITED_PATTERNS.read_text(encoding="utf-8"))
+    except yaml.YAMLError as e:
+        return [f"FAIL: prohibited-patterns.yml is not valid YAML: {e}"]
+    patterns = data.get("prohibited_patterns", []) if data else []
+    failures = []
+    for p in patterns:
+        for required_field in ("id", "description", "severity"):
+            if required_field not in p:
+                failures.append(f"FAIL: prohibited-patterns.yml entry missing '{required_field}': {p.get('id', '?')}")
+    if not patterns:
+        failures.append("FAIL: prohibited-patterns.yml has no prohibited_patterns entries")
+    return failures
+
+
 def main() -> int:
     missing_files = [
         p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES]
@@ -252,7 +274,9 @@ def main() -> int:
         "studio-quick-ref.md Key Gem Contacts for Escalation",
     )
 
-    all_failures = storage_failures + placeholder_failures + reflib_failures + gem_failures
+    prohibited_failures = check_prohibited_patterns_exist()
+    config_dir_failures = check_config_dirs_non_empty(CONFIG_DIRS_REQUIRED_NON_EMPTY)
+    all_failures = storage_failures + placeholder_failures + reflib_failures + gem_failures + prohibited_failures + config_dir_failures
 
     if not all_failures:
         print(

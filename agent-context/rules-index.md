@@ -30,6 +30,7 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 | `organizational-entities.yml` | Org catalog | 25 entities: crews, project-teams, departments, gems |
 | `governance-scopes.yml` | Scope catalog | governance scope definitions |
 | `governance-kpi.yml` | KPIs | 3 governance KPIs with targets, owners, cadence, data-source, report-to, and alert-at fields |
+| `prohibited-patterns.yml` | Enforcement prohibitions | 4 machine-evaluable prohibited patterns (PROHIBIT-001–004): reference-libraries edits, Co-Authored-By commits, force-push to main, secret file commits |
 
 ## config-engines/api-parameters/
 
