@@ -1,0 +1,32 @@
+# compression-thresholds.yml
+# Canonical compression threshold rules enforced by tools/verify-compression.sh.
+# nb = non-blank lines (lines that are not empty and do not consist solely of whitespace).
+# Do not update these values without filing a gcs-core-governance issue and obtaining Studio Lead approval.
+
+_meta:
+  docId: GOV-CFG-COMPRESS-001
+  title: Compression Thresholds
+  version: 1.0.0
+  metadata:
+    lifecycle-stage: approved
+    scope: studio
+    domain: governance
+    doc-type: config
+    intended-audience: [ai-agents, ci-pipelines]
+    security-classification: l2_confidential
+    last_verified: "2026-06-28"
+
+thresholds:
+  - target: CLAUDE.md
+    description: "Workspace CLAUDE.md non-blank-line budget"
+    unit: nb
+    limit: 200
+    enforcement: FAIL
+    rationale: "CLAUDE.md is injected into every agent session; exceeding 200 nb degrades context quality. Hard failure blocks merge."
+
+  - target: AGENTS.md
+    description: "Per-repo AGENTS.md non-blank-line budget"
+    unit: nb
+    limit: 150
+    enforcement: WARN
+    rationale: "AGENTS.md serves as the agent entry point for a single repo; 150 nb is a soft guideline. Violation emits a warning but does not block CI."

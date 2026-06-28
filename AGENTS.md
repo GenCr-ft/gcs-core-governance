@@ -55,7 +55,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 ## Critical Patterns
 
 - All documents must have YAML frontmatter with `docId: DOMAIN-TYPE-CODE`.
-- `tools/verify-compression.sh` — compression ACs for WI-14 (200 nb CLAUDE.md, 150 nb AGENTS.md). nb = non-blank lines (lines where `grep -cv ^\\s*$` counts non-zero); defined in [agent-context/grounding/lexicon.yml](agent-context/grounding/lexicon.yml).
+- `tools/verify-compression.sh` — compression check: 200 nb (non-blank lines) hard limit for CLAUDE.md (FAIL), 150 nb soft limit for AGENTS.md (WARN). Thresholds registered in `config-engines/pipeline-thresholds/compression-thresholds.yml`. nb = non-blank lines (lines where `grep -cv ^\\s*$` counts non-zero); defined in [agent-context/grounding/lexicon.yml](agent-context/grounding/lexicon.yml).
 - `agent-context/` is the machine-readable surfacing layer. Do not read `reference-libraries/` directly.
 - Issue routing: `gh issue create --repo GenCr-ft/gcs-core-governance`.
 
@@ -72,7 +72,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 - File gaps as GitHub issues in `gcs-core-governance` before proceeding
 
 ⚠️ **Ask First**
-- Changing compression thresholds (200/150 nb line limits; nb = non-blank lines)
+- Changing compression thresholds (200 nb hard limit for CLAUDE.md, 150 nb soft limit for AGENTS.md — see `config-engines/pipeline-thresholds/compression-thresholds.yml`)
 - Adding new governance standards that affect all repos
 
 🚫 **Never Do**
