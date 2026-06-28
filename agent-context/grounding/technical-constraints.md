@@ -23,7 +23,7 @@ Extracted engineering constraints for AI agents. Each row is an actionable rule.
 
 | Constraint | Domain | Enforcement | Source Section |
 |-----------|--------|-------------|---------------|
-| Branch from `main` for features; squash-merge PR back to `main`; tag releases on `main` with a SemVer tag | Version Control | PR review gate | §2.1 Git Branching |
+| Branch from `main` for features; squash-merge PR back to `main`; tag releases on `main` with a SemVer tag _(applies-to: software repos with develop/main flow; governance/docs-only repos such as `gcs-core-governance` have no `develop` branch — follow `ops-runbook.md` for repo-local branching commands)_ | Version Control | PR review gate | §2.1 Git Branching |
 | All software artifacts follow SemVer `MAJOR.MINOR.PATCH` — MAJOR for breaking, MINOR for additive, PATCH for fixes | Versioning | Release checklist | §2.2 SemVer |
 | Python module filenames: lowercase + underscores only; hyphens forbidden (causes `ImportError`) | Code | Pre-commit / CI lint | §2.3 Python Naming |
 | DoD requires: code reviewed + merged, all CI tests pass, QA validated, no Blocker/Critical bugs, docs updated, PO accepted | Quality | Close gate | §3.1 DoD |
