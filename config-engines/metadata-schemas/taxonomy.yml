@@ -3,19 +3,22 @@
 # Date: 2025-07-08
 # This file is the SSoT for all controlled vocabularies'\n'  aligned with SKOS principles.
 # filename: taxonomy.yml
-ssot_version: "1.3.0" # Version bumped due to significant additions
+ssot_version: "1.4.0" # Version bumped: resolved intra-section duplicate prefLabels (all-contributors, architects, devops-crew) and added scopeNotes to cross-section terms
 
 artifact_class:
   - skos:prefLabel: knowledge
     skos:definition: "An artifact whose primary purpose is to convey information'\n'  such as a guide'\n'  a standard'\n'  or a report."
   - skos:prefLabel: code
     skos:definition: "An artifact composed of source code written in a programming or scripting language."
+    skos:scopeNote: "Scoped to artifact_class. Not equivalent to repository_type:code."
   - skos:prefLabel: asset
     skos:definition: "A creative or artistic artifact used in production'\n'  such as a 3D model'\n'  an audio file'\n'  or a texture."
   - skos:prefLabel: process
     skos:definition: "An artifact that defines an automated workflow or process'\n'  such as a CI/CD pipeline or a GitHub Action."
+    skos:scopeNote: "Scoped to artifact_class. Not equivalent to repository_type:process."
   - skos:prefLabel: infrastructure
     skos:definition: "An artifact that defines Infrastructure as Code (IaC) for cloud resources'\n'  networks'\n'  or environments."
+    skos:scopeNote: "Scoped to artifact_class. Not equivalent to repository_type:infrastructure."
   - skos:prefLabel: data
     skos:definition: "An artifact representing structured or unstructured datasets'\n'  such as analytics'\n'  telemetry'\n'  or game configuration."
 
@@ -51,6 +54,7 @@ knowledge_classification_type:
   - skos:prefLabel: "template"
     category: "to-describe"
     code: "TEMP"
+    skos:scopeNote: "Scoped to knowledge_classification_type. Not equivalent to repository_type:template."
   - skos:prefLabel: "overview"
     category: "to-describe"
     code: "OVER"
@@ -233,6 +237,7 @@ studio_domain:
 lifecycle_phase:
   - skos:prefLabel: "experimental"
     skos:definition: "A prototype or proof-of-concept. Not an official SSoT artifact."
+    skos:scopeNote: "Scoped to lifecycle_phase. Not equivalent to repository_type:experimental."
   - skos:prefLabel: "emergence"
     skos:definition: "A raw idea'\n'  a note'\n'  an unstructured brainstorming artifact."
   - skos:prefLabel: ideation
@@ -308,11 +313,6 @@ intended_audience:
     skos:definition: "Intended for individuals leading specific projects crews or initiatives."
   - skos:prefLabel: "all-gems"
     skos:definition: "All AI Gems within Gencraft Studio."
-  - skos:prefLabel: "all-contributors"
-    skos:definition: "All contributors (human and AI Gems) to the studio's projects."
-
-  - skos:prefLabel: "architects"
-    skos:definition: "Software and Game Architects."
   - skos:prefLabel: "developers"
     skos:definition: "Software Developers (all programming roles)."
   - skos:prefLabel: "designers"
@@ -321,8 +321,6 @@ intended_audience:
     skos:definition: "Product Managers and Product Owners."
   - skos:prefLabel: "qa-team"
     skos:definition: "Quality Assurance team members."
-  - skos:prefLabel: "devops-crew"
-    skos:definition: "DevOps team members."
   - skos:prefLabel: "studio-leadership"
     skos:definition: "Studio Directors and Management."
   - skos:prefLabel: "knowledge-guardians"
