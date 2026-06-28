@@ -46,18 +46,11 @@ For agents following Algorithm 1 (collaboration-algorithms.md): the table below 
 
 **Canonical source:** `reference-libraries/devops-standards/foundations/governance/GOV-REFE-001.studio-directory--knowledge-guardians.md`
 
-## Validation Rules Quick Reference
+## Validation Rules
 
-Rules are cumulative (all matching rules apply). **Canonical source:** `config-engines/metadata-schemas/validation-rules.yml`
+Rules are cumulative (all matching rules apply). The authoritative rule definitions (conditions and enforcement actions) are maintained exclusively in the canonical source — do not restate them here.
 
-| Rule ID | Applies when | Enforcement |
-|---------|-------------|-------------|
-| `GOV_RULE_001` | knowledge + to-govern + domain=legal | required_reviewers: Henri |
-| `GOV_RULE_002` | knowledge + type=standard + domain=engineering-and-architecture | required_reviewers: Isaac |
-| `GOV_RULE_003` | knowledge + type=policy + domain=security-and-compliance | required_approvers: Cerberus |
-| `GOV_RULE_004` | lifecycle-stage=deprecated | required_frontmatter: deprecation_justification |
-| `GOV_RULE_005` | pull_request on code repo | body must contain: "References Definition of Done (PRO-STAN-001)" |
-| `GOV_RULE_006` | type=contract + domain=legal | required_frontmatter: expiration_date + reviewer: Henri |
+**Canonical source:** `config-engines/metadata-schemas/validation-rules.yml`
 
 ## Routing Decision Flowchart
 
