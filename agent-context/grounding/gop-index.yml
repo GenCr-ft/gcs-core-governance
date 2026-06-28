@@ -1,0 +1,141 @@
+_meta:
+  docId: GOV-GRND-GOPI-001
+  title: GOP S-Number Index — Global Operational Protocol Lookup
+  version: 1.0.0
+  authors: [Governance Crew]
+  metadata:
+    lifecycle-stage: approved
+    scope: studio
+    domain: governance
+    doc-type: reference
+    intended-audience: [ai-agents]
+    security-classification: l2_confidential
+    source_version: "1.0.0"
+    last_verified: "2026-06-28"
+    source: "reference-libraries/studio-handbook/01-operational-protocols/"
+
+# GOP Index — maps every S-number to its protocol name, document path, and algorithm cross-reference.
+# Use this file when collaboration-algorithms.md cites an S-number and you need the full protocol.
+# All paths are relative to the gcs-core-governance repository root.
+
+gop_protocols:
+  - id: S1
+    name: Feedback & Approval Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-021.s1-feedback-approval.md
+    algorithm_ref: "Algorithm 1 — Contribution & Review (collaboration-algorithms.md)"
+    summary: Governs how deliverables are reviewed and approved before merging.
+
+  - id: S2
+    name: Disagreement & Escalation Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-002.s2-disagreement-escalation.md
+    algorithm_ref: "Algorithm 2 — Disagreement & Escalation (collaboration-algorithms.md)"
+    summary: Governs how disagreements are formalized and escalated through the crew hierarchy.
+
+  - id: S3
+    name: Emergency & Incident Management Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-003.s3-emergency-management.md
+    algorithm_ref: "Algorithm 5 — Incident Management Quick Response (collaboration-algorithms.md)"
+    summary: Governs critical failure response, security breach handling, and incident reporting.
+
+  - id: S4
+    name: Architectural Review Process
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-004.s4-architectural-review-process.md
+    algorithm_ref: null
+    summary: Governs how significant architectural decisions are reviewed and recorded.
+
+  - id: S5
+    name: Lessons Learned Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-005.s5-lessons-learned.md
+    algorithm_ref: null
+    summary: Governs retrospective capture and propagation of lessons learned.
+
+  - id: S6
+    name: Key Reports Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-006.s6-key-reports.md
+    algorithm_ref: null
+    summary: Governs mandatory studio reporting cadence and formats.
+
+  - id: S7
+    name: Key Decisions Traceability Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-007.s7-key-decisions-traceability.md
+    algorithm_ref: "Algorithm 3 — Decision Traceability (collaboration-algorithms.md)"
+    summary: Governs documentation of significant autonomous decisions — context, options, decision, justification, traceability.
+
+  - id: S8
+    name: Information Security Management Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-008.s8-information-security-management.md
+    algorithm_ref: null
+    summary: Governs data classification handling and security incident reporting.
+
+  - id: S9
+    name: Intellectual Property Management Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-009.s9-intellectual-property-management.md
+    algorithm_ref: null
+    summary: Governs IP ownership, licensing, and contribution rights.
+
+  - id: S10
+    name: AI Gem Onboarding Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-010.s10-ai-gem-onboarding.md
+    algorithm_ref: null
+    summary: Governs the onboarding sequence for new AI Gems joining the studio.
+
+  - id: S11
+    name: External Communication Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-011.s11-external-communication.md
+    algorithm_ref: null
+    summary: Governs communication with external parties, partners, and the public.
+
+  - id: S12
+    name: Crew-Specific Amendments Protocol (CSP)
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-012.s12-crew-specific-amendments.md
+    algorithm_ref: "Algorithm 6 — Protocol Evolution (collaboration-algorithms.md)"
+    summary: Governs how crews propose and maintain Crew-Specific Protocol adaptations of GOPs.
+
+  - id: S13
+    name: Global Protocol Evolution Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-013.s13-global-protocol-evolution.md
+    algorithm_ref: "Algorithm 6 — Protocol Evolution (collaboration-algorithms.md)"
+    governance_contact: Governance Crew
+    summary: Governs how studio-wide GOPs are proposed, reviewed, and merged to gcs-core-governance.
+
+  - id: S14
+    name: Knowledge Communication Training & Adoption Plan
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-014.s14-kct-communication-training-adoption-plan.md
+    algorithm_ref: null
+    summary: Governs knowledge dissemination and training rollout for new protocols.
+
+  - id: S15
+    name: Agile/Scrum Project Management Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-015.s15-agile-scrum-project-management.md
+    algorithm_ref: "Algorithm 4 — Agile/Scrum Task Loop (collaboration-algorithms.md)"
+    summary: Governs sprint cycles, backlog management, and Definition of Done.
+
+  - id: S16
+    name: Budget & Financial Management Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-016.s16-budget-financial-management.md
+    algorithm_ref: "Algorithm 7 — Epic & Task Hierarchy (collaboration-algorithms.md)"
+    summary: Governs budget tracking, financial reporting, and resource allocation.
+
+  - id: S17
+    name: Virtual HR & Gem Development Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-017.s17-virtual-hr-gem-development.md
+    algorithm_ref: null
+    summary: Governs Gem performance reviews, capability development, and team growth.
+
+  - id: S18
+    name: Grievance Reporting & Resolution Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-018.s18-grievance-reporting-and-resolution.md
+    algorithm_ref: null
+    summary: Governs formal grievance submission and resolution process.
+
+  - id: S19
+    name: Action Item Management Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-019.s19-action-item-management-protocol.md
+    algorithm_ref: null
+    summary: Governs tracking and closure of action items from meetings and retrospectives.
+
+  - id: S20
+    name: Artifact Storage & Retention Protocol
+    doc_path: reference-libraries/studio-handbook/01-operational-protocols/OPS-GUIDE-020.s20-artifact-storage-and-retention.md
+    algorithm_ref: null
+    summary: Governs storage, versioning, and retention policy for studio artifacts.

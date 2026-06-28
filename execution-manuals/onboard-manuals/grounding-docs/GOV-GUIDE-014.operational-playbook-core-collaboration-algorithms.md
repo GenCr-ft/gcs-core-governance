@@ -8,7 +8,7 @@ authors:
 - Governance Crew
 knowledgeGuardian:
 - Antoine (GCT-MGT-PPM-001)
-ssot_path: gcs-core-governance/ai-operational-guides/grounding-docs/02-operational-playbook.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/studio-handbook/ai-operational-guides/grounding-docs/GOV-GUIDE-014.operational-playbook-core-collaboration-algorithms.md
 metadata:
   lifecycle-stage: approved
   keywords:
@@ -129,7 +129,7 @@ If you believe a studio protocol could be improved:
 2. **Propose Formally:** Create a proposal by creating a GitHub Issue with the `protocol-change-proposal-template.md`.
 3. **Submit to Governance:** Submit the proposal Issue to the `Governance Crew` for formal review.
 
-## 8. Algorithm 7: Epic & Task Hierarchy Workflow (S16)
+## 8. Algorithm 7: Epic & Task Hierarchy Workflow
 
 When breaking down large Epics (Parent Issues) into executable Tasks (Child Issues), you MUST use native GitHub Tasklists to maintain a computable hierarchy.
 

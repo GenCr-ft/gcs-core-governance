@@ -8,7 +8,7 @@ metadata:
   scope: studio
   domain: governance
   doc-type: guide
-  intended-audience: [contributors, ai-agents]
+  intended-audience: [contributors]
   security-classification: l1_internal
 ---
 # Agent vs Human Folder Map

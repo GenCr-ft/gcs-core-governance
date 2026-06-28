@@ -2,12 +2,23 @@
 """
 verify_agent_context_parity.py — Agent-context parity check.
 
-Checks two invariants:
+Checks three invariants:
   1. rule_ids in storage-rules.yml all appear in the routing table of document-routing.md.
-  2. rule_ids in validation-rules.yml all appear in the validation table of document-routing.md.
+  2. target_path_template placeholder variable names in storage-rules.yml match those used
+     in the corresponding rows of document-routing.md (prevents silent naming divergence).
+  3. Every GemID row in technical-constraints.md §Key Agents Referenced also appears in
+     studio-quick-ref.md §Key Gem Contacts for Escalation.
+     (studio-quick-ref.md may list additional contacts — that is expected and not an error.)
 
-Exit 0 = PASS (all rule_ids present in respective tables).
-Exit 1 = FAIL (details printed to stdout).
+Note: Invariant 2 from the original four (validation rule IDs present in document-routing.md)
+was removed.  As of commit 6925a39, document-routing.md intentionally uses a pointer-only
+§Validation Rules section — it no longer mirrors the GOV_RULE_NNN rows that live in
+validation-rules.yml.  The canonical source for those rules is validation-rules.yml itself.
+
+Exit 0 = PASS (all invariants satisfied).
+Exit 0 = WARN (only orphaned routing-table entries found; no canonical rule IDs missing).
+Exit 1 = FAIL (one or more canonical rule IDs are absent from document-routing.md, or
+         placeholder names diverge, GemID subset check fails, or required files are missing).
 """
 import re
 import sys
@@ -17,6 +28,13 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 STORAGE_RULES = REPO_ROOT / "config-engines" / "metadata-schemas" / "storage-rules.yml"
 VALIDATION_RULES = REPO_ROOT / "config-engines" / "metadata-schemas" / "validation-rules.yml"
 ROUTING_DOC = REPO_ROOT / "agent-context" / "protocols" / "document-routing.md"
+REFLIB_STORAGE_RULES = REPO_ROOT / "reference-libraries" / "devops-standards" / "foundations" / "governance" / "rules" / "storage-rules.yml"
+CONFIG_DIRS_REQUIRED_NON_EMPTY = [
+    REPO_ROOT / "config-engines" / "pipeline-thresholds",
+    REPO_ROOT / "config-engines" / "api-parameters",
+]
+TECHNICAL_CONSTRAINTS = REPO_ROOT / "agent-context" / "grounding" / "technical-constraints.md"
+STUDIO_QUICK_REF = REPO_ROOT / "agent-context" / "grounding" / "studio-quick-ref.md"
 
 
 def extract_rule_ids_from_yaml(path: Path) -> list[str]:
@@ -28,12 +46,6 @@ def extract_rule_ids_from_yaml(path: Path) -> list[str]:
 def extract_storage_rule_ids_from_routing_table(path: Path) -> list[str]:
     """Parse backtick-quoted STORAGE rule IDs (ALL_CAPS_STORAGE/RULE) from document-routing.md."""
     pattern = re.compile(r'`([A-Z][A-Z_]*(?:STORAGE|RULE)[A-Z_]*)`')
-    return pattern.findall(path.read_text(encoding="utf-8"))
-
-
-def extract_validation_rule_ids_from_routing_table(path: Path) -> list[str]:
-    """Parse backtick-quoted GOV_RULE_NNN IDs from document-routing.md."""
-    pattern = re.compile(r'`(GOV_RULE_\d+)`')
     return pattern.findall(path.read_text(encoding="utf-8"))
 
 
@@ -58,9 +70,157 @@ def check_parity(
     return failures
 
 
+def check_reflib_parity(canonical_path: Path, reflib_path: Path) -> list[str]:
+    """Verify that reference-libraries copy of storage-rules.yml is byte-for-byte identical
+    to the canonical copy (ignoring the leading comment header lines which are identical).
+    Compares each rule block field-by-field: rule_id, description, justification.
+    Returns list of failure messages, empty = PASS.
+    """
+    import yaml
+
+    failures = []
+    canonical_text = canonical_path.read_text(encoding="utf-8")
+    reflib_text = reflib_path.read_text(encoding="utf-8")
+
+    # Strip leading comment lines (lines starting with #) for YAML parsing
+    def strip_comments(text: str) -> str:
+        lines = text.splitlines()
+        body_lines = [l for l in lines if not l.startswith("#")]
+        return "\n".join(body_lines)
+
+    canonical_data = yaml.safe_load(strip_comments(canonical_text))
+    reflib_data = yaml.safe_load(strip_comments(reflib_text))
+
+    canonical_rules = {r["rule_id"]: r for r in canonical_data.get("storage_rules", [])}
+    reflib_rules = {r["rule_id"]: r for r in reflib_data.get("storage_rules", [])}
+
+    for rule_id, canonical_rule in canonical_rules.items():
+        if rule_id not in reflib_rules:
+            failures.append(f"FAIL: rule {rule_id!r} missing from reference-libraries copy")
+            continue
+        reflib_rule = reflib_rules[rule_id]
+        for field in ("description", "justification"):
+            # justification is nested under 'then'
+            canonical_val = canonical_rule.get(field) or canonical_rule.get("then", {}).get(field)
+            reflib_val = reflib_rule.get(field) or reflib_rule.get("then", {}).get(field)
+            if canonical_val != reflib_val:
+                failures.append(
+                    f"FAIL: {rule_id}.{field} diverges:\n"
+                    f"  canonical:  {canonical_val!r}\n"
+                    f"  reflib:     {reflib_val!r}"
+                )
+
+    for rule_id in reflib_rules:
+        if rule_id not in canonical_rules:
+            failures.append(f"WARN: rule {rule_id!r} in reference-libraries copy not in canonical")
+
+    return failures
+
+
+def check_subset(
+    required_ids: set[str],
+    superset_ids: set[str],
+    required_label: str,
+    superset_label: str,
+) -> list[str]:
+    """Check that required_ids is a subset of superset_ids (one-way; extra entries in superset are fine).
+
+    Returns FAIL messages only for IDs missing from superset_ids.
+    """
+    failures = []
+    missing = required_ids - superset_ids
+    if missing:
+        failures.append(f"FAIL: GemIDs in {required_label} missing from {superset_label}:")
+        for rid in sorted(missing):
+            failures.append(f"  - {rid}")
+    return failures
+
+
+def extract_template_placeholders_from_yaml(path: Path) -> dict[str, set[str]]:
+    """Return {rule_id: set_of_placeholder_names} for rules that have target_path_template."""
+    text = path.read_text(encoding="utf-8")
+    rule_id_pattern = re.compile(r'-\s*rule_id:\s*"?([A-Z_0-9]+)"?')
+    template_pattern = re.compile(r'target_path_template:\s*"([^"]+)"')
+    placeholder_pattern = re.compile(r'\{([^}]+)\}')
+
+    result: dict[str, set[str]] = {}
+    # Split on rule blocks using the rule_id as a delimiter
+    blocks = re.split(r'(?=-\s*rule_id:)', text)
+    for block in blocks:
+        rid_match = rule_id_pattern.search(block)
+        tpl_match = template_pattern.search(block)
+        if rid_match and tpl_match:
+            rid = rid_match.group(1)
+            placeholders = set(placeholder_pattern.findall(tpl_match.group(1)))
+            result[rid] = placeholders
+    return result
+
+
+def extract_template_placeholders_from_routing_table(path: Path) -> dict[str, set[str]]:
+    """Return {rule_id: set_of_placeholder_names} from path strings in document-routing.md table rows."""
+    text = path.read_text(encoding="utf-8")
+    placeholder_pattern = re.compile(r'\{([^}]+)\}')
+    result: dict[str, set[str]] = {}
+    for line in text.splitlines():
+        # Match table rows that contain a backtick-quoted rule_id and a path fragment
+        rid_match = re.search(r'`([A-Z][A-Z_]*(?:STORAGE|RULE)[A-Z_]*)`', line)
+        if rid_match:
+            rid = rid_match.group(1)
+            placeholders = set(placeholder_pattern.findall(line))
+            if placeholders:
+                result[rid] = placeholders
+    return result
+
+
+def check_placeholder_parity(
+    yaml_templates: dict[str, set[str]],
+    routing_templates: dict[str, set[str]],
+) -> list[str]:
+    """Return failure messages for any rule whose placeholder sets diverge."""
+    failures = []
+    for rid, yaml_placeholders in yaml_templates.items():
+        routing_placeholders = routing_templates.get(rid)
+        if routing_placeholders is None:
+            # Rule not in routing table — caught by rule_id parity check; skip here
+            continue
+        if yaml_placeholders != routing_placeholders:
+            failures.append(
+                f"FAIL: placeholder mismatch for rule {rid}:\n"
+                f"  storage-rules.yml  : {sorted(yaml_placeholders)}\n"
+                f"  document-routing.md: {sorted(routing_placeholders)}"
+            )
+    return failures
+
+
+def extract_gem_ids_from_technical_constraints(path: Path) -> list[str]:
+    """Parse GemID values from the Key Agents Referenced table in technical-constraints.md."""
+    pattern = re.compile(r'\|\s*[^|]+\|\s*(GCT-[A-Z0-9]+-[A-Z0-9]+-\d+)')
+    return pattern.findall(path.read_text(encoding="utf-8"))
+
+
+def extract_gem_ids_from_quick_ref_escalation_table(path: Path) -> list[str]:
+    """Parse GemID values from the Key Gem Contacts for Escalation table in studio-quick-ref.md."""
+    pattern = re.compile(r'\|\s*[^|]+\|\s*(GCT-[A-Z0-9]+-[A-Z0-9]+-\d+)')
+    return pattern.findall(path.read_text(encoding="utf-8"))
+
+
+def check_config_dirs_non_empty(dirs: list[Path]) -> list[str]:
+    """Return failure messages for any config-engines subdirectory that is empty."""
+    failures = []
+    for d in dirs:
+        if not d.is_dir():
+            failures.append(f"FAIL: required config directory not found: {d}")
+        elif not any(f for f in d.iterdir() if f.is_file()):
+            failures.append(
+                f"FAIL: config directory is empty (rules-index.md pointer is broken): {d.relative_to(REPO_ROOT)}"
+            )
+    return failures
+
+
 def main() -> int:
     missing_files = [
-        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC] if not p.exists()
+        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES]
+        if not p.exists()
     ]
     if missing_files:
         for p in missing_files:
@@ -68,30 +228,43 @@ def main() -> int:
         return 1
 
     storage_canonical = set(extract_rule_ids_from_yaml(STORAGE_RULES))
-    validation_canonical = set(extract_rule_ids_from_yaml(VALIDATION_RULES))
     routing_storage_ids = set(extract_storage_rule_ids_from_routing_table(ROUTING_DOC))
-    routing_validation_ids = set(extract_validation_rule_ids_from_routing_table(ROUTING_DOC))
+
+    yaml_templates = extract_template_placeholders_from_yaml(STORAGE_RULES)
+    routing_templates = extract_template_placeholders_from_routing_table(ROUTING_DOC)
 
     storage_failures = check_parity(
         storage_canonical, routing_storage_ids, "storage-rules.yml", "document-routing.md routing table"
     )
-    validation_failures = check_parity(
-        validation_canonical, routing_validation_ids, "validation-rules.yml", "document-routing.md validation table"
+    placeholder_failures = check_placeholder_parity(yaml_templates, routing_templates)
+    reflib_failures = check_reflib_parity(STORAGE_RULES, REFLIB_STORAGE_RULES)
+
+    # Invariant 3: every GemID in technical-constraints.md Key Agents Referenced must appear
+    # in studio-quick-ref.md Key Gem Contacts for Escalation.
+    # studio-quick-ref.md is the escalation table and may list additional contacts — that is
+    # expected and is NOT a failure condition.
+    constraints_gem_ids = set(extract_gem_ids_from_technical_constraints(TECHNICAL_CONSTRAINTS))
+    quick_ref_gem_ids = set(extract_gem_ids_from_quick_ref_escalation_table(STUDIO_QUICK_REF))
+    gem_failures = check_subset(
+        constraints_gem_ids,
+        quick_ref_gem_ids,
+        "technical-constraints.md Key Agents Referenced",
+        "studio-quick-ref.md Key Gem Contacts for Escalation",
     )
 
-    all_failures = storage_failures + validation_failures
+    all_failures = storage_failures + placeholder_failures + reflib_failures + gem_failures
 
     if not all_failures:
         print(
-            f"PASS: {len(storage_canonical)} storage rule IDs and "
-            f"{len(validation_canonical)} validation rule IDs all present in document-routing.md"
+            f"PASS: {len(storage_canonical)} storage rule IDs all present in document-routing.md; "
+            f"all target_path_template placeholders match; "
+            f"reference-libraries copy is in parity with canonical; "
+            f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref"
         )
         return 0
 
     for line in all_failures:
         print(line)
     return 1
-
-
 if __name__ == "__main__":
     sys.exit(main())

@@ -24,8 +24,8 @@ metadata:
 | `onboard-manuals/grounding-docs/GOV-GUIDE-014.md` | `agent-context/protocols/collaboration-algorithms.md` | ✅ Extracted |
 | `onboard-manuals/grounding-docs/GOV-GUIDE-012.md` | `agent-context/grounding/agent-bootstrap.md` | ✅ Extracted |
 | `onboard-manuals/grounding-docs/` (full docs) | `agent-context/grounding/` | Pending migration issue [#99](https://github.com/GenCr-ft/gcs-core-governance/issues/99) |
-| `security-checklists/` | `agent-context/protocols/` | Pending |
-| `testing-playbooks/` | `agent-context/protocols/` | Pending |
+| `security-checklists/` | `agent-context/protocols/` | Pending — content not yet available at target; use [`gcs-security-core`](https://github.com/GenCr-ft/gcs-security-core) as authoritative source until migration completes |
+| `testing-playbooks/` | `agent-context/protocols/` | Pending — content not yet available at target; use [`gcs-security-core`](https://github.com/GenCr-ft/gcs-security-core) as authoritative source until migration completes |
 
 ## AI agents: use agent-context/ instead
 

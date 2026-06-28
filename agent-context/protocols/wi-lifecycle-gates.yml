@@ -1,13 +1,24 @@
 # WI Lifecycle Gates — Machine-Readable Protocol
-# Version: 1.0.0
-# Canonical source: GOV-PROT-003.wi-lifecycle-contract.md + gcs-plt-gemop/hooks/issue_context_gate.py
-# Skill: wi-lifecycle (gcs-plt-gemop/skills/wi-lifecycle/)
-# source_version: "1.0.0"
-# last_verified: "2026-06-27"
+
+_meta:
+  docId: GOV-PROT-WI-GATES-001
+  title: WI Lifecycle Gates
+  version: 1.0.0
+  metadata:
+    lifecycle-stage: approved
+    intended-audience: [ai-agents]
+    security-classification: l2_confidential
+    source_version: "1.0.0"
+    last_verified: "2026-06-28"
+    source: "GOV-PROT-003.wi-lifecycle-contract.md + gcs-plt-gemop/hooks/issue_context_gate.py"
+    skill: "wi-lifecycle (gcs-plt-gemop/skills/wi-lifecycle/)"
+    knowledgeGuardian: "Orion (GCT-UTL-SLG-001)"
+
 # Evaluation: gates are sequential; each phase must pass before proceeding to the next
 
 gates:
   - phase: create
+    gate_number: 1
     trigger: new WI issue filed
     required_sections:
       - "## Summary"
@@ -20,6 +31,7 @@ gates:
       - spec_refs_with_lifecycle_stage: ["draft", "proposed", "absent"]
 
   - phase: refine
+    gate_number: 2
     trigger: branch feat/issue-N-slug or fix/issue-N-slug cut
     required_sections:
       - "## Acceptance Criteria"  # >= 1 Given/When/Then block per AC
@@ -27,10 +39,13 @@ gates:
       - "## Sub-issues"           # >= 1 tasklist entry for [DESIGN] sub-issue
     additional_checks:
       - design_sub_issue_must_be_open: true
-      - spec_refs_still_approved: true
+    blockers_additional:
+      - spec_refs_still_approved: true  # see GOV-PROT-003 §Spec Reference Contract for evaluation rules
     outputs:
-      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # written by lifecycle_stamp.py
+      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # written by lifecycle_stamp.py; volatile — lost on session restart
+      - stamp_miss_fallback: github_issue_comments  # on /tmp miss, query issue comments for pattern "✅ LIFECYCLE:REFINE:PASS"
       - comment: "✅ LIFECYCLE:REFINE:PASS"
+    lifecycle_stamp_cmd: "bash $(git -C . rev-parse --show-toplevel)/scripts/lifecycle-stamp.sh write {repo} {branch} {issue} refine"  # delegates to scripts/lifecycle-stamp.sh; gcs-plt-gemop must be a sibling dir (see ops-runbook.md pre-condition check)
     blockers:
       - missing_gherkin_in_any_ac
       - testability_notes_empty
@@ -38,6 +53,8 @@ gates:
       - design_sub_issue_not_open
 
   - phase: design
+    gate_number: 3  # Gate 3 — Design (before [IMPL] sub-issue is authored); canonical per GOV-PROT-003
+    extension_phase: true
     trigger: "[DESIGN] sub-issue authored"
     required_sections_in_design_issue:
       - "## Relations"
@@ -48,12 +65,15 @@ gates:
       - "## Open Questions"
     adversary_review: true  # dispatches wi-lifecycle-adversary
     outputs:
+      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # phase updated to "design"
       - comment_on_design_issue: "✅ LIFECYCLE:DESIGN:READY — ready for human review and status:approved label"
+      - comment: "✅ LIFECYCLE:DESIGN:PASS"
     blockers:
       - any_section_completely_empty  # "N/A + justification" is acceptable
       - critical_or_high_adversary_finding_unresolved
 
   - phase: implement
+    gate_number: 4
     trigger: "human sets status:approved on both [DESIGN] (closed) and [IMPL] sub-issues"
     self_approval_check: true   # label-setter login != current agent login
     required_sections_in_impl_issue:
@@ -76,7 +96,8 @@ gates:
       never: red+green in same commit for same feature
     adversary_review: true
     outputs:
-      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # phase updated to "implement"
+      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # phase updated to "implement"; volatile — lost on session restart
+      - stamp_miss_fallback: github_issue_comments  # on /tmp miss, query issue comments for pattern "✅ LIFECYCLE:IMPLEMENT:PASS"
       - comment: "✅ LIFECYCLE:IMPLEMENT:PASS"
     blockers:
       - self_approval_on_either_sub_issue
@@ -86,6 +107,7 @@ gates:
       - critical_or_high_adversary_finding_unresolved
 
   - phase: close
+    gate_number: 5
     trigger: all code committed, PR open
     checks:
       - all_child_issues_closed_or_deferred: true   # DEFERRED:WI-N label accepted
@@ -116,3 +138,44 @@ branch_patterns:
 commit_format: "{type}({scope}): WI-{N}.{M} — {description}"
 commit_types: [feat, fix, refactor, test, docs, chore, ci]
 prohibited_trailer: "Co-Authored-By"
+
+# Behavioral constraints — sourced verbatim from GOV-PROT-003 lines 132-153
+# MUST NOT items are hard-blocked (exit 2 / required status check)
+# MUST items are obligations enforced by L1 hooks, L2 CI, and L3 wi-lifecycle skill
+behavioral_constraints:
+  must_not:
+    - id: MN-1
+      description: "Write 'Closes #N' before all AC checkboxes are ticked and evidence comments are present."
+    - id: MN-2
+      description: "Set status:approved on any sub-issue (Claude is never the approver)."
+    - id: MN-3
+      description: "Post LIFECYCLE:BYPASS on its own behalf."
+    - id: MN-4
+      description: "Commit to main, master, or prod."
+    - id: MN-5
+      description: "Commit without a WI-N.M ref in the message."
+    - id: MN-6
+      description: "Modify source files without a valid open WI issue linked to the current branch."
+    - id: MN-7
+      description: "Skip a gate without human-set lifecycle:bypass label AND pre-posted bypass comment."
+    - id: MN-8
+      description: "Close the parent WI issue manually."
+    - id: MN-9
+      description: "Begin Edit/Write on implement-phase work before the implement gate passes."
+    - id: MN-10
+      description: "Merge a PR without all L2 required status checks green."
+  must:
+    - id: M-1
+      description: "Invoke wi-lifecycle <phase> at each phase transition."
+    - id: M-2
+      description: "Post '✅ AC-N satisfied' evidence comments on the parent WI for each AC."
+    - id: M-3
+      description: "Post review outcome markers (LIFECYCLE:CODE-REVIEW:, LIFECYCLE:SECURITY-REVIEW:, LIFECYCLE:DATA-RISK:) as PR comments before the close gate."
+    - id: M-4
+      description: "Author [DESIGN] and [IMPL] sub-issues before the design gate is validated."
+    - id: M-5
+      description: "Link sub-issues in the parent WI tasklist."
+    - id: M-6
+      description: "Run ./test.sh before opening a PR."
+    - id: M-7
+      description: "Post fix-pointer comments on resolved PR review threads."

@@ -83,4 +83,7 @@ directory:
       description: "Legal Counsel, responsible for all legal documents and compliance."
     - name: "Gemma's Maintainer"
       description: "The role responsible for maintaining the Gem Generator (`Gemma`), owner of its blueprints and core configuration."
+    - name: "Orion (GCT-UTL-SLG-001)"
+      gemId: "GCT-UTL-SLG-001"
+      description: "Studio Lore Guardian, responsible for governance protocol accuracy and currency."
 ```

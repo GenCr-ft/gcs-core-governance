@@ -24,12 +24,9 @@ flowchart TD
     START([New artifact to store]) --> Q1{lifecycle-phase\n= experimental?}
 
     Q1 -- Yes --> R1[🧪 gce-* repo\nExperimental repository]
-    Q1 -- No --> Q2{security-classification\n= l3-secret?}
+    Q1 -- No --> Q3{artifact-class\n= infrastructure?}
 
-    Q2 -- Yes --> R2[🔒 gcs-vault-critical\nHigh-security vault]
-    Q2 -- No --> Q3{artifact-class\n= infrastructure?}
-
-    Q3 -- Yes --> R3[⚙️ gencraft-iac\nOpenTofu IaC repo]
+    Q3 -- Yes --> R3[⚙️ gci-*\nOpenTofu IaC repos]
     Q3 -- No --> Q4{artifact-class\n= process?}
 
     Q4 -- Yes --> R4[🔄 gcd-shared-actions\nReusable GitHub Actions]
@@ -42,10 +39,15 @@ flowchart TD
     Q6 -- No --> Q7{artifact-class = knowledge\nAND domain = governance\nAND category = to-govern?}
 
     Q7 -- Yes --> R7[📋 gcs-core-governance\nfoundations/governance/]
-    Q7 -- No --> Q8{artifact-class = knowledge\nAND domain IN\ngov/ops/legal/marketing/finance?}
+    Q7 -- No --> Q8{artifact-class = knowledge\nAND domain IN\ngovernance/production-management/\nmarketing-and-communication/\nlegal/finance-and-hr?}
 
-    Q8 -- Yes --> R8[📖 gcs-core-governance\nsections/{domain}/]
-    Q8 -- No --> R9[❓ No matching rule\nFile governance issue to add one]
+    Q8 -- Yes --> R8[📖 gcs-core-governance\nreference-libraries/studio-handbook/sections/{domain}/]
+    Q8 -- No --> Q9{artifact-class\n= data?}
+
+    Q9 -- Yes --> R9[📊 gcd-data-*\nData artifact repos]
+    Q9 -- No --> R10[❓ No matching rule\nFile governance issue to add one]
+
+    style R9 fill:#d4edda
 
     style R1 fill:#fff3cd
     style R2 fill:#f8d7da
@@ -63,12 +65,12 @@ flowchart TD
 | Rule ID | Condition | Target | Justification |
 |---------|-----------|--------|---------------|
 | EXPERIMENTAL_STORAGE_RULE | `lifecycle-phase: experimental` | `gce-*` | Isolates experimental work |
-| SECURITY_SECRET_STORAGE | `security-classification: l3-secret` | `gcs-vault-critical` | Strict access control |
-| INFRASTRUCTURE_CODE_STORAGE | `artifact-class: infrastructure` | `gencraft-iac` | IaC centralization |
+| INFRASTRUCTURE_CODE_STORAGE | `artifact-class: infrastructure` | `gci-*` | IaC centralization |
 | PROCESS_DEFINITION_STORAGE | `artifact-class: process` | `gcd-shared-actions` | Workflow centralization |
 | CODE_SHARED_LIBRARY_STORAGE | `artifact-class: code` + `type: library` | `gcl-*` | Library convention |
 | ASSET_PROJECT_STORAGE | `artifact-class: asset` + `scope: project-aethel` | `gcp-aethel-assets-*` | Asset isolation |
 | KNOWLEDGE_GOVERNANCE_STORAGE | knowledge + governance + to-govern | `gcs-core-governance/foundations/governance/` | Laws with configs |
-| KNOWLEDGE_HANDBOOK_STORAGE | knowledge + ops/legal/marketing domains | `gcs-core-governance/sections/{domain}/` | Operational centralization |
+| KNOWLEDGE_HANDBOOK_STORAGE | knowledge + governance/production-management/marketing-and-communication/legal/finance-and-hr domains | `gcs-core-governance/reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` | Operational centralization |
+| DATA_ARTIFACT_STORAGE | `artifact-class: data` | `gcd-data-*` → `datasets/{domain}/` | Data centralization |
 
 > **Rule evaluation is sequential.** A document matching multiple conditions stops at the FIRST matching rule (top of table wins).

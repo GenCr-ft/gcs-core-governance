@@ -1,5 +1,5 @@
 ---
-docId: GOV-GUIDE-HG-004
+docId: GOV-GUIDE-004
 title: SSoT Document Naming Cheatsheet
 version: 1.0.0
 authors: [Governance Crew]
@@ -27,7 +27,25 @@ Quick reference for naming SSoT documents correctly. Every document ID (`docId`)
    └─────────────────── Domain code (see table below)
 ```
 
-**Full docId format:** `{DOMAIN}-{TYPE}-{NNN}`
+**Full docId format (base):** `{DOMAIN}-{TYPE}-{NNN}`
+
+Domain-specific subsystems may add one or two optional uppercase subsystem segments between the type code and the sequence number:
+
+```
+  GOV  -  GUIDE  -  HG  -  001
+   │         │        │       │
+   │         │        │       └── Three-digit sequence
+   │         │        └────────── Subsystem code (e.g. HG = Human Guides, AC = Agent Context)
+   │         └─────────────────── Document type code
+   └───────────────────────────── Domain code
+```
+
+**Extended docId format:** `{DOMAIN}-{TYPE}-{SUBSYSTEM}-{NNN}` or `{DOMAIN}-{TYPE}-{SUBSYSTEM}-{SUBSYSTEM2}-{NNN}`
+
+Examples across all in-use formats:
+- `ENG-SPEC-008` — base three-segment format
+- `GOV-GUIDE-HG-001` — four-segment with subsystem `HG` (Human Guides)
+- `GOV-GUIDE-HG-AC-005` — five-segment with subsystems `HG` + `AC` (Agent Context under Human Guides)
 
 **Filename format:** `{docId}.{title-kebab-case}.md`
 
@@ -52,16 +70,17 @@ Quick reference for naming SSoT documents correctly. Every document ID (`docId`)
 |------|------|----------|---------|
 | `SPEC` | Specification | to-describe | `ENG-SPEC-001` |
 | `STAN` | Standard | to-govern | `ENG-STAN-002` |
-| `GUIDE` | Guide | to-instruct | `GOV-GUIDE-006` |
+| `GUIDE` | Guide | to-instruct | `GOV-GUIDE-HG-001` |
 | `PLAY` | Playbook | to-instruct | `OPS-PLAY-001` |
 | `ADR` | Architecture Decision Record | to-record | `ENG-ADR-070` |
 | `PROT` | Protocol | to-instruct | `GOV-PROT-003` |
+| `PROTO` | Protocol (subsystem-scoped) | to-instruct | `GOV-PROTO-CA-001` |
 | `PLAN` | Plan | to-plan | `ENG-PLAN-001` |
 | `POST` | Postmortem | to-record | `OPS-POST-001` |
 | `POL` | Policy | to-govern | `SEC-POL-001` |
 | `BACK` | Backlog entry | to-describe | `ENG-BACK-001` |
-| `STAN` | Standard | to-govern | `GOV-STAN-001` |
 | `OVER` | Overview | to-describe | `ENG-OVER-001` |
+| `GRND` | Grounding | to-instruct | `GOV-GRND-001` |
 | `READ` | README / Navigation index | to-inform | `GOV-READ-001` |
 
 ## Frontmatter Template

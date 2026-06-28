@@ -4,11 +4,12 @@ title: Work Item Lifecycle Quality Contract
 version: 1.0.0
 authors: [Studio Lead]
 knowledgeGuardian:
-- Orion (GCT-GOV-ORN-001)
+- Orion (GCT-UTL-SLG-001)
 creation_date: '2026-06-09'
-last_updated_date: '2026-06-11'
+last_updated_date: '2026-06-28'
 language: en
 ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/GOV-PROT-003.wi-lifecycle-contract.md
+spec_path: docs/superpowers/specs/2026-06-09-wi-lifecycle-enforcement-design.md
 metadata:
   lifecycle-stage: approved
   scope: studio
@@ -44,6 +45,8 @@ hook, Action, and skill updates follow as separate PRs.
 | `## Architecture Impact` | ≥1 non-blank line (rough) |
 | `## Out of Scope` | ≥1 non-blank line |
 
+**Spec-refs blocker (hard-block):** If the WI `## Relations` section links any specification document whose `metadata.lifecycle-stage` frontmatter value is `draft`, `proposed`, or absent, the CREATE gate fails. An agent evaluates this by fetching each linked document and reading its `lifecycle-stage` field. See `agent-context/grounding/lexicon.yml` term `spec_refs` for the full evaluation algorithm.
+
 ### Gate 2 — Refine (before DESIGN sub-issue is approved)
 
 | Upgrade required | Condition |
@@ -53,7 +56,18 @@ hook, Action, and skill updates follow as separate PRs.
 | `## Testability Notes` | QA-authored: test types, tooling, data |
 | `## Sub-issues` tasklist | Contains `- [ ] #N` for `[DESIGN]` sub-issue |
 
-### Gate 3 — Implement (before Edit/Write is unblocked)
+**Spec-refs advisory check:** All spec documents linked in `## Relations` must still carry `lifecycle-stage: approved`. This is an `additional_checks` condition (advisory, not hard-block): a demotion to `draft` or `proposed` surfaces as a warning that the linked spec may no longer support the WI's design. See `agent-context/grounding/lexicon.yml` term `spec_refs` for the evaluation algorithm.
+
+### Gate 3 — Design (before [IMPL] sub-issue is authored)
+
+| Artifact | Required state |
+|----------|---------------|
+| `[DESIGN]` sub-issue | Authored with all required sections (see Sub-issue Contracts) |
+| Adversary review | Dispatched; critical/high findings resolved |
+| Output token | `LIFECYCLE:DESIGN:READY` posted on [DESIGN] sub-issue |
+| Human review | Human sets `status:approved` on [DESIGN] sub-issue |
+
+### Gate 4 — Implement (before Edit/Write is unblocked)
 
 | Artifact | Required state |
 |----------|---------------|
@@ -62,7 +76,7 @@ hook, Action, and skill updates follow as separate PRs.
 | Both sub-issues | Linked in parent WI tasklist |
 | Self-approval | Forbidden — label setter must differ from current GitHub actor |
 
-### Gate 4 — Close (before `Closes #N` written)
+### Gate 5 — Close (before `Closes #N` written)
 
 | Check | Required |
 |-------|---------|
@@ -74,6 +88,45 @@ hook, Action, and skill updates follow as separate PRs.
 | ADR | Referenced if wire format, auth, or persistence changed |
 | PR checklist | All boxes ticked |
 | `[IMPL]` Relations Check | `[IMPL]` sub-issue body contains a valid branch or PR reference in its `## Relations` section |
+
+---
+
+## Spec Reference Contract
+
+A **spec_ref** is a specification document linked or referenced in a Work Item body. This section is the canonical definition required by `wi-lifecycle-gates.yml` (lines 20 and 30).
+
+### What qualifies as a spec_ref
+
+A document or issue qualifies as a spec_ref if:
+- Its `docId` frontmatter field starts with a recognized spec prefix: `ENG-SPEC-`, `GAM-SPEC-`, `GOV-SPEC-`, or any studio-registered docId pattern ending in `-SPEC-`.
+- It is a GitHub Issue carrying the `spec` label.
+- It is explicitly named as a spec in the WI body using the format `**Spec:** <link>`.
+
+### How to identify spec_refs on a WI
+
+Scan the WI issue body for:
+1. Lines matching `**Spec:** <url-or-issue-ref>`
+2. Linked issues that carry the `spec` label.
+3. File paths matching the docId patterns above in the `## Architecture Impact` or `## Relations` sections.
+
+If none are found, the spec_ref set is considered **absent**.
+
+### How to evaluate lifecycle-stage
+
+| Source type | Where to read lifecycle-stage |
+|-------------|------------------------------|
+| Markdown file with YAML frontmatter | `metadata.lifecycle-stage` field |
+| GitHub Issue | Label starting with `lifecycle:` (e.g. `lifecycle:approved`) |
+| No frontmatter and no label | Treat as `draft` |
+
+Valid lifecycle-stage values: `draft`, `proposed`, `approved`, `deprecated`, `archived`.
+
+### Gate evaluation rules
+
+| Gate key | Location in YAML | Blocks when |
+|----------|-----------------|-------------|
+| `spec_refs_with_lifecycle_stage: ["draft", "proposed", "absent"]` | create phase `blockers:` | Any linked spec_ref has lifecycle-stage `draft` or `proposed`, OR the spec_ref set is absent |
+| `spec_refs_still_approved: true` | refine phase `blockers:` | Any linked spec_ref no longer has lifecycle-stage `approved` at refine time |
 
 ---
 
@@ -181,7 +234,9 @@ Machine-parseable token set used by all three enforcement layers:
 | Token | Meaning |
 |-------|---------|
 | `✅ LIFECYCLE:<PHASE>:PASS` | Phase gate passed; written to issue comment |
+| `✅ LIFECYCLE:DESIGN:PASS` | Design gate passed; written to issue comment and stamp updated to `phase=design` |
 | `❌ LIFECYCLE:<PHASE>:FAIL — <gaps>` | Phase gate failed; written to issue comment |
+| `LIFECYCLE:DESIGN:READY` | Design sub-issue complete; ready for human review and `status:approved` label |
 | `LIFECYCLE:CODE-REVIEW:PASS` | Code review clean |
 | `LIFECYCLE:CODE-REVIEW:FINDINGS` | Code review findings with accepted dispositions |
 | `LIFECYCLE:SECURITY-REVIEW:PASS` | OWASP scan clean |

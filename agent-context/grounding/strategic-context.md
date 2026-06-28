@@ -1,5 +1,5 @@
 ---
-docId: GOV-GUIDE-HG-AC-005
+docId: GOV-GRND-004
 title: Studio Strategic Context — Executive Summary
 version: 1.0.0
 authors: [Governance Crew]
@@ -7,7 +7,7 @@ metadata:
   lifecycle-stage: approved
   scope: studio
   domain: governance
-  doc-type: guide
+  doc-type: grounding
   intended-audience: [ai-agents]
   security-classification: l2_confidential
   source_version: "1.0.0"

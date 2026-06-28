@@ -24,18 +24,21 @@ flowchart LR
     DOC[Your document or PR]
 
     DOC --> R1{Legal knowledge\ndomain = legal?}
+    DOC --> R2{Engineering standard\ndomain = engineering-and-architecture?}
     DOC --> R3{Security policy\ndomain = security?}
     DOC --> R4{lifecycle-phase\n= deprecated?}
     DOC --> R5{Event = PR\non a code repo?}
     DOC --> R6{Contract\ndomain = legal?}
 
     R1 -- Yes --> A1[Requires reviewer:\nHenri - Legal Counsel]
+    R2 -- Yes --> A2[Requires reviewer:\nIsaac - Senior Architect]
     R3 -- Yes --> A3[Requires approver:\nCerberus - Security Officer]
     R4 -- Yes --> A4[Must have\ndeprecation_justification\nin frontmatter]
     R5 -- Yes --> A5[PR body must contain:\nReferences Definition of Done]
     R6 -- Yes --> A6[Must have expiration_date\n+ Henri reviewer]
 
     style A1 fill:#fff3cd
+    style A2 fill:#cce5ff
     style A3 fill:#f8d7da
     style A4 fill:#d1ecf1
     style A5 fill:#d4edda
@@ -47,7 +50,7 @@ flowchart LR
 | Rule ID | Applies When | Enforcement | Who Approves | Frontmatter Required |
 |---------|-------------|-------------|--------------|---------------------|
 | GOV_RULE_001 | Knowledge doc + domain=legal + category=to-govern | PR review gate | Henri (Legal Counsel) | — |
-| GOV_RULE_002 | Knowledge doc + type=standard + domain=engineering | PR review gate | Isaac (Senior Architect) | — |
+| GOV_RULE_002 | Knowledge doc + type=standard + domain=engineering-and-architecture | PR review gate | Isaac (Senior Architect) | — |
 | GOV_RULE_003 | Knowledge doc + type=policy + domain=security | PR approval gate | Cerberus (Security Officer) | — |
 | GOV_RULE_004 | Any artifact with `lifecycle-phase: deprecated` | SSoT linter CI | — | `deprecation_justification:` |
 | GOV_RULE_005 | Pull Request on a code repository | PR body check | — | PR body must include `"References Definition of Done (PRO-STAN-001)"` |

@@ -38,7 +38,7 @@ validation_rules:
     description: "A deprecated artifact must justify its status."
     rule_applies_if:
       all_of:
-        - lifecycle-phase: "deprecated"
+        - lifecycle-stage: "deprecated"
     action_to_enforce:
       required_frontmatter_fields: ["deprecation_justification"]
 
@@ -49,7 +49,7 @@ validation_rules:
         - event_type: "pull_request"
         - target_repository.type: "code"
     action_to_enforce:
-      body_must_contain_string: "References Definition of Done (PRO-STAN-001)"
+      body_must_contain_string: "References Definition of Done (OPS-STANDARD-001)"
 
   - rule_id: "GOV_RULE_006"
     description: "Legal contracts must have an expiration date and be reviewed by Legal Counsel."

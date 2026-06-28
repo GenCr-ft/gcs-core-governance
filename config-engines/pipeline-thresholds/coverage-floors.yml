@@ -1,0 +1,18 @@
+# Coverage Floors --- CI Pipeline Thresholds
+# Version: 1.0.0
+#
+# This file is the canonical pointer for CI coverage threshold configuration.
+# The authoritative rule value is defined in:
+#   agent-context/grounding/technical-constraints.md (row: "Minimum 80% unit test coverage")
+#
+# Agents and CI tooling MUST read that file for the numeric floor.
+# This file exists to satisfy the rules-index.md pointer and to record
+# the threshold category without duplicating the authoritative value.
+
+coverage_floors:
+  - id: UNIT_TEST_COVERAGE_TS_PY
+    label: "Minimum unit test coverage --- TypeScript and Python services"
+    authoritative_source: "agent-context/grounding/technical-constraints.md"
+    source_row: "Minimum 80% unit test coverage for all TypeScript/Python services"
+    enforcement: "CI coverage gate"
+    note: "Do not restate the numeric floor here; read the authoritative source to avoid drift."

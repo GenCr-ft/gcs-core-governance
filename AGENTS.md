@@ -11,7 +11,7 @@ last_updated_date: '2026-06-27'
 metadata:
   lifecycle-stage: approved
   scope: studio-governance
-  domain: engineering
+  domain: engineering-and-architecture
   doc-type: agent-instructions
   security-classification: l2_confidential
 ---
@@ -29,7 +29,10 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 | What collaboration algorithm applies? | [agent-context/protocols/collaboration-algorithms.md](agent-context/protocols/collaboration-algorithms.md) |
 | What CLI commands and error paths do I need? | [agent-context/protocols/ops-runbook.md](agent-context/protocols/ops-runbook.md) |
 | What is my identity and operational context? | [agent-context/grounding/agent-bootstrap.md](agent-context/grounding/agent-bootstrap.md) |
+| What studio facts do I need? | [agent-context/grounding/studio-quick-ref.md](agent-context/grounding/studio-quick-ref.md) |
+| What engineering constraints apply? | [agent-context/grounding/technical-constraints.md](agent-context/grounding/technical-constraints.md) |
 | What does this term mean? | [agent-context/grounding/lexicon.yml](agent-context/grounding/lexicon.yml) |
+| What is the studio mission and project context? | [agent-context/grounding/strategic-context.md](agent-context/grounding/strategic-context.md) |
 | What are the authoritative rule YAML files? | [agent-context/rules-index.md](agent-context/rules-index.md) |
 
 ## Human Guides Layer
@@ -37,8 +40,8 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 | Guide | File |
 |-------|------|
 | Three-layer enforcement architecture | [human-guides/enforcement-architecture.md](human-guides/enforcement-architecture.md) |
-| WI lifecycle visual flowchart | [human-guides/wi-lifecycle-visual.md](human-guides/wi-lifecycle-visual.md) |
-| Document routing guide | [human-guides/document-routing-guide.md](human-guides/document-routing-guide.md) |
+| WI lifecycle visual flowchart | [human-guides/wi-lifecycle-flow.md](human-guides/wi-lifecycle-flow.md) |
+| Document routing guide | [human-guides/document-routing.md](human-guides/document-routing.md) |
 
 ## Quick Commands
 
@@ -46,13 +49,13 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 |------|---------|
 | Run compression acceptance tests | `bash tools/tests/test_verify_compression.sh` |
 | Run agent-context parity check | `python3 scripts/verify_agent_context_parity.py` |
-| Write lifecycle stamp (REFINE) | `python3 gcs-plt-gemop/hooks/lifecycle_stamp.py write gcs-core-governance <branch> <issue> refine` |
+| Write lifecycle stamp (REFINE) | `bash scripts/lifecycle-stamp.sh write gcs-core-governance <branch> <issue> refine` |
 | File governance gap issue | `unset GH_TOKEN && gh issue create --repo GenCr-ft/gcs-core-governance --title "[GOV] ..."` |
 
 ## Critical Patterns
 
 - All documents must have YAML frontmatter with `docId: DOMAIN-TYPE-CODE`.
-- `tools/verify-compression.sh` — compression ACs for WI-14 (200 nb CLAUDE.md, 150 nb AGENTS.md).
+- `tools/verify-compression.sh` — compression check: 200 nb (non-blank lines) hard limit for CLAUDE.md (FAIL), 150 nb soft limit for AGENTS.md (WARN). Thresholds registered in `config-engines/pipeline-thresholds/compression-thresholds.yml`. nb = non-blank lines (lines where `grep -cv ^\\s*$` counts non-zero); defined in [agent-context/grounding/lexicon.yml](agent-context/grounding/lexicon.yml).
 - `agent-context/` is the machine-readable surfacing layer. Do not read `reference-libraries/` directly.
 - Issue routing: `gh issue create --repo GenCr-ft/gcs-core-governance`.
 
@@ -69,7 +72,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 - File gaps as GitHub issues in `gcs-core-governance` before proceeding
 
 ⚠️ **Ask First**
-- Changing compression thresholds (200/150 nb line limits)
+- Changing compression thresholds (200 nb hard limit for CLAUDE.md, 150 nb soft limit for AGENTS.md — see `config-engines/pipeline-thresholds/compression-thresholds.yml`)
 - Adding new governance standards that affect all repos
 
 🚫 **Never Do**

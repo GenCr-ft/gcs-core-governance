@@ -3,20 +3,25 @@
 # Source: execution-manuals/onboard-manuals/grounding-docs/GOV-GUIDE-412.studio-reference-core-lexicon--capabilities.md
 
 _meta:
-  docId: GOV-GUIDE-HG-AC-004
+  docId: GOV-REFE-004
   title: Agent Lexicon
   version: 1.1.0
+  authors: [Governance Crew]
   metadata:
     lifecycle-stage: approved
+    scope: studio
+    domain: governance
+    doc-type: reference
     intended-audience: [ai-agents]
     security-classification: l2_confidential
-    source_version: "1.0.0"
+    source_version: "1.3.0"
     last_verified: "2026-06-27"
     source: GOV-GUIDE-412 §2
 
 terms:
   - term: Gemma
     definition: "The GEM instantiation agent. Injects GemID, role title, and core mission context into a Gem at the start of each session. All Gems receive their operational identity via Gemma."
+    gemId: "GCT-UTL-GGEN-001"
     source: "GOV-GUIDE-006 GASAI v2.0"
 
   - term: SSoT
@@ -52,7 +57,7 @@ terms:
     source: "GOV-GUIDE-412 §2"
 
   - term: DoD
-    definition: "Definition of Done — shared mandatory checklist of criteria a work item must meet to be considered complete. Document: PRO-STAN-001."
+    definition: "Definition of Done — shared mandatory checklist of criteria a work item must meet to be considered complete. Document: OPS-STANDARD-001."
     source: "GOV-GUIDE-412 §2"
 
   - term: NFR
@@ -60,7 +65,7 @@ terms:
     source: "GOV-GUIDE-412 §2"
 
   - term: IaC
-    definition: "Infrastructure as Code — managing and provisioning infrastructure through machine-readable definition files (OpenTofu). Repo: gencraft-iac."
+    definition: "Infrastructure as Code — managing and provisioning infrastructure through machine-readable definition files (OpenTofu). Repo prefix: gci-* (e.g., gencraft-iac)."
     source: "GOV-GUIDE-412 §2"
 
   - term: CI/CD
@@ -72,9 +77,37 @@ terms:
     source: "GOV-GUIDE-412 §2"
 
   - term: WI
-    definition: "Work Item — a GitHub Issue tracking a single deliverable, governed by the 5-gate lifecycle in GOV-PROT-003."
+    definition: "Work Item — a GitHub Issue tracking a single deliverable, governed by the 4-gate lifecycle in GOV-PROT-003 (Gate 1 Create, Gate 2 Refine, Gate 3 Implement, Gate 4 Close). The lifecycle has 5 sequential phases — create, refine, design, implement, close — where the design phase is a sub-phase within the refine-to-implement transition, not a standalone named gate."
+    source: "gcs-core-governance/GOV-PROT-003.wi-lifecycle-contract.md"
+
+  - term: title_kebab_case
+    definition: "A path-template variable that resolves to the document title transformed to lowercase, with spaces and underscores replaced by hyphens, and all non-alphanumeric punctuation removed. Example: 'On-Boarding Guide' → 'on-boarding-guide'. Used in KNOWLEDGE_HANDBOOK_STORAGE target_path_template."
+    source: "config-engines/metadata-schemas/storage-rules.yml (KNOWLEDGE_HANDBOOK_STORAGE)"
+
+  - term: spec_refs
+    definition: "Specification references — the set of Markdown links present in a WI issue body's `## Relations` section that point to documents (in any Gencraft repository) whose YAML frontmatter contains a `lifecycle-stage:` field. An agent evaluates spec_refs by: (1) parsing every hyperlink in `## Relations`; (2) fetching the target document; (3) reading its `metadata.lifecycle-stage` frontmatter field. A spec_ref is considered 'approved' when its `lifecycle-stage` value is exactly `approved`. Values of `draft`, `proposed`, or an absent frontmatter field are non-approved. The blocker `spec_refs_with_lifecycle_stage: [\"draft\", \"proposed\", \"absent\"]` fails (hard-block at CREATE) when any linked spec document matches one of those states. The additional_check `spec_refs_still_approved: true` fails (advisory at REFINE) when any previously-approved spec has been demoted below `approved`."
     source: "gcs-core-governance/agent-context/protocols/wi-lifecycle-gates.yml"
+
+  - term: redirect (->)
+    definition: "Notation used in rules-index.md to indicate that the canonical SSoT for the named file lives in reference-libraries/ but a surfaced read-accessible copy is maintained at the path given by the enclosing section header (e.g. config-engines/metadata-schemas/). Agents must read the copy at the surfaced path, never the reference-libraries/ original."
+    source: "gcs-core-governance/agent-context/rules-index.md"
 
   - term: GemID
     definition: "Unique identifier for an AI Gem. Format: GCT-{DEPT}-{ROLE}-{NNN}. Example: GCT-PRG-SARCH-001 (Isaac, Senior Architect)."
     source: "gcs-plt-gembp repo"
+
+  - term: Adversary Finding Severity
+    definition: "Classification tier for a finding raised by the wi-lifecycle-adversary skill. CRITICAL — makes the artifact un-implementable; blocks gate, requires full fix and re-trigger. HIGH — significant but remediable gap; blocks gate, resolved via ADVERSARY-REVIEW:DISPOSITION comment. LOW — minor improvement; does not block the gate. The blocker condition critical_or_high_adversary_finding_unresolved in wi-lifecycle-gates.yml is triggered by any CRITICAL or HIGH finding that has not been resolved or dispositioned."
+    source: "gcs-plt-gemop/skills/wi-lifecycle-adversary/SKILL.md"
+
+  - term: redirect (→)
+    definition: "Notation used in rules-index.md to indicate that the canonical SSoT for the named file lives in reference-libraries/ but a surfaced read-accessible copy is maintained at the path given by the enclosing section header (e.g. config-engines/metadata-schemas/). Agents must read the copy at the surfaced path, never the reference-libraries/ original."
+    source: "gcs-core-governance/agent-context/rules-index.md"
+
+  - term: nb
+    definition: "Non-blank lines — the count of lines that are not entirely whitespace, computed as `grep -cv '^\s*$' <file>`. Used as the unit for CLAUDE.md (≤200 nb) and AGENTS.md (≤150 nb) compression thresholds established in WI-14 (gcs-core-governance#14). Authoritative implementation: tools/verify-compression.sh."
+    source: "gcs-core-governance/tools/verify-compression.sh (WI-14)"
+
+  - term: spec_ref
+    definition: "A specification document linked or referenced in a Work Item's body. Qualifying documents are: any GitHub Issue or file whose title or path starts with a recognized spec prefix (ENG-SPEC-, GAM-SPEC-, GOV-SPEC-, or equivalent docId patterns), or any issue explicitly labelled 'spec'. To evaluate a spec_ref's lifecycle-stage: read the YAML frontmatter field `metadata.lifecycle-stage` of the linked document; if the document has no frontmatter or is a GitHub Issue, read the issue label whose name starts with 'lifecycle:' (e.g. lifecycle:draft, lifecycle:proposed, lifecycle:approved). A spec_ref is considered 'absent' when no qualifying reference exists in the WI body. The create-phase blocker spec_refs_with_lifecycle_stage blocks a WI if any linked spec_ref has a lifecycle-stage matching one of the listed values (['draft', 'proposed', 'absent']). The refine-phase check spec_refs_still_approved passes only when every linked spec_ref retains lifecycle-stage 'approved' at the time of evaluation."
+    source: "GOV-PROT-003.wi-lifecycle-contract.md §Spec Reference Contract"

@@ -3,13 +3,29 @@ name: agent-context parity check
 on:
   pull_request:
     paths:
-      - 'config-engines/metadata-schemas/storage-rules.yml'
+      - 'config-engines/**'
       - 'agent-context/protocols/document-routing.md'
+      - 'human-guides/validation-rules-summary.md'
+      - 'agent-context/protocols/wi-lifecycle-gates.yml'
+      - 'GOV-PROT-003.wi-lifecycle-contract.md'
+      - 'human-guides/ssot-naming-cheatsheet.md'
+      - 'agent-context/grounding/technical-constraints.md'
+      - 'agent-context/grounding/studio-quick-ref.md'
+      - 'scripts/verify_agent_context_parity.py'
+      - 'reference-libraries/devops-standards/foundations/governance/rules/storage-rules.yml'
   push:
     branches: [main]
     paths:
-      - 'config-engines/metadata-schemas/storage-rules.yml'
+      - 'config-engines/**'
       - 'agent-context/protocols/document-routing.md'
+      - 'human-guides/validation-rules-summary.md'
+      - 'agent-context/protocols/wi-lifecycle-gates.yml'
+      - 'GOV-PROT-003.wi-lifecycle-contract.md'
+      - 'human-guides/ssot-naming-cheatsheet.md'
+      - 'agent-context/grounding/technical-constraints.md'
+      - 'agent-context/grounding/studio-quick-ref.md'
+      - 'scripts/verify_agent_context_parity.py'
+      - 'reference-libraries/devops-standards/foundations/governance/rules/storage-rules.yml'
 
 jobs:
   parity:
@@ -19,5 +35,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Verify agent-context routing table matches storage-rules.yml
+      - name: Verify agent-context routing table matches storage-rules.yml and validation-rules.yml
         run: python3 scripts/verify_agent_context_parity.py
+      - name: Verify wi-lifecycle-gates.yml gate phases match GOV-PROT-003
+        run: python3 scripts/verify_lifecycle_gate_parity.py
+      - name: Verify ssot-naming-cheatsheet.md type codes match taxonomy.yml
+        run: python3 scripts/verify_taxonomy_parity.py

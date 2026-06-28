@@ -5,9 +5,9 @@
   "type": "object",
   "properties": {
     "docId": {
-      "description": "The unique, immutable identifier for the document. Format: DOMAIN-TYPE-NNN.",
+      "description": "The unique, immutable identifier for the document. Format: DOMAIN-TYPE[-SUBSYSTEM[-SUBSYSTEM2]]-NNN (e.g. ENG-SPEC-008, GOV-GUIDE-HG-001, GOV-GUIDE-HG-AC-005).",
       "type": "string",
-      "pattern": "^[A-Z]{3,}-[A-Z]{2,10}-[0-9]{3,}$"
+      "pattern": "^[A-Z]{3,}-[A-Z]{2,10}(-[A-Z]{2,10})*-[0-9]{3,}$"
     },
     "title": {
       "description": "The official, human-readable title of the document.",
@@ -77,7 +77,7 @@
           }
         },
         "security-classification": {
-          "description": "The confidentiality level of the document's content. Must be a kebab-case string from the taxonomy.",
+          "description": "The confidentiality level of the document's content. Must be an underscore-delimited string from the taxonomy (e.g. l0_public, l1_internal, l2_confidential, l3_secret).",
           "type": "string"
         },
         "keywords": {

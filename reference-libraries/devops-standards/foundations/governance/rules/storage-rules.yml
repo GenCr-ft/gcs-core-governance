@@ -2,26 +2,38 @@
 # Version: 1.0.0
 # filename: storage-rules.yml
 # Rule Evaluation Order: Rules are evaluated top-down. The first matching rule is applied.
+---
 storage_rules:
   - rule_id: "EXPERIMENTAL_STORAGE_RULE"
     description: "Artifacts in an experimental phase must reside in a dedicated experimental repository."
     if:
       all_of:
-        - metadata.lifecycle-phase: "experimental"
+        - metadata.lifecycle-stage: "experimental"
     then:
       target_repository_prefix: "gce-"
       justification: "Isolates experimental work from production SSoT to prevent dependency conflicts."
 
+  - rule_id: "DATA_ARTIFACT_STORAGE"
+    description: "Structured and unstructured datasets (telemetry, analytics, game configuration) live in dedicated data repositories."
+    if:
+      all_of:
+        - artifact-class: "data"
+    then:
+      target_repository_prefix: "gcd-data-"
+      target_path_template: "datasets/{domain}/{docId}.{title_kebab_case}"
+      justification: "Centralizes data artifacts in dedicated data repositories, keeping telemetry, analytics, and game configuration datasets separate from code and knowledge artifacts."
+
+
   - rule_id: "KNOWLEDGE_GOVERNANCE_STORAGE"
-    description: "Core governance documents (the Constitution and its laws) reside in the technical standards repository."
+    description: "Core governance documents reside in the technical standards repository."
     if:
       all_of:
         - artifact-class: "knowledge"
-        - domain: "governance"
+        - domain: ["governance", "engineering-and-architecture"]
         - classification.category: "to-govern"
     then:
       target_repository_id: "gcs-core-governance"
-      target_path_template: "foundations/governance/{classification.type}/{docId}.md"
+      target_path_template: "foundations/governance/{docId}.md"
       justification: "Keeps the laws defining the system with the technical configurations that enforce them."
 
   - rule_id: "KNOWLEDGE_HANDBOOK_STORAGE"
@@ -30,10 +42,10 @@ storage_rules:
       all_of:
         - artifact-class: "knowledge"
         - domain: ["governance", "production-management", "marketing-and-communication", "legal", "finance-and-hr"]
-        - classification.category: ["to-instruct", "to-inform", "to-record", "to-define"]
+        - classification.category: ["to-instruct", "to-inform", "to-describe", "to-record", "to-define"]
     then:
       target_repository_id: "gcs-core-governance"
-      target_path_template: "sections/{domain}/{docId}.{title_kebab_case}.md"
+      target_path_template: "reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md"
       justification: "Centralizes all human-readable operational and organizational knowledge for easy access."
 
   - rule_id: "INFRASTRUCTURE_CODE_STORAGE"
@@ -42,8 +54,8 @@ storage_rules:
       all_of:
         - artifact-class: "infrastructure"
     then:
-      target_repository_prefix: "gci-"
-      justification: "Centralizes infrastructure code for security and consistency, aligning with gci-* prefix convention."
+      target_repository_id: "gencraft-iac"
+      justification: "Routes to gencraft-iac, the sole IaC repository in the studio."
 
   - rule_id: "PROCESS_DEFINITION_STORAGE"
     description: "Reusable process definitions like GitHub Actions must live in the 'gcd-shared-actions' repository."
@@ -73,12 +85,3 @@ storage_rules:
     then:
       target_repository_prefix: "gcp-aethel-assets-"
       justification: "Separates large binary assets from code while keeping them project-specific."
-
-  - rule_id: "SECURITY_SECRET_STORAGE"
-    description: "Artifacts classified as L3-Secret must be stored in a dedicated, high-security repository."
-    if:
-      all_of:
-        - security-classification: "l3-secret"
-    then:
-      target_repository_id: "gcs-vault-critical" # hypothetical repository for high-security assets
-      justification: "Enforces strict access control for the most sensitive studio assets."

@@ -1,7 +1,7 @@
 ---
 docId: GOV-GUIDE-HG-002
 title: Work Item Lifecycle Flow
-version: 1.0.0
+version: 1.1.0
 authors: [Governance Crew]
 metadata:
   lifecycle-stage: approved
@@ -13,7 +13,7 @@ metadata:
 ---
 # Work Item Lifecycle Flow
 
-Visual guide to the 5-gate Work Item (WI) lifecycle. All states and transitions match `GOV-PROT-003.wi-lifecycle-contract.md` exactly.
+Visual guide to the 4-gate Work Item (WI) lifecycle. All states and transitions match `GOV-PROT-003.wi-lifecycle-contract.md` exactly. The lifecycle has 5 sequential phases (create, refine, design, implement, close) but only 4 named gates (Gate 1–4); the design phase is a sub-phase within the refine-to-implement transition.
 
 > **Source:** `GOV-PROT-003.wi-lifecycle-contract.md` (canonical)
 
@@ -39,15 +39,18 @@ stateDiagram-v2
 
     DESIGN_READY --> IMPLEMENT_PASS : [DESIGN] + [IMPL] approved by human
     note right of DESIGN_READY
-        Gate 3 pre-check:
-        [DESIGN] closed + status:approved
-        [IMPL] open + status:approved
-        Self-approval FORBIDDEN
+        Gate 3 (Design) checks:
+        [DESIGN] all required sections present
+        Adversary review PASS
+        LIFECYCLE:DESIGN:READY posted
+        Human sets status:approved on [DESIGN]
     end note
 
     IMPLEMENT_PASS --> CLOSE_PASS : PR open, all ACs ticked
     note right of IMPLEMENT_PASS
-        Gate 3 (Implement) checks:
+        Gate 4 (Implement) checks:
+        [DESIGN] closed + status:approved
+        [IMPL] open + status:approved
         Both sub-issues approved by non-self
         [IMPL] body has all required sections
         TDD commit policy followed
@@ -55,7 +58,7 @@ stateDiagram-v2
 
     CLOSE_PASS --> Closed : Closes #N written in PR
     note right of CLOSE_PASS
-        Gate 4 (Close) checks:
+        Gate 5 (Close) checks:
         AC checkboxes ticked
         CODE-REVIEW + SECURITY-REVIEW + DATA-RISK
         PR adversary review PASS
@@ -71,8 +74,9 @@ stateDiagram-v2
 |------|------|---------|------------|
 | 1 | Create | Issue filed | Summary, ACs, Architecture Impact, Out of Scope |
 | 2 | Refine | Branch cut | Gherkin ACs, Testability Notes, [DESIGN] link in Sub-issues |
-| 3 | Implement | [DESIGN]+[IMPL] approved | Non-self approval, [IMPL] sections, TDD cycles |
-| 4 | Close | PR open, all ACs ticked | Reviews, adversary, PR checklist, ADR if needed |
+| 3 | Design | [DESIGN] sub-issue authored | All required sections, adversary PASS, LIFECYCLE:DESIGN:READY posted |
+| 4 | Implement | [DESIGN]+[IMPL] approved | Non-self approval, [IMPL] sections, TDD cycles |
+| 5 | Close | PR open, all ACs ticked | Reviews, adversary, PR checklist, ADR if needed |
 
 ## TDD Commit Convention
 
@@ -90,9 +94,9 @@ refactor(scope): WI-N.M — blue: <description>
 
 ## Sub-issue Naming Convention
 
-| Sub-issue | Title format | State when gate passes |
-|-----------|-------------|----------------------|
-| [DESIGN] | `[DESIGN] #N — <description>` | Closed + `status:approved` (set by human) |
-| [IMPL] | `[IMPL] #N — <description>` | Open + `status:approved` (set by human) |
+| Type | Title pattern | Example | State when gate passes |
+|------|--------------|---------|------------------------|
+| `[DESIGN]` | `[DESIGN] WI-N.M — <parent WI title>` | `[DESIGN] WI-42.1 — fix auth bug` | Closed + `status:approved` (set by human) |
+| `[IMPL]` | `[IMPL] WI-N.M — <parent WI title>` | `[IMPL] WI-42.1 — fix auth bug` | Open + `status:approved` (set by human) |
 
 > **Self-approval is forbidden.** The person who sets `status:approved` must differ from the current GitHub actor. In a solo studio, this creates a gate that requires a second human reviewer.
