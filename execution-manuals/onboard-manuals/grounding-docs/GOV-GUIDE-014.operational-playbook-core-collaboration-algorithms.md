@@ -129,7 +129,7 @@ If you believe a studio protocol could be improved:
 2. **Propose Formally:** Create a proposal by creating a GitHub Issue with the `protocol-change-proposal-template.md`.
 3. **Submit to Governance:** Submit the proposal Issue to the `Governance Crew` for formal review.
 
-## 8. Algorithm 7: Epic & Task Hierarchy Workflow (S16)
+## 8. Algorithm 7: Epic & Task Hierarchy Workflow
 
 When breaking down large Epics (Parent Issues) into executable Tasks (Child Issues), you MUST use native GitHub Tasklists to maintain a computable hierarchy.
 

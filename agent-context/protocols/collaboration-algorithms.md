@@ -73,7 +73,7 @@ Required when making a significant decision within scope of autonomy:
 
 > ⚠ Template: `protocol-change-proposal-template.md` — not yet authored. See ops-runbook.md Template Registry.
 
-## Algorithm 7 — Epic & Task Hierarchy (S16)
+## Algorithm 7 — Epic & Task Hierarchy
 
 1. Create Epic (Parent Issue) in appropriate repo
 2. Inside Epic body, use `- [ ] #N` tasklist syntax to link Child Issues (not plain text)
