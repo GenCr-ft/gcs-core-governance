@@ -1,7 +1,7 @@
 ---
 docId: GOV-PROTO-OR-001
 title: Operations Runbook — Agent CLI Reference
-version: 1.0.0
+version: 1.0.1
 authors: [Governance Crew]
 metadata:
   lifecycle-stage: approved
@@ -11,7 +11,7 @@ metadata:
   intended-audience: [ai-agents]
   security-classification: l2_confidential
   source_version: "1.0.0"
-  last_verified: "2026-06-27"
+  last_verified: "2026-06-28"
 ---
 # Operations Runbook — Agent CLI Reference
 
@@ -83,7 +83,7 @@ test -f $(git -C . rev-parse --show-toplevel)/../gcs-plt-gemop/hooks/lifecycle_s
 ### Write a stamp (REFINE gate)
 
 ```bash
-python3 $(git -C . rev-parse --show-toplevel)/../gcs-plt-gemop/hooks/lifecycle_stamp.py write \
+bash scripts/lifecycle-stamp.sh write \
   gcs-core-governance \
   feat/issue-{N}-{slug} \
   {N} \
