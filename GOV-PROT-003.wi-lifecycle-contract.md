@@ -47,8 +47,6 @@ hook, Action, and skill updates follow as separate PRs.
 
 **Spec-refs blocker (hard-block):** If the WI `## Relations` section links any specification document whose `metadata.lifecycle-stage` frontmatter value is `draft`, `proposed`, or absent, the CREATE gate fails. An agent evaluates this by fetching each linked document and reading its `lifecycle-stage` field. See `agent-context/grounding/lexicon.yml` term `spec_refs` for the full evaluation algorithm.
 
-**Spec-refs blocker (hard-block):** If the WI `## Relations` section links any specification document whose `metadata.lifecycle-stage` frontmatter value is `draft`, `proposed`, or absent, the CREATE gate fails. An agent evaluates this by fetching each linked document and reading its `lifecycle-stage` field. See `agent-context/grounding/lexicon.yml` term `spec_refs` for the full evaluation algorithm.
-
 ### Gate 2 — Refine (before DESIGN sub-issue is approved)
 
 | Upgrade required | Condition |
