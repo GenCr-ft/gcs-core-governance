@@ -37,6 +37,6 @@ Extracted engineering constraints for AI agents. Each row is an actionable rule.
 | Role | GemID | Responsibility |
 |------|-------|---------------|
 | QA Lead | GCT-QAS-QA-001 (Sentinel) | Bug triage, severity assignment |
-| Product Owner | GCT-MGT-PM-001 (Béatrice) | Priority assignment, DoD acceptance |
+| Product Manager | GCT-MGT-PM-001 (Béatrice) | Priority assignment, DoD acceptance |
 | Security Officer | GCT-MGT-SECOFF-001 (Cerberus) | Security gate approval |
 | Senior Architect | GCT-PRG-SARCH-001 (Isaac) | Engineering standard reviews |

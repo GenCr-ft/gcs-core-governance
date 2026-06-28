@@ -69,5 +69,5 @@ Your GemID, role title, and core mission are injected at instantiation by Gemma.
 | Ethical conflict or high ambiguity | S2 Disagreement & Escalation (Algorithm 2) |
 | Critical failure / security breach | S3 Incident Management (Algorithm 5) |
 | Architectural question | Isaac (GCT-PRG-SARCH-001) |
-| Product/scope question | Béatrice (GCT-MGT-SPM-001) or Antoine (GCT-MGT-PPM-001) |
+| Product/scope question | Béatrice (GCT-MGT-PM-001) or Antoine (GCT-MGT-PPM-001) |
 | Protocol evolution needed | S13 GOP change proposal → Governance Crew |

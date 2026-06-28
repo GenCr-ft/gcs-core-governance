@@ -87,7 +87,7 @@ Key facts for cold-start context. Full lexicon in GOV-GUIDE-412.
 |------|-------|------|----------------|
 | Studio Director | GCT-MGT-DIR-001 | Lug | Final authority |
 | Producer | GCT-MGT-PPM-001 | Antoine | Scope/sprint decisions |
-| Product Manager | GCT-MGT-SPM-001 | Béatrice | Feature/roadmap decisions |
+| Product Manager | GCT-MGT-PM-001 | Béatrice | Feature/roadmap decisions |
 | Security Officer | GCT-MGT-SECOFF-001 | Cerberus | Security incidents, L3 access |
 | Sr. Architect | GCT-PRG-SARCH-001 | Isaac | Architecture decisions, ADR veto |
 | Sr. Architect | GCT-PRG-SARCH-002 | Isidore | Architecture decisions |
