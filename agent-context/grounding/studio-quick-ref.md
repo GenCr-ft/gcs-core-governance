@@ -20,17 +20,19 @@ Key facts for cold-start context. Full lexicon in GOV-GUIDE-412.
 
 ## Core Terminology
 
+> **Authoritative source:** `grounding/lexicon.yml` (GOV-GUIDE-HG-AC-004) is the canonical definition for all terms below. When a definition here conflicts with `lexicon.yml`, `lexicon.yml` takes precedence.
+
 | Term | Definition |
 |------|-----------|
-| SSoT | Single Source of Truth — one authoritative location per piece of info, always in a version-controlled Git repo |
-| AI Gem | A specialized AI entity with a role, GemID, and SKILL.md persona definition |
-| GOP | Global Operational Protocol — studio-wide, applies to all Gems (S1–S20) — see [protocols/gop-s-number-index.md](../protocols/gop-s-number-index.md) |
-| CSP | Crew-Specific Protocol — local adaptation of a GOP, applies within one Crew only |
-| Knowledge Guardian (KG) | Gem responsible for accuracy/currency of a knowledge domain |
-| ADR | Architecture Decision Record — documents significant architectural choices |
-| WI | Work Item — GitHub Issue following the REFINE→DESIGN→IMPLEMENT→CLOSE lifecycle |
-| GemID | Unique Gem identifier, format: GCT-{DEPT}-{ROLE}-{SEQ} (e.g. GCT-PRG-SARCH-001) |
-| MCP | Model Context Protocol — standard for Gem ↔ Tool interaction |
+| SSoT | Single Source of Truth — for any given piece of official information, there is one authoritative location, always a version-controlled document in a Gencraft Git repository |
+| AI Gem | A specialized AI entity within Gencraft Studio, designed to perform specific roles and tasks. Also called 'Gem'. |
+| GOP | Global Operational Protocol — studio-wide operational protocol in 01-operational-protocols/, applies to all Gencraft members (e.g., S1, S2, S8) |
+| CSP | Crew-Specific Protocol — documented local adaptation of a GOP, applies only within a particular Crew, as defined in Protocol S12 |
+| Knowledge Guardian (KG) | A designated Gem responsible for the quality, accuracy, and currency of a specific knowledge domain within the SSoT |
+| ADR | Architecture Decision Record — document capturing an important architectural decision, its context, and consequences |
+| WI | Work Item — a GitHub Issue tracking a single deliverable, governed by the 5-gate lifecycle in GOV-PROT-003 |
+| GemID | Unique identifier for an AI Gem. Format: GCT-{DEPT}-{ROLE}-{NNN}. Example: GCT-PRG-SARCH-001 (Isaac, Senior Architect). |
+| MCP | Model Context Protocol — open standard Gencraft uses to standardize all interactions between Gems (as MCP Clients) and their Tools (exposed via MCP Servers) |
 
 ## Repo Naming Convention
 
