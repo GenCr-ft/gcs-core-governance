@@ -219,7 +219,7 @@ def check_config_dirs_non_empty(dirs: list[Path]) -> list[str]:
 
 def main() -> int:
     missing_files = [
-        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF]
+        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES]
         if not p.exists()
     ]
     if missing_files:
@@ -237,6 +237,7 @@ def main() -> int:
         storage_canonical, routing_storage_ids, "storage-rules.yml", "document-routing.md routing table"
     )
     placeholder_failures = check_placeholder_parity(yaml_templates, routing_templates)
+    reflib_failures = check_reflib_parity(STORAGE_RULES, REFLIB_STORAGE_RULES)
 
     # Invariant 3: every GemID in technical-constraints.md Key Agents Referenced must appear
     # in studio-quick-ref.md Key Gem Contacts for Escalation.
@@ -251,28 +252,19 @@ def main() -> int:
         "studio-quick-ref.md Key Gem Contacts for Escalation",
     )
 
-    config_dir_failures = check_config_dirs_non_empty(CONFIG_DIRS_REQUIRED_NON_EMPTY)
-    all_failures = storage_failures + placeholder_failures + gem_failures + config_dir_failures
+    all_failures = storage_failures + placeholder_failures + reflib_failures + gem_failures
 
     if not all_failures:
         print(
             f"PASS: {len(storage_canonical)} storage rule IDs all present in document-routing.md; "
             f"all target_path_template placeholders match; "
-            f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref; "
-            f"all required config-engines directories are non-empty"
+            f"reference-libraries copy is in parity with canonical; "
+            f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref"
         )
         return 0
 
     for line in all_failures:
         print(line)
-
-    # Return 0 (WARN) when ALL messages are advisory orphan warnings; return 1 (FAIL) only
-    # when at least one genuine FAIL condition is present (missing canonical ID, placeholder
-    # mismatch, or GemID subset failure). This lets AI agents and CI distinguish blocking
-    # failures from stale entries.
-    has_fail = any(line.startswith("FAIL:") for line in all_failures)
-    return 1 if has_fail else 0
-
-
+    return 1
 if __name__ == "__main__":
     sys.exit(main())

@@ -12,6 +12,7 @@ on:
       - 'agent-context/grounding/technical-constraints.md'
       - 'agent-context/grounding/studio-quick-ref.md'
       - 'scripts/verify_agent_context_parity.py'
+      - 'reference-libraries/devops-standards/foundations/governance/rules/storage-rules.yml'
   push:
     branches: [main]
     paths:
@@ -24,6 +25,7 @@ on:
       - 'agent-context/grounding/technical-constraints.md'
       - 'agent-context/grounding/studio-quick-ref.md'
       - 'scripts/verify_agent_context_parity.py'
+      - 'reference-libraries/devops-standards/foundations/governance/rules/storage-rules.yml'
 
 jobs:
   parity:

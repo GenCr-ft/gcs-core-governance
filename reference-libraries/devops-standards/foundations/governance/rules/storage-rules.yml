@@ -2,6 +2,7 @@
 # Version: 1.0.0
 # filename: storage-rules.yml
 # Rule Evaluation Order: Rules are evaluated top-down. The first matching rule is applied.
+---
 storage_rules:
   - rule_id: "EXPERIMENTAL_STORAGE_RULE"
     description: "Artifacts in an experimental phase must reside in a dedicated experimental repository."
@@ -12,16 +13,27 @@ storage_rules:
       target_repository_prefix: "gce-"
       justification: "Isolates experimental work from production SSoT to prevent dependency conflicts."
 
+  - rule_id: "DATA_ARTIFACT_STORAGE"
+    description: "Structured and unstructured datasets (telemetry, analytics, game configuration) live in dedicated data repositories."
+    if:
+      all_of:
+        - artifact-class: "data"
+    then:
+      target_repository_prefix: "gcd-data-"
+      target_path_template: "datasets/{domain}/{docId}.{title_kebab_case}"
+      justification: "Centralizes data artifacts in dedicated data repositories, keeping telemetry, analytics, and game configuration datasets separate from code and knowledge artifacts."
+
+
   - rule_id: "KNOWLEDGE_GOVERNANCE_STORAGE"
-    description: "Core governance documents (the Constitution and its laws) reside in the technical standards repository."
+    description: "Core governance documents reside in the technical standards repository."
     if:
       all_of:
         - artifact-class: "knowledge"
-        - domain: "governance"
+        - domain: ["governance", "engineering-and-architecture"]
         - classification.category: "to-govern"
     then:
       target_repository_id: "gcs-core-governance"
-      target_path_template: "foundations/governance/{classification.type}/{docId}.md"
+      target_path_template: "foundations/governance/{docId}.md"
       justification: "Keeps the laws defining the system with the technical configurations that enforce them."
 
   - rule_id: "KNOWLEDGE_HANDBOOK_STORAGE"
@@ -73,23 +85,3 @@ storage_rules:
     then:
       target_repository_prefix: "gcp-aethel-assets-"
       justification: "Separates large binary assets from code while keeping them project-specific."
-
-  - rule_id: "DATA_ARTIFACT_STORAGE"
-    description: "Structured and unstructured datasets (telemetry, analytics, game configuration) live in dedicated data repositories."
-    if:
-      all_of:
-        - artifact-class: "data"
-    then:
-      target_repository_prefix: "gcd-data-"
-      target_path_template: "datasets/{domain}/{docId}.{title_kebab_case}"
-      justification: "Centralizes data artifacts in dedicated data repositories, keeping telemetry, analytics, and game configuration datasets separate from code and knowledge artifacts."
-
-  - rule_id: "SECURITY_SECRET_STORAGE"
-    description: "Artifacts classified as L3-Secret must be stored in a dedicated, high-security repository."
-    if:
-      all_of:
-        - security-classification: "l3-secret"
-    then:
-      target_repository_id: "gcs-security-core"
-      target_path_template: "secrets/{docId}.md"
-      justification: "Enforces strict access control for the most sensitive studio assets by routing them to the dedicated, access-restricted security repository."
