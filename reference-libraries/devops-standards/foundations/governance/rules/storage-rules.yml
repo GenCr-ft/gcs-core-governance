@@ -42,8 +42,8 @@ storage_rules:
       all_of:
         - artifact-class: "infrastructure"
     then:
-      target_repository_prefix: "gci-"
-      justification: "Centralizes infrastructure code for security and consistency, aligning with gci-* prefix convention."
+      target_repository_id: "gencraft-iac"
+      justification: "Routes to gencraft-iac, the sole IaC repository in the studio."
 
   - rule_id: "PROCESS_DEFINITION_STORAGE"
     description: "Reusable process definitions like GitHub Actions must live in the 'gcd-shared-actions' repository."
