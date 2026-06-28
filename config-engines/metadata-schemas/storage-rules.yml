@@ -40,7 +40,7 @@ storage_rules:
       all_of:
         - artifact-class: "knowledge"
         - domain: ["governance", "production-management", "marketing-and-communication", "legal", "finance-and-hr"]
-        - classification.category: ["to-instruct", "to-inform", "to-record", "to-define"]
+        - classification.category: ["to-instruct", "to-inform", "to-describe", "to-record", "to-define"]
     then:
       target_repository_id: "gcs-core-governance"
       target_path_template: "reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md"
