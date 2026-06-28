@@ -42,7 +42,7 @@ Key facts for cold-start context. Full lexicon in GOV-GUIDE-412.
 | `gcs-` | Studio-wide standards and handbooks |
 | `gct-` | Templates (repo, service, SSoT) |
 | `gce-` | Experimental (not yet production) |
-| `gci-` | Infrastructure as Code |
+| *(none — see `gencraft-iac`)* | Infrastructure as Code (predates prefix convention; actual repo is `gencraft-iac`) |
 
 ## Key Repositories
 

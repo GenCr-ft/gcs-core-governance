@@ -25,7 +25,7 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 | `EXPERIMENTAL_STORAGE_RULE` | `metadata.lifecycle-phase: "experimental"` | repo prefix `gce-` |
 | `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","engineering-and-architecture"]` + `classification.category: "to-govern"` | `gcs-core-governance` → `foundations/governance/{classification.type}/{docId}.md` |
 | `KNOWLEDGE_HANDBOOK_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","production-management","marketing-and-communication","legal","finance-and-hr"]` + `classification.category: ["to-instruct","to-inform","to-record","to-define"]` | `gcs-core-governance` → `reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` |
-| `INFRASTRUCTURE_CODE_STORAGE` | `artifact-class: "infrastructure"` | repo prefix `gci-` |
+| `INFRASTRUCTURE_CODE_STORAGE` | `artifact-class: "infrastructure"` | `gencraft-iac` |
 | `PROCESS_DEFINITION_STORAGE` | `artifact-class: "process"` | `gcd-shared-actions` |
 | `CODE_SHARED_LIBRARY_STORAGE` | `artifact-class: "code"` + `code-classification.type: "library"` | repo prefix `gcl-` |
 | `ASSET_PROJECT_STORAGE` | `artifact-class: "asset"` + `scope: "project-aethel"` | repo prefix `gcp-aethel-assets-` |
@@ -66,7 +66,7 @@ flowchart TD
     A[New artifact to route] --> B{lifecycle-phase = experimental?}
     B -- Yes --> C[gce-* repo]
     B -- No --> D{artifact-class?}
-    D -- infrastructure --> E[gci-* repo]
+    D -- infrastructure --> E[gencraft-iac]
     D -- process --> F[gcd-shared-actions]
     D -- asset + project-aethel --> G[gcp-aethel-assets-*]
     D -- code + library --> H[gcl-* repo]
