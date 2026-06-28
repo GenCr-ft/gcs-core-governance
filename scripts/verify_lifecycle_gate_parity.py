@@ -58,9 +58,12 @@ def load_gates_yml(path: Path) -> dict:
 
 
 def check_metadata_fields(data: dict) -> list[str]:
-    """Verify metadata.source_version and metadata.last_verified are real YAML fields."""
+    """Verify metadata.source_version and metadata.last_verified are real YAML fields.
+
+    Accepts _meta.metadata: nested layout or top-level metadata: layout.
+    """
     failures = []
-    metadata = data.get("metadata")
+    metadata = data.get("metadata") or (data.get("_meta") or {}).get("metadata")
     if not isinstance(metadata, dict):
         failures.append(
             "FAIL: wi-lifecycle-gates.yml missing top-level 'metadata' mapping — "
