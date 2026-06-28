@@ -23,7 +23,7 @@ Extracted from `config-engines/metadata-schemas/storage-rules.yml` (first-match 
 | Rule ID | Condition (exact YAML field syntax from storage-rules.yml) | Target |
 |---------|-----------|--------|
 | `EXPERIMENTAL_STORAGE_RULE` | `metadata.lifecycle-stage: "experimental"` | repo prefix `gce-` |
-| `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","engineering-and-architecture"]` + `classification.category: "to-govern"` | `gcs-core-governance` → `foundations/governance/{classification.type}/{docId}.md` |
+| `KNOWLEDGE_GOVERNANCE_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","engineering-and-architecture"]` + `classification.category: "to-govern"` | `gcs-core-governance` → `foundations/governance/{docId}.md` |
 | `KNOWLEDGE_HANDBOOK_STORAGE` | `artifact-class: "knowledge"` + `domain: ["governance","production-management","marketing-and-communication","legal","finance-and-hr"]` + `classification.category: ["to-instruct","to-inform","to-record","to-define"]` | `gcs-core-governance` → `reference-libraries/studio-handbook/sections/{domain}/{docId}.{title_kebab_case}.md` |
 | `INFRASTRUCTURE_CODE_STORAGE` | `artifact-class: "infrastructure"` | `gencraft-iac` |
 | `PROCESS_DEFINITION_STORAGE` | `artifact-class: "process"` | `gcd-shared-actions` |
