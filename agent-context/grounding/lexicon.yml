@@ -61,7 +61,7 @@ terms:
     source: "GOV-GUIDE-412 §2"
 
   - term: IaC
-    definition: "Infrastructure as Code — managing and provisioning infrastructure through machine-readable definition files (OpenTofu). Repo: gencraft-iac."
+    definition: "Infrastructure as Code — managing and provisioning infrastructure through machine-readable definition files (OpenTofu). Repo prefix: gci-* (e.g., gencraft-iac)."
     source: "GOV-GUIDE-412 §2"
 
   - term: CI/CD
