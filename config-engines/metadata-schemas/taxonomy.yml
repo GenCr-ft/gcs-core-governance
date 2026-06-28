@@ -173,6 +173,18 @@ knowledge_classification_type:
     category: "to-record"
     code: "ARCH"
     skos:definition: "Archived or deprecated documents kept for historical trace."
+  - skos:prefLabel: "rules-index"
+    category: to-govern
+    code: "RULES"
+    skos:definition: "An index document enumerating the operative rules, constraints, or policies that govern a domain or agent."
+  - skos:prefLabel: "readme"
+    category: to-describe
+    code: "READ"
+    skos:definition: "A human- and agent-readable entry-point document describing the purpose, structure, and navigation of a repository or directory."
+  - skos:prefLabel: "agent-protocol"
+    category: to-instruct
+    code: "PROTO"
+    skos:definition: "An operational protocol document specifying step-by-step procedures or algorithms for AI agents to follow."
 
 studio_domain:
   - skos:prefLabel: "governance"
