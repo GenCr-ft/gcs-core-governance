@@ -7,7 +7,7 @@ metadata:
   source_document: "GOV-PROT-003.wi-lifecycle-contract.md"
   source_version: "1.0.0"
   last_verified: "2026-06-27"
-  knowledgeGuardian: "Orion (GCT-GOV-ORN-001)" 
+  knowledgeGuardian: "Orion (GCT-UTL-SLG-001)" 
 
 gates:
   - phase: create
