@@ -17,6 +17,7 @@ _meta:
 terms:
   - term: Gemma
     definition: "The GEM instantiation agent. Injects GemID, role title, and core mission context into a Gem at the start of each session. All Gems receive their operational identity via Gemma."
+    gemId: "GCT-UTL-GGEN-001"
     source: "GOV-GUIDE-006 GASAI v2.0"
 
   - term: SSoT

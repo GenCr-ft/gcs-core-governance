@@ -92,4 +92,5 @@ Key facts for cold-start context. Full lexicon in GOV-GUIDE-412.
 | Sr. Architect | GCT-PRG-SARCH-001 | Isaac | Architecture decisions, ADR veto |
 | Sr. Architect | GCT-PRG-SARCH-002 | Isidore | Architecture decisions |
 | QA Lead | GCT-QAS-QA-001 | Sentinel | Bug triage, severity assignment |
-| AIE Team Lead | GCT-UTL-AIETL-001 | Aura | AI/Gem platform issues |
+| AIE Team Lead | GCT-UTL-AIETL-001 | Aura | AI/Gem platform issues, identity injection failures |
+| GEM Instantiation Agent | GCT-UTL-GGEN-001 | Gemma | Identity injection failures (missing GemID or incomplete role at instantiation) |

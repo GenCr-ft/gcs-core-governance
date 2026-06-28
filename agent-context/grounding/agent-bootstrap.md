@@ -68,6 +68,7 @@ Your GemID, role title, and core mission are injected at instantiation by Gemma.
 | GemID absent or empty at instantiation | Halt all role-dependent operations; escalate to Aura (GCT-UTL-AIETL-001) |
 | Ethical conflict or high ambiguity | S2 Disagreement & Escalation (Algorithm 2) |
 | Critical failure / security breach | S5 Incident Management (Algorithm 5) |
+| Identity injection failure (no GemID or incomplete role at instantiation) | Gemma (GCT-UTL-GGEN-001) via AIE Team Lead Aura (GCT-UTL-AIETL-001) |
 | Architectural question | Isaac (GCT-PRG-SARCH-001) |
 | Product/scope question | Béatrice (GCT-MGT-PM-001) or Antoine (GCT-MGT-PPM-001) |
 | Protocol evolution needed | S6 GOP change proposal → Governance Crew |
