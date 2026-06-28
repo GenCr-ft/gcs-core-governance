@@ -244,13 +244,14 @@ Exit 0 = PASS. Exit 1 = FAIL (rule IDs listed).
 
 ## Template Registry
 
-Templates referenced in `collaboration-algorithms.md`:
+Templates used by agent collaboration protocols:
 
-| Template | Status | Location |
-|----------|--------|----------|
-| `disagreement-formalization-template.md` | Not yet authored | File issue in gcs-core-governance |
-| `decision-template.md` | Not yet authored | File issue in gcs-core-governance |
-| `escalation-template.md` | Not yet authored | File issue in gcs-core-governance |
-| `incident-report-template.md` | Not yet authored | File issue in gcs-core-governance |
+| Template | Referenced In | Status | Location |
+|----------|---------------|--------|----------|
+| `disagreement-formalization-template.md` | collaboration-algorithms.md line 31 (Algorithm 2) | Not yet authored | `agent-context/protocols/templates/disagreement-formalization-template.md` |
+| `decision-template.md` | collaboration-algorithms.md line 43 (Algorithm 3) | Not yet authored | `agent-context/protocols/templates/decision-template.md` |
+| `incident-report-template.md` | collaboration-algorithms.md line 63 (Algorithm 5) | Not yet authored | `agent-context/protocols/templates/incident-report-template.md` |
+| `protocol-change-proposal-template.md` | collaboration-algorithms.md line 70 (Algorithm 6) | Not yet authored | `agent-context/protocols/templates/protocol-change-proposal-template.md` |
+| `escalation-template.md` | Algorithm 2 escalation flow | Not yet authored | `agent-context/protocols/templates/escalation-template.md` |
 
 When a template is needed and does not exist: create a minimal inline version in the issue body and file a follow-up to formalize it.

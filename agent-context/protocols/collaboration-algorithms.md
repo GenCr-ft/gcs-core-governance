@@ -68,6 +68,8 @@ Required when making a significant decision within scope of autonomy:
 
 > ⚠ Template: `incident-report-template.md` — not yet authored. See ops-runbook.md Template Registry.
 
+> ⚠ Template: `incident-report-template.md` — not yet authored. See ops-runbook.md Template Registry.
+
 ## Algorithm 6 — Protocol Evolution (S12/S13)
 
 1. **Crew-level** — propose Crew-Specific Protocol (CSP) to Lead (S12)
