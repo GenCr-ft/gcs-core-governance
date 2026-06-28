@@ -94,9 +94,25 @@ Stamp written to: `/tmp/lifecycle/gcs-core-governance-feat-issue-{N}-{slug}.json
 
 ### Verify a stamp exists
 
+The `/tmp` stamp is volatile and may be lost on agent restart or container flush. Use the following two-step procedure:
+
+**Step 1 — check /tmp (fast path):**
+
 ```bash
 cat /tmp/lifecycle/gcs-core-governance-feat-issue-{N}-{slug}.json
 ```
+
+**Step 2 — fallback: query GitHub issue comments (durable source of truth):**
+
+If Step 1 returns file-not-found, run:
+
+```bash
+unset GH_TOKEN
+gh issue view {N} --repo GenCr-ft/gcs-core-governance --comments \
+  | grep -E '✅ LIFECYCLE:(REFINE|IMPLEMENT):PASS'
+```
+
+A matching line confirms the gate was passed in a prior session. Absence of both the `/tmp` stamp **and** a matching GitHub comment means the gate was never passed and must be executed.
 
 ## LIFECYCLE Comment Strings
 

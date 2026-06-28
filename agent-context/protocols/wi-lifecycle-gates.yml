@@ -35,7 +35,8 @@ gates:
     blockers_additional:
       - spec_refs_still_approved: true  # see GOV-PROT-003 §Spec Reference Contract for evaluation rules
     outputs:
-      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # written by lifecycle_stamp.py
+      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # written by lifecycle_stamp.py; volatile — lost on session restart
+      - stamp_miss_fallback: github_issue_comments  # on /tmp miss, query issue comments for pattern "✅ LIFECYCLE:REFINE:PASS"
       - comment: "✅ LIFECYCLE:REFINE:PASS"
     lifecycle_stamp_cmd: "python3 $(git -C . rev-parse --show-toplevel)/../gcs-plt-gemop/hooks/lifecycle_stamp.py write {repo} {branch} {issue} refine"  # path anchored to workspace root; gcs-plt-gemop must be a sibling dir
     blockers:
@@ -85,7 +86,8 @@ gates:
       never: red+green in same commit for same feature
     adversary_review: true
     outputs:
-      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # phase updated to "implement"
+      - stamp: /tmp/lifecycle/{repo}-{branch}.json  # phase updated to "implement"; volatile — lost on session restart
+      - stamp_miss_fallback: github_issue_comments  # on /tmp miss, query issue comments for pattern "✅ LIFECYCLE:IMPLEMENT:PASS"
       - comment: "✅ LIFECYCLE:IMPLEMENT:PASS"
     blockers:
       - self_approval_on_either_sub_issue
