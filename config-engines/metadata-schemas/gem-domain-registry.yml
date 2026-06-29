@@ -62,12 +62,6 @@ domains:
       repos: [gcs-plt-gemop, gcs-plt-gembp]
       path_patterns: ["agents/**", "blueprints/**", "skills/**", "gems/**"]
 
-  - gem_id: forge
-    display: bad-entry-for-red-test
-    authoritative:
-      repos: [test]
-      path_patterns: ["**"]
-
   - gem_id: gct-dvo-dtl-001-diane
     display: diane
     authoritative:

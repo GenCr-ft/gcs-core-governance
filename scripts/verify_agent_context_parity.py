@@ -256,6 +256,12 @@ def check_gem_domain_registry_valid(path: Path) -> list[str]:
                 failures.append(
                     f"FAIL: {path.name} domains[{i}] missing required field '{field}'"
                 )
+        gem_id = entry.get("gem_id", "")
+        if gem_id and not GEM_ID_PATTERN.match(gem_id):
+            failures.append(
+                f"FAIL: {path.name} domains[{i}] gem_id {gem_id!r} does not match "
+                r"^gct-[a-z]+-[a-z]+-\d{3}-[a-z]+$"
+            )
 
     return failures
 
