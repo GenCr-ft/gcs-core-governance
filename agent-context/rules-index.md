@@ -27,6 +27,7 @@ Authoritative pointer manifest. All enforceable rules live in these YAML/JSON fi
 | `governance-config.schema.json` | Schema contract | JSON Schema Draft-7 for the resolved governance config object |
 | `ontology.yml` | Knowledge ontology | RDF triples, class hierarchy, containment constraints |
 | `taxonomy.yml` | Vocabulary taxonomy | SKOS concepts for artifact classes, domains, lifecycles |
+| `gem-domain-registry.yml` | Agent domain boundaries | Gem → repo + path-pattern mappings; consumed by `domain-guard.py` hook (gcs-plt-gemop#287) |
 | `organizational-entities.yml` | Org catalog | 25 entities: crews, project-teams, departments, gems |
 | `governance-scopes.yml` | Scope catalog | governance scope definitions |
 | `governance-kpi.yml` | KPIs | 3 governance KPIs with targets, owners, cadence, data-source, report-to, and alert-at fields |

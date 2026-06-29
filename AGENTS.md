@@ -7,7 +7,7 @@ authors:
 creation_date: '2026-06-13'
 language: en
 summary: Claude Code subagent entry point for gcs-core-governance. Surfaces agent-context/ and human-guides/ layers.
-last_updated_date: '2026-06-27'
+last_updated_date: '2026-06-29'
 metadata:
   lifecycle-stage: approved
   scope: studio-governance
@@ -47,6 +47,7 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 
 | Task | Command |
 |------|---------|
+| Run all parity checks | `./test.sh` |
 | Run compression acceptance tests | `bash tools/tests/test_verify_compression.sh` |
 | Run agent-context parity check | `python3 scripts/verify_agent_context_parity.py` |
 | Write lifecycle stamp (REFINE) | `bash scripts/lifecycle-stamp.sh write gcs-core-governance <branch> <issue> refine` |
@@ -79,3 +80,10 @@ Canonical DevOps/tooling SSoT for GenCr@ft Studio. Read `agent-context/` for mac
 - Commit without a GitHub Issue reference
 - Delete existing governance standards without Studio Lead approval
 - Modify `reference-libraries/` content (frozen pending restructure)
+- Edit `config-engines/metadata-schemas/gem-domain-registry.yml` without Aura sign-off (GCT-UTL-AIETL-001) — changes to gem domain boundaries affect hook enforcement across all repos
+
+## Governed Artefacts
+
+| File | Approver required |
+|------|------------------|
+| `config-engines/metadata-schemas/gem-domain-registry.yml` | Aura (GCT-UTL-AIETL-001) — gem domain boundary changes affect hook enforcement |

@@ -58,12 +58,19 @@ def load_gates_yml(path: Path) -> dict:
 
 
 def check_metadata_fields(data: dict) -> list[str]:
-    """Verify metadata.source_version and metadata.last_verified are real YAML fields."""
+    """Verify metadata.source_version and metadata.last_verified are real YAML fields.
+
+    The file uses the studio _meta SSoT convention: fields live under
+    _meta.metadata (not at the top level). Fall back to a bare top-level
+    'metadata' key for forward-compatibility.
+    """
     failures = []
-    metadata = data.get("metadata")
+    metadata = data.get("_meta", {}).get("metadata")
+    if metadata is None:
+        metadata = data.get("metadata")
     if not isinstance(metadata, dict):
         failures.append(
-            "FAIL: wi-lifecycle-gates.yml missing top-level 'metadata' mapping — "
+            "FAIL: wi-lifecycle-gates.yml missing '_meta.metadata' block — "
             "source_version and last_verified must be parseable YAML fields, not comments"
         )
         return failures

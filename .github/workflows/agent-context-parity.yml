@@ -35,6 +35,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Checkout gcs-plt-gemop for gem domain registry cross-reference
+        uses: actions/checkout@v4
+        with:
+          repository: GenCr-ft/gcs-plt-gemop
+          path: ../gcs-plt-gemop
+          token: ${{ secrets.CROSS_REPO_PAT }}
+      - name: Assert gcs-plt-gemop/gems/index.yaml reachable (requires secondary checkout)
+        run: test -f ../gcs-plt-gemop/gems/index.yaml || (echo "FAIL: gems/index.yaml not found — secondary checkout missing" && exit 1)
       - name: Verify agent-context routing table matches storage-rules.yml and validation-rules.yml
         run: python3 scripts/verify_agent_context_parity.py
       - name: Verify wi-lifecycle-gates.yml gate phases match GOV-PROT-003

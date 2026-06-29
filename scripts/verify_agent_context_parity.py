@@ -20,9 +20,16 @@ Exit 0 = WARN (only orphaned routing-table entries found; no canonical rule IDs 
 Exit 1 = FAIL (one or more canonical rule IDs are absent from document-routing.md, or
          placeholder names diverge, GemID subset check fails, or required files are missing).
 """
+import os
 import re
 import sys
 from pathlib import Path
+
+try:
+    import yaml
+except ImportError:
+    print("FAIL: PyYAML is required — install with: pip install pyyaml")
+    sys.exit(1)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STORAGE_RULES = REPO_ROOT / "config-engines" / "metadata-schemas" / "storage-rules.yml"
@@ -35,6 +42,10 @@ CONFIG_DIRS_REQUIRED_NON_EMPTY = [
 ]
 TECHNICAL_CONSTRAINTS = REPO_ROOT / "agent-context" / "grounding" / "technical-constraints.md"
 STUDIO_QUICK_REF = REPO_ROOT / "agent-context" / "grounding" / "studio-quick-ref.md"
+REGISTRY = REPO_ROOT / "config-engines" / "metadata-schemas" / "gem-domain-registry.yml"
+WORKSPACE_ROOT = Path(os.environ.get("WORKSPACE_ROOT", str(REPO_ROOT.parent)))
+GEMS_INDEX = WORKSPACE_ROOT / "gcs-plt-gemop" / "gems" / "index.yaml"
+GEM_ID_PATTERN = re.compile(r"^gct-[a-z]+-[a-z]+-\d{3}-[a-z]+$")
 
 
 def extract_rule_ids_from_yaml(path: Path) -> list[str]:
@@ -76,8 +87,6 @@ def check_reflib_parity(canonical_path: Path, reflib_path: Path) -> list[str]:
     Compares each rule block field-by-field: rule_id, description, justification.
     Returns list of failure messages, empty = PASS.
     """
-    import yaml
-
     failures = []
     canonical_text = canonical_path.read_text(encoding="utf-8")
     reflib_text = reflib_path.read_text(encoding="utf-8")
@@ -217,9 +226,102 @@ def check_config_dirs_non_empty(dirs: list[Path]) -> list[str]:
     return failures
 
 
+def check_gem_domain_registry_valid(path: Path) -> list[str]:
+    """Validate gem-domain-registry.yml structure.
+
+    Returns FAIL messages for: missing _meta, empty exempt_conditions, or domain
+    entries lacking gem_id/display/authoritative keys.
+    """
+    failures = []
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as exc:
+        failures.append(f"FAIL: could not parse {path.name}: {exc}")
+        return failures
+
+    if not isinstance(data, dict):
+        failures.append(f"FAIL: {path.name} must be a YAML mapping at the top level")
+        return failures
+
+    if "_meta" not in data:
+        failures.append(f"FAIL: {path.name} missing '_meta' block")
+
+    exempt = data.get("exempt_conditions")
+    if not exempt:
+        failures.append(f"FAIL: {path.name} 'exempt_conditions' is absent or empty")
+
+    for i, entry in enumerate(data.get("domains", [])):
+        for field in ("gem_id", "display", "authoritative"):
+            if field not in entry:
+                failures.append(
+                    f"FAIL: {path.name} domains[{i}] missing required field '{field}'"
+                )
+        gem_id = entry.get("gem_id", "")
+        if not gem_id:
+            failures.append(
+                f"FAIL: {path.name} domains[{i}] gem_id is empty or absent"
+            )
+            continue
+        if not GEM_ID_PATTERN.match(gem_id):
+            failures.append(
+                f"FAIL: {path.name} domains[{i}] gem_id {gem_id!r} does not match "
+                r"^gct-[a-z]+-[a-z]+-\d{3}-[a-z]+$"
+            )
+
+    return failures
+
+
+def check_gem_ids_in_gems_index(registry_path: Path, gems_index_path: Path) -> list[str]:
+    """Verify every gem_id in the registry has a matching entry in gems/index.yaml.
+
+    Cross-reference algorithm: re.sub(r"-[a-z]+$", "", gem_id).upper() produces the
+    canonical GCT-* id (e.g. gct-prg-ldtl-001-forge → GCT-PRG-LDTL-001). The result
+    is looked up in the 'id' field of each entry in gems/index.yaml.
+
+    Assumes a single-word lowercase-alpha display suffix. Multi-word suffixes (e.g.
+    tech-lead) would produce incorrect lookup keys — no such entries exist in the
+    current gem corpus, but this constraint should be documented when adding new gems.
+
+    Returns a FAIL message immediately if gems_index_path does not exist.
+    """
+    if not gems_index_path.exists():
+        return [
+            f"FAIL: {gems_index_path.name} not found at {gems_index_path} — "
+            "verify WORKSPACE_ROOT env var or sibling gcs-plt-gemop checkout"
+        ]
+
+    try:
+        index_data = yaml.safe_load(gems_index_path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as exc:
+        return [f"FAIL: could not parse {gems_index_path.name}: {exc}"]
+
+    index_ids = {entry["id"] for entry in index_data.get("gems", []) if "id" in entry}
+
+    try:
+        registry_data = yaml.safe_load(registry_path.read_text(encoding="utf-8"))
+    except yaml.YAMLError:
+        return []  # structural issues caught by check_gem_domain_registry_valid
+
+    failures = []
+    for entry in registry_data.get("domains", []):
+        gem_id = entry.get("gem_id", "")
+        if not gem_id:
+            continue
+        canonical_id = re.sub(r"-[a-z]+$", "", gem_id).upper()
+        if canonical_id not in index_ids:
+            failures.append(
+                f"FAIL: gem_id {gem_id!r} → {canonical_id!r} not found in "
+                f"{gems_index_path.name}"
+            )
+    return failures
+
+
 def main() -> int:
+    # GEMS_INDEX is intentionally excluded: check_gem_ids_in_gems_index() handles
+    # its own absent-file case and returns a scoped FAIL, preserving isolation for
+    # all pre-existing checks when the sibling gcs-plt-gemop checkout is absent.
     missing_files = [
-        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES]
+        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES, REGISTRY]
         if not p.exists()
     ]
     if missing_files:
@@ -252,14 +354,24 @@ def main() -> int:
         "studio-quick-ref.md Key Gem Contacts for Escalation",
     )
 
-    all_failures = storage_failures + placeholder_failures + reflib_failures + gem_failures
+    registry_failures = check_gem_domain_registry_valid(REGISTRY)
+    cross_ref_failures = check_gem_ids_in_gems_index(REGISTRY, GEMS_INDEX)
+
+    all_failures = storage_failures + placeholder_failures + reflib_failures + gem_failures + registry_failures + cross_ref_failures
 
     if not all_failures:
+        try:
+            _reg = yaml.safe_load(REGISTRY.read_text(encoding="utf-8"))
+            _gem_count = len(_reg.get("domains", []))
+        except Exception:
+            _gem_count = 0
         print(
             f"PASS: {len(storage_canonical)} storage rule IDs all present in document-routing.md; "
             f"all target_path_template placeholders match; "
             f"reference-libraries copy is in parity with canonical; "
-            f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref"
+            f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref; "
+            f"gem-domain-registry.yml structure valid; "
+            f"{_gem_count} gem IDs validated against gems/index.yaml"
         )
         return 0
 
@@ -268,3 +380,4 @@ def main() -> int:
     return 1
 if __name__ == "__main__":
     sys.exit(main())
+
