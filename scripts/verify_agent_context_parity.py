@@ -313,7 +313,7 @@ def check_gem_ids_in_gems_index(registry_path: Path, gems_index_path: Path) -> l
 
 def main() -> int:
     missing_files = [
-        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES, REGISTRY]
+        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES, REGISTRY, GEMS_INDEX]
         if not p.exists()
     ]
     if missing_files:
@@ -347,16 +347,23 @@ def main() -> int:
     )
 
     registry_failures = check_gem_domain_registry_valid(REGISTRY)
+    cross_ref_failures = check_gem_ids_in_gems_index(REGISTRY, GEMS_INDEX)
 
-    all_failures = storage_failures + placeholder_failures + reflib_failures + gem_failures + registry_failures
+    all_failures = storage_failures + placeholder_failures + reflib_failures + gem_failures + registry_failures + cross_ref_failures
 
     if not all_failures:
+        try:
+            _reg = yaml.safe_load(REGISTRY.read_text(encoding="utf-8"))
+            _gem_count = len(_reg.get("domains", []))
+        except Exception:
+            _gem_count = 0
         print(
             f"PASS: {len(storage_canonical)} storage rule IDs all present in document-routing.md; "
             f"all target_path_template placeholders match; "
             f"reference-libraries copy is in parity with canonical; "
             f"{len(constraints_gem_ids)} GemIDs from technical-constraints all present in studio-quick-ref; "
-            f"gem-domain-registry.yml structure valid"
+            f"gem-domain-registry.yml structure valid; "
+            f"{_gem_count} gem IDs validated against gems/index.yaml"
         )
         return 0
 

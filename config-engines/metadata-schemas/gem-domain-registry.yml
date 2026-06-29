@@ -68,8 +68,3 @@ domains:
       repos: [gcd-shared-actions, gcd-ops-scripts, gencraft-iac]
       path_patterns: [".github/workflows/**", "**/*.yml", "**/*.tf", "**/*.tofu"]
 
-  - gem_id: gct-zzz-zzz-999-nobody
-    display: nobody
-    authoritative:
-      repos: []
-      path_patterns: []
