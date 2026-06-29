@@ -1,0 +1,69 @@
+_meta:
+  docId: GOV-CFG-GDREG-001
+  title: Gem Domain Registry
+  version: 1.0.0
+  authors: [Governance Crew]
+  metadata:
+    lifecycle-stage: approved
+    scope: studio
+    domain: governance
+    doc-type: config
+    security-classification: l2_confidential
+
+exempt_conditions:
+  - gem_id_unset: true
+  - agent_types:
+      - codebase-researcher
+      - test-resolution-specialist
+      - security-auditor
+      - pm-spec-validator
+      - test-architect
+
+domains:
+  - gem_id: gct-prg-ldtl-001-forge
+    display: forge
+    authoritative:
+      repos: [gcp-aethel-server]
+      path_patterns: ["**/*.ts", "**/*.js", "**/*.json"]
+
+  - gem_id: gct-prg-nbp-001-nexus
+    display: nexus
+    authoritative:
+      repos: [gcp-aethel-server, gcl-srv-persistence, gcl-srv-authentication]
+      path_patterns: ["**/*.ts", "**/*.prisma", "prisma/migrations/**"]
+
+  - gem_id: gct-prg-gp-001-axiom
+    display: axiom
+    authoritative:
+      repos: [gcp-aethel-server, gcp-aethel-client]
+      path_patterns: ["**/*.ts", "**/*.gd", "**/*.tscn"]
+
+  - gem_id: gct-prg-pcg-001-genesis
+    display: genesis
+    authoritative:
+      repos: [gcp-aethel-pcg]
+      path_patterns: ["**/*.rs", "**/*.py", "**/*.toml"]
+
+  - gem_id: gct-prg-red-001-prism
+    display: prism
+    authoritative:
+      repos: [gcl-voxel-engine, gcp-aethel-client]
+      path_patterns: ["**/*.rs", "**/*.gd", "**/*.glsl"]
+
+  - gem_id: gct-prg-sarch-001-isaac
+    display: isaac
+    authoritative:
+      repos: [gcp-aethel-architecture]
+      path_patterns: ["adrs/**", "**/*.md", "**/*.drawio"]
+
+  - gem_id: gct-utl-aietl-001-aura
+    display: aura
+    authoritative:
+      repos: [gcs-plt-gemop, gcs-plt-gembp]
+      path_patterns: ["agents/**", "blueprints/**", "skills/**", "gems/**"]
+
+  - gem_id: gct-dvo-dtl-001-diane
+    display: diane
+    authoritative:
+      repos: [gcd-shared-actions, gcd-ops-scripts, gencraft-iac]
+      path_patterns: [".github/workflows/**", "**/*.yml", "**/*.tf", "**/*.tofu"]
