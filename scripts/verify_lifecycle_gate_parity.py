@@ -65,7 +65,9 @@ def check_metadata_fields(data: dict) -> list[str]:
     'metadata' key for forward-compatibility.
     """
     failures = []
-    metadata = data.get("_meta", {}).get("metadata") or data.get("metadata")
+    metadata = data.get("_meta", {}).get("metadata")
+    if metadata is None:
+        metadata = data.get("metadata")
     if not isinstance(metadata, dict):
         failures.append(
             "FAIL: wi-lifecycle-gates.yml missing '_meta.metadata' block — "

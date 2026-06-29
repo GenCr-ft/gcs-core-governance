@@ -257,7 +257,12 @@ def check_gem_domain_registry_valid(path: Path) -> list[str]:
                     f"FAIL: {path.name} domains[{i}] missing required field '{field}'"
                 )
         gem_id = entry.get("gem_id", "")
-        if gem_id and not GEM_ID_PATTERN.match(gem_id):
+        if not gem_id:
+            failures.append(
+                f"FAIL: {path.name} domains[{i}] gem_id is empty or absent"
+            )
+            continue
+        if not GEM_ID_PATTERN.match(gem_id):
             failures.append(
                 f"FAIL: {path.name} domains[{i}] gem_id {gem_id!r} does not match "
                 r"^gct-[a-z]+-[a-z]+-\d{3}-[a-z]+$"
@@ -312,8 +317,11 @@ def check_gem_ids_in_gems_index(registry_path: Path, gems_index_path: Path) -> l
 
 
 def main() -> int:
+    # GEMS_INDEX is intentionally excluded: check_gem_ids_in_gems_index() handles
+    # its own absent-file case and returns a scoped FAIL, preserving isolation for
+    # all pre-existing checks when the sibling gcs-plt-gemop checkout is absent.
     missing_files = [
-        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES, REGISTRY, GEMS_INDEX]
+        p for p in [STORAGE_RULES, VALIDATION_RULES, ROUTING_DOC, TECHNICAL_CONSTRAINTS, STUDIO_QUICK_REF, REFLIB_STORAGE_RULES, REGISTRY]
         if not p.exists()
     ]
     if missing_files:
