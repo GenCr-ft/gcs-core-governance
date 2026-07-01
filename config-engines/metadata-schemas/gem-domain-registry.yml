@@ -60,7 +60,15 @@ domains:
     display: aura
     authoritative:
       repos: [gcs-plt-gemop, gcs-plt-gembp]
-      path_patterns: ["agents/**", "blueprints/**", "skills/**", "gems/**"]
+      path_patterns:
+        - "agents/**"
+        - "blueprints/**"
+        - "skills/**"
+        - "gems/**"
+        - "hooks/**"
+        - "workspace/**"
+        - "tests/**"
+        - "scripts/**"
 
   - gem_id: gct-dvo-dtl-001-diane
     display: diane
