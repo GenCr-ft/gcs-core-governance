@@ -229,7 +229,7 @@ that the PCG authority matrix routes to.
   conformance via the golden-vector fixtures that satisfy the contract.
 
 **Rationale (transcribed from arch#118):** the contract simultaneously constrains
-persistence regeneration, wire-format behaviour on the client/server boundary,
+persistence regeneration, wire-format behavior on the client/server boundary,
 multiplayer authority consistency, and cross-language parity between the Rust/WASM
 production path and the Python parity path. A contract of that authority class cannot
 live inside an implementation epic (Option 1 understates it) nor inside a governance
