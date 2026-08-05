@@ -5,12 +5,15 @@ name: Governance Integrity (advisory)
 # baseline (governance/governed-paths.sha256). ADVISORY — fails visibly on drift, not a
 # server-side required gate (plan-constrained, gcs-plt-gemop#356). Authority: GOV-STAN-010.
 #
-# Pinned to the immutable merge commit of the reusable workflow (gcd-shared-actions#102). Upgrade
-# to a semver tag when gcd-shared-actions cuts its next release (follow-up).
+# Uses the gcd-shared-actions composite action (#105/#106), pinned by full COMMIT SHA — a moving
+# tag is unsafe on self-hosted runners (action cache serves stale tags; actions/runner#145).
 
 on:
   pull_request:
 
 jobs:
   governance:
-    uses: GenCr-ft/gcd-shared-actions/.github/workflows/reusable-governance-integrity.yml@2e497cc589f0c4dacc0757b81459668b79f923e5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: GenCr-ft/gcd-shared-actions/.github/actions/governance-integrity@e1242e7b00050437b05d597dfd3df1416da205d5
