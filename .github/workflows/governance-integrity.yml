@@ -1,0 +1,16 @@
+name: Governance Integrity (advisory)
+
+# Adopts the reusable governance-integrity check published in gcd-shared-actions#101 to verify
+# this repo's drift-block governed files (governance/governed-paths.yaml) against its committed
+# baseline (governance/governed-paths.sha256). ADVISORY — fails visibly on drift, not a
+# server-side required gate (plan-constrained, gcs-plt-gemop#356). Authority: GOV-STAN-010.
+#
+# Pinned to the immutable merge commit of the reusable workflow (gcd-shared-actions#102). Upgrade
+# to a semver tag when gcd-shared-actions cuts its next release (follow-up).
+
+on:
+  pull_request:
+
+jobs:
+  governance:
+    uses: GenCr-ft/gcd-shared-actions/.github/workflows/reusable-governance-integrity.yml@2e497cc589f0c4dacc0757b81459668b79f923e5

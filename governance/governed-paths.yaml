@@ -1,0 +1,15 @@
+# governed-paths.yaml — gcs-core-governance standards/SSoT integrity (Cerberus F-9, gcs-core-governance#303).
+# Verified by the advisory .github/workflows/governance-integrity.yml, which calls the reusable
+# check published in gcd-shared-actions#101. Authority: GOV-STAN-010 (which is itself governed below).
+# ADVISORY posture (no branch protection on plan — gcs-plt-gemop#356): visible, not a hard gate.
+# Only drift-block rows are checksum-verified.
+
+version: 1
+
+paths:
+  - {glob: governance/governed-paths.yaml, mode: drift-block, owner: orion}   # self-protecting first row
+  - {glob: '**/GOV-STAN-*.md', mode: drift-block, owner: orion}                # incl. GOV-STAN-010 (the scheme's authority)
+  - {glob: '**/ENG-STAN-*.md', mode: drift-block, owner: orion}
+  - {glob: '**/PRO-STAN-*.md', mode: drift-block, owner: orion}
+  - {glob: '**/GOV-POLICY-*.md', mode: drift-block, owner: orion}
+  - {glob: 'config-engines/metadata-schemas/**', mode: drift-block, owner: orion}   # SSoT taxonomy/ontology/schemas
