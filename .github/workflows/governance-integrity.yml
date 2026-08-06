@@ -1,12 +1,11 @@
 name: Governance Integrity (advisory)
 
-# Adopts the reusable governance-integrity check published in gcd-shared-actions#101 to verify
-# this repo's drift-block governed files (governance/governed-paths.yaml) against its committed
-# baseline (governance/governed-paths.sha256). ADVISORY — fails visibly on drift, not a
-# server-side required gate (plan-constrained, gcs-plt-gemop#356). Authority: GOV-STAN-010.
-#
-# Uses the gcd-shared-actions composite action (#105/#106), pinned by full COMMIT SHA — a moving
-# tag is unsafe on self-hosted runners (action cache serves stale tags; actions/runner#145).
+# SELF-CONTAINED (vendored) — no cross-repo action dependency. gcd-shared-actions is private and a
+# caller's default GITHUB_TOKEN cannot fetch a composite ACTION from another private repo ("Unable
+# to resolve action … not found" — org cross-repo Actions limitation; cf. CROSS_REPO_PAT #182). The
+# verify script is vendored at governance/verify_governed_paths.py (keep in sync with gcd-shared-actions).
+# ADVISORY: fails visibly on drift, not a server-side required gate (plan-constrained, gcs-plt-gemop#356).
+# Authority: GOV-STAN-010.
 
 on:
   pull_request:
@@ -16,4 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: GenCr-ft/gcd-shared-actions/.github/actions/governance-integrity@e1242e7b00050437b05d597dfd3df1416da205d5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PyYAML
+        run: pip install pyyaml
+      - name: Verify governed-paths integrity (advisory)
+        run: python governance/verify_governed_paths.py
