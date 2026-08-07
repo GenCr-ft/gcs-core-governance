@@ -8,16 +8,24 @@
 # repositories". This repo is the governance SSoT for exactly that kind of config, so it
 # adopts the canonical template rather than minting a bespoke variant (#307 review, HIGH 3).
 #
-# To re-sync:  cp ../gct-repo-template-standard/.gitignore .gitignore  &&  re-apply the addendum.
+# To re-sync: replace ONLY the delimited canonical block, then re-apply this header and the
+# addendum. Do NOT `cp` the template over this file wholesale — that deletes this header.
 #
 # Why this file exists at all: the repo had no .gitignore, so Python bytecode from scripts/
 # appeared as untracked noise in every `git status` — which is how humans and agents judge
 # whether a tree is clean before starting work (#304).
 #
-# Scope note: per GOV-STANDARD-008 §3, the SSoT linter treats anything matching this file as
-# OUT OF SCOPE for validation. Adding a pattern here is therefore a governance change, not
-# housekeeping. Verified: no currently-tracked file matches any pattern
-# (`git ls-files | git check-ignore --stdin` → empty, exit 1, across all tracked files).
+# Scope note: per GOV-STANDARD-008 §6.1 (item 3), the SSoT linter MUST respect .gitignore and
+# treats anything matching it as OUT OF SCOPE for validation. Adding a pattern here is therefore
+# a governance change, not housekeeping. (Note that standard scopes the linter's caller workflow
+# to "every other studio repository", and nothing currently running in THIS repo reads .gitignore
+# — so the de-scoping is prospective here, not yet operative.)
+#
+# Verified: no currently-tracked file matches any pattern —
+#   git ls-files | git check-ignore --no-index --stdin     → empty, exit 1, across 341 files
+# The --no-index is REQUIRED and not optional: without it, check-ignore consults the index and
+# never reports a tracked path, so the pipeline returns empty for ANY .gitignore, including `*`.
+# The earlier form of this line omitted it and was therefore a test that could not fail.
 
 # Gencraft Studio - Standard .gitignore (v1.0)
 # This file is part of gct-repo-template-standard and should be the base for all new repositories.
