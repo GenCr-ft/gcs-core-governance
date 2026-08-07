@@ -1,0 +1,30 @@
+# SSoT Path: gcs-core-governance/.gitignore
+# Description: Ignore locally-generated artifacts. This repo had no .gitignore at all, so
+#              Python bytecode from scripts/ showed up as untracked noise in every
+#              `git status` — which is how both humans and agents judge whether a tree is
+#              clean before starting work (#304).
+#
+# Deliberately minimal: only artifacts this repo actually produces. Nothing here matches a
+# currently-tracked file (verified with `git check-ignore` over `git ls-files`), and no
+# content path is ignored — `reference-libraries/`, `.planning/` and every Markdown document
+# remain fully tracked.
+
+# Python bytecode — produced by scripts/ (mirrors gcs-plt-gemop/.gitignore:17)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local virtual environments
+.venv/
+venv/
+
+# Test and coverage artifacts
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
