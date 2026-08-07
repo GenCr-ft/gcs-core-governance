@@ -2,14 +2,29 @@
 #
 # DERIVED FILE — do not hand-edit the canonical block below.
 #
-# Everything from the "Gencraft Studio - Standard .gitignore" header down to the
-# "REPO-SPECIFIC ADDENDUM" marker is a byte-identical copy of
-# gct-repo-template-standard/.gitignore, which states it "should be the base for all new
-# repositories". This repo is the governance SSoT for exactly that kind of config, so it
-# adopts the canonical template rather than minting a bespoke variant (#307 review, HIGH 3).
+# Lines 45-244 of this file are a BYTE-IDENTICAL copy of gct-repo-template-standard/.gitignore,
+#   sha256 049729bcdf52ccdb6bbdba1b8a1a0aa8170119e98a5683ff822b0f882ca9aed0
+# That template states it "should be the base for all new repositories". This repo is the
+# governance SSoT for exactly that kind of config, so it adopts the canonical template rather
+# than minting a bespoke variant (#307 review, HIGH 3).
 #
-# To re-sync: replace ONLY the delimited canonical block, then re-apply this header and the
-# addendum. Do NOT `cp` the template over this file wholesale — that deletes this header.
+# To re-sync: replace EXACTLY lines 45-244 (not through the ─── rule or the marker below), then
+# re-apply this header and the addendum, then re-check the sha256 above. Do NOT `cp` the template
+# over this file wholesale — that deletes this header.
+#
+# TWO TRAPS, both real today:
+#
+# 1. SEVERAL PATTERNS APPEAR TWICE, and `git check-ignore -v` reports only the LAST match. `.env`
+#    is at :165 AND :203; likewise dist/, build/, *.log, venv/, env/, and .venv vs .venv/. Delete
+#    the :203 `.env` believing you removed the rule and it stays ignored via :165 — which reads as
+#    a broken .gitignore. Being fixed upstream in gct-repo-template-standard#45 (de-duplication).
+#
+# 2. THE REAL HAZARD IS THE NEXT reference-libraries/ SYNC, not additions to this file. Directory
+#    patterns here are unanchored, so of 14 plausible upstream path shapes, 12 would match --
+#    lib/ build/ target/ var/ dist/ env/ instance/ htmlcov/ *.log MANIFEST override.tf *.tfvars.
+#    Vendored content matching any of them vanishes from `git status` with NO diff to review,
+#    because it is never added. Nothing matches today. Trade-off routed to #45; anchoring locally
+#    would recreate the divergence HIGH 3 objected to.
 #
 # Why this file exists at all: the repo had no .gitignore, so Python bytecode from scripts/
 # appeared as untracked noise in every `git status` — which is how humans and agents judge

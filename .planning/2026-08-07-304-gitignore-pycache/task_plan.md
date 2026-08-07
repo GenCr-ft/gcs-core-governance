@@ -74,9 +74,10 @@ document:
 2. `reusable-ssot-linter.yml@v1.3.2` contains **zero** occurrences of `planning`.
 3. This repo's `.pre-commit-config.yaml` **excludes** `.planning/` from all four SSoT linters — three
    via the `&ssot_exclude` anchor (defined line 128, aliased at 142 and 149) and the naming-linter at
-   line 135 via an **inlined literal copy** of the same pattern rather than the anchor. All four do
-   exclude it; the mechanism is not uniform, which matters if someone edits the anchor expecting all
-   four to follow.
+   line 135 via an **inlined variant** — not a literal copy: it is a superset, ending
+   `…|\.planning/|\.github/)` where the anchor ends `…|\.planning/)`. All four do exclude
+   `.planning/`, but the mechanism is not uniform, so editing the anchor will not move the
+   naming-linter.
 
 The decision is still right, for a different reason: `.planning/` holds **tracked** files (6,
 including this plan), so ignoring it would break the tracked-plan convention. The workspace
@@ -86,13 +87,32 @@ convention question remains open in gcs-project-management#533.
 
 | AC | Check | Result |
 |---|---|---|
-| AC-1 | `__pycache__` is ignored | `scripts/__pycache__/x.pyc` → `.gitignore:39:__pycache__/` ✓ |
+| AC-1 | `__pycache__` is ignored | `scripts/__pycache__/x.pyc` → `.gitignore:62:__pycache__/` ✓ |
 | AC-1 | a `.pyc` inside it is ignored | matched by the same rule ✓ |
-| AC-2 | `git status` no longer lists it | with the directory and a `.pyc` present, `git status --porcelain` shows only `?? .gitignore` ✓ |
+| AC-2 | `git status` no longer lists it | with the directory and a `.pyc` present, `git status --porcelain` shows **0 lines** ✓ (it showed `?? .gitignore` before the file was tracked) |
 | AC-3 | **no currently-tracked file becomes ignored** | `git ls-files \| git check-ignore --no-index --stdin` → empty, exit 1, across all **341** tracked files — re-run against the canonical template ✓ (the `--no-index` is load-bearing; see below) |
-| — | governed `.env` MUSTs satisfied | `.env` → `:180`, `.env.local` → `:181`, `.env.production.local` → `:182` ✓ |
-| — | canonical block unmodified | sha256 of the embedded template matches `gct-repo-template-standard/.gitignore` ✓ |
+| — | governed `.env` MUSTs satisfied | `.env` → `:203`, `.env.local` → `:204`, `.env.production.local` → `:205` ✓ |
+| — | canonical block unmodified | lines **45–244** are byte-identical to `gct-repo-template-standard/.gitignore`, `sha256 049729bcdf52ccdb6bbdba1b8a1a0aa8170119e98a5683ff822b0f882ca9aed0`, matching that repo's `origin/main` blob ✓ |
 | — | markdownlint (this plan file) | `markdownlint-cli@0.45.0 --config .markdownlint.yaml` → clean ✓ |
+
+**Every line number in this table has been wrong at least once, and the mechanism is worth naming.**
+`d1eb6a7` grew the provenance header by 8 lines (231 → 239) without re-deriving the citations
+pointing into the file, so `:39` and `:180/181/182` — exact at `ac4f56f` — silently became `:47` and
+`:188/189/190`. A maintainer following `:180` would have read `cython_debug/`. Then round 3's own
+remediation grew the header again (239 → 254) and shifted them a second time, to the current `:62`
+and `:203/204/205`.
+
+That second shift is the point: **a line-number citation into the same file you are editing is
+invalidated by the act of fixing it.** Every value in this table is now re-derived by *running*
+`git check-ignore --no-index -v` and `grep -n`, never by arithmetic, and the header's own
+`45–244` block range plus its `sha256` are re-checked against the template after each edit — which is
+why the addendum records the hash: it makes the claim falsifiable instead of merely stated.
+
+The AC-2 row was stale for a different reason: `.gitignore` is now tracked, so `git status
+--porcelain` is empty rather than showing `?? .gitignore`.
+
+The rule this plan states at the end — *"a citation's section number needs the same grep as its
+text"* — I applied to the external standard I cite and not to the file I ship.
 
 ### The AC-3 check I originally ran could not fail
 
@@ -152,7 +172,7 @@ adding one is a governance change. Recorded in the file's own header.
 **One honest qualification.** That de-scoping is **prospective in this repo, not yet operative.**
 Nothing currently running here reads `.gitignore`: there is no `ssot-compliance.yml` caller workflow,
 `governance-integrity.yml` runs a vendored `verify_governed_paths.py` that uses `glob.glob` rather
-than gitignore semantics, and the pre-commit `gft verify` hooks receive staged paths directly. The
+than gitignore semantics, and the pre-commit `gft verify` hooks receive staged paths directly — except `validate-planning-metadata`, which sets `pass_filenames: false` (line 150) and does its own discovery, so it is the one hook whose gitignore-awareness cannot be determined from this repo. The
 standard also scopes the linter's caller to *"every other studio repository"*. Stating the de-scoping
 as already live would be the same over-claiming that produced the `@v1.3.2` error this PR already
 fixed once.
@@ -173,8 +193,16 @@ unilaterally, since anchoring here alone recreates the divergence HIGH 3 objecte
 
 **But "anchor or don't" was a false binary.** An *assertion* is not a divergence: a pre-commit or CI
 check that `git ls-files | git check-ignore --no-index --stdin` is empty closes this permanently
-without touching a single pattern, and would additionally have caught the tautological-verification
-defect above. Neither my plan nor #45 considered it. Added to #45 as the recommended remedy.
+without touching a single pattern. Neither my plan nor #45 considered it. Added to #45 as the
+recommended remedy.
+
+I had also claimed such an assertion "would additionally have caught the tautological-verification
+defect above". **That is wrong, and arguably backwards.** The assertion detects *a tracked file
+becoming ignored*; it cannot detect *that a human's verification command was malformed*. Worse — had
+I written it at the time, I would have written it in the form I then believed correct, i.e. **without**
+`--no-index`, institutionalising a permanently-green check across every consuming repo. #45's AC-3 now
+inoculates against exactly that (`the --no-index is load-bearing; without it this AC is
+unfalsifiable`). The recommendation stands; this justification for it did not.
 
 ## Isolation
 
@@ -219,9 +247,23 @@ mirrored a downstream consumer while claiming canonical status.
 **Round 2 sharpened that, and corrected my own account of it.** I had written here that "AC-3 was
 genuinely well-tested". It was not: the command certifying it could not fail. So the honest version is
 worse than the original diagnosis — it was not that I verified the implementation and skipped the
-prose, it was that I verified the implementation *with a tautology* and skipped the prose. Both of
-round 2's HIGHs were introduced by round 1's remediation, which matches the sibling PR
-(`gcs-security-core#53`) where every round found defects in the previous round's corrections.
+prose, it was that I verified the implementation *with a tautology* and skipped the prose.
+
+I then wrote that **both** of round 2's HIGHs were introduced by round 1's remediation. Round 3 showed
+that is false, and false in the direction that flatters me:
+
+- The `GOV-STANDARD-008 §3` citation **was** remediation-introduced — absent from `bad072e`, present
+  at `ac4f56f`.
+- The tautological AC-3 command was in the **original** commit (`bad072e`'s plan, line 49). Round 1
+  examined that very row and certified it `TRUE`.
+
+So attributing it to the remediation relocated an original defect — one the reviewer also endorsed —
+into the safer category of "a fix went wrong". Round 2's own comment was careful about this; my
+condensation of it was not.
+
+Nor does the sibling PR support "every round found defects in the previous round's corrections":
+`gcs-security-core#53` ran four rounds and **round 4 returned PASS with 0 HIGH**. Two of its three
+mechanism errors were fix-introduced; the first was in its implementation commit.
 
 Three concrete practices, all earned:
 
