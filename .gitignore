@@ -1,30 +1,231 @@
 # SSoT Path: gcs-core-governance/.gitignore
-# Description: Ignore locally-generated artifacts. This repo had no .gitignore at all, so
-#              Python bytecode from scripts/ showed up as untracked noise in every
-#              `git status` — which is how both humans and agents judge whether a tree is
-#              clean before starting work (#304).
 #
-# Deliberately minimal: only artifacts this repo actually produces. Nothing here matches a
-# currently-tracked file (verified with `git check-ignore` over `git ls-files`), and no
-# content path is ignored — `reference-libraries/`, `.planning/` and every Markdown document
-# remain fully tracked.
+# DERIVED FILE — do not hand-edit the canonical block below.
+#
+# Everything from the "Gencraft Studio - Standard .gitignore" header down to the
+# "REPO-SPECIFIC ADDENDUM" marker is a byte-identical copy of
+# gct-repo-template-standard/.gitignore, which states it "should be the base for all new
+# repositories". This repo is the governance SSoT for exactly that kind of config, so it
+# adopts the canonical template rather than minting a bespoke variant (#307 review, HIGH 3).
+#
+# To re-sync:  cp ../gct-repo-template-standard/.gitignore .gitignore  &&  re-apply the addendum.
+#
+# Why this file exists at all: the repo had no .gitignore, so Python bytecode from scripts/
+# appeared as untracked noise in every `git status` — which is how humans and agents judge
+# whether a tree is clean before starting work (#304).
+#
+# Scope note: per GOV-STANDARD-008 §3, the SSoT linter treats anything matching this file as
+# OUT OF SCOPE for validation. Adding a pattern here is therefore a governance change, not
+# housekeeping. Verified: no currently-tracked file matches any pattern
+# (`git ls-files | git check-ignore --stdin` → empty, exit 1, across all tracked files).
 
-# Python bytecode — produced by scripts/ (mirrors gcs-plt-gemop/.gitignore:17)
+# Gencraft Studio - Standard .gitignore (v1.0)
+# This file is part of gct-repo-template-standard and should be the base for all new repositories.
+
+# Node.js
+# Dependencies are managed by package managers, do not commit them.
+node_modules/
+# Build output
+dist/
+build/
+# TypeScript incremental build info
+*.tsbuildinfo
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Local virtual environments
-.venv/
-venv/
+# C extensions
+*.so
 
-# Test and coverage artifacts
-.pytest_cache/
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
 .coverage
 .coverage.*
-htmlcov/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
 
-# OS / editor cruft
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to consider not ignoring
+#   .python-version, since it is useful for users to know what version
+#   of python is required.
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock
+#   in version control. But in case you prefer not to, then here is a line:
+# Pipfile.lock
+
+# PEP 582; __pypackages__ directory
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Sensitive Environment Variables
+# NEVER commit .env files. Use a .env.example as a template if needed.
+.env
+.env.local
+.env.*.local
+
+# OS & Editor Specific
+# macOS
 .DS_Store
-Thumbs.db
+# Vim
+*~
 *.swp
+# VSCode
+.vscode/
+
+# Java (for completeness)
+*.class
+*.jar
+
+# Local Terraform directories
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+*.tfvars.json
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Ignore any .tfplan files
+*.tfplan
+
+# Ignore generated override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REPO-SPECIFIC ADDENDUM — additions beyond the canonical template
+# ─────────────────────────────────────────────────────────────────────────────
+# Keep this section minimal; prefer upstreaming genuinely universal patterns to
+# gct-repo-template-standard so every repo benefits instead of drifting.
+
+# Windows thumbnail cache — not in the canonical template (upstreamed as
+# GenCr-ft/gct-repo-template-standard#45; drop this line once that lands and re-sync)
+Thumbs.db
