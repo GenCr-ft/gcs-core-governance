@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-308
+docId: AIE-GUIDE-308
 title: "The MLOps (ML Engineering) Guide"
 version: 1.0.0
 status: Draft
@@ -8,7 +8,7 @@ authors:
   - "Technical Governance"
 knowledgeGuardian:
   - "ML Engineering Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/GCS-GUIDE-308.mlops-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/AIE-GUIDE-308.mlops-guide.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -27,7 +27,7 @@ metadata:
 
 ## 1. Objective
 
-This guide establishes the studio's standard practices for operationalizing the entire Machine Learning (ML) lifecycle. Its purpose is to bring software engineering discipline to ML projects, ensuring that our models are reproducible, testable, reliable, and continuously monitored in production. MLOps is the application of our DevOps culture [cite: GCS-GUIDE-202] to the unique challenges of Machine Learning.
+This guide establishes the studio's standard practices for operationalizing the entire Machine Learning (ML) lifecycle. Its purpose is to bring software engineering discipline to ML projects, ensuring that our models are reproducible, testable, reliable, and continuously monitored in production. MLOps is the application of our DevOps culture [cite: DVO-GUIDE-202] to the unique challenges of Machine Learning.
 
 ## 2. The MLOps Lifecycle Protocol
 
@@ -52,7 +52,7 @@ All ML projects MUST follow this structured lifecycle to ensure consistency and 
 
 ### 2.4. Step 4: Model Deployment
 
-* **Deployment as Code:** Model deployment infrastructure is managed as code. Models are served as containerized services on our Kubernetes platform [cite: GCS-GUIDE-202].
+* **Deployment as Code:** Model deployment infrastructure is managed as code. Models are served as containerized services on our Kubernetes platform [cite: DVO-GUIDE-202].
 * **Deployment Strategies:**
   * **Canary Deployment:** Gradually roll out a new model version to a small subset of users to evaluate its performance before a full release.
   * **Shadow Deployment:** Deploy the new model alongside the old one, feeding it the same production traffic but not acting on its predictions. This allows for performance comparison without user impact. This is our preferred strategy for validating a new model version.

@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-402
+docId: ENG-GUIDE-402
 title: "The Design-Development Collaboration Handbook"
 version: 1.0.0
 status: Draft
@@ -10,7 +10,7 @@ authors:
 knowledgeGuardian:
   - "Lead Product Designer"
   - "Lead Frontend Developer"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/GCS-GUIDE-402.design-dev-collaboration.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/ENG-GUIDE-402.design-dev-collaboration.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -72,7 +72,7 @@ We are committed to building products that are usable by everyone.
   * All images have appropriate `alt` text.
   * Semantic HTML is used correctly (e.g., using `<nav>`, `<main>`, `<button>`).
   * Color contrast ratios meet the AA standard.
-* **Automated Checks:** Accessibility checks (e.g., using `axe-core`) are integrated into our CI pipeline [cite: GCS-GUIDE-202] and must pass for a PR to be merged.
+* **Automated Checks:** Accessibility checks (e.g., using `axe-core`) are integrated into our CI pipeline [cite: DVO-GUIDE-202] and must pass for a PR to be merged.
 * **Manual Testing:** Designers and developers must perform manual accessibility testing as part of the QA process, including:
   * Keyboard navigation testing.
   * Screen reader compatibility checks.

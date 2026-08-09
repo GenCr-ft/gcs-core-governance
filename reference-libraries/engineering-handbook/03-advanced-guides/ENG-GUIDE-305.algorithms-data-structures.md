@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-305
+docId: ENG-GUIDE-305
 title: "The Practical Algorithm & Data Structure Guide"
 version: 1.0.0
 status: Draft
@@ -8,7 +8,7 @@ authors:
   - "Technical Governance"
 knowledgeGuardian:
   - "Principal Architect"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/GCS-GUIDE-305.algorithms-data-structures.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/ENG-GUIDE-305.algorithms-data-structures.md
 metadata:
   lifecycle-stage: approved
   domain: engineering

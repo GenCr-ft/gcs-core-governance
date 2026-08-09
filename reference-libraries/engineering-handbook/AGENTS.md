@@ -73,15 +73,15 @@ pre-commit run --all-files   # markdownlint, yamllint, commitlint, gcd-ops-scrip
 - The Godot and PCG sections provide patterns that must be followed when writing `gcp-aethel-client` and `gcp-aethel-pcg` code.
 - All Markdown files must carry valid SSoT YAML frontmatter.
 - This is a documentation-only repo — do not add implementation code.
-- **AI instruction file precedence:** `AGENTS.md` is the sole authoritative AI instruction source for every repository. `CLAUDE.md`, when present, is a human-readable companion only and MUST NOT contradict `AGENTS.md`. See `GCS-GUIDE-205` for the full policy.
+- **AI instruction file precedence:** `AGENTS.md` is the sole authoritative AI instruction source for every repository. `CLAUDE.md`, when present, is a human-readable companion only and MUST NOT contradict `AGENTS.md`. See `PLT-GUIDE-205` for the full policy.
 
 ## .planning/ Directory Policy
 
 Task plan files in `.planning/` directories are **session-ephemeral artefacts**. The authoritative policy is:
 
-> `04-process-guides/GCS-GUIDE-405.planning-directory-retention-policy.md`
+> `04-process-guides/OPS-GUIDE-405.planning-directory-retention-policy.md`
 
-Key rules (full details in GCS-GUIDE-405):
+Key rules (full details in OPS-GUIDE-405):
 - Plans with `status: complete` MUST be deleted before or immediately after the PR merge that completes the work — never committed to `main`.
 - Plans with `status: in_progress` or `approved` MAY be committed to the working branch so they survive across sessions; they must be deleted in the merge commit or in a follow-up commit on `main` immediately after merge.
 - If you find a `.planning/` file with `status: complete` or all tasks checked, treat it as a stale artefact — do NOT re-execute its tasks.

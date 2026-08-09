@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-502
+docId: MGT-GUIDE-502
 title: "The Feedback & Performance Review Framework"
 version: 1.0.0
 authors:
@@ -9,7 +9,7 @@ creation_date: '2025-06-19'
 last_updated_date: '2026-05-06'
 knowledgeGuardian:
   - "Head of Engineering"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/05-governance-and-organization/GCS-GUIDE-502.feedback-performance-framework.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/05-governance-and-organization/MGT-GUIDE-502.feedback-performance-framework.md
 metadata:
   lifecycle-stage: approved
   domain: engineering

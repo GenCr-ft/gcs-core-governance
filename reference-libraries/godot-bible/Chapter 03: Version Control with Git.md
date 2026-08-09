@@ -50,7 +50,7 @@
     * **fix/bug-name:** (e.g., fix/inventory-crash, fix/typo-main-menu)
       * For fixing bugs.
       * Branched *from* main, merged *into* main via a Pull Request.
-    * *(Note: GitHub Flow replaces the earlier Simplified GitFlow used in this guide. The studio standard — GCS-ARCH-001 §1, GCS-GUIDE-201 §2.1 — mandates GitHub Flow for all projects, including Godot game clients.)*
+    * *(Note: GitHub Flow replaces the earlier Simplified GitFlow used in this guide. The studio standard — GCS-ARCH-001 §1, ENG-GUIDE-201 §2.1 — mandates GitHub Flow for all projects, including Godot game clients.)*
   * **3.4. The Pull Request (PR) & Code Review Process**
     * **Rule:** No one merges their own code directly into main.
     * **Workflow:**

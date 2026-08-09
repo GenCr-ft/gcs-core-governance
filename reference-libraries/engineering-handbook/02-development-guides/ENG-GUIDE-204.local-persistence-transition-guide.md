@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-204
+docId: ENG-GUIDE-204
 title: Local Persistence Transition Guide
 version: 1.0.0
 authors:
@@ -35,10 +35,10 @@ metadata:
   provenance:
     source: manual
 date: '2026-05-06'
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/GCS-GUIDE-204.local-persistence-transition-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/ENG-GUIDE-204.local-persistence-transition-guide.md
 ---
 
-# GCS-GUIDE-204 — Local Persistence Transition Guide
+# ENG-GUIDE-204 — Local Persistence Transition Guide
 
 ## 1. Overview
 

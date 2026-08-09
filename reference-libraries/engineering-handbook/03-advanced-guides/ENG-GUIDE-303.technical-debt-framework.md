@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-303
+docId: ENG-GUIDE-303
 title: "The Technical Debt Management Framework"
 version: 1.0.0
 status: Draft
@@ -9,7 +9,7 @@ authors:
 knowledgeGuardian:
   - "Principal Architect"
   - "Engineering Manager"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/GCS-GUIDE-303.technical-debt-framework.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/ENG-GUIDE-303.technical-debt-framework.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -46,8 +46,8 @@ Our management of technical debt follows a structured, continuous cycle.
 Technical debt must be made visible and measurable.
 
 * **Identification Sources:**
-  * **Automated Tooling:** Use static analysis tools (e.g., SonarQube) integrated into our CI/CD pipeline [cite: GCS-GUIDE-202] to automatically detect code smells, complexity issues, and security vulnerabilities.
-  * **Code Reviews:** The code review process [cite: GCS-GUIDE-201] is a primary human-driven method for identifying design flaws and architectural inconsistencies.
+  * **Automated Tooling:** Use static analysis tools (e.g., SonarQube) integrated into our CI/CD pipeline [cite: DVO-GUIDE-202] to automatically detect code smells, complexity issues, and security vulnerabilities.
+  * **Code Reviews:** The code review process [cite: ENG-GUIDE-201] is a primary human-driven method for identifying design flaws and architectural inconsistencies.
   * **Developer Feedback:** Create a culture where developers are encouraged to flag areas of the codebase that are brittle or difficult to work with.
 * **The Technical Debt Backlog:**
   * All identified debt items MUST be documented as specific, actionable tasks in a dedicated **Technical Debt Backlog** (e.g., a specific Jira project or ticket type).
@@ -63,7 +63,7 @@ We cannot fix all debt at once. Prioritization MUST be based on impact and risk.
 * **Prioritization Matrix:** Use a matrix that weighs **Business Impact** against **Remediation Effort**. High-impact, low-effort items should be prioritized first.
 * **Key Criteria:**
     1. **Business Impact:** Does the debt slow down the delivery of critical features? Does it affect user experience?
-    2. **Risk:** Does it pose a security, reliability, or compliance risk? [cite: GCS-GUIDE-306]
+    2. **Risk:** Does it pose a security, reliability, or compliance risk? [cite: SEC-GUIDE-306]
     3. **Frequency of Change:** Debt in frequently modified parts of the codebase accrues "interest" faster and should be prioritized.
     4. **Team Morale:** Does this debt significantly frustrate the development team?
 
@@ -71,7 +71,7 @@ We cannot fix all debt at once. Prioritization MUST be based on impact and risk.
 
 Remediating technical debt is part of our regular development work, not a separate activity.
 
-* **Allocate Capacity:** A minimum of **15%** of each sprint's capacity MUST be allocated to tasks from the Technical Debt Backlog. This is a non-negotiable part of our sprint planning [cite: GCS-GUIDE-403].
+* **Allocate Capacity:** A minimum of **15%** of each sprint's capacity MUST be allocated to tasks from the Technical Debt Backlog. This is a non-negotiable part of our sprint planning [cite: MGT-GUIDE-403].
 * **"Boy Scout Rule":** Always leave the code cleaner than you found it. When working on a feature, take a small amount of extra time to clean up the immediate surrounding area.
 * **Dedicated Sprints (Pit Stops):** For large-scale refactoring or architectural debt, the team may schedule a dedicated "pit stop" or "refactoring" sprint where no new features are developed. This must be planned and prioritized by the Product Owner and Engineering Manager.
 
@@ -99,14 +99,14 @@ As our systems evolve, we will continue to refine this framework based on lesson
 
 ## 7. Related Resources and Links
 
-* [GCS-GUIDE-201: The Everyday Developer Guide](../02-development-guides/GCS-GUIDE-201.developer-guide.md)
-* [GCS-GUIDE-202: DevSecOps and Reliability Guide](../02-development-guides/GCS-GUIDE-202.devsecops-reliability-guide.md)
-* [GCS-GUIDE-306: Application Security Guide](GCS-GUIDE-306.application-security-guide.md)
-* GCS-GUIDE-403: Agile Sprint Planning (not yet authored)
-* [GCS-GUIDE-305: Algorithms and Data Structures](GCS-GUIDE-305.algorithms-data-structures.md)
+* [ENG-GUIDE-201: The Everyday Developer Guide](../02-development-guides/ENG-GUIDE-201.developer-guide.md)
+* [DVO-GUIDE-202: DevSecOps and Reliability Guide](../02-development-guides/DVO-GUIDE-202.devsecops-reliability-guide.md)
+* [SEC-GUIDE-306: Application Security Guide](SEC-GUIDE-306.application-security-guide.md)
+* MGT-GUIDE-403: Agile Sprint Planning (not yet authored)
+* [ENG-GUIDE-305: Algorithms and Data Structures](ENG-GUIDE-305.algorithms-data-structures.md)
 * [ENG-REFE-001: Studio Global Engineering Standards](../01-manifesto-and-culture/ENG-REFE-001.studio-global-engineering-standards.md)
-* [GCS-GUIDE-202: DevSecOps and Reliability Guide](../02-development-guides/GCS-GUIDE-202.devsecops-reliability-guide.md)
-* GCS-GUIDE-403: Agile Sprint Planning (not yet authored)
-* [GCS-GUIDE-301: Design Patterns Handbook](GCS-GUIDE-301.design-patterns-handbook.md)
+* [DVO-GUIDE-202: DevSecOps and Reliability Guide](../02-development-guides/DVO-GUIDE-202.devsecops-reliability-guide.md)
+* MGT-GUIDE-403: Agile Sprint Planning (not yet authored)
+* [ENG-GUIDE-301: Design Patterns Handbook](ENG-GUIDE-301.design-patterns-handbook.md)
 * **Feedback and Contributions:** This document is a living guide. Feedback and contributions are welcome via pull requests or discussions in the relevant repository.
 * **Version Control:** This document is version-controlled in the GCS Engineering Handbook repository. Changes to this document should follow the standard contribution process outlined in [ENG-REFE-001: Studio Global Engineering Standards](../01-manifesto-and-culture/ENG-REFE-001.studio-global-engineering-standards.md).

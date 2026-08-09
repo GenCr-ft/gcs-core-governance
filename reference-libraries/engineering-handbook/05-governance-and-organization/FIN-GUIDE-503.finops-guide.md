@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-503
+docId: FIN-GUIDE-503
 title: "The Cost Management (FinOps) Guide"
 version: 1.0.0
 status: Draft
@@ -10,7 +10,7 @@ authors:
 knowledgeGuardian:
   - "Head of Engineering"
   - "Finance Business Partner"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/05-governance-and-organization/GCS-GUIDE-503.finops-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/05-governance-and-organization/FIN-GUIDE-503.finops-guide.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -65,8 +65,8 @@ Once we have visibility, we can optimize.
 FinOps is an ongoing process, not a one-time project.
 
 * **Automated Cost Anomaly Detection:** We use automated tools to detect sudden spikes in spending, which trigger alerts to the responsible team and the FinOps team.
-* **Cost as a CI/CD Metric:** Cost estimation tools are integrated into our CI/CD pipelines [cite: GCS-GUIDE-202]. A Pull Request that is predicted to cause a significant cost increase will require an additional layer of approval.
-* **Regular Reviews:** Cost optimization is a standing agenda item in team meetings and sprint retrospectives [cite: GCS-GUIDE-403].
+* **Cost as a CI/CD Metric:** Cost estimation tools are integrated into our CI/CD pipelines [cite: DVO-GUIDE-202]. A Pull Request that is predicted to cause a significant cost increase will require an additional layer of approval.
+* **Regular Reviews:** Cost optimization is a standing agenda item in team meetings and sprint retrospectives [cite: MGT-GUIDE-403].
 
 ## 4. Standard Tooling
 

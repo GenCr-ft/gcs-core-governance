@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-403
+docId: MGT-GUIDE-403
 title: "The Agile Project Management Playbook"
 version: 1.1.0
 status: Approved
@@ -11,7 +11,7 @@ authors:
 knowledgeGuardian:
   - "Lead Product Manager"
   - "Scrum Master"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/GCS-GUIDE-403.agile-playbook.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/MGT-GUIDE-403.agile-playbook.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -94,11 +94,11 @@ These events create regularity and minimize the need for meetings not defined in
   * An item cannot be part of the Increment unless it meets our **Definition of "Done"**. The DoD is a shared understanding of what it means for work to be complete.
   * **Our Official Definition of "Done":**
         1. Upstream gates (**Refine → Design → Plan**) are fully satisfied, sibling `[DESIGN]` child sub-issue is officially closed, and approved plan is commented on the parent issue.
-        2. Code is written, adheres to TDD commit cycles, and is peer-reviewed [cite: GCS-GUIDE-201].
-        3. All automated tests (unit, integration) are passing [cite: GCS-GUIDE-203].
-        4. CI pipeline is green [cite: GCS-GUIDE-202].
-        5. Meets all refined Acceptance Criteria (formatted as Gherkin scenarios) [cite: GCS-GUIDE-401].
-        6. Validated by the QA team [cite: GCS-GUIDE-404].
+        2. Code is written, adheres to TDD commit cycles, and is peer-reviewed [cite: ENG-GUIDE-201].
+        3. All automated tests (unit, integration) are passing [cite: ENG-GUIDE-203].
+        4. CI pipeline is green [cite: DVO-GUIDE-202].
+        5. Meets all refined Acceptance Criteria (formatted as Gherkin scenarios) [cite: ENG-GUIDE-401].
+        6. Validated by the QA team [cite: QA-GUIDE-404].
         7. Product Owner accepts the story.
 * **Sprint Goal:**
   * The Sprint Goal is the single objective for the Sprint. It is created during Sprint Planning and provides guidance to the Development Team on why it is building the Increment.
