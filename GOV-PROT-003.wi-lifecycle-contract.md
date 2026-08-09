@@ -1,12 +1,12 @@
 ---
 docId: GOV-PROT-003
 title: Work Item Lifecycle Quality Contract
-version: 1.0.0
+version: 1.1.0
 authors: [Studio Lead]
 knowledgeGuardian:
 - Orion (GCT-UTL-SLG-001)
 creation_date: '2026-06-09'
-last_updated_date: '2026-06-28'
+last_updated_date: '2026-08-09'
 language: en
 ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/GOV-PROT-003.wi-lifecycle-contract.md
 spec_path: docs/superpowers/specs/2026-06-09-wi-lifecycle-enforcement-design.md
@@ -120,6 +120,20 @@ If none are found, the spec_ref set is considered **absent**.
 | No frontmatter and no label | Treat as `draft` |
 
 Valid lifecycle-stage values: `draft`, `proposed`, `approved`, `deprecated`, `archived`.
+
+#### Deprecated alias: `lifecycle-phase`
+
+Some legacy documents carry `metadata.lifecycle-phase` instead of the canonical `metadata.lifecycle-stage`. Evaluators MUST read the canonical `metadata.lifecycle-stage` when present, and when it is absent MUST fall back to the legacy `lifecycle-phase` key as a **deprecated alias**, applying this value mapping:
+
+| Legacy value (`lifecycle-phase`) | Canonical `lifecycle-stage` | Authority |
+|---|---|---|
+| `accepted` | `approved` | gcs-core-governance#309 (ratified, Isaac §4.4) |
+| `design` | `proposed` | #374 |
+| any value already in the canonical enum | itself | — |
+
+`accepted ≡ approved` is a deliberate, ratified equivalence for gate evaluation: an ADR that self-declares `Accepted` is treated as `approved` by the WI-lifecycle gate. (This does not weaken any ADR's own stricter internal promotion rule for *setting* `approved` — e.g. an Architecture-Authority countersignature requirement — which governs authorship, not gate reads. Normalizing residual ADR text that states `accepted` is strictly below `approved` is tracked separately.)
+
+**Absent-key handling (canonical):** a document with neither `lifecycle-stage` nor the `lifecycle-phase` alias nor a `lifecycle:` label is treated as `draft` (see the table above), which hard-blocks at CREATE via `spec_refs_with_lifecycle_stage`. The L3 wi-lifecycle skill (#374) MUST conform to this contract position; any skill behaviour that treats an absent key as non-blocking is a divergence to reconcile against this contract.
 
 ### Gate evaluation rules
 
