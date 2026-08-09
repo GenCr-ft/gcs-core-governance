@@ -123,9 +123,9 @@ Valid lifecycle-stage values: `draft`, `proposed`, `approved`, `deprecated`, `ar
 
 #### Deprecated alias: `lifecycle-phase`
 
-Some legacy documents carry `metadata.lifecycle-phase` (or a top-level `status:` on ADRs) instead of the canonical `metadata.lifecycle-stage`. Evaluators MUST read the canonical `metadata.lifecycle-stage` when present, and MAY fall back to `lifecycle-phase` / ADR `status:` as a **deprecated alias**, applying this value mapping:
+Some legacy documents carry `metadata.lifecycle-phase` instead of the canonical `metadata.lifecycle-stage`. Evaluators MUST read the canonical `metadata.lifecycle-stage` when present, and when it is absent MUST fall back to the legacy `lifecycle-phase` key as a **deprecated alias**, applying this value mapping:
 
-| Legacy value (`lifecycle-phase` / ADR `status`) | Canonical `lifecycle-stage` | Authority |
+| Legacy value (`lifecycle-phase`) | Canonical `lifecycle-stage` | Authority |
 |---|---|---|
 | `accepted` | `approved` | gcs-core-governance#309 (ratified, Isaac §4.4) |
 | `design` | `proposed` | #374 |
