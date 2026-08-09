@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-401
+docId: ENG-GUIDE-401
 title: "The Requirements Engineering Guide"
 version: 1.0.0
 status: Draft
@@ -9,7 +9,7 @@ authors:
   - "Product Management"
 knowledgeGuardian:
   - "Lead Product Manager"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/GCS-GUIDE-401.requirements-engineering.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/ENG-GUIDE-401.requirements-engineering.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -93,6 +93,6 @@ It is crucial to distinguish between two types of requirements:
 * **Non-Functional Requirements (NFRs):** Define *how* the system should perform a certain function. They are quality attributes that the system must have. NFRs MUST be documented as constraints on the relevant User Stories or Epics.
   * **Examples of NFRs:**
     * **Performance:** "The login page must load in under 2 seconds."
-    * **Security:** "All user passwords must be hashed using Argon2." [cite: GCS-GUIDE-306]
-    * **Reliability:** "The authentication service must have a 99.95% availability." [cite: GCS-GUIDE-202]
-    * **Usability/Accessibility:** "All UI elements must be navigable via keyboard and compliant with WCAG 2.1 AA." [cite: GCS-GUIDE-402]
+    * **Security:** "All user passwords must be hashed using Argon2." [cite: SEC-GUIDE-306]
+    * **Reliability:** "The authentication service must have a 99.95% availability." [cite: DVO-GUIDE-202]
+    * **Usability/Accessibility:** "All UI elements must be navigable via keyboard and compliant with WCAG 2.1 AA." [cite: ENG-GUIDE-402]

@@ -85,7 +85,7 @@ Our career ladder is defined by a series of levels. For each level, expectations
 
 ## 4. Promotion Process
 
-Promotions are based on a demonstrated and sustained impact at the *next* level, not just excellence at the current level. The process is initiated by an engineer's manager during the regular performance review cycle [cite: GCS-GUIDE-502] and requires a formal promotion packet with evidence and feedback from peers.
+Promotions are based on a demonstrated and sustained impact at the *next* level, not just excellence at the current level. The process is initiated by an engineer's manager during the regular performance review cycle [cite: MGT-GUIDE-502] and requires a formal promotion packet with evidence and feedback from peers.
 
 ## 5. Career Development Resources
 

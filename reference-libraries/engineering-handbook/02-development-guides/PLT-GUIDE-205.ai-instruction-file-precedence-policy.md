@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-205
+docId: PLT-GUIDE-205
 title: "AI Instruction File Precedence Policy"
 version: 1.0.0
 status: Approved
@@ -8,7 +8,7 @@ authors:
   - "Engineering Lead"
 knowledgeGuardian:
   - "Engineering Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/GCS-GUIDE-205.ai-instruction-file-precedence-policy.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/PLT-GUIDE-205.ai-instruction-file-precedence-policy.md
 metadata:
   lifecycle-stage: approved
   domain: engineering

@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-306
+docId: SEC-GUIDE-306
 title: "The Application Security (Secure by Design) Guide"
 version: 1.0.0
 status: Draft
@@ -8,7 +8,7 @@ authors:
   - "Technical Governance"
 knowledgeGuardian:
   - "Security Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/GCS-GUIDE-306.application-security-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/SEC-GUIDE-306.application-security-guide.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -39,7 +39,7 @@ Security starts with architecture. The following principles MUST be considered a
 * **Implementation:**
   * Application service accounts should have restricted database permissions (e.g., no `DROP TABLE` rights).
   * API tokens should be scoped to specific actions.
-  * Run application processes as a non-root user [cite: GCS-GUIDE-202].
+  * Run application processes as a non-root user [cite: DVO-GUIDE-202].
 
 ### 2.2. Defense in Depth
 
@@ -48,7 +48,7 @@ Security starts with architecture. The following principles MUST be considered a
   * A web application firewall (WAF) can block common attacks.
   * The application itself must validate all input.
   * The database layer should use parameterized queries.
-  * All layers should have appropriate monitoring and alerting [cite: GCS-GUIDE-304].
+  * All layers should have appropriate monitoring and alerting [cite: DVO-GUIDE-304].
 
 ### 2.3. Trust but Verify (Zero Trust on Boundaries)
 

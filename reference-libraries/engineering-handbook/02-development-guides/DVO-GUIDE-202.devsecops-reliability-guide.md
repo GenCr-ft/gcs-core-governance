@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-202
+docId: DVO-GUIDE-202
 title: "The DevSecOps, Reliability & Cloud-Native Guide"
 version: 1.0.0
 status: Draft
@@ -9,7 +9,7 @@ authors:
 knowledgeGuardian:
   - "DevOps Lead"
   - "SRE Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/GCS-GUIDE-202.devsecops-reliability-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/DVO-GUIDE-202.devsecops-reliability-guide.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -64,8 +64,8 @@ Kubernetes is our standard for container orchestration.
 Our CI/CD pipeline is the automated backbone of our development process.
 
 1. **Mandatory CI Checks:** Every Pull Request MUST pass a series of automated checks before being eligible for merge:
-    * Unit & Integration Tests [cite: GCS-GUIDE-203].
-    * Static Code Analysis & Linting [cite: GCS-GUIDE-201].
+    * Unit & Integration Tests [cite: ENG-GUIDE-203].
+    * Static Code Analysis & Linting [cite: ENG-GUIDE-201].
     * **Software Composition Analysis (SCA):** A scan for known vulnerabilities in third-party dependencies MUST be performed. High or Critical vulnerabilities must be fixed or explicitly triaged.
     * **Container Image Scan:** The built Docker image MUST be scanned for OS-level vulnerabilities.
 2. **SBOM Generation:** A Software Bill of Materials (SBOM) in SPDX or CycloneDX format MUST be generated for every production build. This artifact must be stored alongside the container image.

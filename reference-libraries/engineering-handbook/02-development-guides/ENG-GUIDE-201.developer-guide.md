@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-201
+docId: ENG-GUIDE-201
 title: "The Everyday Developer's Guide"
 version: 1.0.0
 status: Draft
@@ -8,7 +8,7 @@ authors:
   - "Technical Governance"
 knowledgeGuardian:
   - "Lead Developer"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/GCS-GUIDE-201.developer-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/ENG-GUIDE-201.developer-guide.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -30,7 +30,7 @@ metadata:
 
 This guide is the primary reference for all developers at the studio. It provides clear, actionable, and mandatory procedures for the daily tasks of writing, reviewing, and delivering high-quality code. Its purpose is to establish a consistent and professional baseline for all our development activities.
 
-It translates the abstract principles from our **Manifesto** [cite: GCS-GUIDE-101] into concrete, everyday actions.
+It translates the abstract principles from our **Manifesto** [cite: ENG-REFE-001] into concrete, everyday actions.
 
 ## 2. Version Control Workflow (Git)
 

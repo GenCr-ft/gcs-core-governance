@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-405
+docId: OPS-GUIDE-405
 title: ".planning/ Directory Retention Policy"
 version: 1.0.0
 status: Approved
@@ -8,7 +8,7 @@ authors:
   - "Engineering Lead"
 knowledgeGuardian:
   - "Engineering Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/GCS-GUIDE-405.planning-directory-retention-policy.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/OPS-GUIDE-405.planning-directory-retention-policy.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -111,7 +111,7 @@ Accumulated stale plans create a hazard for AI agents operating across sessions.
 
 ## 8. Related Documents
 
-- [`GCS-GUIDE-201`](../02-development-guides/GCS-GUIDE-201.developer-guide.md) — The Everyday Developer's Guide (Git workflow)
-- `GCS-GUIDE-203` — TDD Guide
+- [`ENG-GUIDE-201`](../02-development-guides/ENG-GUIDE-201.developer-guide.md) — The Everyday Developer's Guide (Git workflow)
+- `ENG-GUIDE-203` — TDD Guide
 - [`ENG-REFE-001`](../01-manifesto-and-culture/ENG-REFE-001.studio-global-engineering-standards.md) — Studio Global Engineering Standards
 - [`../AGENTS.md`](../AGENTS.md) — Agent orientation guide for this repo

@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-307
+docId: ENG-GUIDE-307
 title: "The Data Engineering Guide"
 version: 1.0.0
 status: Draft
@@ -8,7 +8,7 @@ authors:
   - "Technical Governance"
 knowledgeGuardian:
   - "Data Engineering Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/GCS-GUIDE-307.data-engineering-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/ENG-GUIDE-307.data-engineering-guide.md
 metadata:
   lifecycle-stage: approved
   domain: engineering

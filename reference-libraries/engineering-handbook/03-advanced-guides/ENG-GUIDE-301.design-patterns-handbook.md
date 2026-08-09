@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-301
+docId: ENG-GUIDE-301
 title: "The Design & Architectural Patterns Grimoire"
 version: 1.0.0
 status: Draft
@@ -8,7 +8,7 @@ authors:
   - "Technical Governance"
 knowledgeGuardian:
   - "Principal Architect"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/GCS-GUIDE-301.design-patterns-handbook.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/ENG-GUIDE-301.design-patterns-handbook.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -44,7 +44,7 @@ This is our default architectural paradigm for building decoupled and testable a
 * **Procedure:**
     1. **Define Ports:** Inside the application core, define interfaces (the "Ports") that represent the interactions the domain needs (e.g., `OrderRepositoryPort`, `PaymentServicePort`).
     2. **Implement Adapters:** Outside the core, create concrete implementations (the "Adapters") that connect these ports to real-world technology. A `PostgresOrderRepositoryAdapter` implements the `OrderRepositoryPort` and contains the SQL code. A `StripeAdapter` implements the `PaymentServicePort`.
-* **Reference:** This is our canonical implementation of the **Dependency Inversion Principle** [cite: GCS-GUIDE-201] at the architectural level.
+* **Reference:** This is our canonical implementation of the **Dependency Inversion Principle** [cite: ENG-GUIDE-201] at the architectural level.
 
 ### 2.2. Recipe: Clean Architecture
 

@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-404
+docId: QA-GUIDE-404
 title: "The Quality Assurance (QA) Framework"
 version: 1.0.0
 status: Draft
@@ -9,7 +9,7 @@ authors:
   - "QA Governance"
 knowledgeGuardian:
   - "QA Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/GCS-GUIDE-404.qa-framework.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/04-process-guides/QA-GUIDE-404.qa-framework.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -47,7 +47,7 @@ graph TD
     style E2E fill:#f8d7da,stroke:#721c24
 ```
 
-* **Unit Tests (Large Base):** These are the foundation. They test individual components in isolation. They are fast, reliable, and written by developers as part of the TDD cycle [cite: GCS-GUIDE-203].
+* **Unit Tests (Large Base):** These are the foundation. They test individual components in isolation. They are fast, reliable, and written by developers as part of the TDD cycle [cite: ENG-GUIDE-203].
 * **Integration Tests (Smaller Middle):** These tests verify that different modules or services work together correctly. They are slower and more complex than unit tests.
 * **End-to-End (E2E) Tests (Narrow Top):** These tests simulate a full user journey through the application. They are slow, brittle, and expensive to maintain. We use them sparingly to validate critical user flows only.
 
@@ -99,5 +99,5 @@ Triage is the process of assessing and prioritizing new bugs. This is a collabor
 ## 5. Non-Regression Testing Strategy
 
 * **Automation is Key:** Our non-regression strategy relies on our automated test suites (Unit, Integration, and E2E).
-* **Triggering:** The full non-regression suite MUST be executed automatically via our CI/CD pipeline [cite: GCS-GUIDE-202] before any deployment to the production environment.
+* **Triggering:** The full non-regression suite MUST be executed automatically via our CI/CD pipeline [cite: DVO-GUIDE-202] before any deployment to the production environment.
 * **Zero Tolerance:** A deployment to production is blocked if even a single non-regression test fails.

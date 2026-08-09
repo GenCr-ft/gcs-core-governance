@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-203
+docId: ENG-GUIDE-203
 title: "The Practical TDD Guide"
 version: 1.0.0
 status: Draft
@@ -9,7 +9,7 @@ authors:
 knowledgeGuardian:
   - "Lead Developer"
   - "QA Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/GCS-GUIDE-203.tdd-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/02-development-guides/ENG-GUIDE-203.tdd-guide.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -47,7 +47,7 @@ All new business logic MUST be developed following the TDD cycle. This cycle is 
 
 3. **REFACTOR - Improve the Design:**
     * With the confidence of a passing test suite, improve the internal structure of the newly written code (both production and test code).
-    * Remove duplication, improve names, simplify logic, and ensure the code adheres to our **Clean Code** principles [cite: GCS-GUIDE-201].
+    * Remove duplication, improve names, simplify logic, and ensure the code adheres to our **Clean Code** principles [cite: ENG-GUIDE-201].
     * Re-run all tests to ensure that the refactoring has not altered the external behavior.
     * **This step is not optional.** Skipping the refactor step negates the primary design benefits of TDD.
 
@@ -74,7 +74,7 @@ TDD is a team sport. Each role has specific responsibilities to ensure its succe
 ## 4. TDD in our Workflow
 
 * **Code Reviews:** A Pull Request that adds or modifies business logic MUST include the corresponding unit tests. The PR will not be approved if the tests are missing or inadequate.
-* **CI Pipeline:** The test suite is executed automatically on every commit via our CI pipeline [cite: GCS-GUIDE-202]. A failing test breaks the build, and fixing it is the team's highest priority. The feedback loop from the CI server must be as fast as possible.
+* **CI Pipeline:** The test suite is executed automatically on every commit via our CI pipeline [cite: DVO-GUIDE-202]. A failing test breaks the build, and fixing it is the team's highest priority. The feedback loop from the CI server must be as fast as possible.
 
 ## 5. Automated TDD Commit Verification Gates
 

@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-302
+docId: ENG-GUIDE-302
 title: "The Performance Optimization Guide"
 version: 1.0.0
 status: Draft
@@ -8,7 +8,7 @@ authors:
   - "Technical Governance"
 knowledgeGuardian:
   - "Principal Architect"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/GCS-GUIDE-302.performance-optimization.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/ENG-GUIDE-302.performance-optimization.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -34,7 +34,7 @@ This guide provides a systematic and data-driven approach to software performanc
 
 Our approach to optimization is governed by a single, non-negotiable principle derived from Donald Knuth's wisdom:
 
-> "We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%." [cite: GCS-GUIDE-101]
+> "We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%." [cite: ENG-REFE-001]
 
 This means we **never** optimize based on intuition alone. All optimization efforts MUST be preceded by measurement.
 
@@ -42,7 +42,7 @@ This means we **never** optimize based on intuition alone. All optimization effo
 
 The mandatory workflow for addressing a performance issue is as follows:
 
-1. **Write Correct and Clean Code First:** Implement the functionality correctly and cleanly, following the standards in [cite: GCS-GUIDE-201]. Do not attempt to optimize at this stage.
+1. **Write Correct and Clean Code First:** Implement the functionality correctly and cleanly, following the standards in [cite: ENG-GUIDE-201]. Do not attempt to optimize at this stage.
 2. **Benchmark to Establish a Baseline:** Create an automated benchmark test that reliably reproduces the performance characteristics of the feature under a realistic load. This gives you a baseline metric to compare against.
 3. **Profile to Identify the Bottleneck:** Use a profiling tool to analyze the code while the benchmark is running. The goal is to identify the specific "hotspots"—the functions or code paths that consume the most significant amount of CPU time or memory.
 4. **Optimize the "Critical 3%":** Focus your optimization efforts *only* on the identified bottlenecks.
@@ -52,7 +52,7 @@ The mandatory workflow for addressing a performance issue is as follows:
 
 ### 4.1. Algorithmic and Data Structure Optimization
 
-* **The First Line of Attack:** Before considering micro-optimizations, always verify that the underlying algorithm and data structures are appropriate for the task. A change from an O(n²) algorithm to an O(n log n) one will yield far greater returns than any low-level code tweak. Refer to [cite: GCS-GUIDE-305] for guidance.
+* **The First Line of Attack:** Before considering micro-optimizations, always verify that the underlying algorithm and data structures are appropriate for the task. A change from an O(n²) algorithm to an O(n log n) one will yield far greater returns than any low-level code tweak. Refer to [cite: ENG-GUIDE-305] for guidance.
 
 ### 4.2. Advanced Memory Management
 
@@ -68,7 +68,7 @@ The mandatory workflow for addressing a performance issue is as follows:
 * **Use the Right Tool for the Job:**
   * Use **asynchronous programming** for I/O-bound tasks (e.g., network requests).
   * Use **multithreading/parallelism** for CPU-bound tasks (e.g., complex calculations, image processing).
-* **Apply Concurrency Patterns:** Use established patterns like Producer-Consumer or Thread Pools to manage concurrent operations safely and effectively [cite: GCS-GUIDE-301].
+* **Apply Concurrency Patterns:** Use established patterns like Producer-Consumer or Thread Pools to manage concurrent operations safely and effectively [cite: ENG-GUIDE-301].
 
 ### 4.4. Compiler Optimizations
 
@@ -110,4 +110,4 @@ Performance optimization is a critical aspect of software engineering that requi
 ## 6. References
 
 * [ENG-REFE-001: Studio Global Engineering Standards](../01-manifesto-and-culture/ENG-REFE-001.studio-global-engineering-standards.md)
-* [GCS-GUIDE-201: The Everyday Developer Guide](../02-development-guides/GCS-GUIDE-201.developer-guide.md)
+* [ENG-GUIDE-201: The Everyday Developer Guide](../02-development-guides/ENG-GUIDE-201.developer-guide.md)

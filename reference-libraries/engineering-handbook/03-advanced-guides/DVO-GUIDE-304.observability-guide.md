@@ -1,5 +1,5 @@
 ---
-docId: GCS-GUIDE-304
+docId: DVO-GUIDE-304
 title: "The Observability & Monitoring Guide"
 version: 1.0.0
 status: Draft
@@ -9,7 +9,7 @@ authors:
 knowledgeGuardian:
   - "SRE Lead"
   - "DevOps Lead"
-ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/GCS-GUIDE-304.observability-guide.md
+ssot_path: https://github.com/GenCr-ft/gcs-core-governance/blob/main/reference-libraries/engineering-handbook/03-advanced-guides/DVO-GUIDE-304.observability-guide.md
 metadata:
   lifecycle-stage: approved
   domain: engineering
@@ -32,7 +32,7 @@ metadata:
 
 This guide establishes the studio's standard practices and tools for achieving system observability. Its purpose is to ensure that all our production systems are instrumented to provide the necessary data to understand their behavior, diagnose problems, and answer questions about their state without needing to ship new code.
 
-Observability is a core component of our reliability engineering practices [cite: GCS-GUIDE-202].
+Observability is a core component of our reliability engineering practices [cite: DVO-GUIDE-202].
 
 ## 2. Monitoring vs. Observability: A Critical Distinction
 
@@ -53,7 +53,7 @@ Every service deployed in the studio MUST be instrumented to expose these three 
 * **Standard Protocol:**
   * All logs MUST be written to `stdout` / `stderr` in a **structured format**, specifically **JSON**. Unstructured, human-readable strings are forbidden in production as they are not machine-parsable.
   * Logs MUST include a consistent set of fields: a timestamp, a severity level (`INFO`, `WARN`, `ERROR`), the service name, and the event-specific payload.
-  * NEVER log sensitive information (PII, passwords, API keys) [cite: GCS-GUIDE-306].
+  * NEVER log sensitive information (PII, passwords, API keys) [cite: SEC-GUIDE-306].
 
 ### 3.2. Metrics (The "How Much")
 
@@ -86,7 +86,7 @@ To ensure consistency, we use a standardized, open-source stack for collecting a
 
 1. **Instrumentation by Default:** All new services MUST be instrumented with libraries that expose logs, metrics, and traces according to the protocols defined in this guide **before** their first deployment to production.
 2. **Dashboarding:** Every service MUST have a corresponding Grafana dashboard displaying its key health metrics (the Golden Signals).
-3. **Alerting on SLOs:** Alerts SHOULD be configured based on the violation of Service Level Objectives (SLOs), not on raw metrics. For example, alert when the error budget is burning too fast [cite: GCS-GUIDE-202].
+3. **Alerting on SLOs:** Alerts SHOULD be configured based on the violation of Service Level Objectives (SLOs), not on raw metrics. For example, alert when the error budget is burning too fast [cite: DVO-GUIDE-202].
 4. **Centralized Configuration:** All observability configurations (e.g., Prometheus scrape configs, Grafana dashboards) MUST be stored in a central repository (`gcs-observability-configs`) and version-controlled.
 5. **Review and Approval:** All observability configurations MUST be reviewed and approved by the SRE team before deployment to production, following Protocol S1: Feedback & Approval.
 6. **Documentation:** Each service MUST include documentation on its observability setup, including:
