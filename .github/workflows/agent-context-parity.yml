@@ -39,11 +39,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: GenCr-ft/gcs-plt-gemop
-          # Must stay inside $GITHUB_WORKSPACE — actions/checkout refuses a path that
-          # escapes it, which is why this workflow never loaded. Coupled with the
-          # WORKSPACE_ROOT below: verify_agent_context_parity.py defaults WORKSPACE_ROOT to
-          # REPO_ROOT.parent, so moving the checkout without moving the lookup would trade a
-          # checkout failure for a resolution failure.
+          # Must stay inside $GITHUB_WORKSPACE — actions/checkout refuses a path that escapes
+          # it, so this step failed at RUNTIME. (Separate from the YAML quoting error below,
+          # which is what stopped the workflow LOADING at all; the two were masked together
+          # because a workflow that never loads never reaches this step.)
+          # Coupled with the WORKSPACE_ROOT below: verify_agent_context_parity.py defaults
+          # WORKSPACE_ROOT to REPO_ROOT.parent, which is where ../gcs-plt-gemop used to land —
+          # so moving the checkout without moving the lookup trades a checkout failure for a
+          # resolution failure. Both move together, or neither.
           path: gcs-plt-gemop
           token: ${{ secrets.CROSS_REPO_PAT }}
       - name: Assert gcs-plt-gemop/gems/index.yaml reachable (requires secondary checkout)
