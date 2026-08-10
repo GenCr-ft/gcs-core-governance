@@ -3,7 +3,7 @@
 # Date: 2025-07-08
 # This file is the SSoT for all controlled vocabularies, aligned with SKOS principles.
 # filename: taxonomy.yml
-ssot_version: "1.4.0" # Version bumped: resolved intra-section duplicate prefLabels (all-contributors, architects, devops-crew) and added scopeNotes to cross-section terms
+ssot_version: "1.5.0" # 1.5.0 (gcs-core-governance#321, ratified): added knowledge_classification_type entries requirement/REQ + initiative/INIT. 1.4.0: resolved intra-section duplicate prefLabels + added scopeNotes.
 
 artifact_class:
   - skos:prefLabel: knowledge
@@ -185,6 +185,15 @@ knowledge_classification_type:
     category: to-instruct
     code: "PROTO"
     skos:definition: "An operational protocol document specifying step-by-step procedures or algorithms for AI agents to follow."
+  - skos:prefLabel: "requirement"
+    category: to-describe
+    code: "REQ"
+    skos:altLabel: ["req", "spec-requirement"]
+    skos:definition: "A formal statement of a functional or non-functional need that a system, product, or feature must satisfy. The atomic unit of requirements engineering below feature/story."
+  - skos:prefLabel: "initiative"
+    category: to-plan
+    code: "INIT"
+    skos:definition: "A strategic, cross-epic body of work representing a top-level bet in the studio decomposition hierarchy (Initiative to Epic to Feature to User Story)."
 
 studio_domain:
   - skos:prefLabel: "governance"
