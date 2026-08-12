@@ -53,7 +53,7 @@ flowchart LR
 | GOV_RULE_002 | Knowledge doc + type=standard + domain=engineering-and-architecture | PR review gate | Isaac (Senior Architect) | — |
 | GOV_RULE_003 | Knowledge doc + type=policy + domain=security | PR approval gate | Cerberus (Security Officer) | — |
 | GOV_RULE_004 | Any artifact with `lifecycle-phase: deprecated` | SSoT linter CI | — | `deprecation_justification:` |
-| GOV_RULE_005 | Pull Request on a code repository | PR body check | — | PR body must include `"References Definition of Done (PRO-STAN-001)"` |
+| GOV_RULE_005 | Pull Request on a code repository | PR body check | — | PR body must include `"References Definition of Done (OPS-STANDARD-001)"` |
 | GOV_RULE_006 | Knowledge doc + type=contract + domain=legal | PR review + frontmatter | Henri (Legal Counsel) | `expiration_date:` |
 
 ## What Triggers a Validation Failure?
@@ -62,7 +62,7 @@ flowchart LR
 |----------|---------------|-----|
 | New security policy PR merged without Cerberus approval | GOV_RULE_003 | Add Cerberus as required reviewer |
 | Deprecated doc missing justification | GOV_RULE_004 | Add `deprecation_justification: "Replaced by {docId}"` |
-| PR to a code repo body has no DoD reference | GOV_RULE_005 | Add `References Definition of Done (PRO-STAN-001)` to PR body |
+| PR to a code repo body has no DoD reference | GOV_RULE_005 | Add `References Definition of Done (OPS-STANDARD-001)` to PR body |
 | Legal contract doc missing expiry | GOV_RULE_006 | Add `expiration_date: "YYYY-MM-DD"` to frontmatter |
 
 ## Enforcement Layers
