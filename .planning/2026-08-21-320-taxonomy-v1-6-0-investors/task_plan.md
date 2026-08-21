@@ -1,6 +1,6 @@
 ---
 docId: GOV-PLAN-320
-title: "[CODE] WI-320 — taxonomy v1.5.1: add intended_audience `investors` (ruled)"
+title: "[CODE] WI-320 — taxonomy v1.6.0: add intended_audience `investors` (ruled)"
 issue-id: GenCr-ft/gcs-core-governance#320
 status: in-progress
 version: "1.0"
@@ -12,13 +12,13 @@ metadata:
   lifecycle-stage: in-progress
 ---
 
-# [CODE] WI-320 — taxonomy v1.5.1 (add `investors`)
+# [CODE] WI-320 — taxonomy v1.6.0 (add `investors`)
 
 Implements **Decision 3** of the #320 ruling (Studio Lead, 2026-08-21). Companion to #321, which
 delivered v1.5.0 under the same pattern.
 
 - `config-engines/metadata-schemas/taxonomy.yml`: add `intended_audience` entry `investors`;
-  `ssot_version` 1.5.0 → 1.5.1.
+  `ssot_version` 1.5.0 → 1.6.0.
 - Re-baselined `governance/governed-paths.sha256` — `taxonomy.yml` is drift-block governed
   (30 governed files, exactly one hash changed).
 
@@ -61,7 +61,7 @@ survive comparison with §5's text, and is flagged for correction on #321.
 
 - **The three value maps** in Decision 3, and Decisions 1 and 2 (`NFR` → `REQ`, `deferred` →
   `ideation`) — all are per-repo document edits, landing in the #314 remediation WIs.
-- **Tagging `v1.5.1` and the fleet re-pin** — post-merge steps 2 and 3, owned by
+- **Tagging `v1.6.0` and the fleet re-pin** — post-merge steps 2 and 3, owned by
   `gcs-project-management#531` / `gcd-shared-actions#125`.
 - **#321's step-4 renames** (`CATALOG`→`CAT`, `RPT`→`REP`, `REG`→`REGI`, `PRO`→`MGT`, `VAL`→`QA`).
 
@@ -71,6 +71,29 @@ survive comparison with §5's text, and is flagged for correction on #321.
 `_drift_block_globs` swallows a missing manifest with a bare `except Exception: return []`. Run from
 the wrong directory it prints `✅ governance-integrity: 0 governed files match the baseline` and
 exits 0 — a green result that means "I found no manifest", indistinguishable from "nothing drifted".
-Worth a guard that fails when zero governed files are discovered.
+Worth a guard that fails when zero governed files are discovered. Filed as #339.
 
 Ref #320, #321, #314, #310.
+
+## Adversary PR review (GOV-STAN-010 §4.1) — findings and disposition
+
+The mandatory review of PR #338 returned **3 HIGH / 3 LOW**. Two HIGH findings were accepted and
+fixed in-place; the third was accepted and routed. Recorded here because two of them are defects in
+this WI's own first draft.
+
+| # | Finding | Disposition |
+|---|---|---|
+| HIGH-1 | `ssot_version: 1.5.1` violates ENG-STAN-001 §3.1/§3.5 — an added term is MINOR, not PATCH | **FIXED → 1.6.0.** Decisive evidence: this file has *never* had a PATCH bump (1.3.0 → 1.4.0 → 1.5.0), #321 added two entries and went MINOR, and §3.7 maps `feat:` → MINOR while this WI's commit is `feat(taxonomy):`. The "1.5.1" figure came from the agent's decision brief, not the Studio Lead's versioning judgement, so correcting it is a drafting fix rather than a reopened ruling. |
+| HIGH-2 | `intended_audience` is not declared in `taxonomy.schema.json` at all — 3 of 10 vocabularies undeclared, no `additionalProperties` | **ROUTED, not fixed here.** Declaring three vocabularies and closing the schema is a change with its own blast radius; bundling it into a two-line vocabulary addition would be scope creep. Filed and cross-linked as a prerequisite on #333, whose proposed CI wiring would otherwise validate three sections vacuously. |
+| HIGH-3 | The definition's second sentence, *"implies the content is cleared for external release"*, creates an informal second channel for release clearance alongside `security-classification` — the one §5 surface (§5.5) the tier assessment did not argue | **FIXED.** Sentence removed. The vocabulary needs the audience; clearance semantics belong in `validation-rules.yml` or GOV-REFE-002 where they can be enforced. |
+| LOW-1 | No rule couples `intended-audience` to `security-classification`; `[investors]` + `l3_secret` validates clean | **FILED.** The ruling flagged it as a per-document review and out of scope, but no issue existed, so §9 was unsatisfied. |
+| LOW-2 | GOV-REFE-002 carries a divergent, wholesale-stale prose copy of this facet | **NOTED for the #314 programme.** Pre-existing; not introduced here. |
+| LOW-3 | This plan's drift-checker observation did not cite the issue it was filed as | **FIXED** — now cites #339. |
+
+Re-verified after the fixes: additive-only across all ten vocabularies (synthetic-removal control
+still fires), `ssot_version` = 1.6.0, drift baseline re-cut (30 governed files, one hash changed),
+and the functional probe still rejects `investors` under v1.5.0 and scans clean under the patched Law.
+
+What the review could not verify, recorded so it is not mistaken for verified: it did not reproduce
+the functional probe or the drift exit-code sequence, and could not confirm the `wi:lightweight`
+setter identity because the `gh` token was expired and `gft issue view` does not expose label events.

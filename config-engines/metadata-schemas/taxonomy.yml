@@ -3,7 +3,7 @@
 # Date: 2025-07-08
 # This file is the SSoT for all controlled vocabularies, aligned with SKOS principles.
 # filename: taxonomy.yml
-ssot_version: "1.5.1" # 1.5.1 (gcs-core-governance#320 Decision 3, ruled): added intended_audience entry investors. 1.5.0 (gcs-core-governance#321, ratified): added knowledge_classification_type entries requirement/REQ + initiative/INIT. 1.4.0: resolved intra-section duplicate prefLabels + added scopeNotes.
+ssot_version: "1.6.0" # 1.6.0 (gcs-core-governance#320 Decision 3, ruled): added intended_audience entry investors. MINOR per ENG-STAN-001 §3.1 — an added vocabulary term is backward-compatible added functionality, not a bug fix; matches the 1.4.0 -> 1.5.0 precedent for the same change class in #321. 1.5.0 (gcs-core-governance#321, ratified): added knowledge_classification_type entries requirement/REQ + initiative/INIT. 1.4.0: resolved intra-section duplicate prefLabels + added scopeNotes.
 
 artifact_class:
   - skos:prefLabel: knowledge
@@ -372,7 +372,7 @@ intended_audience:
   - skos:prefLabel: "aie-team"
     skos:definition: "The AI Enablement Team."
   - skos:prefLabel: "investors"
-    skos:definition: "External investors and prospective investors. The only audience term denoting a reader outside Gencraft Studio; implies the content is cleared for external release."
+    skos:definition: "External investors and prospective investors. The only audience term denoting a reader outside Gencraft Studio."
 #######################################################
 organizational_entity_type:
   - skos:prefLabel: crew
