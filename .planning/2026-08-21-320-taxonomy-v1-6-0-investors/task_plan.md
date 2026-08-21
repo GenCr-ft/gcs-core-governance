@@ -97,3 +97,34 @@ and the functional probe still rejects `investors` under v1.5.0 and scans clean 
 What the review could not verify, recorded so it is not mistaken for verified: it did not reproduce
 the functional probe or the drift exit-code sequence, and could not confirm the `wi:lightweight`
 setter identity because the `gh` token was expired and `gft issue view` does not expose label events.
+
+## Adversary PR review — second pass
+
+All six first-pass fixes verified real. The second pass returned **2 HIGH / 4 LOW**, all in surfaces
+the first round of fixes did not reach.
+
+| # | Finding | Disposition |
+|---|---|---|
+| HIGH-4 | The version rename was applied to tracked files only. The **PR title** still said `v1.5.1` — which becomes the commit subject on squash-merge — and the PR body plus `#320` step 5 still handed `v1.5.1` to the two owners who will execute the sweep (`gcs-project-management#531`, `gcd-shared-actions#125`). | **FIXED.** PR title and body corrected; `#320` amended by comment. The published artefact here is a git tag that 24+ repos pin, so off-file correctness is the whole point. |
+| HIGH-5 | Both fixes diverge from the comment headed **"RULING (Studio Lead)"**, which specifies `1.5.0 → 1.5.1` and the clearance clause verbatim. The claim that `1.5.1` originated in the agent's own brief is genealogically plausible but not verifiable from the artefacts — `gft issue comments` exposes no author field. | **FIXED by amendment, not by narration.** The Studio Lead confirmed `1.6.0` directly; that confirmation is now recorded on `#320` alongside an amended step 5 and patch block, using the same correction pattern already applied to `#321`. |
+| LOW-4 | The version comment under-described `v1.6.0`. `bec3d66` (WI-299, `#332`) added 13 `knowledge_classification_type` definitions after the `v1.5.0` tag **without touching `ssot_version`** — so `main` declared 1.5.0 while 13 definitions ahead, and `v1.6.0` is the first tag to carry them. | **FIXED.** The comment now names both changes. This also **weakens the WI's own SemVer evidence**, recorded honestly: "never had a PATCH bump" reflects loose practice, not a rule — a `fix:`-class change took no bump at all, and 1.5.1 is the slot it should have occupied. The MINOR conclusion still holds on §3.1's text. |
+| LOW-5 | *"The only audience term denoting a reader outside Gencraft Studio"* is a claim about the vocabulary that self-invalidates on the next external term — and `OPS-CATALOG-001.glossary.md` already recognises partners, press and regulatory bodies as distinct external parties under S11. | **FIXED.** `skos:definition` trimmed to the term itself; the qualification moved to `skos:scopeNote`, matching the 7 existing uses of that key in this file, and now explicitly says to add a new term rather than reuse this one. |
+| LOW-6 | The disposition table recorded HIGH-2/LOW-1 as filed without giving `#340`/`#341`, and "cross-linked as a prerequisite on `#333`" overstated a link that exists only as a body reference from `#340`. | **FIXED.** Numbers stated below; a comment on `#333` makes the cross-link real in both directions. |
+| LOW-7 | Commit `56fed87` is typed `fix(taxonomy):` while its central argument is that §3.7 maps `feat:` → MINOR. | **NOTED, not rewritten.** Squash-merge takes the PR title, which is correctly `feat(taxonomy):`; rewriting landed commit types would rewrite pushed history for no gain. |
+
+Routed findings, with numbers: **`#340`** (schema declares 7 of 10 vocabularies, no `additionalProperties`
+— a prerequisite for `#333`, whose proposed CI check would otherwise validate three sections
+vacuously) and **`#341`** (no rule couples `intended-audience` to `security-classification`).
+
+### Correction to this plan's own earlier claim
+
+An earlier revision of this file asserted the §5 misreading was "flagged for correction on #321".
+That is true but incomplete — the same misreading was also adopted operationally in `#320`'s ruling
+text, so the correction was posted on **both** issues.
+
+### Re-verified after the second-pass fixes
+
+Additive-only across all ten vocabularies with the synthetic-removal control still firing;
+`ssot_version` = 1.6.0; drift baseline re-cut with a must-fail control (exit 1 before, `30 governed
+files match` after, exactly one row changed); functional probe unchanged — `investors` rejected under
+v1.5.0, clean under the patched Law.
