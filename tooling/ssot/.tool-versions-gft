@@ -1,6 +1,21 @@
 # GenCr@ft Studio — canonical tool version pins
 # Format: <tool-name> <version>  (asdf/mise .tool-versions convention)
-# Read at runtime by gcd-onboarding-scripts get_ssot_tool_version()
+#
+# Read via gcd-onboarding-scripts get_ssot_tool_version(). NOT every entry has a consumer:
+# that function is called for nodejs, python and opentofu only (includes/02_installers.sh:414,
+# 422, 430). An entry here is authoritative but not self-enforcing — adding one does not make
+# anything install it. Consumers per tool:
+#
+#   nodejs    -> gcd-onboarding-scripts install_node
+#   python    -> gcd-onboarding-scripts install_python
+#   opentofu  -> gcd-onboarding-scripts install_binary_from_github
+#   poetry    -> NONE YET. gcs-plt-tools/onboard.sh:37 hard-codes its own POETRY_VERSION, and
+#                13 CI call sites install poetry unpinned (gcs-core-governance#354). Both are
+#                being pointed here; until they are, this line is declarative.
+#
+# Before trusting an entry, check it has a consumer. The absence of that note here is what
+# made a reader assume this file governed the whole toolchain when it governs three of it.
 nodejs 20.18.0
 python 3.11.5
 opentofu 1.6.0
+poetry 2.4.1
