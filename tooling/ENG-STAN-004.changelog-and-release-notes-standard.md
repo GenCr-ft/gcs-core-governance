@@ -36,8 +36,8 @@ statement of that rule differs, this standard governs. Related: `ENG-STAN-001` (
 
 1. Every repository listed in the workspace `AGENTS.md` Repo Index MUST have a root `CHANGELOG.md`.
 2. `## [Unreleased]` MUST be the first version section. Released versions follow it, newest first.
-3. A version heading reads `## [X.Y.Z] - YYYY-MM-DD`, with the date in ISO 8601. An em dash is
-   accepted as the separator, since released headings are not rewritten. A pulled version keeps
+3. A version heading MUST read `## [X.Y.Z] - YYYY-MM-DD`, with the date in ISO 8601. An em dash
+   is accepted as the separator, since released headings are not rewritten. A pulled version keeps
    its heading with `[YANKED]` appended after the date.
 4. Version headings SHOULD link to their tag compare range (link references at the end of the file).
 
