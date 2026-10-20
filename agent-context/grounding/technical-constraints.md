@@ -25,6 +25,7 @@ Extracted engineering constraints for AI agents. Each row is an actionable rule.
 |-----------|--------|-------------|---------------|
 | Branch from `main` for features; squash-merge PR back to `main`; tag releases on `main` with a SemVer tag _(applies-to: software repos with develop/main flow; governance/docs-only repos such as `gcs-core-governance` have no `develop` branch — follow `ops-runbook.md` for repo-local branching commands)_ | Version Control | PR review gate | §2.1 Git Branching |
 | All software artifacts follow SemVer `MAJOR.MINOR.PATCH` — MAJOR for breaking, MINOR for additive, PATCH for fixes | Versioning | Release checklist | §2.2 SemVer |
+| `CHANGELOG.md` follows Keep a Changelog 1.0.0: one entry per consumer-visible change, `- <what changed>. (#PR, @author)`, ≤ 200 chars; release notes summarize one version | Versioning | `changelog-linter` + `gft pr preflight` + PR review | `ENG-STAN-004` |
 | Python module filenames: lowercase + underscores only; hyphens forbidden (causes `ImportError`) | Code | Pre-commit / CI lint | §2.3 Python Naming |
 | DoD requires: code reviewed + merged, all CI tests pass, QA validated, no Blocker/Critical bugs, docs updated, PO accepted | Quality | Close gate | §3.1 DoD |
 | Bug severity uses SEV-1 (Blocker) to SEV-5 (Trivial); priority P1 (Urgent) to P4 (Low) | Quality | Sprint triage | §3.2 Bug Triage |
