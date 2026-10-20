@@ -137,5 +137,6 @@ section, for readers who will not open the diff.
 | §3 void exemptions, §4.1, §4.3–§4.6, §6 | PR review | in force |
 
 Rollout: a repository enables `changelog-linter` only after its `[Unreleased]` conforms
-(GenCr-ft/gcs-project-management#614). Released sections written before this standard are not
-rewritten.
+(GenCr-ft/gcs-project-management#614). Released sections written before this standard keep their
+entries as written. Only their version headings MAY be normalised to §1.3 (Studio Lead ruling,
+2026-10-20).
