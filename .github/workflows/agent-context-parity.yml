@@ -1,5 +1,10 @@
 name: agent-context parity check
 
+# The shape of this file is a contract, checked by tests/check_parity_workflow_contract.py
+# (step S4, design GenCr-ft/gcs-core-governance#386 v6). Any change here must also change
+# that checker's STEPS in the same PR. Every file a step runs is listed in both `paths`
+# lists, so the job re-verifies its own changes (#325).
+
 on:
   pull_request:
     paths:
@@ -13,6 +18,11 @@ on:
       - 'agent-context/grounding/studio-quick-ref.md'
       - 'scripts/verify_agent_context_parity.py'
       - 'reference-libraries/devops-standards/foundations/governance/rules/storage-rules.yml'
+      - '.github/workflows/agent-context-parity.yml'
+      - 'scripts/verify_lifecycle_gate_parity.py'
+      - 'scripts/verify_taxonomy_parity.py'
+      - 'scripts/check_gemop_credential.sh'
+      - 'tests/check_parity_workflow_contract.py'
   push:
     branches: [main]
     paths:
@@ -26,33 +36,57 @@ on:
       - 'agent-context/grounding/studio-quick-ref.md'
       - 'scripts/verify_agent_context_parity.py'
       - 'reference-libraries/devops-standards/foundations/governance/rules/storage-rules.yml'
+      - '.github/workflows/agent-context-parity.yml'
+      - 'scripts/verify_lifecycle_gate_parity.py'
+      - 'scripts/verify_taxonomy_parity.py'
+      - 'scripts/check_gemop_credential.sh'
+      - 'tests/check_parity_workflow_contract.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   parity:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout gcs-core-governance
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install verifier dependencies
+        run: python -m pip install 'PyYAML==6.0.3'
+      - name: Verify the workflow contract
+        run: python3 tests/check_parity_workflow_contract.py
+      - name: Self-test the contract checker
+        run: python3 tests/check_parity_workflow_contract.py --self-test
+      - name: Self-test the credential classifier
+        run: bash scripts/check_gemop_credential.sh --self-test
+      # The precondition the old post-checkout `test -f` assert could never be (it ran after a
+      # checkout that had already failed). It probes gems/index.yaml BEFORE the checkout and
+      # names the failure class: absent, rejected, rate-limited, sso, forbidden, no-grant,
+      # index-missing or api-fault (#386 OQ-3). Never add continue-on-error here (#325).
+      - name: Verify CROSS_REPO_PAT can read gcs-plt-gemop/gems/index.yaml
+        env:
+          CROSS_REPO_PAT: ${{ secrets.CROSS_REPO_PAT }}
+        run: bash scripts/check_gemop_credential.sh
       - name: Checkout gcs-plt-gemop for gem domain registry cross-reference
         uses: actions/checkout@v4
         with:
           repository: GenCr-ft/gcs-plt-gemop
           # Must stay inside $GITHUB_WORKSPACE — actions/checkout refuses a path that escapes
-          # it, so this step failed at RUNTIME. (Separate from the YAML quoting error below,
-          # which is what stopped the workflow LOADING at all; the two were masked together
-          # because a workflow that never loads never reaches this step.)
-          # Coupled with the WORKSPACE_ROOT below: verify_agent_context_parity.py defaults
-          # WORKSPACE_ROOT to REPO_ROOT.parent, which is where ../gcs-plt-gemop used to land —
-          # so moving the checkout without moving the lookup trades a checkout failure for a
-          # resolution failure. Both move together, or neither.
+          # it. Coupled with WORKSPACE_ROOT below: verify_agent_context_parity.py defaults
+          # WORKSPACE_ROOT to REPO_ROOT.parent, so the checkout path and the lookup move
+          # together, or neither (#319).
           path: gcs-plt-gemop
           token: ${{ secrets.CROSS_REPO_PAT }}
-      - name: Assert gcs-plt-gemop/gems/index.yaml reachable (requires secondary checkout)
-        run: |
-          test -f gcs-plt-gemop/gems/index.yaml \
-            || (echo "FAIL: gems/index.yaml not found — secondary checkout missing" && exit 1)
+          # The token must not stay in gcs-plt-gemop/.git/config while the verifiers, which
+          # may be PR-authored code, run (Cerberus M5, #386).
+          persist-credentials: false
       - name: Verify agent-context routing table matches storage-rules.yml and validation-rules.yml
         env:
           WORKSPACE_ROOT: ${{ github.workspace }}
