@@ -170,3 +170,4 @@ case "${1:-}" in
   "") main ;;
   *) usage ;;
 esac
+# AC-2 scratch probe (gov#325): this one-file change must trigger the parity job.
