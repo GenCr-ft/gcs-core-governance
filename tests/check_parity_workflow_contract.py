@@ -604,3 +604,4 @@ def main(argv: list) -> int:
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
+# AC-2 scratch probe (gov#325): this one-file change must trigger the parity job.
