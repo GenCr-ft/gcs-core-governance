@@ -70,7 +70,7 @@ domains:
         - "tests/**"
         - "scripts/**"
 
-  - gem_id: gct-dvo-dtl-001-diane
+  - gem_id: gct-dvo-dtl-999-diane
     display: diane
     authoritative:
       repos: [gcd-shared-actions, gcd-ops-scripts, gencraft-iac]
