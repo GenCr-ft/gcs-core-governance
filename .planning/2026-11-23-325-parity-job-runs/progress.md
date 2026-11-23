@@ -15,6 +15,37 @@ Never pipe a verifier to `head` or `tail` — that reports the pager's exit stat
 
 ## Red
 
+- **WI-325.1** (`1ea0d42`): `evidence/red-325.1.md`. On base, the checker reports FAIL {C0, C1, C3, C5, C11, C14} and SKIP {C7, C8, C13}, exactly as predicted.
+- **WI-325.2** (`432089c`): `evidence/red-325.2.md`. The stub `classify` returns `unknown` for 401, and all 3 tests fail on their assertions.
+- Both red-evidence files pass `evidence_check.py red --artefacts`. Their excerpts were re-cut on 2026-11-23 to avoid trailing-whitespace lines, so the repo's `trailing-whitespace` fixer cannot desynchronise them from the logs.
+
 ## Green
 
+- **WI-325.2** (`a4b3df4`): `tests/test_check_gemop_credential.py` passes (3 tests), and `--self-test` passes (13 rows plus the empty-token row).
+- **Live-path checks** from [IMPL] #387, run as uid 1000. The log is `/home/lgan/.cache/gov325/evidence/green-325.2-live.log`, sha256 `ececa711822bb4008e83b7ba038da96d5bb8890cf05412ea6404630f7be3f8ca`. Verbatim:
+
+```text
+== 1 absent: no temp file, no curl
+rc=1 entries=0 curl_calls=0
+== 2 unwritable temp dir: exit 2, curl never invoked
+rc=2 curl_lines=0
+== 3 live probe, marker token exported (env only): argv must not contain it
+rc=1 curl_invocations=1 marker_in_argv=0 marker_in_output=0 temp_left=0
+out=::error title=CROSS_REPO_PAT rejected::HTTP 401 — the token is dead. …
+== 4 positive control: marker deliberately in argv must be seen
+curl rc=7
+marker_in_argv=1
+```
+
+- **Disclosed deviation from [IMPL] #387.** `strace` is not installed on this host. The argv check and the "no network call" check therefore used an **argv-recording `curl` shim** placed first on `PATH`; it logs `"$@"` and then `exec`s `/usr/bin/curl`, so stdin is preserved. This observes exactly the argv curl receives. For check 2 it proves curl was **never invoked**, which is stronger than a zero `connect()` count. The positive control (check 4) proves the shim sees a marker placed in argv.
+- **WI-325.1** (`011542d`): the checker reports `RESULT: PASS` on the rewritten workflow, and all 5 tests pass.
+- **Local replay** of S3–S11 in a clean venv with `PyYAML==6.0.3`. The log is `/home/lgan/.cache/gov325/evidence/green-325.1-replay.log`, sha256 `120a0b9b2b87a589b93e2b0f38e9a6983152b70d09fd77076fb77c128ed111cf`.
+  - S4, S5 and S6 PASS.
+  - S7 reports `absent` with exit 1, which is expected locally because there is no token.
+  - S9, S10 and S11 PASS against gemop `origin/main`.
+
 ## Verification
+
+- `pre-commit run --from-ref origin/main --to-ref HEAD` (log `~/.cache/gov325/evidence/precommit-1.log`) found 2 failures, both in the red-evidence files: trailing whitespace, and MD032 in `red-325.2.md`. Both are fixed in the following docs commit.
+- **Disclosure:** the gov clone has **no pre-commit hook installed** (`.git/hooks/pre-commit` is absent), so the hooks did not run at commit time. They are run manually per range instead.
+- `gft tdd status`: `✓ TDD compliance: OK`.
