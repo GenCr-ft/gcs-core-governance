@@ -22,7 +22,7 @@ Never pipe a verifier to `head` or `tail` — that reports the pager's exit stat
 ## Green
 
 - **WI-325.2** (`a4b3df4`): `tests/test_check_gemop_credential.py` passes (3 tests), and `--self-test` passes (13 rows plus the empty-token row).
-- **Live-path checks** from [IMPL] #387, run as uid 1000. The log is `/home/lgan/.cache/gov325/evidence/green-325.2-live.log`, sha256 `ececa711822bb4008e83b7ba038da96d5bb8890cf05412ea6404630f7be3f8ca`. Verbatim:
+- **Live-path checks** from [IMPL] #387, run as uid 1000. The log is `/home/lgan/.cache/gov325/evidence/green-325.2-live.log`, sha256 `ececa711822bb4008e83b7ba038da96d5bb8890cf05412ea6404630f7be3f8ca`. Excerpt (not the full log: the header line and some `out=` lines are omitted; relabelled per Cerberus EV-1, PR #389):
 
 ```text
 == 1 absent: no temp file, no curl
@@ -43,6 +43,29 @@ marker_in_argv=1
   - S4, S5 and S6 PASS.
   - S7 reports `absent` with exit 1, which is expected locally because there is no token.
   - S9, S10 and S11 PASS against gemop `origin/main`.
+
+### CI runs on PR #389, every run
+
+| Run | Head | Conclusion | Steps |
+|---|---|---|---|
+| 45237467623 | `3628e30` | failure, the expected AC-3 proof | 2–7 success; 8 probe failure, `HTTP 401` class `rejected`; 9–12 skipped |
+| 45237717892 | `ca276ff` | failure, run before the secret was set | the same pattern |
+| 45241246940 | `d66c8f6` | success, AC-1 | 2–12 success |
+| 45242165449 | `b92dcd8` | success | the head the first review round reviewed |
+
+Each run had a successful Governance Integrity companion.
+
+### Cycle 5: PR #389 review fixes
+
+- **Red** (`fc11994`, `evidence/red-325.5.md`). The live probe path is now driven through a stub curl, covering 200, 401, 404 then 404, 404 then 200, 403 with the rate-limit header, a curl failure, and an unwritable temp dir; this was forge's MED. Each case asserts the class, the exit code, that the token is not in argv, that it arrives on stdin, and that the temp files are cleaned. Four further tests were red:
+  - the curl exit code in `api-fault` (adversary LOW);
+  - a non-mapping `with:` (forge LOW);
+  - GitHub glob semantics (forge LOW);
+  - a secret behind a brace escaping C8 (forge and adversary LOW).
+
+  A baseline-paths drift test was added too (forge LOW). It passed at red, because the paths already agree.
+- **Green** (`dce5ddc`): all 16 tests pass. The checker self-test now has 20 mutations, including the brace case.
+- **Local replay** at `dce5ddc`, log `/home/lgan/.cache/gov325/evidence/green-325.5-replay.log`: S4–S6 and S9–S11 PASS, and S7 reports `absent`. Its sha256, `120a0b9b…11cf`, equals the cycle-1 replay's, because every step prints deterministic text and the self-tests print only their final verdict line.
 
 ## Verification
 
