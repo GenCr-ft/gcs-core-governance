@@ -88,7 +88,8 @@ probe() {
   code=$(curl --proto '=https' -sS --max-time 30 -o /dev/null -D "$2" -w '%{http_code}' \
     -H 'Accept: application/vnd.github+json' -H @- "$1" <<< "Authorization: Bearer ${CROSS_REPO_PAT}")
   rc=$?
-  if [ "$rc" -ne 0 ]; then code=000; fi
+  # A curl failure is code 000 (api-fault); keep curl's own exit status for the diagnostic.
+  if [ "$rc" -ne 0 ]; then code="000 (curl exit $rc)"; fi
   printf '%s' "$code"
 }
 

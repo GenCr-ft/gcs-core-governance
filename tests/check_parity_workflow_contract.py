@@ -9,15 +9,15 @@ Usage:
 
 Exit codes: 0 the contract holds, 1 it is violated, 2 usage or parse error.
 
-Each check id reports FAIL, SKIP or PASS. A SKIP means a check could not locate
-the step it reads (a dependency failed), so it never hides a violation: the
-dependency's own FAIL already makes the exit code 1.
+Each check id has an outcome of FAIL, SKIP or PASS. The output lists every FAIL
+and SKIP line, then one RESULT line; a passing id prints nothing. A SKIP means a
+check could not locate the step it reads (a dependency failed), so it never hides
+a violation: the dependency's own FAIL already makes the exit code 1.
 """
 
 from __future__ import annotations
 
 import copy
-import fnmatch
 import re
 import subprocess
 import sys
@@ -114,7 +114,14 @@ STEPS = [
     },
 ]
 STEP_BY_ID = {s["id"]: s for s in STEPS}
-SECRETS_RE = re.compile(r"\$\{\{[^}]*\bsecrets\b")
+# One `${{ … }}` expression, up to its closing `}}`; a lone `}` inside it (as in
+# `format('{0}', secrets.X)`) does not end it (PR #389 review).
+EXPR_RE = re.compile(r"\$\{\{(.*?)\}\}", re.DOTALL)
+SECRETS_WORD_RE = re.compile(r"\bsecrets\b")
+
+
+def mentions_secrets(text: str) -> bool:
+    return any(SECRETS_WORD_RE.search(m.group(1)) for m in EXPR_RE.finditer(text))
 
 
 class Report:
@@ -214,8 +221,32 @@ def walk_strings(node, path=()):
         yield path, node
 
 
+def glob_re(pattern: str):
+    """GitHub `paths:` glob semantics: `**` crosses `/`, `*` and `?` do not."""
+    out, i = [], 0
+    while i < len(pattern):
+        if pattern.startswith("**", i):
+            out.append(".*")
+            i += 2
+        elif pattern[i] == "*":
+            out.append("[^/]*")
+            i += 1
+        elif pattern[i] == "?":
+            out.append("[^/]")
+            i += 1
+        else:
+            out.append(re.escape(pattern[i]))
+            i += 1
+    return re.compile("".join(out) + r"\Z")
+
+
 def covered(path: str, patterns: list) -> bool:
-    return any(path == p or fnmatch.fnmatch(path, p) for p in patterns)
+    return any(path == p or glob_re(p).match(path) for p in patterns)
+
+
+def mapping(value) -> dict:
+    """A step's `with`/`env` as a dict; a non-mapping (already a C0 FAIL) reads as empty."""
+    return value if isinstance(value, dict) else {}
 
 
 def check(wf, tracked: set) -> Report:
@@ -279,7 +310,7 @@ def check(wf, tracked: set) -> Report:
 
     # C6: S8 values.
     if "S8" in where:
-        w = steps[where["S8"]].get("with") or {}
+        w = mapping(steps[where["S8"]].get("with"))
         repo = str(w.get("repository", ""))
         if "${{" in repo or repo.lower() != GEMOP_REPO:
             rep.fail("C6", f"S8 repository {repo!r}")
@@ -292,7 +323,7 @@ def check(wf, tracked: set) -> Report:
 
     # C7: S7 env value.
     if "S7" in where:
-        env = steps[where["S7"]].get("env") or {}
+        env = mapping(steps[where["S7"]].get("env"))
         if env.get("CROSS_REPO_PAT") != SECRET_REF:
             rep.fail("C7", "S7 env.CROSS_REPO_PAT is not the CROSS_REPO_PAT secret")
     else:
@@ -305,7 +336,7 @@ def check(wf, tracked: set) -> Report:
             ("jobs", "parity", "steps", where["S8"], "with", "token"),
         }
         for path, text in walk_strings(wf):
-            if SECRETS_RE.search(text) and path not in allowed:
+            if mentions_secrets(text) and path not in allowed:
                 rep.fail("C8", f"secrets context at {'.'.join(map(str, path))}")
     else:
         rep.skip("C8", "depends on C0 (S7 or S8 unlocated)")
@@ -313,7 +344,7 @@ def check(wf, tracked: set) -> Report:
     # C11: persist-credentials false on both checkouts.
     sites = [sid for sid in ("S1", "S8") if sid in where]
     for sid in sites:
-        w = steps[where[sid]].get("with") or {}
+        w = mapping(steps[where[sid]].get("with"))
         if w.get("persist-credentials") is not False:
             rep.fail("C11", f"{sid} persist-credentials is not false")
     if not sites:
@@ -510,6 +541,12 @@ MUTATIONS = [
     (
         "secret in the workflow name",
         _mut(lambda w: w.update(name="parity ${{ secrets.CROSS_REPO_PAT }}")),
+        {"C8"},
+        set(),
+    ),
+    (
+        "secret behind a brace in the name",
+        _mut(lambda w: w.update(name="${{ format('{0}', secrets.CROSS_REPO_PAT) }}")),
         {"C8"},
         set(),
     ),
