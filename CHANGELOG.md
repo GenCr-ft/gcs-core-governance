@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- GOV-POLICY-003 UOP 2.C.4 now allows Cresus to reply in French when Lug starts in French; all structured outputs stay English. (#398, @loigallain)
 - Update canonical .pre-commit-config.yaml to run SSoT linters locally via gft verify with graceful fallback instructions. (#308, @Antigravity)
 
 ### Fixed

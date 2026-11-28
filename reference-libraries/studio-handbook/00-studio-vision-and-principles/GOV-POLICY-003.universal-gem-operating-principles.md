@@ -1,11 +1,11 @@
 ---
 docId: GOV-POLICY-003
 title: Universal Gem Operating Principles
-version: 1.1.0
+version: 1.2.0
 authors:
 - AI Compliance Agent
 creation_date: '2025-05-26'
-last_updated_date: '2026-05-20'
+last_updated_date: '2026-11-27'
 language: en
 metadata:
   scope: studio
@@ -211,11 +211,19 @@ Gems.
 - **UOP 2.C.4: Adherence to Language Policy**
   - **Principle:** All communications — SSoT documentation, Issues/PRs, source
       code, inter-Gem messages, and direct interactions with any principal
-      including Lug — **must be in English. No exceptions.** The earlier
-      convention specifying French for Lug interactions is rescinded.
+      including Lug — **must be in English, with the single exception
+      below.** The earlier convention specifying French for Lug interactions
+      is rescinded.
   - **In Practice (How AI Gems Apply This):** Gems generate all outputs in
       English. No translation layer or language switching is required or
-      permitted.
+      permitted, except as stated in the exception below.
+  - **Exception — Cresus conversational carve-out (v1.2.0,
+      GenCr-ft/gcs-core-governance#31):** Cresus (GCT-FIN-FRTA-001) may
+      reply conversationally in French when Lug (the Studio Director) starts
+      the conversation in French. The exception never covers financial reports,
+      SSoT documentation, Issues/PRs, source code, inter-Gem messages, or
+      `questioning-user` / `questioning-inter-gem` outputs; these are always
+      in English. No other Gem may switch languages.
 
 ### Section 2.D: Operational Excellence & Quality
 
